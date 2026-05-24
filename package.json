@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "generate": "env-cmd -f .env.local npx tsx scripts/generate-meanings.ts",
+    "generate:all": "env-cmd -f .env.local npx tsx scripts/generate-meanings.ts --source=all-emojis.json",
+    "build-emoji-list": "npx tsx scripts/build-full-emoji-list.ts",
     "create-indexes": "env-cmd -f .env.local npx tsx scripts/create-indexes.ts"
   },
   "dependencies": {

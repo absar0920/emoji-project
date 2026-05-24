@@ -21,7 +21,17 @@ async function main() {
     process.exit(1);
   }
 
-  const seedPath = path.join(__dirname, "../data/seed-emojis.json");
+  const sourceFlag = process.argv.find((a) => a.startsWith("--source="));
+  const sourceFile = sourceFlag
+    ? sourceFlag.split("=")[1]
+    : "seed-emojis.json";
+  const seedPath = path.join(__dirname, "../data", sourceFile);
+
+  if (!fs.existsSync(seedPath)) {
+    console.error(`Source file not found: ${seedPath}`);
+    process.exit(1);
+  }
+
   const seedData = JSON.parse(fs.readFileSync(seedPath, "utf-8"));
   const emojis = seedData as SeedEmoji[];
 
