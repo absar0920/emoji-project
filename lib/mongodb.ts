@@ -20,13 +20,20 @@ async function connectToDatabase(): Promise<{
     return { client: cachedClient, db: cachedDb };
   }
 
-  const client = await MongoClient.connect(MONGODB_URI);
-  const db = client.db(MONGODB_DB);
+  try {
+    const client = await MongoClient.connect(MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
+    const db = client.db(MONGODB_DB);
 
-  cachedClient = client;
-  cachedDb = db;
+    cachedClient = client;
+    cachedDb = db;
 
-  return { client, db };
+    return { client, db };
+  } catch (err) {
+    console.warn("MongoDB connection failed (build-time fallback):", (err as Error).message);
+    return null;
+  }
 }
 
 function emojis(db: Db): Collection<EmojiDocument> {
