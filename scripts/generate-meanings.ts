@@ -1,17 +1,14 @@
 import { MongoClient } from "mongodb";
 import { v4 as uuidv4 } from "uuid";
+import pLimit from "p-limit";
 import { generateEmojiMeanings } from "../lib/claude";
-import type { SeedEmoji, EmojiDocument } from "../types/emoji";
+import type { SeedEmoji } from "../types/emoji";
 import * as fs from "fs";
 import * as path from "path";
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 const MONGODB_DB = process.env.MONGODB_DB || "emoji-platform";
-const RATE_LIMIT_MS = 6000; // 10 per minute
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+const CONCURRENCY = 10;
 
 async function main() {
   if (!MONGODB_URI) {
@@ -32,55 +29,65 @@ async function main() {
   const db = client.db(MONGODB_DB);
   const collection = db.collection("emojis");
 
-  console.log(`Starting pipeline for ${emojis.length} emojis...`);
+  // Pre-filter: check which emojis already have meaning data
+  const existingDocs = await collection
+    .find({}, { projection: { slug: 1, emoji_id: 1, created_at: 1, official_meaning: 1 } })
+    .toArray();
+  const existingMap = new Map(existingDocs.map((d) => [d.slug, d]));
 
-  let processed = 0;
-  let skipped = 0;
-  let errors = 0;
-
-  for (const seed of emojis) {
-    // Resume support: skip if already exists with meaning data
-    const existing = await collection.findOne({ slug: seed.slug });
+  const toProcess = emojis.filter((seed) => {
+    const existing = existingMap.get(seed.slug);
     if (existing?.official_meaning) {
       console.log(`  SKIP: ${seed.character} ${seed.name} (already has meaning data)`);
-      skipped++;
-      continue;
+      return false;
     }
+    return true;
+  });
 
-    try {
-      console.log(`  Generating: ${seed.character} ${seed.name}...`);
-      const meanings = await generateEmojiMeanings(seed.character, seed.name);
+  const skipped = emojis.length - toProcess.length;
+  console.log(`Starting pipeline: ${toProcess.length} to generate, ${skipped} skipped (${CONCURRENCY} concurrent)`);
 
-      const doc = {
-        emoji_id: existing?.emoji_id || uuidv4(),
-        slug: seed.slug,
-        unicode: seed.unicode,
-        name: seed.name,
-        character: seed.character,
-        shortcode: seed.shortcode,
-        category: seed.category,
-        tags: seed.tags,
-        created_at: existing?.created_at || new Date(),
-        updated_at: new Date(),
-        ...meanings,
-      };
+  let processed = 0;
+  let errors = 0;
+  const limit = pLimit(CONCURRENCY);
 
-      await collection.updateOne(
-        { slug: seed.slug },
-        { $set: doc },
-        { upsert: true }
-      );
+  const tasks = toProcess.map((seed) =>
+    limit(async () => {
+      const existing = existingMap.get(seed.slug);
+      try {
+        console.log(`  Generating: ${seed.character} ${seed.name}...`);
+        const meanings = await generateEmojiMeanings(seed.character, seed.name);
 
-      processed++;
-      console.log(`  ✓ ${seed.character} ${seed.name} (${processed}/${emojis.length - skipped})`);
-    } catch (err) {
-      errors++;
-      console.error(`  ✗ ${seed.character} ${seed.name}: ${err}`);
-    }
+        const doc = {
+          emoji_id: existing?.emoji_id || uuidv4(),
+          slug: seed.slug,
+          unicode: seed.unicode,
+          name: seed.name,
+          character: seed.character,
+          shortcode: seed.shortcode,
+          category: seed.category,
+          tags: seed.tags,
+          created_at: existing?.created_at || new Date(),
+          updated_at: new Date(),
+          ...meanings,
+        };
 
-    // Rate limit
-    await sleep(RATE_LIMIT_MS);
-  }
+        await collection.updateOne(
+          { slug: seed.slug },
+          { $set: doc },
+          { upsert: true }
+        );
+
+        processed++;
+        console.log(`  ✓ ${seed.character} ${seed.name} (${processed}/${toProcess.length})`);
+      } catch (err) {
+        errors++;
+        console.error(`  ✗ ${seed.character} ${seed.name}: ${err}`);
+      }
+    })
+  );
+
+  await Promise.allSettled(tasks);
 
   console.log(`\nDone! Processed: ${processed}, Skipped: ${skipped}, Errors: ${errors}`);
   await client.close();

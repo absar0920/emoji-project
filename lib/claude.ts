@@ -34,7 +34,7 @@ export async function generateEmojiMeanings(
   name: string
 ): Promise<Record<string, unknown>> {
   const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250514",
+    model: "claude-opus-4-7",
     max_tokens: 2000,
     messages: [
       {
