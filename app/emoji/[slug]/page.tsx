@@ -8,6 +8,7 @@ import PlatformCard from "@/components/PlatformCard";
 import CultureCard from "@/components/CultureCard";
 import TimelineSection from "@/components/TimelineSection";
 import RelatedEmojis from "@/components/RelatedEmojis";
+import PlatformLinks from "@/components/PlatformLinks";
 import StickyTOC from "@/components/StickyTOC";
 import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
@@ -115,6 +116,12 @@ export default async function EmojiPage({ params }: PageProps) {
         {/* Related */}
         <section id="related" className="mb-10">
           <RelatedEmojis emojis={relatedEmojis} />
+        </section>
+
+        {/* Platform links */}
+        <section className="mb-10">
+          <h2 className="text-lg font-bold text-primary-dark mb-4">See on Every Platform</h2>
+          <PlatformLinks emojiSlug={emoji.slug} />
         </section>
 
         {/* FAQ */}
