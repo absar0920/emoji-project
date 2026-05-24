@@ -1,5 +1,6 @@
 import { MongoClient, Db, Collection } from "mongodb";
 import { EmojiDocument, EmojiSearchItem } from "@/types/emoji";
+import { getCached, setCached } from "./redis";
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_DB = process.env.MONGODB_DB || "emoji-platform";
@@ -35,19 +36,35 @@ function emojis(db: Db): Collection<EmojiDocument> {
 export async function getEmojiBySlug(
   slug: string
 ): Promise<EmojiDocument | null> {
+  const cacheKey = `emoji:${slug}`;
+  const cached = await getCached<EmojiDocument>(cacheKey);
+  if (cached) return cached;
+
   const { db } = await connectToDatabase();
-  return emojis(db).findOne({ slug });
+  const result = await emojis(db).findOne({ slug });
+
+  if (result) {
+    await setCached(cacheKey, result, 3600); // 1 hour TTL
+  }
+  return result;
 }
 
 export async function getTrendingEmojis(
   limit: number = 10
 ): Promise<EmojiDocument[]> {
+  const cacheKey = `trending:all:${limit}`;
+  const cached = await getCached<EmojiDocument[]>(cacheKey);
+  if (cached) return cached;
+
   const { db } = await connectToDatabase();
-  return emojis(db)
+  const results = await emojis(db)
     .find({})
     .sort({ "virality.trend_score": -1 })
     .limit(limit)
     .toArray();
+
+  await setCached(cacheKey, results, 300); // 5 min TTL
+  return results;
 }
 
 export async function getAllSlugs(): Promise<string[]> {
