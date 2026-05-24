@@ -10,7 +10,9 @@
     "generate": "env-cmd -f .env.local npx tsx scripts/generate-meanings.ts",
     "generate:all": "env-cmd -f .env.local npx tsx scripts/generate-meanings.ts --source=all-emojis.json",
     "build-emoji-list": "npx tsx scripts/build-full-emoji-list.ts",
-    "create-indexes": "env-cmd -f .env.local npx tsx scripts/create-indexes.ts"
+    "create-indexes": "env-cmd -f .env.local npx tsx scripts/create-indexes.ts",
+    "generate:comparisons": "env-cmd -f .env.local npx tsx scripts/generate-comparisons.ts",
+    "generate:combos": "env-cmd -f .env.local npx tsx scripts/generate-combos.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
