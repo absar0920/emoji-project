@@ -1,4 +1,9 @@
 import Anthropic from "@anthropic-ai/sdk";
+import {
+  COMBOS_SCHEMA,
+  COMPARISON_SCHEMA,
+  EMOJI_MEANINGS_SCHEMA,
+} from "./claude-schemas";
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -6,6 +11,40 @@ const client = new Anthropic({
 
 const SYSTEM_PROMPT = `You are a world-class emoji cultural intelligence expert.
 Return valid JSON only — no markdown, no explanation, no code fences.`;
+
+function extractJsonFromText(text: string): string {
+  let cleaned = text.trim();
+
+  const fenceMatch = cleaned.match(/^```(?:json)?\s*\n?([\s\S]*?)\n?```\s*$/i);
+  if (fenceMatch) {
+    cleaned = fenceMatch[1].trim();
+  }
+
+  if (!cleaned.startsWith("{") && !cleaned.startsWith("[")) {
+    const objStart = cleaned.indexOf("{");
+    const arrStart = cleaned.indexOf("[");
+    const start =
+      objStart === -1
+        ? arrStart
+        : arrStart === -1
+          ? objStart
+          : Math.min(objStart, arrStart);
+
+    if (start !== -1) {
+      const isArray = cleaned[start] === "[";
+      const end = cleaned.lastIndexOf(isArray ? "]" : "}");
+      if (end > start) {
+        cleaned = cleaned.slice(start, end + 1);
+      }
+    }
+  }
+
+  return cleaned;
+}
+
+function parseResponseText(text: string): Record<string, unknown> {
+  return JSON.parse(extractJsonFromText(text));
+}
 
 function buildUserPrompt(character: string, name: string): string {
   return `Generate complete meaning data for ${character} (${name}).
@@ -53,27 +92,40 @@ Each culture value should be a 1-2 sentence description of how this emoji is use
 async function callClaude(
   prompt: string,
   maxTokens: number,
+  schema: Record<string, unknown>,
   retries: number = 2
 ): Promise<Record<string, unknown>> {
   for (let attempt = 0; attempt <= retries; attempt++) {
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-6",
-      max_tokens: maxTokens,
-      messages: [{ role: "user", content: prompt }],
-      system: SYSTEM_PROMPT,
-    });
-
-    const text =
-      response.content[0].type === "text" ? response.content[0].text : "";
-
     try {
-      return JSON.parse(text);
-    } catch {
+      const response = await client.messages.parse({
+        model: "claude-sonnet-4-6",
+        max_tokens: maxTokens,
+        messages: [{ role: "user", content: prompt }],
+        system: SYSTEM_PROMPT,
+        output_config: {
+          format: {
+            type: "json_schema",
+            schema,
+          },
+        },
+      });
+
+      if (response.parsed_output) {
+        return response.parsed_output as Record<string, unknown>;
+      }
+
+      const text =
+        response.content[0]?.type === "text" ? response.content[0].text : "";
+      return parseResponseText(text);
+    } catch (err) {
       if (attempt < retries) {
-        console.log(`    JSON parse failed (attempt ${attempt + 1}/${retries + 1}), retrying...`);
+        const reason = err instanceof Error ? err.message : String(err);
+        console.log(
+          `    Request failed (attempt ${attempt + 1}/${retries + 1}): ${reason.slice(0, 120)}`
+        );
         continue;
       }
-      throw new Error(`JSON parse failed after ${retries + 1} attempts. Response length: ${text.length}, stop_reason: ${response.stop_reason}`);
+      throw err;
     }
   }
   throw new Error("Unreachable");
@@ -83,7 +135,7 @@ export async function generateEmojiMeanings(
   character: string,
   name: string
 ): Promise<Record<string, unknown>> {
-  return callClaude(buildUserPrompt(character, name), 10000);
+  return callClaude(buildUserPrompt(character, name), 10000, EMOJI_MEANINGS_SCHEMA);
 }
 
 export async function generateComparison(
@@ -102,7 +154,8 @@ Return a JSON object with:
 - when_to_use: string (practical guide, 2-3 sentences)
 
 Each difference should be 1-2 sentences explaining how the two emojis differ in that context.`,
-    1500
+    1500,
+    COMPARISON_SCHEMA
   );
 }
 
@@ -117,6 +170,7 @@ Return a JSON object with:
   - emojis: string[] (4-8 emoji characters)
   - label: string (short name like "Classic ${theme}")
 - seo_description: string (1-2 sentence description for SEO meta)`,
-    1000
+    1000,
+    COMBOS_SCHEMA
   );
 }
