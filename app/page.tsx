@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTrendingEmojis, getEmojiCount } from "@/lib/mongodb";
 import EmojiCard from "@/components/EmojiCard";
 import Footer from "@/components/Footer";
+import ClientShell from "@/components/ClientShell";
 
 export const revalidate = 300; // Revalidate every 5 minutes
 
@@ -20,7 +21,7 @@ export default async function HomePage() {
   ];
 
   return (
-    <>
+    <ClientShell>
       <main>
         {/* Hero */}
         <section className="bg-gradient-to-br from-[#F8F7FF] to-[#EEF2FF] py-16 sm:py-24">
@@ -117,6 +118,6 @@ export default async function HomePage() {
       </main>
 
       <Footer />
-    </>
+    </ClientShell>
   );
 }

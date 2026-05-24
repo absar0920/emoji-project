@@ -10,6 +10,7 @@ import TimelineSection from "@/components/TimelineSection";
 import RelatedEmojis from "@/components/RelatedEmojis";
 import StickyTOC from "@/components/StickyTOC";
 import Footer from "@/components/Footer";
+import ClientShell from "@/components/ClientShell";
 
 export const revalidate = 3600;
 
@@ -45,7 +46,7 @@ export default async function EmojiPage({ params }: PageProps) {
   const breadcrumbSchema = generateBreadcrumbSchema(emoji);
 
   return (
-    <>
+    <ClientShell>
       <main className="max-w-4xl mx-auto px-4 py-6">
         {/* Breadcrumb */}
         <nav className="text-sm text-neutral-400 mb-4">
@@ -153,6 +154,6 @@ export default async function EmojiPage({ params }: PageProps) {
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-    </>
+    </ClientShell>
   );
 }
