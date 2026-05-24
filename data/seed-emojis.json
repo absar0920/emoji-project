@@ -1,0 +1,1802 @@
+[
+  {
+    "character": "😀",
+    "name": "Grinning Face",
+    "slug": "grinning-face",
+    "unicode": "U+1F600",
+    "shortcode": ":grinning:",
+    "category": "Smileys & Emotion",
+    "tags": ["happy", "smile", "grin", "joy", "cheerful"]
+  },
+  {
+    "character": "😂",
+    "name": "Face With Tears Of Joy",
+    "slug": "face-with-tears-of-joy",
+    "unicode": "U+1F602",
+    "shortcode": ":joy:",
+    "category": "Smileys & Emotion",
+    "tags": ["laughing", "crying", "funny", "lol", "hilarious"]
+  },
+  {
+    "character": "🤣",
+    "name": "Rolling On The Floor Laughing",
+    "slug": "rolling-on-the-floor-laughing",
+    "unicode": "U+1F923",
+    "shortcode": ":rofl:",
+    "category": "Smileys & Emotion",
+    "tags": ["laughing", "rofl", "funny", "lmao", "hysterical"]
+  },
+  {
+    "character": "😊",
+    "name": "Smiling Face With Smiling Eyes",
+    "slug": "smiling-face-with-smiling-eyes",
+    "unicode": "U+1F60A",
+    "shortcode": ":blush:",
+    "category": "Smileys & Emotion",
+    "tags": ["happy", "blush", "sweet", "warm", "grateful"]
+  },
+  {
+    "character": "😍",
+    "name": "Smiling Face With Heart-Eyes",
+    "slug": "smiling-face-with-heart-eyes",
+    "unicode": "U+1F60D",
+    "shortcode": ":heart_eyes:",
+    "category": "Smileys & Emotion",
+    "tags": ["love", "adore", "crush", "hearts", "infatuated"]
+  },
+  {
+    "character": "🥰",
+    "name": "Smiling Face With Hearts",
+    "slug": "smiling-face-with-hearts",
+    "unicode": "U+1F970",
+    "shortcode": ":smiling_face_with_three_hearts:",
+    "category": "Smileys & Emotion",
+    "tags": ["love", "adore", "romantic", "crush", "affection"]
+  },
+  {
+    "character": "😘",
+    "name": "Face Blowing A Kiss",
+    "slug": "face-blowing-a-kiss",
+    "unicode": "U+1F618",
+    "shortcode": ":kissing_heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["kiss", "love", "flirt", "romantic", "mwah"]
+  },
+  {
+    "character": "😭",
+    "name": "Loudly Crying Face",
+    "slug": "loudly-crying-face",
+    "unicode": "U+1F62D",
+    "shortcode": ":sob:",
+    "category": "Smileys & Emotion",
+    "tags": ["crying", "sad", "devastated", "ugly cry", "sobbing"]
+  },
+  {
+    "character": "😤",
+    "name": "Face With Steam From Nose",
+    "slug": "face-with-steam-from-nose",
+    "unicode": "U+1F624",
+    "shortcode": ":triumph:",
+    "category": "Smileys & Emotion",
+    "tags": ["angry", "frustrated", "determined", "steam", "annoyed"]
+  },
+  {
+    "character": "😡",
+    "name": "Enraged Face",
+    "slug": "enraged-face",
+    "unicode": "U+1F621",
+    "shortcode": ":rage:",
+    "category": "Smileys & Emotion",
+    "tags": ["angry", "rage", "furious", "mad", "enraged"]
+  },
+  {
+    "character": "😢",
+    "name": "Crying Face",
+    "slug": "crying-face",
+    "unicode": "U+1F622",
+    "shortcode": ":cry:",
+    "category": "Smileys & Emotion",
+    "tags": ["sad", "crying", "tears", "upset", "emotional"]
+  },
+  {
+    "character": "😔",
+    "name": "Pensive Face",
+    "slug": "pensive-face",
+    "unicode": "U+1F614",
+    "shortcode": ":pensive:",
+    "category": "Smileys & Emotion",
+    "tags": ["sad", "thinking", "pensive", "reflective", "down"]
+  },
+  {
+    "character": "😩",
+    "name": "Weary Face",
+    "slug": "weary-face",
+    "unicode": "U+1F629",
+    "shortcode": ":weary:",
+    "category": "Smileys & Emotion",
+    "tags": ["tired", "exhausted", "weary", "done", "drained"]
+  },
+  {
+    "character": "😫",
+    "name": "Tired Face",
+    "slug": "tired-face",
+    "unicode": "U+1F62B",
+    "shortcode": ":tired_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["tired", "exhausted", "sleepy", "drained", "burnout"]
+  },
+  {
+    "character": "🥺",
+    "name": "Pleading Face",
+    "slug": "pleading-face",
+    "unicode": "U+1F97A",
+    "shortcode": ":pleading_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["please", "puppy eyes", "begging", "cute", "emotional"]
+  },
+  {
+    "character": "😏",
+    "name": "Smirking Face",
+    "slug": "smirking-face",
+    "unicode": "U+1F60F",
+    "shortcode": ":smirk:",
+    "category": "Smileys & Emotion",
+    "tags": ["smirk", "flirty", "sly", "knowing", "mischievous"]
+  },
+  {
+    "character": "🙄",
+    "name": "Face With Rolling Eyes",
+    "slug": "face-with-rolling-eyes",
+    "unicode": "U+1F644",
+    "shortcode": ":roll_eyes:",
+    "category": "Smileys & Emotion",
+    "tags": ["eyeroll", "annoyed", "sarcastic", "unimpressed", "whatever"]
+  },
+  {
+    "character": "😒",
+    "name": "Unamused Face",
+    "slug": "unamused-face",
+    "unicode": "U+1F612",
+    "shortcode": ":unamused:",
+    "category": "Smileys & Emotion",
+    "tags": ["unamused", "bored", "unimpressed", "meh", "not funny"]
+  },
+  {
+    "character": "😌",
+    "name": "Relieved Face",
+    "slug": "relieved-face",
+    "unicode": "U+1F60C",
+    "shortcode": ":relieved:",
+    "category": "Smileys & Emotion",
+    "tags": ["relieved", "peaceful", "calm", "content", "serene"]
+  },
+  {
+    "character": "🤔",
+    "name": "Thinking Face",
+    "slug": "thinking-face",
+    "unicode": "U+1F914",
+    "shortcode": ":thinking:",
+    "category": "Smileys & Emotion",
+    "tags": ["thinking", "pondering", "hmm", "wonder", "considering"]
+  },
+  {
+    "character": "🤭",
+    "name": "Face With Hand Over Mouth",
+    "slug": "face-with-hand-over-mouth",
+    "unicode": "U+1F92D",
+    "shortcode": ":face_with_hand_over_mouth:",
+    "category": "Smileys & Emotion",
+    "tags": ["oops", "giggly", "surprise", "sneaky", "secret"]
+  },
+  {
+    "character": "🤫",
+    "name": "Shushing Face",
+    "slug": "shushing-face",
+    "unicode": "U+1F92B",
+    "shortcode": ":shushing_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["shush", "quiet", "secret", "silence", "hush"]
+  },
+  {
+    "character": "🤗",
+    "name": "Hugging Face",
+    "slug": "hugging-face",
+    "unicode": "U+1F917",
+    "shortcode": ":hugs:",
+    "category": "Smileys & Emotion",
+    "tags": ["hug", "warm", "friendly", "embrace", "supportive"]
+  },
+  {
+    "character": "😎",
+    "name": "Smiling Face With Sunglasses",
+    "slug": "smiling-face-with-sunglasses",
+    "unicode": "U+1F60E",
+    "shortcode": ":sunglasses:",
+    "category": "Smileys & Emotion",
+    "tags": ["cool", "sunglasses", "awesome", "confident", "swag"]
+  },
+  {
+    "character": "🥳",
+    "name": "Partying Face",
+    "slug": "partying-face",
+    "unicode": "U+1F973",
+    "shortcode": ":partying_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["party", "celebration", "birthday", "fun", "festive"]
+  },
+  {
+    "character": "🤩",
+    "name": "Star-Struck",
+    "slug": "star-struck",
+    "unicode": "U+1F929",
+    "shortcode": ":star_struck:",
+    "category": "Smileys & Emotion",
+    "tags": ["starstruck", "amazed", "excited", "star eyes", "wow"]
+  },
+  {
+    "character": "😜",
+    "name": "Winking Face With Tongue",
+    "slug": "winking-face-with-tongue",
+    "unicode": "U+1F61C",
+    "shortcode": ":stuck_out_tongue_winking_eye:",
+    "category": "Smileys & Emotion",
+    "tags": ["silly", "playful", "wink", "tongue", "joking"]
+  },
+  {
+    "character": "🤪",
+    "name": "Zany Face",
+    "slug": "zany-face",
+    "unicode": "U+1F92A",
+    "shortcode": ":zany_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["crazy", "zany", "wild", "goofy", "chaotic"]
+  },
+  {
+    "character": "😷",
+    "name": "Face With Medical Mask",
+    "slug": "face-with-medical-mask",
+    "unicode": "U+1F637",
+    "shortcode": ":mask:",
+    "category": "Smileys & Emotion",
+    "tags": ["sick", "mask", "illness", "covid", "health"]
+  },
+  {
+    "character": "🥴",
+    "name": "Woozy Face",
+    "slug": "woozy-face",
+    "unicode": "U+1F974",
+    "shortcode": ":woozy_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["drunk", "dizzy", "woozy", "confused", "tipsy"]
+  },
+  {
+    "character": "🥵",
+    "name": "Hot Face",
+    "slug": "hot-face",
+    "unicode": "U+1F975",
+    "shortcode": ":hot_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["hot", "sweating", "overheated", "attractive", "fire"]
+  },
+  {
+    "character": "🥶",
+    "name": "Cold Face",
+    "slug": "cold-face",
+    "unicode": "U+1F976",
+    "shortcode": ":cold_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["cold", "freezing", "icy", "shivering", "chilly"]
+  },
+  {
+    "character": "😱",
+    "name": "Face Screaming In Fear",
+    "slug": "face-screaming-in-fear",
+    "unicode": "U+1F631",
+    "shortcode": ":scream:",
+    "category": "Smileys & Emotion",
+    "tags": ["shocked", "scared", "horror", "scream", "terrified"]
+  },
+  {
+    "character": "😨",
+    "name": "Fearful Face",
+    "slug": "fearful-face",
+    "unicode": "U+1F628",
+    "shortcode": ":fearful:",
+    "category": "Smileys & Emotion",
+    "tags": ["fear", "scared", "anxious", "nervous", "worried"]
+  },
+  {
+    "character": "😳",
+    "name": "Flushed Face",
+    "slug": "flushed-face",
+    "unicode": "U+1F633",
+    "shortcode": ":flushed:",
+    "category": "Smileys & Emotion",
+    "tags": ["embarrassed", "flushed", "shocked", "blushing", "stunned"]
+  },
+  {
+    "character": "🤯",
+    "name": "Exploding Head",
+    "slug": "exploding-head",
+    "unicode": "U+1F92F",
+    "shortcode": ":exploding_head:",
+    "category": "Smileys & Emotion",
+    "tags": ["mind blown", "shocked", "amazed", "explode", "unbelievable"]
+  },
+  {
+    "character": "🤬",
+    "name": "Face With Symbols On Mouth",
+    "slug": "face-with-symbols-on-mouth",
+    "unicode": "U+1F92C",
+    "shortcode": ":face_with_symbols_on_mouth:",
+    "category": "Smileys & Emotion",
+    "tags": ["swearing", "angry", "cursing", "furious", "profanity"]
+  },
+  {
+    "character": "😈",
+    "name": "Smiling Face With Horns",
+    "slug": "smiling-face-with-horns",
+    "unicode": "U+1F608",
+    "shortcode": ":smiling_imp:",
+    "category": "Smileys & Emotion",
+    "tags": ["devil", "evil", "mischievous", "naughty", "villain"]
+  },
+  {
+    "character": "💀",
+    "name": "Skull",
+    "slug": "skull",
+    "unicode": "U+1F480",
+    "shortcode": ":skull:",
+    "category": "Smileys & Emotion",
+    "tags": ["dead", "dying", "skull", "death", "dead laughing"]
+  },
+  {
+    "character": "☠️",
+    "name": "Skull And Crossbones",
+    "slug": "skull-and-crossbones",
+    "unicode": "U+2620 U+FE0F",
+    "shortcode": ":skull_crossbones:",
+    "category": "Smileys & Emotion",
+    "tags": ["skull", "death", "poison", "danger", "pirate"]
+  },
+  {
+    "character": "🙃",
+    "name": "Upside-Down Face",
+    "slug": "upside-down-face",
+    "unicode": "U+1F643",
+    "shortcode": ":upside_down_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["sarcasm", "irony", "silly", "fine", "chaos"]
+  },
+  {
+    "character": "😶",
+    "name": "Face Without Mouth",
+    "slug": "face-without-mouth",
+    "unicode": "U+1F636",
+    "shortcode": ":no_mouth:",
+    "category": "Smileys & Emotion",
+    "tags": ["speechless", "silent", "no words", "blank", "mute"]
+  },
+  {
+    "character": "🫠",
+    "name": "Melting Face",
+    "slug": "melting-face",
+    "unicode": "U+1FAE0",
+    "shortcode": ":melting_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["melting", "awkward", "uncomfortable", "dissolving", "distress"]
+  },
+  {
+    "character": "🥹",
+    "name": "Face Holding Back Tears",
+    "slug": "face-holding-back-tears",
+    "unicode": "U+1F979",
+    "shortcode": ":face_holding_back_tears:",
+    "category": "Smileys & Emotion",
+    "tags": ["emotional", "touched", "trying not to cry", "proud", "moved"]
+  },
+  {
+    "character": "😵",
+    "name": "Face With Crossed-Out Eyes",
+    "slug": "face-with-crossed-out-eyes",
+    "unicode": "U+1F635",
+    "shortcode": ":dizzy_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["dizzy", "dead", "dazed", "overwhelmed", "confused"]
+  },
+  {
+    "character": "🤑",
+    "name": "Money-Mouth Face",
+    "slug": "money-mouth-face",
+    "unicode": "U+1F911",
+    "shortcode": ":money_mouth_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["money", "rich", "greedy", "cash", "wealthy"]
+  },
+  {
+    "character": "😴",
+    "name": "Sleeping Face",
+    "slug": "sleeping-face",
+    "unicode": "U+1F634",
+    "shortcode": ":sleeping:",
+    "category": "Smileys & Emotion",
+    "tags": ["sleep", "tired", "bored", "zzz", "napping"]
+  },
+  {
+    "character": "🤤",
+    "name": "Drooling Face",
+    "slug": "drooling-face",
+    "unicode": "U+1F924",
+    "shortcode": ":drooling_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["drool", "delicious", "craving", "food", "attractive"]
+  },
+  {
+    "character": "🤥",
+    "name": "Lying Face",
+    "slug": "lying-face",
+    "unicode": "U+1F925",
+    "shortcode": ":lying_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["lying", "pinocchio", "dishonest", "fib", "stretching truth"]
+  },
+  {
+    "character": "😬",
+    "name": "Grimacing Face",
+    "slug": "grimacing-face",
+    "unicode": "U+1F62C",
+    "shortcode": ":grimacing:",
+    "category": "Smileys & Emotion",
+    "tags": ["awkward", "nervous", "cringe", "oops", "uncomfortable"]
+  },
+  {
+    "character": "🥱",
+    "name": "Yawning Face",
+    "slug": "yawning-face",
+    "unicode": "U+1F971",
+    "shortcode": ":yawning_face:",
+    "category": "Smileys & Emotion",
+    "tags": ["yawn", "bored", "tired", "sleepy", "uninterested"]
+  },
+  {
+    "character": "❤️",
+    "name": "Red Heart",
+    "slug": "red-heart",
+    "unicode": "U+2764 U+FE0F",
+    "shortcode": ":heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["love", "heart", "romance", "affection", "passion"]
+  },
+  {
+    "character": "💛",
+    "name": "Yellow Heart",
+    "slug": "yellow-heart",
+    "unicode": "U+1F49B",
+    "shortcode": ":yellow_heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["friendship", "happiness", "sunny", "warm", "Snapchat"]
+  },
+  {
+    "character": "💚",
+    "name": "Green Heart",
+    "slug": "green-heart",
+    "unicode": "U+1F49A",
+    "shortcode": ":green_heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["nature", "health", "growth", "jealousy", "eco"]
+  },
+  {
+    "character": "💙",
+    "name": "Blue Heart",
+    "slug": "blue-heart",
+    "unicode": "U+1F499",
+    "shortcode": ":blue_heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["trust", "loyalty", "calm", "friendship", "ocean"]
+  },
+  {
+    "character": "💜",
+    "name": "Purple Heart",
+    "slug": "purple-heart",
+    "unicode": "U+1F49C",
+    "shortcode": ":purple_heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["love", "royalty", "luxury", "compassion", "creativity"]
+  },
+  {
+    "character": "🖤",
+    "name": "Black Heart",
+    "slug": "black-heart",
+    "unicode": "U+1F5A4",
+    "shortcode": ":black_heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["dark", "gothic", "edgy", "sarcasm", "aesthetic"]
+  },
+  {
+    "character": "🤍",
+    "name": "White Heart",
+    "slug": "white-heart",
+    "unicode": "U+1F90D",
+    "shortcode": ":white_heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["pure", "clean", "love", "peace", "minimalist"]
+  },
+  {
+    "character": "💔",
+    "name": "Broken Heart",
+    "slug": "broken-heart",
+    "unicode": "U+1F494",
+    "shortcode": ":broken_heart:",
+    "category": "Smileys & Emotion",
+    "tags": ["heartbreak", "sad", "breakup", "loss", "grief"]
+  },
+  {
+    "character": "💕",
+    "name": "Two Hearts",
+    "slug": "two-hearts",
+    "unicode": "U+1F495",
+    "shortcode": ":two_hearts:",
+    "category": "Smileys & Emotion",
+    "tags": ["love", "romance", "couple", "affection", "sweet"]
+  },
+  {
+    "character": "🫶",
+    "name": "Heart Hands",
+    "slug": "heart-hands",
+    "unicode": "U+1FAF6",
+    "shortcode": ":heart_hands:",
+    "category": "People & Body",
+    "tags": ["love", "hands", "heart", "appreciation", "support"]
+  },
+  {
+    "character": "👋",
+    "name": "Waving Hand",
+    "slug": "waving-hand",
+    "unicode": "U+1F44B",
+    "shortcode": ":wave:",
+    "category": "People & Body",
+    "tags": ["wave", "hello", "goodbye", "greeting", "hi"]
+  },
+  {
+    "character": "🤚",
+    "name": "Raised Back Of Hand",
+    "slug": "raised-back-of-hand",
+    "unicode": "U+1F91A",
+    "shortcode": ":raised_back_of_hand:",
+    "category": "People & Body",
+    "tags": ["hand", "stop", "high five", "backhand", "greeting"]
+  },
+  {
+    "character": "✋",
+    "name": "Raised Hand",
+    "slug": "raised-hand",
+    "unicode": "U+270B",
+    "shortcode": ":hand:",
+    "category": "People & Body",
+    "tags": ["stop", "high five", "hand", "hello", "halt"]
+  },
+  {
+    "character": "👌",
+    "name": "Ok Hand",
+    "slug": "ok-hand",
+    "unicode": "U+1F44C",
+    "shortcode": ":ok_hand:",
+    "category": "People & Body",
+    "tags": ["okay", "perfect", "approve", "agree", "fine"]
+  },
+  {
+    "character": "🤌",
+    "name": "Pinched Fingers",
+    "slug": "pinched-fingers",
+    "unicode": "U+1F90C",
+    "shortcode": ":pinched_fingers:",
+    "category": "People & Body",
+    "tags": ["italian", "what", "gesture", "chef's kiss", "precise"]
+  },
+  {
+    "character": "🤏",
+    "name": "Pinching Hand",
+    "slug": "pinching-hand",
+    "unicode": "U+1F90F",
+    "shortcode": ":pinching_hand:",
+    "category": "People & Body",
+    "tags": ["tiny", "small", "little", "pinch", "barely"]
+  },
+  {
+    "character": "✌️",
+    "name": "Victory Hand",
+    "slug": "victory-hand",
+    "unicode": "U+270C U+FE0F",
+    "shortcode": ":v:",
+    "category": "People & Body",
+    "tags": ["peace", "victory", "two", "scissors", "win"]
+  },
+  {
+    "character": "🤞",
+    "name": "Crossed Fingers",
+    "slug": "crossed-fingers",
+    "unicode": "U+1F91E",
+    "shortcode": ":crossed_fingers:",
+    "category": "People & Body",
+    "tags": ["luck", "hope", "wish", "fingers crossed", "praying"]
+  },
+  {
+    "character": "🖕",
+    "name": "Middle Finger",
+    "slug": "middle-finger",
+    "unicode": "U+1F595",
+    "shortcode": ":fu:",
+    "category": "People & Body",
+    "tags": ["rude", "insult", "flip off", "offensive", "angry"]
+  },
+  {
+    "character": "👍",
+    "name": "Thumbs Up",
+    "slug": "thumbs-up",
+    "unicode": "U+1F44D",
+    "shortcode": ":thumbsup:",
+    "category": "People & Body",
+    "tags": ["approve", "good", "yes", "like", "agree"]
+  },
+  {
+    "character": "👎",
+    "name": "Thumbs Down",
+    "slug": "thumbs-down",
+    "unicode": "U+1F44E",
+    "shortcode": ":thumbsdown:",
+    "category": "People & Body",
+    "tags": ["dislike", "no", "disapprove", "bad", "reject"]
+  },
+  {
+    "character": "👏",
+    "name": "Clapping Hands",
+    "slug": "clapping-hands",
+    "unicode": "U+1F44F",
+    "shortcode": ":clap:",
+    "category": "People & Body",
+    "tags": ["applause", "clap", "bravo", "congratulations", "sarcastic applause"]
+  },
+  {
+    "character": "🙌",
+    "name": "Raising Hands",
+    "slug": "raising-hands",
+    "unicode": "U+1F64C",
+    "shortcode": ":raised_hands:",
+    "category": "People & Body",
+    "tags": ["celebrate", "praise", "hallelujah", "excited", "worship"]
+  },
+  {
+    "character": "🤝",
+    "name": "Handshake",
+    "slug": "handshake",
+    "unicode": "U+1F91D",
+    "shortcode": ":handshake:",
+    "category": "People & Body",
+    "tags": ["deal", "agreement", "business", "cooperation", "partnership"]
+  },
+  {
+    "character": "🙏",
+    "name": "Folded Hands",
+    "slug": "folded-hands",
+    "unicode": "U+1F64F",
+    "shortcode": ":pray:",
+    "category": "People & Body",
+    "tags": ["pray", "please", "thank you", "namaste", "beg"]
+  },
+  {
+    "character": "💪",
+    "name": "Flexed Biceps",
+    "slug": "flexed-biceps",
+    "unicode": "U+1F4AA",
+    "shortcode": ":muscle:",
+    "category": "People & Body",
+    "tags": ["strong", "muscles", "flex", "gym", "power"]
+  },
+  {
+    "character": "🦾",
+    "name": "Mechanical Arm",
+    "slug": "mechanical-arm",
+    "unicode": "U+1F9BE",
+    "shortcode": ":mechanical_arm:",
+    "category": "People & Body",
+    "tags": ["bionic", "strong", "cyborg", "prosthetic", "robot arm"]
+  },
+  {
+    "character": "👀",
+    "name": "Eyes",
+    "slug": "eyes",
+    "unicode": "U+1F440",
+    "shortcode": ":eyes:",
+    "category": "People & Body",
+    "tags": ["watching", "looking", "staring", "creepy", "attention"]
+  },
+  {
+    "character": "👅",
+    "name": "Tongue",
+    "slug": "tongue",
+    "unicode": "U+1F445",
+    "shortcode": ":tongue:",
+    "category": "People & Body",
+    "tags": ["tongue", "lick", "taste", "flirty", "playful"]
+  },
+  {
+    "character": "💋",
+    "name": "Kiss Mark",
+    "slug": "kiss-mark",
+    "unicode": "U+1F48B",
+    "shortcode": ":kiss:",
+    "category": "People & Body",
+    "tags": ["kiss", "lipstick", "love", "romantic", "smooch"]
+  },
+  {
+    "character": "🧠",
+    "name": "Brain",
+    "slug": "brain",
+    "unicode": "U+1F9E0",
+    "shortcode": ":brain:",
+    "category": "People & Body",
+    "tags": ["smart", "intelligence", "thinking", "mind", "knowledge"]
+  },
+  {
+    "character": "🦷",
+    "name": "Tooth",
+    "slug": "tooth",
+    "unicode": "U+1F9B7",
+    "shortcode": ":tooth:",
+    "category": "People & Body",
+    "tags": ["tooth", "dentist", "smile", "teeth", "dental"]
+  },
+  {
+    "character": "💅",
+    "name": "Nail Polish",
+    "slug": "nail-polish",
+    "unicode": "U+1F485",
+    "shortcode": ":nail_care:",
+    "category": "People & Body",
+    "tags": ["nails", "slay", "self-care", "confident", "fabulous"]
+  },
+  {
+    "character": "🐶",
+    "name": "Dog Face",
+    "slug": "dog-face",
+    "unicode": "U+1F436",
+    "shortcode": ":dog:",
+    "category": "Animals & Nature",
+    "tags": ["dog", "puppy", "pet", "cute", "loyal"]
+  },
+  {
+    "character": "🐱",
+    "name": "Cat Face",
+    "slug": "cat-face",
+    "unicode": "U+1F431",
+    "shortcode": ":cat:",
+    "category": "Animals & Nature",
+    "tags": ["cat", "kitten", "pet", "cute", "meow"]
+  },
+  {
+    "character": "🐸",
+    "name": "Frog",
+    "slug": "frog",
+    "unicode": "U+1F438",
+    "shortcode": ":frog:",
+    "category": "Animals & Nature",
+    "tags": ["frog", "meme", "Kermit", "ribbit", "green"]
+  },
+  {
+    "character": "🐧",
+    "name": "Penguin",
+    "slug": "penguin",
+    "unicode": "U+1F427",
+    "shortcode": ":penguin:",
+    "category": "Animals & Nature",
+    "tags": ["penguin", "cute", "cold", "bird", "tuxedo"]
+  },
+  {
+    "character": "🦋",
+    "name": "Butterfly",
+    "slug": "butterfly",
+    "unicode": "U+1F98B",
+    "shortcode": ":butterfly:",
+    "category": "Animals & Nature",
+    "tags": ["butterfly", "transformation", "beauty", "flutter", "colorful"]
+  },
+  {
+    "character": "🐝",
+    "name": "Honeybee",
+    "slug": "honeybee",
+    "unicode": "U+1F41D",
+    "shortcode": ":bee:",
+    "category": "Animals & Nature",
+    "tags": ["bee", "honey", "busy", "sting", "pollinate"]
+  },
+  {
+    "character": "🌸",
+    "name": "Cherry Blossom",
+    "slug": "cherry-blossom",
+    "unicode": "U+1F338",
+    "shortcode": ":cherry_blossom:",
+    "category": "Animals & Nature",
+    "tags": ["flower", "spring", "pink", "Japan", "beauty"]
+  },
+  {
+    "character": "🌺",
+    "name": "Hibiscus",
+    "slug": "hibiscus",
+    "unicode": "U+1F33A",
+    "shortcode": ":hibiscus:",
+    "category": "Animals & Nature",
+    "tags": ["flower", "tropical", "red", "summer", "beautiful"]
+  },
+  {
+    "character": "🌻",
+    "name": "Sunflower",
+    "slug": "sunflower",
+    "unicode": "U+1F33B",
+    "shortcode": ":sunflower:",
+    "category": "Animals & Nature",
+    "tags": ["flower", "sunshine", "happy", "summer", "yellow"]
+  },
+  {
+    "character": "🌹",
+    "name": "Rose",
+    "slug": "rose",
+    "unicode": "U+1F339",
+    "shortcode": ":rose:",
+    "category": "Animals & Nature",
+    "tags": ["flower", "love", "romance", "red", "beautiful"]
+  },
+  {
+    "character": "🍀",
+    "name": "Four Leaf Clover",
+    "slug": "four-leaf-clover",
+    "unicode": "U+1F340",
+    "shortcode": ":four_leaf_clover:",
+    "category": "Animals & Nature",
+    "tags": ["lucky", "clover", "luck", "Ireland", "fortune"]
+  },
+  {
+    "character": "🌴",
+    "name": "Palm Tree",
+    "slug": "palm-tree",
+    "unicode": "U+1F334",
+    "shortcode": ":palm_tree:",
+    "category": "Animals & Nature",
+    "tags": ["tropical", "beach", "vacation", "summer", "paradise"]
+  },
+  {
+    "character": "🌵",
+    "name": "Cactus",
+    "slug": "cactus",
+    "unicode": "U+1F335",
+    "shortcode": ":cactus:",
+    "category": "Animals & Nature",
+    "tags": ["desert", "prickly", "tough", "resilient", "dry"]
+  },
+  {
+    "character": "⭐",
+    "name": "Star",
+    "slug": "star",
+    "unicode": "U+2B50",
+    "shortcode": ":star:",
+    "category": "Animals & Nature",
+    "tags": ["star", "favorite", "rating", "sky", "wish"]
+  },
+  {
+    "character": "🔥",
+    "name": "Fire",
+    "slug": "fire",
+    "unicode": "U+1F525",
+    "shortcode": ":fire:",
+    "category": "Animals & Nature",
+    "tags": ["fire", "hot", "lit", "trending", "fire emoji"]
+  },
+  {
+    "character": "💧",
+    "name": "Droplet",
+    "slug": "droplet",
+    "unicode": "U+1F4A7",
+    "shortcode": ":droplet:",
+    "category": "Animals & Nature",
+    "tags": ["water", "drop", "sweat", "clean", "hydrate"]
+  },
+  {
+    "character": "🌊",
+    "name": "Water Wave",
+    "slug": "water-wave",
+    "unicode": "U+1F30A",
+    "shortcode": ":ocean:",
+    "category": "Animals & Nature",
+    "tags": ["wave", "ocean", "surf", "beach", "sea"]
+  },
+  {
+    "character": "❄️",
+    "name": "Snowflake",
+    "slug": "snowflake",
+    "unicode": "U+2744 U+FE0F",
+    "shortcode": ":snowflake:",
+    "category": "Animals & Nature",
+    "tags": ["snow", "cold", "winter", "ice", "unique"]
+  },
+  {
+    "character": "⚡",
+    "name": "High Voltage",
+    "slug": "high-voltage",
+    "unicode": "U+26A1",
+    "shortcode": ":zap:",
+    "category": "Animals & Nature",
+    "tags": ["lightning", "electric", "fast", "powerful", "energy"]
+  },
+  {
+    "character": "🌈",
+    "name": "Rainbow",
+    "slug": "rainbow",
+    "unicode": "U+1F308",
+    "shortcode": ":rainbow:",
+    "category": "Animals & Nature",
+    "tags": ["rainbow", "color", "pride", "hopeful", "beautiful"]
+  },
+  {
+    "character": "🍕",
+    "name": "Pizza",
+    "slug": "pizza",
+    "unicode": "U+1F355",
+    "shortcode": ":pizza:",
+    "category": "Food & Drink",
+    "tags": ["pizza", "food", "Italian", "cheese", "delicious"]
+  },
+  {
+    "character": "🍔",
+    "name": "Hamburger",
+    "slug": "hamburger",
+    "unicode": "U+1F354",
+    "shortcode": ":hamburger:",
+    "category": "Food & Drink",
+    "tags": ["burger", "fast food", "meat", "American", "meal"]
+  },
+  {
+    "character": "🍟",
+    "name": "French Fries",
+    "slug": "french-fries",
+    "unicode": "U+1F35F",
+    "shortcode": ":fries:",
+    "category": "Food & Drink",
+    "tags": ["fries", "chips", "fast food", "salty", "snack"]
+  },
+  {
+    "character": "🌮",
+    "name": "Taco",
+    "slug": "taco",
+    "unicode": "U+1F32E",
+    "shortcode": ":taco:",
+    "category": "Food & Drink",
+    "tags": ["taco", "Mexican", "food", "delicious", "spicy"]
+  },
+  {
+    "character": "🍦",
+    "name": "Soft Ice Cream",
+    "slug": "soft-ice-cream",
+    "unicode": "U+1F366",
+    "shortcode": ":icecream:",
+    "category": "Food & Drink",
+    "tags": ["ice cream", "sweet", "dessert", "summer", "treat"]
+  },
+  {
+    "character": "🎂",
+    "name": "Birthday Cake",
+    "slug": "birthday-cake",
+    "unicode": "U+1F382",
+    "shortcode": ":birthday:",
+    "category": "Food & Drink",
+    "tags": ["birthday", "cake", "celebration", "candles", "party"]
+  },
+  {
+    "character": "🍷",
+    "name": "Wine Glass",
+    "slug": "wine-glass",
+    "unicode": "U+1F377",
+    "shortcode": ":wine_glass:",
+    "category": "Food & Drink",
+    "tags": ["wine", "alcohol", "fancy", "dinner", "cheers"]
+  },
+  {
+    "character": "🍺",
+    "name": "Beer Mug",
+    "slug": "beer-mug",
+    "unicode": "U+1F37A",
+    "shortcode": ":beer:",
+    "category": "Food & Drink",
+    "tags": ["beer", "cheers", "drinking", "party", "pub"]
+  },
+  {
+    "character": "☕",
+    "name": "Hot Beverage",
+    "slug": "hot-beverage",
+    "unicode": "U+2615",
+    "shortcode": ":coffee:",
+    "category": "Food & Drink",
+    "tags": ["coffee", "tea", "morning", "caffeine", "hot drink"]
+  },
+  {
+    "character": "🧋",
+    "name": "Bubble Tea",
+    "slug": "bubble-tea",
+    "unicode": "U+1F9CB",
+    "shortcode": ":bubble_tea:",
+    "category": "Food & Drink",
+    "tags": ["boba", "bubble tea", "trendy", "drink", "sweet"]
+  },
+  {
+    "character": "🍓",
+    "name": "Strawberry",
+    "slug": "strawberry",
+    "unicode": "U+1F353",
+    "shortcode": ":strawberry:",
+    "category": "Food & Drink",
+    "tags": ["strawberry", "fruit", "red", "sweet", "summer"]
+  },
+  {
+    "character": "🍑",
+    "name": "Peach",
+    "slug": "peach",
+    "unicode": "U+1F351",
+    "shortcode": ":peach:",
+    "category": "Food & Drink",
+    "tags": ["peach", "butt", "fruit", "soft", "cute"]
+  },
+  {
+    "character": "🍆",
+    "name": "Eggplant",
+    "slug": "eggplant",
+    "unicode": "U+1F346",
+    "shortcode": ":eggplant:",
+    "category": "Food & Drink",
+    "tags": ["eggplant", "aubergine", "NSFW", "vegetables", "purple"]
+  },
+  {
+    "character": "🍒",
+    "name": "Cherries",
+    "slug": "cherries",
+    "unicode": "U+1F352",
+    "shortcode": ":cherries:",
+    "category": "Food & Drink",
+    "tags": ["cherries", "fruit", "red", "sweet", "flirty"]
+  },
+  {
+    "character": "🌍",
+    "name": "Globe Showing Europe-Africa",
+    "slug": "globe-showing-europe-africa",
+    "unicode": "U+1F30D",
+    "shortcode": ":earth_africa:",
+    "category": "Travel & Places",
+    "tags": ["globe", "world", "earth", "travel", "Africa"]
+  },
+  {
+    "character": "🗺️",
+    "name": "World Map",
+    "slug": "world-map",
+    "unicode": "U+1F5FA U+FE0F",
+    "shortcode": ":world_map:",
+    "category": "Travel & Places",
+    "tags": ["map", "travel", "explore", "world", "navigate"]
+  },
+  {
+    "character": "✈️",
+    "name": "Airplane",
+    "slug": "airplane",
+    "unicode": "U+2708 U+FE0F",
+    "shortcode": ":airplane:",
+    "category": "Travel & Places",
+    "tags": ["travel", "flight", "vacation", "trip", "flying"]
+  },
+  {
+    "character": "🚀",
+    "name": "Rocket",
+    "slug": "rocket",
+    "unicode": "U+1F680",
+    "shortcode": ":rocket:",
+    "category": "Travel & Places",
+    "tags": ["rocket", "launch", "space", "fast", "startup"]
+  },
+  {
+    "character": "🏠",
+    "name": "House",
+    "slug": "house",
+    "unicode": "U+1F3E0",
+    "shortcode": ":house:",
+    "category": "Travel & Places",
+    "tags": ["home", "house", "family", "property", "comfort"]
+  },
+  {
+    "character": "🏖️",
+    "name": "Beach With Umbrella",
+    "slug": "beach-with-umbrella",
+    "unicode": "U+1F3D6 U+FE0F",
+    "shortcode": ":beach_umbrella:",
+    "category": "Travel & Places",
+    "tags": ["beach", "vacation", "summer", "sun", "relax"]
+  },
+  {
+    "character": "🗼",
+    "name": "Tokyo Tower",
+    "slug": "tokyo-tower",
+    "unicode": "U+1F5FC",
+    "shortcode": ":tokyo_tower:",
+    "category": "Travel & Places",
+    "tags": ["Tokyo", "Japan", "tower", "landmark", "travel"]
+  },
+  {
+    "character": "🗽",
+    "name": "Statue Of Liberty",
+    "slug": "statue-of-liberty",
+    "unicode": "U+1F5FD",
+    "shortcode": ":statue_of_liberty:",
+    "category": "Travel & Places",
+    "tags": ["New York", "freedom", "USA", "landmark", "America"]
+  },
+  {
+    "character": "🎡",
+    "name": "Ferris Wheel",
+    "slug": "ferris-wheel",
+    "unicode": "U+1F3A1",
+    "shortcode": ":ferris_wheel:",
+    "category": "Travel & Places",
+    "tags": ["fair", "amusement", "wheel", "carnival", "fun"]
+  },
+  {
+    "character": "🌃",
+    "name": "Night With Stars",
+    "slug": "night-with-stars",
+    "unicode": "U+1F303",
+    "shortcode": ":night_with_stars:",
+    "category": "Travel & Places",
+    "tags": ["night", "city", "stars", "romantic", "urban"]
+  },
+  {
+    "character": "🌅",
+    "name": "Sunrise",
+    "slug": "sunrise",
+    "unicode": "U+1F305",
+    "shortcode": ":sunrise:",
+    "category": "Travel & Places",
+    "tags": ["sunrise", "morning", "dawn", "beautiful", "new day"]
+  },
+  {
+    "character": "🌙",
+    "name": "Crescent Moon",
+    "slug": "crescent-moon",
+    "unicode": "U+1F319",
+    "shortcode": ":crescent_moon:",
+    "category": "Travel & Places",
+    "tags": ["moon", "night", "sleep", "Islamic", "crescent"]
+  },
+  {
+    "character": "🚗",
+    "name": "Automobile",
+    "slug": "automobile",
+    "unicode": "U+1F697",
+    "shortcode": ":car:",
+    "category": "Travel & Places",
+    "tags": ["car", "drive", "vehicle", "road trip", "transport"]
+  },
+  {
+    "character": "⛵",
+    "name": "Sailboat",
+    "slug": "sailboat",
+    "unicode": "U+26F5",
+    "shortcode": ":sailboat:",
+    "category": "Travel & Places",
+    "tags": ["boat", "sail", "ocean", "vacation", "sailing"]
+  },
+  {
+    "character": "🎮",
+    "name": "Video Game",
+    "slug": "video-game",
+    "unicode": "U+1F3AE",
+    "shortcode": ":video_game:",
+    "category": "Activities",
+    "tags": ["gaming", "gamer", "controller", "play", "entertainment"]
+  },
+  {
+    "character": "🎯",
+    "name": "Bullseye",
+    "slug": "bullseye",
+    "unicode": "U+1F3AF",
+    "shortcode": ":dart:",
+    "category": "Activities",
+    "tags": ["target", "aim", "accurate", "goal", "bullseye"]
+  },
+  {
+    "character": "🎵",
+    "name": "Musical Note",
+    "slug": "musical-note",
+    "unicode": "U+1F3B5",
+    "shortcode": ":musical_note:",
+    "category": "Activities",
+    "tags": ["music", "song", "melody", "note", "listening"]
+  },
+  {
+    "character": "🎶",
+    "name": "Musical Notes",
+    "slug": "musical-notes",
+    "unicode": "U+1F3B6",
+    "shortcode": ":notes:",
+    "category": "Activities",
+    "tags": ["music", "singing", "song", "notes", "melody"]
+  },
+  {
+    "character": "🎤",
+    "name": "Microphone",
+    "slug": "microphone",
+    "unicode": "U+1F3A4",
+    "shortcode": ":microphone:",
+    "category": "Activities",
+    "tags": ["singing", "karaoke", "music", "performance", "mic"]
+  },
+  {
+    "character": "🎸",
+    "name": "Guitar",
+    "slug": "guitar",
+    "unicode": "U+1F3B8",
+    "shortcode": ":guitar:",
+    "category": "Activities",
+    "tags": ["guitar", "music", "rock", "instrument", "band"]
+  },
+  {
+    "character": "⚽",
+    "name": "Soccer Ball",
+    "slug": "soccer-ball",
+    "unicode": "U+26BD",
+    "shortcode": ":soccer:",
+    "category": "Activities",
+    "tags": ["soccer", "football", "sport", "goal", "team"]
+  },
+  {
+    "character": "🏀",
+    "name": "Basketball",
+    "slug": "basketball",
+    "unicode": "U+1F3C0",
+    "shortcode": ":basketball:",
+    "category": "Activities",
+    "tags": ["basketball", "sport", "NBA", "hoops", "ball"]
+  },
+  {
+    "character": "🎭",
+    "name": "Performing Arts",
+    "slug": "performing-arts",
+    "unicode": "U+1F3AD",
+    "shortcode": ":performing_arts:",
+    "category": "Activities",
+    "tags": ["theater", "drama", "acting", "masks", "performance"]
+  },
+  {
+    "character": "🎨",
+    "name": "Artist Palette",
+    "slug": "artist-palette",
+    "unicode": "U+1F3A8",
+    "shortcode": ":art:",
+    "category": "Activities",
+    "tags": ["art", "painting", "creative", "artist", "colors"]
+  },
+  {
+    "character": "📚",
+    "name": "Books",
+    "slug": "books",
+    "unicode": "U+1F4DA",
+    "shortcode": ":books:",
+    "category": "Activities",
+    "tags": ["books", "reading", "study", "education", "knowledge"]
+  },
+  {
+    "character": "🏆",
+    "name": "Trophy",
+    "slug": "trophy",
+    "unicode": "U+1F3C6",
+    "shortcode": ":trophy:",
+    "category": "Activities",
+    "tags": ["trophy", "winner", "champion", "award", "victory"]
+  },
+  {
+    "character": "🥊",
+    "name": "Boxing Glove",
+    "slug": "boxing-glove",
+    "unicode": "U+1F94A",
+    "shortcode": ":boxing_glove:",
+    "category": "Activities",
+    "tags": ["boxing", "fight", "sport", "punch", "training"]
+  },
+  {
+    "character": "🎪",
+    "name": "Circus Tent",
+    "slug": "circus-tent",
+    "unicode": "U+1F3AA",
+    "shortcode": ":circus_tent:",
+    "category": "Activities",
+    "tags": ["circus", "carnival", "entertainment", "show", "fun"]
+  },
+  {
+    "character": "🏋️",
+    "name": "Person Lifting Weights",
+    "slug": "person-lifting-weights",
+    "unicode": "U+1F3CB U+FE0F",
+    "shortcode": ":weight_lifting:",
+    "category": "Activities",
+    "tags": ["gym", "fitness", "lifting", "weights", "strong"]
+  },
+  {
+    "character": "💻",
+    "name": "Laptop",
+    "slug": "laptop",
+    "unicode": "U+1F4BB",
+    "shortcode": ":computer:",
+    "category": "Objects",
+    "tags": ["laptop", "computer", "work", "coding", "tech"]
+  },
+  {
+    "character": "📱",
+    "name": "Mobile Phone",
+    "slug": "mobile-phone",
+    "unicode": "U+1F4F1",
+    "shortcode": ":iphone:",
+    "category": "Objects",
+    "tags": ["phone", "mobile", "smartphone", "text", "call"]
+  },
+  {
+    "character": "📷",
+    "name": "Camera",
+    "slug": "camera",
+    "unicode": "U+1F4F7",
+    "shortcode": ":camera:",
+    "category": "Objects",
+    "tags": ["camera", "photo", "picture", "photography", "snap"]
+  },
+  {
+    "character": "💊",
+    "name": "Pill",
+    "slug": "pill",
+    "unicode": "U+1F48A",
+    "shortcode": ":pill:",
+    "category": "Objects",
+    "tags": ["medicine", "pills", "health", "drugs", "red pill"]
+  },
+  {
+    "character": "🔑",
+    "name": "Key",
+    "slug": "key",
+    "unicode": "U+1F511",
+    "shortcode": ":key:",
+    "category": "Objects",
+    "tags": ["key", "unlock", "access", "solution", "password"]
+  },
+  {
+    "character": "💡",
+    "name": "Light Bulb",
+    "slug": "light-bulb",
+    "unicode": "U+1F4A1",
+    "shortcode": ":bulb:",
+    "category": "Objects",
+    "tags": ["idea", "light", "smart", "insight", "bright"]
+  },
+  {
+    "character": "🔮",
+    "name": "Crystal Ball",
+    "slug": "crystal-ball",
+    "unicode": "U+1F52E",
+    "shortcode": ":crystal_ball:",
+    "category": "Objects",
+    "tags": ["magic", "fortune", "predict", "mystic", "future"]
+  },
+  {
+    "character": "💰",
+    "name": "Money Bag",
+    "slug": "money-bag",
+    "unicode": "U+1F4B0",
+    "shortcode": ":moneybag:",
+    "category": "Objects",
+    "tags": ["money", "rich", "wealth", "cash", "bag"]
+  },
+  {
+    "character": "💎",
+    "name": "Gem Stone",
+    "slug": "gem-stone",
+    "unicode": "U+1F48E",
+    "shortcode": ":gem:",
+    "category": "Objects",
+    "tags": ["diamond", "gem", "luxury", "valuable", "precious"]
+  },
+  {
+    "character": "🎁",
+    "name": "Wrapped Gift",
+    "slug": "wrapped-gift",
+    "unicode": "U+1F381",
+    "shortcode": ":gift:",
+    "category": "Objects",
+    "tags": ["gift", "present", "birthday", "surprise", "giving"]
+  },
+  {
+    "character": "🧲",
+    "name": "Magnet",
+    "slug": "magnet",
+    "unicode": "U+1F9F2",
+    "shortcode": ":magnet:",
+    "category": "Objects",
+    "tags": ["magnet", "attract", "pull", "force", "magnetic"]
+  },
+  {
+    "character": "🔞",
+    "name": "No One Under Eighteen",
+    "slug": "no-one-under-eighteen",
+    "unicode": "U+1F51E",
+    "shortcode": ":underage:",
+    "category": "Objects",
+    "tags": ["adult", "18+", "restricted", "mature", "age limit"]
+  },
+  {
+    "character": "🪄",
+    "name": "Magic Wand",
+    "slug": "magic-wand",
+    "unicode": "U+1FA84",
+    "shortcode": ":magic_wand:",
+    "category": "Objects",
+    "tags": ["magic", "wand", "spell", "wizard", "abracadabra"]
+  },
+  {
+    "character": "🗑️",
+    "name": "Wastebasket",
+    "slug": "wastebasket",
+    "unicode": "U+1F5D1 U+FE0F",
+    "shortcode": ":wastebasket:",
+    "category": "Objects",
+    "tags": ["trash", "delete", "garbage", "remove", "discard"]
+  },
+  {
+    "character": "📸",
+    "name": "Camera With Flash",
+    "slug": "camera-with-flash",
+    "unicode": "U+1F4F8",
+    "shortcode": ":camera_flash:",
+    "category": "Objects",
+    "tags": ["selfie", "photo", "flash", "camera", "picture"]
+  },
+  {
+    "character": "🎉",
+    "name": "Party Popper",
+    "slug": "party-popper",
+    "unicode": "U+1F389",
+    "shortcode": ":tada:",
+    "category": "Objects",
+    "tags": ["party", "celebration", "confetti", "congrats", "festive"]
+  },
+  {
+    "character": "🧨",
+    "name": "Firecracker",
+    "slug": "firecracker",
+    "unicode": "U+1F9E8",
+    "shortcode": ":firecracker:",
+    "category": "Objects",
+    "tags": ["firework", "explosion", "celebration", "loud", "bang"]
+  },
+  {
+    "character": "🎊",
+    "name": "Confetti Ball",
+    "slug": "confetti-ball",
+    "unicode": "U+1F38A",
+    "shortcode": ":confetti_ball:",
+    "category": "Objects",
+    "tags": ["confetti", "party", "celebration", "colorful", "festive"]
+  },
+  {
+    "character": "⚠️",
+    "name": "Warning",
+    "slug": "warning",
+    "unicode": "U+26A0 U+FE0F",
+    "shortcode": ":warning:",
+    "category": "Symbols",
+    "tags": ["warning", "caution", "alert", "danger", "careful"]
+  },
+  {
+    "character": "❗",
+    "name": "Exclamation Mark",
+    "slug": "exclamation-mark",
+    "unicode": "U+2757",
+    "shortcode": ":exclamation:",
+    "category": "Symbols",
+    "tags": ["exclamation", "important", "attention", "emphasis", "serious"]
+  },
+  {
+    "character": "❓",
+    "name": "Question Mark",
+    "slug": "question-mark",
+    "unicode": "U+2753",
+    "shortcode": ":question:",
+    "category": "Symbols",
+    "tags": ["question", "confused", "asking", "uncertain", "curious"]
+  },
+  {
+    "character": "✅",
+    "name": "Check Mark Button",
+    "slug": "check-mark-button",
+    "unicode": "U+2705",
+    "shortcode": ":white_check_mark:",
+    "category": "Symbols",
+    "tags": ["check", "done", "approved", "correct", "complete"]
+  },
+  {
+    "character": "❌",
+    "name": "Cross Mark",
+    "slug": "cross-mark",
+    "unicode": "U+274C",
+    "shortcode": ":x:",
+    "category": "Symbols",
+    "tags": ["wrong", "no", "cancel", "error", "reject"]
+  },
+  {
+    "character": "♾️",
+    "name": "Infinity",
+    "slug": "infinity",
+    "unicode": "U+267E U+FE0F",
+    "shortcode": ":infinity:",
+    "category": "Symbols",
+    "tags": ["infinity", "forever", "endless", "eternal", "loop"]
+  },
+  {
+    "character": "💯",
+    "name": "Hundred Points",
+    "slug": "hundred-points",
+    "unicode": "U+1F4AF",
+    "shortcode": ":100:",
+    "category": "Symbols",
+    "tags": ["100", "perfect", "fire", "accurate", "legit"]
+  },
+  {
+    "character": "✨",
+    "name": "Sparkles",
+    "slug": "sparkles",
+    "unicode": "U+2728",
+    "shortcode": ":sparkles:",
+    "category": "Symbols",
+    "tags": ["sparkle", "magic", "glitter", "shiny", "clean"]
+  },
+  {
+    "character": "🌟",
+    "name": "Glowing Star",
+    "slug": "glowing-star",
+    "unicode": "U+1F31F",
+    "shortcode": ":star2:",
+    "category": "Symbols",
+    "tags": ["star", "shining", "amazing", "excellent", "glow"]
+  },
+  {
+    "character": "💫",
+    "name": "Dizzy",
+    "slug": "dizzy",
+    "unicode": "U+1F4AB",
+    "shortcode": ":dizzy:",
+    "category": "Symbols",
+    "tags": ["dizzy", "star", "spinning", "impact", "magical"]
+  },
+  {
+    "character": "🔵",
+    "name": "Blue Circle",
+    "slug": "blue-circle",
+    "unicode": "U+1F535",
+    "shortcode": ":large_blue_circle:",
+    "category": "Symbols",
+    "tags": ["blue", "circle", "color", "dot", "Discord"]
+  },
+  {
+    "character": "🔴",
+    "name": "Red Circle",
+    "slug": "red-circle",
+    "unicode": "U+1F534",
+    "shortcode": ":red_circle:",
+    "category": "Symbols",
+    "tags": ["red", "circle", "stop", "dot", "recording"]
+  },
+  {
+    "character": "🟢",
+    "name": "Green Circle",
+    "slug": "green-circle",
+    "unicode": "U+1F7E2",
+    "shortcode": ":green_circle:",
+    "category": "Symbols",
+    "tags": ["green", "circle", "online", "go", "dot"]
+  },
+  {
+    "character": "⬆️",
+    "name": "Up Arrow",
+    "slug": "up-arrow",
+    "unicode": "U+2B06 U+FE0F",
+    "shortcode": ":arrow_up:",
+    "category": "Symbols",
+    "tags": ["up", "increase", "growth", "level up", "higher"]
+  },
+  {
+    "character": "☑️",
+    "name": "Check Box With Check",
+    "slug": "check-box-with-check",
+    "unicode": "U+2611 U+FE0F",
+    "shortcode": ":ballot_box_with_check:",
+    "category": "Symbols",
+    "tags": ["checkbox", "done", "tick", "complete", "selected"]
+  },
+  {
+    "character": "🏳️",
+    "name": "White Flag",
+    "slug": "white-flag",
+    "unicode": "U+1F3F3 U+FE0F",
+    "shortcode": ":white_flag:",
+    "category": "Flags",
+    "tags": ["surrender", "peace", "give up", "white flag", "defeat"]
+  },
+  {
+    "character": "🏴",
+    "name": "Black Flag",
+    "slug": "black-flag",
+    "unicode": "U+1F3F4",
+    "shortcode": ":black_flag:",
+    "category": "Flags",
+    "tags": ["pirate", "black flag", "rebellion", "dark", "anarchist"]
+  },
+  {
+    "character": "🏁",
+    "name": "Chequered Flag",
+    "slug": "chequered-flag",
+    "unicode": "U+1F3C1",
+    "shortcode": ":checkered_flag:",
+    "category": "Flags",
+    "tags": ["finish", "race", "done", "checkered", "winner"]
+  },
+  {
+    "character": "🚩",
+    "name": "Triangular Flag",
+    "slug": "triangular-flag",
+    "unicode": "U+1F6A9",
+    "shortcode": ":triangular_flag_on_post:",
+    "category": "Flags",
+    "tags": ["red flag", "warning", "danger", "sign", "alert"]
+  },
+  {
+    "character": "🏴‍☠️",
+    "name": "Pirate Flag",
+    "slug": "pirate-flag",
+    "unicode": "U+1F3F4 U+200D U+2620 U+FE0F",
+    "shortcode": ":pirate_flag:",
+    "category": "Flags",
+    "tags": ["pirate", "skull", "jolly roger", "rebel", "adventure"]
+  },
+  {
+    "character": "🇺🇸",
+    "name": "Flag: United States",
+    "slug": "flag-united-states",
+    "unicode": "U+1F1FA U+1F1F8",
+    "shortcode": ":flag_us:",
+    "category": "Flags",
+    "tags": ["USA", "America", "United States", "flag", "American"]
+  },
+  {
+    "character": "🇬🇧",
+    "name": "Flag: United Kingdom",
+    "slug": "flag-united-kingdom",
+    "unicode": "U+1F1EC U+1F1E7",
+    "shortcode": ":flag_gb:",
+    "category": "Flags",
+    "tags": ["UK", "Britain", "England", "flag", "British"]
+  },
+  {
+    "character": "🇯🇵",
+    "name": "Flag: Japan",
+    "slug": "flag-japan",
+    "unicode": "U+1F1EF U+1F1F5",
+    "shortcode": ":flag_jp:",
+    "category": "Flags",
+    "tags": ["Japan", "Japanese", "flag", "Nippon", "Asia"]
+  },
+  {
+    "character": "🇰🇷",
+    "name": "Flag: South Korea",
+    "slug": "flag-south-korea",
+    "unicode": "U+1F1F0 U+1F1F7",
+    "shortcode": ":flag_kr:",
+    "category": "Flags",
+    "tags": ["Korea", "Korean", "flag", "K-pop", "Seoul"]
+  },
+  {
+    "character": "🇧🇷",
+    "name": "Flag: Brazil",
+    "slug": "flag-brazil",
+    "unicode": "U+1F1E7 U+1F1F7",
+    "shortcode": ":flag_br:",
+    "category": "Flags",
+    "tags": ["Brazil", "Brazilian", "flag", "football", "carnival"]
+  },
+  {
+    "character": "🇮🇳",
+    "name": "Flag: India",
+    "slug": "flag-india",
+    "unicode": "U+1F1EE U+1F1F3",
+    "shortcode": ":flag_in:",
+    "category": "Flags",
+    "tags": ["India", "Indian", "flag", "Bollywood", "South Asia"]
+  },
+  {
+    "character": "🇲🇽",
+    "name": "Flag: Mexico",
+    "slug": "flag-mexico",
+    "unicode": "U+1F1F2 U+1F1FD",
+    "shortcode": ":flag_mx:",
+    "category": "Flags",
+    "tags": ["Mexico", "Mexican", "flag", "Spanish", "Latin America"]
+  },
+  {
+    "character": "🇨🇦",
+    "name": "Flag: Canada",
+    "slug": "flag-canada",
+    "unicode": "U+1F1E8 U+1F1E6",
+    "shortcode": ":flag_ca:",
+    "category": "Flags",
+    "tags": ["Canada", "Canadian", "flag", "maple leaf", "North America"]
+  },
+  {
+    "character": "🇦🇺",
+    "name": "Flag: Australia",
+    "slug": "flag-australia",
+    "unicode": "U+1F1E6 U+1F1FA",
+    "shortcode": ":flag_au:",
+    "category": "Flags",
+    "tags": ["Australia", "Australian", "flag", "Aussie", "Oceania"]
+  },
+  {
+    "character": "🇩🇪",
+    "name": "Flag: Germany",
+    "slug": "flag-germany",
+    "unicode": "U+1F1E9 U+1F1EA",
+    "shortcode": ":flag_de:",
+    "category": "Flags",
+    "tags": ["Germany", "German", "flag", "Deutsche", "Europe"]
+  },
+  {
+    "character": "🇫🇷",
+    "name": "Flag: France",
+    "slug": "flag-france",
+    "unicode": "U+1F1EB U+1F1F7",
+    "shortcode": ":flag_fr:",
+    "category": "Flags",
+    "tags": ["France", "French", "flag", "Paris", "Europe"]
+  },
+  {
+    "character": "🇪🇸",
+    "name": "Flag: Spain",
+    "slug": "flag-spain",
+    "unicode": "U+1F1EA U+1F1F8",
+    "shortcode": ":flag_es:",
+    "category": "Flags",
+    "tags": ["Spain", "Spanish", "flag", "Europe", "Barcelona"]
+  },
+  {
+    "character": "🇮🇹",
+    "name": "Flag: Italy",
+    "slug": "flag-italy",
+    "unicode": "U+1F1EE U+1F1F9",
+    "shortcode": ":flag_it:",
+    "category": "Flags",
+    "tags": ["Italy", "Italian", "flag", "Rome", "Europe"]
+  },
+  {
+    "character": "🇵🇰",
+    "name": "Flag: Pakistan",
+    "slug": "flag-pakistan",
+    "unicode": "U+1F1F5 U+1F1F0",
+    "shortcode": ":flag_pk:",
+    "category": "Flags",
+    "tags": ["Pakistan", "Pakistani", "flag", "South Asia", "Urdu"]
+  },
+  {
+    "character": "🇸🇦",
+    "name": "Flag: Saudi Arabia",
+    "slug": "flag-saudi-arabia",
+    "unicode": "U+1F1F8 U+1F1E6",
+    "shortcode": ":flag_sa:",
+    "category": "Flags",
+    "tags": ["Saudi Arabia", "Saudi", "flag", "Middle East", "Arabic"]
+  }
+]
