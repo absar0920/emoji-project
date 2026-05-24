@@ -11,9 +11,9 @@ let cachedDb: Db | null = null;
 async function connectToDatabase(): Promise<{
   client: MongoClient;
   db: Db;
-}> {
+} | null> {
   if (!MONGODB_URI) {
-    throw new Error("MONGODB_URI environment variable is not set");
+    return null;
   }
 
   if (cachedClient && cachedDb) {
@@ -40,11 +40,12 @@ export async function getEmojiBySlug(
   const cached = await getCached<EmojiDocument>(cacheKey);
   if (cached) return cached;
 
-  const { db } = await connectToDatabase();
-  const result = await emojis(db).findOne({ slug });
+  const conn = await connectToDatabase();
+  if (!conn) return null;
+  const result = await emojis(conn.db).findOne({ slug });
 
   if (result) {
-    await setCached(cacheKey, result, 3600); // 1 hour TTL
+    await setCached(cacheKey, result, 3600);
   }
   return result;
 }
@@ -56,28 +57,31 @@ export async function getTrendingEmojis(
   const cached = await getCached<EmojiDocument[]>(cacheKey);
   if (cached) return cached;
 
-  const { db } = await connectToDatabase();
-  const results = await emojis(db)
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  const results = await emojis(conn.db)
     .find({})
     .sort({ "virality.trend_score": -1 })
     .limit(limit)
     .toArray();
 
-  await setCached(cacheKey, results, 300); // 5 min TTL
+  await setCached(cacheKey, results, 300);
   return results;
 }
 
 export async function getAllSlugs(): Promise<string[]> {
-  const { db } = await connectToDatabase();
-  const docs = await emojis(db)
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  const docs = await emojis(conn.db)
     .find({}, { projection: { slug: 1 } })
     .toArray();
   return docs.map((d) => d.slug);
 }
 
 export async function getSearchIndex(): Promise<EmojiSearchItem[]> {
-  const { db } = await connectToDatabase();
-  const docs = await emojis(db)
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  const docs = await emojis(conn.db)
     .find(
       {},
       {
@@ -108,8 +112,9 @@ export async function getSearchIndex(): Promise<EmojiSearchItem[]> {
 export async function getRelatedEmojis(
   slugs: string[]
 ): Promise<EmojiDocument[]> {
-  const { db } = await connectToDatabase();
-  return emojis(db)
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  return emojis(conn.db)
     .find({ slug: { $in: slugs } })
     .toArray();
 }
@@ -118,8 +123,9 @@ export async function getEmojisByCategory(
   category: string,
   limit: number = 20
 ): Promise<EmojiDocument[]> {
-  const { db } = await connectToDatabase();
-  return emojis(db)
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  return emojis(conn.db)
     .find({ category })
     .sort({ "virality.trend_score": -1 })
     .limit(limit)
@@ -127,8 +133,9 @@ export async function getEmojisByCategory(
 }
 
 export async function getEmojiCount(): Promise<number> {
-  const { db } = await connectToDatabase();
-  return emojis(db).countDocuments();
+  const conn = await connectToDatabase();
+  if (!conn) return 0;
+  return emojis(conn.db).countDocuments();
 }
 
 export { connectToDatabase };
