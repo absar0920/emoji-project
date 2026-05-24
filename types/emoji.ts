@@ -322,6 +322,13 @@ export const PLATFORM_KEYS = [
 
 export type PlatformKey = (typeof PLATFORM_KEYS)[number];
 
+export interface KitchenCombo {
+  emoji1: string;
+  emoji2: string;
+  result_url: string;
+  created_at: Date;
+}
+
 /** Platform display names */
 export const PLATFORM_LABELS: Record<PlatformKey, string> = {
   tiktok: "TikTok",

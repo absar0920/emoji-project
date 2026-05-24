@@ -266,4 +266,56 @@ export async function getRelatedCombos(
     .toArray();
 }
 
+export async function getKitchenCombo(
+  emoji1: string,
+  emoji2: string
+): Promise<any | null> {
+  const conn = await connectToDatabase();
+  if (!conn) return null;
+  const kitchen = conn.db.collection("kitchen");
+  // Check both orderings
+  const result = await kitchen.findOne({
+    $or: [
+      { emoji1, emoji2 },
+      { emoji1: emoji2, emoji2: emoji1 },
+    ],
+  });
+  return result;
+}
+
+export async function getRandomKitchenCombos(
+  limit: number = 10
+): Promise<any[]> {
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  return conn.db
+    .collection("kitchen")
+    .aggregate([{ $sample: { size: limit } }])
+    .toArray();
+}
+
+export async function getPopularComparisons(
+  limit: number = 10
+): Promise<ComparisonDocument[]> {
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  return conn.db
+    .collection<ComparisonDocument>("comparisons")
+    .find({})
+    .limit(limit)
+    .toArray();
+}
+
+export async function getPopularCombos(
+  limit: number = 10
+): Promise<ComboDocument[]> {
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  return conn.db
+    .collection<ComboDocument>("combos")
+    .find({})
+    .limit(limit)
+    .toArray();
+}
+
 export { connectToDatabase };
