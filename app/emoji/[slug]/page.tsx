@@ -13,15 +13,10 @@ import StickyTOC from "@/components/StickyTOC";
 import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-// Pages generated on-demand via ISR — not at build time
-export async function generateStaticParams() {
-  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

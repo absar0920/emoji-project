@@ -8,15 +8,10 @@ import PlatformLinks from "@/components/PlatformLinks";
 import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ platform: string; slug: string }>;
-}
-
-// Pages generated on-demand via ISR — not at build time
-export async function generateStaticParams() {
-  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

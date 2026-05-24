@@ -7,14 +7,10 @@ import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ region: string }>;
-}
-
-export async function generateStaticParams() {
-  return CULTURE_REGIONS.map((region) => ({ region }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
