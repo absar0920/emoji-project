@@ -5,7 +5,7 @@ import type { ComboDocument } from "../types/emoji";
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 const MONGODB_DB = process.env.MONGODB_DB || "emoji-platform";
-const CONCURRENCY = 10;
+const CONCURRENCY = 100;
 
 const THEMES = [
   "birthday", "love", "breakup", "aesthetic", "gym", "study", "pride",

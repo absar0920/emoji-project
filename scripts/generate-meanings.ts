@@ -8,7 +8,7 @@ import * as path from "path";
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 const MONGODB_DB = process.env.MONGODB_DB || "emoji-platform";
-const CONCURRENCY = 10;
+const CONCURRENCY = 100;
 
 async function main() {
   if (!MONGODB_URI) {

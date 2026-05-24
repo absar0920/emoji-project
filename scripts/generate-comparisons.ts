@@ -5,7 +5,7 @@ import type { EmojiDocument, ComparisonDocument } from "../types/emoji";
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 const MONGODB_DB = process.env.MONGODB_DB || "emoji-platform";
-const CONCURRENCY = 10;
+const CONCURRENCY = 100;
 
 function makePairSlug(slug1: string, slug2: string): string {
   const sorted = [slug1, slug2].sort();

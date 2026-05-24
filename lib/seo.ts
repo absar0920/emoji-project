@@ -26,27 +26,27 @@ export function generateFAQSchema(emoji: EmojiDocument) {
   const faqs = [
     {
       question: `What does the ${emoji.character} ${emoji.name} emoji mean?`,
-      answer: emoji.official_meaning.description,
+      answer: emoji.official_meaning?.description || `The ${emoji.name} emoji is a commonly used emoji.`,
     },
     {
       question: `What does ${emoji.character} mean on TikTok?`,
-      answer: emoji.tiktok.meaning,
+      answer: (emoji as any).platforms?.tiktok?.meaning || emoji.tiktok?.meaning || `The ${emoji.name} emoji is used on TikTok in various contexts.`,
     },
     {
       question: `What does ${emoji.character} mean on WhatsApp?`,
-      answer: emoji.whatsapp.chat_meaning,
+      answer: (emoji as any).platforms?.whatsapp?.chat_meaning || emoji.whatsapp?.chat_meaning || `The ${emoji.name} emoji is commonly used in WhatsApp chats.`,
     },
     {
       question: `What does ${emoji.character} mean in Gen-Z slang?`,
-      answer: emoji.genz_meaning.interpretation,
+      answer: emoji.genz_meaning?.interpretation || `The ${emoji.name} emoji has various meanings in Gen-Z culture.`,
     },
     {
       question: `Is the ${emoji.character} emoji safe to use?`,
-      answer: emoji.safety.safe_meaning,
+      answer: emoji.safety?.safe_meaning || `The ${emoji.name} emoji is generally safe to use.`,
     },
     {
       question: `What does ${emoji.character} mean in texting?`,
-      answer: emoji.emotional_meaning.psychology_note,
+      answer: emoji.emotional_meaning?.psychology_note || `The ${emoji.name} emoji conveys various emotions in texting.`,
     },
     {
       question: `What is the shortcode for ${emoji.character}?`,
@@ -54,7 +54,7 @@ export function generateFAQSchema(emoji: EmojiDocument) {
     },
     {
       question: `What does ${emoji.character} mean in dating?`,
-      answer: emoji.dating_meaning.flirt_usage,
+      answer: emoji.dating_meaning?.flirt_usage || `The ${emoji.name} emoji can be used in dating contexts.`,
     },
   ];
 
@@ -139,7 +139,7 @@ export function generatePlatformBreadcrumb(emoji: EmojiDocument, platform: Platf
 
 export function generatePlatformFAQ(emoji: EmojiDocument, platform: PlatformKey) {
   const label = PLATFORM_LABELS[platform];
-  const platformData = emoji[platform] as unknown as Record<string, unknown> | undefined;
+  const platformData = ((emoji as any).platforms?.[platform] || emoji[platform]) as Record<string, unknown> | undefined;
   const firstValue = platformData ? String(Object.values(platformData)[0] || "") : "";
 
   return {
@@ -182,17 +182,17 @@ export function generateComparisonFAQ(comparison: ComparisonDocument) {
       {
         "@type": "Question",
         name: `What's the difference between ${comparison.emoji1_character} and ${comparison.emoji2_character}?`,
-        acceptedAnswer: { "@type": "Answer", text: comparison.differences.official },
+        acceptedAnswer: { "@type": "Answer", text: comparison.differences?.official || "These emojis have different meanings and usage contexts." },
       },
       {
         "@type": "Question",
         name: `Which is more popular, ${comparison.emoji1_character} or ${comparison.emoji2_character}?`,
-        acceptedAnswer: { "@type": "Answer", text: `${comparison.winner} is more popular. ${comparison.winner_reason}` },
+        acceptedAnswer: { "@type": "Answer", text: `${comparison.winner || "One of these emojis"} is more popular. ${comparison.winner_reason || ""}` },
       },
       {
         "@type": "Question",
         name: `When should I use ${comparison.emoji1_character} vs ${comparison.emoji2_character}?`,
-        acceptedAnswer: { "@type": "Answer", text: comparison.when_to_use },
+        acceptedAnswer: { "@type": "Answer", text: comparison.when_to_use || "Choose based on the context and tone you want to convey." },
       },
     ],
   };

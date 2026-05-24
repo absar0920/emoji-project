@@ -47,7 +47,7 @@ export default async function PlatformPage({ params }: PageProps) {
   if (!emoji) notFound();
 
   const platformKey = platform as PlatformKey;
-  const platformData = emoji[platformKey] as unknown as Record<string, unknown> | undefined;
+  const platformData = ((emoji as any).platforms?.[platformKey] || (emoji as any)[platformKey]) as Record<string, unknown> | undefined;
   const platformLabel = PLATFORM_LABELS[platformKey];
   const platformIcon = PLATFORM_ICONS[platformKey];
 

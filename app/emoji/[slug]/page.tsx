@@ -66,7 +66,7 @@ export default async function EmojiPage({ params }: PageProps) {
               <CopyButton text={emoji.character} />
               <CopyButton text={emoji.shortcode} label={emoji.shortcode} className="bg-neutral-100 !text-neutral-700 hover:!bg-neutral-200" />
               {emoji.virality?.trend_score != null && (
-                <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 text-accent-amber">🔥 {emoji.virality.trend_score}</span>
+                <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 text-accent-amber">🔥 {emoji.virality?.trend_score}</span>
               )}
             </div>
           </div>
@@ -91,9 +91,9 @@ export default async function EmojiPage({ params }: PageProps) {
         <section id="platforms" className="mb-10">
           <h2 className="text-xl font-bold text-primary-dark mb-4">Platform Meanings</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {emoji.tiktok && <PlatformCard platform="tiktok" data={emoji.tiktok as unknown as Record<string, string | string[] | number>} />}
-            {emoji.whatsapp && <PlatformCard platform="whatsapp" data={emoji.whatsapp as unknown as Record<string, string | string[] | number>} />}
-            {emoji.instagram && <PlatformCard platform="instagram" data={emoji.instagram as unknown as Record<string, string | string[] | number>} />}
+            {((emoji as any).platforms?.tiktok || emoji.tiktok) && <PlatformCard platform="tiktok" data={((emoji as any).platforms?.tiktok || emoji.tiktok) as unknown as Record<string, string | string[] | number>} />}
+            {((emoji as any).platforms?.whatsapp || emoji.whatsapp) && <PlatformCard platform="whatsapp" data={((emoji as any).platforms?.whatsapp || emoji.whatsapp) as unknown as Record<string, string | string[] | number>} />}
+            {((emoji as any).platforms?.instagram || emoji.instagram) && <PlatformCard platform="instagram" data={((emoji as any).platforms?.instagram || emoji.instagram) as unknown as Record<string, string | string[] | number>} />}
           </div>
         </section>
 
