@@ -9,6 +9,14 @@ const footerLinks = {
     { name: "😂 Joy", href: "/emoji/face-with-tears-of-joy" },
     { name: "💅 Nail Polish", href: "/emoji/nail-polish" },
   ],
+  tools: [
+    { name: "Emoji Kitchen", href: "/tools/emoji-kitchen" },
+    { name: "Text to Emoji", href: "/tools/text-to-emoji" },
+    { name: "Vibe Search", href: "/tools/vibe-search" },
+    { name: "Caption Generator", href: "/tools/caption-generator" },
+    { name: "Trending Emojis", href: "/tools/emoji-trends" },
+    { name: "Emoji Keyboard", href: "/tools/emoji-keyboard" },
+  ],
   categories: [
     { name: "Smileys & Emotion", href: "/search" },
     { name: "People & Body", href: "/search" },
@@ -28,7 +36,7 @@ export default function Footer() {
   return (
     <footer className="bg-neutral-900 text-neutral-400 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl">🧠</span>
@@ -42,6 +50,16 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">Popular Emojis</h3>
             <ul className="space-y-2 text-sm">
               {footerLinks.popular.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-white transition-colors">{link.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-white font-semibold mb-4">Tools</h3>
+            <ul className="space-y-2 text-sm">
+              {footerLinks.tools.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-white transition-colors">{link.name}</Link>
                 </li>
