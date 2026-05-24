@@ -36,6 +36,26 @@ async function main() {
   await collection.createIndex({ category: 1, "virality.trend_score": -1 });
   console.log("  ✓ { category, virality.trend_score } compound");
 
+  // Comparisons collection
+  const comparisons = db.collection("comparisons");
+  console.log("\nCreating indexes on 'comparisons' collection...");
+
+  await comparisons.createIndex({ slug: 1 }, { unique: true });
+  console.log("  ✓ slug (unique)");
+
+  await comparisons.createIndex({ emoji1_slug: 1 });
+  console.log("  ✓ emoji1_slug");
+
+  await comparisons.createIndex({ emoji2_slug: 1 });
+  console.log("  ✓ emoji2_slug");
+
+  // Combos collection
+  const combos = db.collection("combos");
+  console.log("\nCreating indexes on 'combos' collection...");
+
+  await combos.createIndex({ slug: 1 }, { unique: true });
+  console.log("  ✓ slug (unique)");
+
   console.log("\nAll indexes created successfully.");
   await client.close();
 }
