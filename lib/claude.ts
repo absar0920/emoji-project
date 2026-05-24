@@ -50,26 +50,40 @@ Use URL-safe slugs for all emoji references (e.g., "skull", "red-heart", "face-w
 Each culture value should be a 1-2 sentence description of how this emoji is used/interpreted in that culture.`;
 }
 
+async function callClaude(
+  prompt: string,
+  maxTokens: number,
+  retries: number = 2
+): Promise<Record<string, unknown>> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const response = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: maxTokens,
+      messages: [{ role: "user", content: prompt }],
+      system: SYSTEM_PROMPT,
+    });
+
+    const text =
+      response.content[0].type === "text" ? response.content[0].text : "";
+
+    try {
+      return JSON.parse(text);
+    } catch {
+      if (attempt < retries) {
+        console.log(`    JSON parse failed (attempt ${attempt + 1}/${retries + 1}), retrying...`);
+        continue;
+      }
+      throw new Error(`JSON parse failed after ${retries + 1} attempts. Response length: ${text.length}, stop_reason: ${response.stop_reason}`);
+    }
+  }
+  throw new Error("Unreachable");
+}
+
 export async function generateEmojiMeanings(
   character: string,
   name: string
 ): Promise<Record<string, unknown>> {
-  const response = await client.messages.create({
-    model: "claude-opus-4-7",
-    max_tokens: 4000,
-    messages: [
-      {
-        role: "user",
-        content: buildUserPrompt(character, name),
-      },
-    ],
-    system: SYSTEM_PROMPT,
-  });
-
-  const text =
-    response.content[0].type === "text" ? response.content[0].text : "";
-  const parsed = JSON.parse(text);
-  return parsed;
+  return callClaude(buildUserPrompt(character, name), 10000);
 }
 
 export async function generateComparison(
@@ -78,13 +92,8 @@ export async function generateComparison(
   emoji2Character: string,
   emoji2Name: string
 ): Promise<Record<string, unknown>> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250514",
-    max_tokens: 1500,
-    messages: [
-      {
-        role: "user",
-        content: `Compare ${emoji1Character} (${emoji1Name}) vs ${emoji2Character} (${emoji2Name}).
+  return callClaude(
+    `Compare ${emoji1Character} (${emoji1Name}) vs ${emoji2Character} (${emoji2Name}).
 
 Return a JSON object with:
 - differences: { official: string, genz: string, emotional: string, dating: string, meme: string, tiktok: string, whatsapp: string }
@@ -93,36 +102,21 @@ Return a JSON object with:
 - when_to_use: string (practical guide, 2-3 sentences)
 
 Each difference should be 1-2 sentences explaining how the two emojis differ in that context.`,
-      },
-    ],
-    system: SYSTEM_PROMPT,
-  });
-
-  const text = response.content[0].type === "text" ? response.content[0].text : "";
-  return JSON.parse(text);
+    1500
+  );
 }
 
 export async function generateCombos(
   theme: string
 ): Promise<Record<string, unknown>> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250514",
-    max_tokens: 1000,
-    messages: [
-      {
-        role: "user",
-        content: `Generate 5 emoji combinations for the theme "${theme}".
+  return callClaude(
+    `Generate 5 emoji combinations for the theme "${theme}".
 
 Return a JSON object with:
 - combos: Array of 5 objects, each with:
   - emojis: string[] (4-8 emoji characters)
   - label: string (short name like "Classic ${theme}")
 - seo_description: string (1-2 sentence description for SEO meta)`,
-      },
-    ],
-    system: SYSTEM_PROMPT,
-  });
-
-  const text = response.content[0].type === "text" ? response.content[0].text : "";
-  return JSON.parse(text);
+    1000
+  );
 }
