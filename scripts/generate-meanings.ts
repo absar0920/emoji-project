@@ -25,6 +25,7 @@ async function main() {
   const sourceFile = sourceFlag
     ? sourceFlag.split("=")[1]
     : "seed-emojis.json";
+  const forceFlag = process.argv.includes("--force");
   const seedPath = path.join(__dirname, "../data", sourceFile);
 
   if (!fs.existsSync(seedPath)) {
@@ -46,6 +47,7 @@ async function main() {
   const existingMap = new Map(existingDocs.map((d) => [d.slug, d]));
 
   const toProcess = emojis.filter((seed) => {
+    if (forceFlag) return true;
     const existing = existingMap.get(seed.slug);
     if (existing?.official_meaning) {
       console.log(`  SKIP: ${seed.character} ${seed.name} (already has meaning data)`);
@@ -55,7 +57,7 @@ async function main() {
   });
 
   const skipped = emojis.length - toProcess.length;
-  console.log(`Starting pipeline: ${toProcess.length} to generate, ${skipped} skipped (${CONCURRENCY} concurrent)`);
+  console.log(`Starting pipeline: ${toProcess.length} to generate, ${skipped} skipped (${CONCURRENCY} concurrent)${forceFlag ? ' [FORCE MODE]' : ''}`);
 
   let processed = 0;
   let errors = 0;
