@@ -13,9 +13,9 @@ interface PageProps {
   params: Promise<{ type: string }>;
 }
 
+// Pages generated on-demand via ISR — not at build time
 export async function generateStaticParams() {
-  const slugs = await getAllComboSlugs();
-  return slugs.map((type) => ({ type }));
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

@@ -14,15 +14,9 @@ interface PageProps {
   params: Promise<{ platform: string; slug: string }>;
 }
 
+// Pages generated on-demand via ISR — not at build time
 export async function generateStaticParams() {
-  const slugs = await getAllSlugs();
-  const params: Array<{ platform: string; slug: string }> = [];
-  for (const platform of PLATFORM_KEYS) {
-    for (const slug of slugs) {
-      params.push({ platform, slug });
-    }
-  }
-  return params;
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
