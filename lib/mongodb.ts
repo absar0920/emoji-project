@@ -36,7 +36,7 @@ async function connectToDatabase(): Promise<{
   }
 }
 
-function emojis(db: Db): Collection<EmojiDocument> {
+export function emojis(db: Db): Collection<EmojiDocument> {
   return db.collection<EmojiDocument>("emojis");
 }
 
