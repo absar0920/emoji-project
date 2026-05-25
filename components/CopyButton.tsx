@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 interface CopyButtonProps {
   text: string;
@@ -8,7 +9,11 @@ interface CopyButtonProps {
   className?: string;
 }
 
-export default function CopyButton({ text, label, className = "" }: CopyButtonProps) {
+export default function CopyButton({
+  text,
+  label,
+  className = "",
+}: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
@@ -18,13 +23,16 @@ export default function CopyButton({ text, label, className = "" }: CopyButtonPr
   }
 
   return (
-    <button
+    <motion.button
       onClick={handleCopy}
+      whileTap={{ scale: 0.9 }}
       className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-        copied ? "bg-accent-emerald text-white" : "bg-primary text-white hover:bg-primary-dark"
+        copied
+          ? "bg-accent-emerald text-white"
+          : "bg-primary text-white hover:bg-primary-dark"
       } ${className}`}
     >
       {copied ? "Copied!" : label || `Copy ${text}`}
-    </button>
+    </motion.button>
   );
 }

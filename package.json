@@ -21,6 +21,7 @@
     "@google/generative-ai": "^0.24.1",
     "@upstash/redis": "^1.38.0",
     "env-cmd": "^11.0.0",
+    "framer-motion": "^12.40.0",
     "fuse.js": "^7.3.0",
     "mongodb": "^7.2.0",
     "next": "16.2.6",
