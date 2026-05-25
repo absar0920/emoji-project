@@ -12,6 +12,7 @@ import PlatformLinks from "@/components/PlatformLinks";
 import StickyTOC from "@/components/StickyTOC";
 import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
+import DesignVariations from "@/components/DesignVariations";
 
 export const dynamic = "force-dynamic";
 
@@ -150,6 +151,9 @@ export default async function EmojiPage({ params }: PageProps) {
             )}
           </section>
         )}
+
+        {/* Design Variations */}
+        <DesignVariations character={emoji.character} variations={emoji.design_variations} />
       </main>
 
       <Footer />
