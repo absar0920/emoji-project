@@ -18,7 +18,8 @@ export async function generateSitemaps() {
   return ids;
 }
 
-export default async function sitemap({ id }: { id: number }): Promise<MetadataRoute.Sitemap> {
+export default async function sitemap(props: { id: Promise<string> }): Promise<MetadataRoute.Sitemap> {
+  const id = Number(await props.id);
   if (id === 0) {
     // Static pages + combos + cultures
     const comboSlugs = await getAllComboSlugs();
