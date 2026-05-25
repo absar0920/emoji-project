@@ -16,6 +16,9 @@ const footerLinks = {
     { name: "Caption Generator", href: "/tools/caption-generator" },
     { name: "Trending Emojis", href: "/tools/emoji-trends" },
     { name: "Emoji Keyboard", href: "/tools/emoji-keyboard" },
+    { name: "Shortcodes", href: "/tools/emoji-shortcodes" },
+    { name: "Emoji Compare", href: "/tools/emoji-vs" },
+    { name: "Emoji Combos", href: "/tools/emoji-combos" },
   ],
   categories: [
     { name: "Smileys & Emotion", href: "/search" },
