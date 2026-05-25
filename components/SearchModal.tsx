@@ -6,6 +6,20 @@ import Fuse from "fuse.js";
 import { createSearchIndex, searchEmojis } from "@/lib/search";
 import { EmojiSearchItem } from "@/types/emoji";
 
+const SMART_KEYWORDS = [
+  "meaning", "on tiktok", "for dating", "whatsapp", "instagram",
+  "sarcastic", "meme", "tiktok", "twitter", "snapchat", "discord",
+  "toxic", "flirt", "breakup", "culture", "pakistan", "middle east",
+  "gen-z", "genz", "professional", "sentiment",
+];
+
+function isSmartQuery(q: string): boolean {
+  const words = q.trim().split(/\s+/);
+  if (words.length <= 2) return false;
+  const lower = q.toLowerCase();
+  return SMART_KEYWORDS.some((kw) => lower.includes(kw));
+}
+
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -16,6 +30,10 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [results, setResults] = useState<EmojiSearchItem[]>([]);
   const [fuse, setFuse] = useState<Fuse<EmojiSearchItem> | null>(null);
   const [loading, setLoading] = useState(false);
+  const [smartResults, setSmartResults] = useState<
+    Array<{ character: string; slug: string; name: string; relevant_meaning: string; why: string }>
+  >([]);
+  const [smartLoading, setSmartLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -38,14 +56,50 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     } else {
       setQuery("");
       setResults([]);
+      setSmartResults([]);
+      setSmartLoading(false);
     }
   }, [isOpen]);
 
   useEffect(() => {
-    if (fuse && query) {
-      setResults(searchEmojis(fuse, query));
-    } else {
+    if (!query) {
       setResults([]);
+      setSmartResults([]);
+      return;
+    }
+
+    if (isSmartQuery(query)) {
+      setSmartLoading(true);
+      setResults([]);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 3000);
+
+      fetch("/api/tools/smart-search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query }),
+        signal: controller.signal,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setSmartResults(data.results || []);
+          setSmartLoading(false);
+        })
+        .catch(() => {
+          // Fallback to fuzzy search on error/timeout
+          if (fuse) setResults(searchEmojis(fuse, query));
+          setSmartResults([]);
+          setSmartLoading(false);
+        })
+        .finally(() => clearTimeout(timeout));
+
+      return () => {
+        controller.abort();
+        clearTimeout(timeout);
+      };
+    } else {
+      setSmartResults([]);
+      if (fuse) setResults(searchEmojis(fuse, query));
     }
   }, [query, fuse]);
 
@@ -66,7 +120,35 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         </div>
         <div className="max-h-80 overflow-y-auto">
           {loading && <div className="p-6 text-center text-neutral-400">Loading search index...</div>}
-          {!loading && query && results.length === 0 && <div className="p-6 text-center text-neutral-400">No emojis found for &quot;{query}&quot;</div>}
+          {smartLoading && (
+            <div className="p-4 text-center text-neutral-400 text-sm">
+              Searching with AI...
+            </div>
+          )}
+          {smartResults.length > 0 && (
+            <>
+              <div className="px-5 py-2 text-xs font-medium text-primary bg-primary/5">
+                AI Results
+              </div>
+              {smartResults.map((item) => (
+                <button
+                  key={item.slug}
+                  onClick={() => handleSelect(item.slug)}
+                  className="w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-50 transition-colors text-left"
+                >
+                  <span className="text-3xl">{item.character}</span>
+                  <div className="flex-1">
+                    <div className="font-medium text-neutral-900">{item.name}</div>
+                    <div className="text-xs text-neutral-600 line-clamp-1">
+                      {item.relevant_meaning}
+                    </div>
+                    <div className="text-xs text-primary">{item.why}</div>
+                  </div>
+                </button>
+              ))}
+            </>
+          )}
+          {!loading && query && results.length === 0 && smartResults.length === 0 && !smartLoading && <div className="p-6 text-center text-neutral-400">No emojis found for &quot;{query}&quot;</div>}
           {results.map((item) => (
             <button key={item.slug} onClick={() => handleSelect(item.slug)} className="w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-50 transition-colors text-left">
               <span className="text-3xl">{item.character}</span>
