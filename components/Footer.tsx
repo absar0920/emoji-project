@@ -20,6 +20,7 @@ const footerLinks = {
     { name: "Emoji Compare", href: "/tools/emoji-vs" },
     { name: "Emoji Combos", href: "/tools/emoji-combos" },
     { name: "Emoji Maker", href: "/tools/emoji-maker" },
+    { name: "Smart Search", href: "/tools/smart-search" },
   ],
   categories: [
     { name: "Smileys & Emotion", href: "/search" },
