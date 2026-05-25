@@ -247,6 +247,12 @@ export interface SafetyLayer {
   };
 }
 
+export interface DesignVariations {
+  google_noto?: string;
+  twemoji?: string;
+  openmoji?: string;
+}
+
 export type EmojiDocument = EmojiBase &
   MeaningLayers &
   PlatformLayer &
@@ -254,6 +260,7 @@ export type EmojiDocument = EmojiBase &
   TimeEvolution & {
     virality: Virality;
     relations: Relations;
+    design_variations?: DesignVariations;
   } &
   SafetyLayer;
 

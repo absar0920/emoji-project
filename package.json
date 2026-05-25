@@ -13,7 +13,8 @@
     "create-indexes": "env-cmd -f .env.local npx tsx scripts/create-indexes.ts",
     "generate:comparisons": "env-cmd -f .env.local npx tsx scripts/generate-comparisons.ts",
     "generate:combos": "env-cmd -f .env.local npx tsx scripts/generate-combos.ts",
-    "download-kitchen": "env-cmd -f .env.local npx tsx scripts/download-kitchen-data.ts"
+    "download-kitchen": "env-cmd -f .env.local npx tsx scripts/download-kitchen-data.ts",
+    "generate-variations": "env-cmd -f .env.local npx tsx scripts/generate-design-variations.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
