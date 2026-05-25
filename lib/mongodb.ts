@@ -318,4 +318,25 @@ export async function getPopularCombos(
     .toArray();
 }
 
+export async function getTrendingByPlatform(
+  platform: "tiktok" | "instagram",
+  limit: number = 10
+): Promise<EmojiDocument[]> {
+  const freqField = platform === "tiktok" ? "virality.tiktok_freq" : "virality.instagram_freq";
+  const cacheKey = `trending:${platform}:${limit}`;
+  const cached = await getCached<EmojiDocument[]>(cacheKey);
+  if (cached) return cached;
+
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  const results = await emojis(conn.db)
+    .find({ [freqField]: { $in: ["viral", "high"] } })
+    .sort({ "virality.trend_score": -1 })
+    .limit(limit)
+    .toArray();
+
+  await setCached(cacheKey, results, 300);
+  return results;
+}
+
 export { connectToDatabase };
