@@ -13,6 +13,7 @@ import PlatformLinks from "@/components/PlatformLinks";
 import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
 import DesignVariations from "@/components/DesignVariations";
+import { FadeIn, AnimatedSection } from "@/components/MotionWrappers";
 
 export const dynamic = "force-dynamic";
 
@@ -124,191 +125,217 @@ export default async function EmojiPage({ params }: PageProps) {
         </nav>
 
         {/* Hero — centered white card */}
-        <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 text-center mb-6">
-          <span className="text-8xl sm:text-[128px] leading-none block mb-4">{emoji.character}</span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark mb-1">{emoji.name} Emoji</h1>
-          <p className="text-sm text-neutral-500 font-mono mb-3">{emoji.unicode} · {emoji.shortcode}</p>
-          <div className="flex flex-wrap gap-2 justify-center">
-            <CopyButton text={emoji.character} />
-            <CopyButton text={emoji.shortcode} label={emoji.shortcode} className="bg-neutral-100 !text-neutral-700 hover:!bg-neutral-200" />
-            {emoji.virality?.trend_score != null && (
-              <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 text-accent-amber">🔥 {emoji.virality?.trend_score}</span>
-            )}
+        <FadeIn>
+          <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 text-center mb-6">
+            <span className="text-8xl sm:text-[128px] leading-none block mb-4">{emoji.character}</span>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark mb-1">{emoji.name} Emoji</h1>
+            <p className="text-sm text-neutral-500 font-mono mb-3">{emoji.unicode} · {emoji.shortcode}</p>
+            <div className="flex flex-wrap gap-2 justify-center">
+              <CopyButton text={emoji.character} />
+              <CopyButton text={emoji.shortcode} label={emoji.shortcode} className="bg-neutral-100 !text-neutral-700 hover:!bg-neutral-200" />
+              {emoji.virality?.trend_score != null && (
+                <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 text-accent-amber">🔥 {emoji.virality?.trend_score}</span>
+              )}
+            </div>
           </div>
-        </div>
+        </FadeIn>
 
         {/* Meanings — tabbed */}
-        <MeaningTabs meanings={meanings} />
+        <AnimatedSection>
+          <MeaningTabs meanings={meanings} />
+        </AnimatedSection>
 
         {/* Platforms — accordion */}
-        <PlatformAccordion platforms={platforms} />
+        <AnimatedSection>
+          <PlatformAccordion platforms={platforms} />
+        </AnimatedSection>
 
         {/* Cultures */}
-        <section id="cultures" className="mb-10">
-          <h2 className="text-xl font-bold text-primary-dark mb-4">Cultural Meanings</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {emoji.cultures && Object.entries(emoji.cultures).map(([region, meaning]) => (
-              <CultureCard key={region} region={region} meaning={meaning as string} />
-            ))}
-          </div>
-        </section>
-
-        {/* Timeline */}
-        <section id="timeline" className="mb-10">
-          <h2 className="text-xl font-bold text-primary-dark mb-4">Meaning Evolution</h2>
-          {emoji.time_evolution && <TimelineSection timeEvolution={emoji.time_evolution} />}
-        </section>
-
-        {/* Related */}
-        <section id="related" className="mb-10">
-          <RelatedEmojis emojis={relatedEmojis} />
-        </section>
-
-        {/* Platform links */}
-        <section className="mb-10">
-          <h2 className="text-lg font-bold text-primary-dark mb-4">See on Every Platform</h2>
-          <PlatformLinks emojiSlug={emoji.slug} />
-        </section>
-
-        {/* Compare With */}
-        {comparisons.length > 0 && (
-          <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark mb-4">Compare With</h2>
-            <div className="flex flex-wrap gap-2">
-              {comparisons.map((comp) => {
-                const otherChar = comp.emoji1_slug === slug ? comp.emoji2_character : comp.emoji1_character;
-                const otherName = comp.emoji1_slug === slug ? comp.emoji2_name : comp.emoji1_name;
-                return (
-                  <Link
-                    key={comp.slug}
-                    href={`/vs/${comp.slug}`}
-                    className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md text-sm font-medium text-neutral-700 hover:shadow-lg transition-shadow"
-                  >
-                    <span className="text-lg">{emoji.character}</span>
-                    <span className="text-neutral-400">vs</span>
-                    <span className="text-lg">{otherChar}</span>
-                    <span className="text-neutral-500">{otherName}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-        )}
-
-        {/* Emoji Combos */}
-        {combos.length > 0 && (
-          <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark mb-4">Emoji Combos</h2>
-            <div className="flex flex-wrap gap-3">
-              {combos.map((combo) => (
-                <Link
-                  key={combo.slug}
-                  href={`/combo/${combo.slug}`}
-                  className="flex items-center gap-2 px-4 py-3 bg-white rounded-xl shadow-md text-sm font-medium text-neutral-700 hover:shadow-lg transition-shadow"
-                >
-                  <span className="text-lg">
-                    {combo.combos?.[0]?.emojis?.slice(0, 3).join("") || "🎉"}
-                  </span>
-                  <span>{combo.theme}</span>
-                </Link>
+        <AnimatedSection>
+          <section id="cultures" className="mb-10">
+            <h2 className="text-xl font-bold text-primary-dark mb-4">Cultural Meanings</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {emoji.cultures && Object.entries(emoji.cultures).map(([region, meaning]) => (
+                <CultureCard key={region} region={region} meaning={meaning as string} />
               ))}
             </div>
           </section>
-        )}
+        </AnimatedSection>
+
+        {/* Timeline */}
+        <AnimatedSection>
+          <section id="timeline" className="mb-10">
+            <h2 className="text-xl font-bold text-primary-dark mb-4">Meaning Evolution</h2>
+            {emoji.time_evolution && <TimelineSection timeEvolution={emoji.time_evolution} />}
+          </section>
+        </AnimatedSection>
+
+        {/* Related */}
+        <AnimatedSection>
+          <section id="related" className="mb-10">
+            <RelatedEmojis emojis={relatedEmojis} />
+          </section>
+        </AnimatedSection>
+
+        {/* Platform links */}
+        <AnimatedSection>
+          <section className="mb-10">
+            <h2 className="text-lg font-bold text-primary-dark mb-4">See on Every Platform</h2>
+            <PlatformLinks emojiSlug={emoji.slug} />
+          </section>
+        </AnimatedSection>
+
+        {/* Compare With */}
+        <AnimatedSection>
+          {comparisons.length > 0 && (
+            <section className="mb-10">
+              <h2 className="text-xl font-bold text-primary-dark mb-4">Compare With</h2>
+              <div className="flex flex-wrap gap-2">
+                {comparisons.map((comp) => {
+                  const otherChar = comp.emoji1_slug === slug ? comp.emoji2_character : comp.emoji1_character;
+                  const otherName = comp.emoji1_slug === slug ? comp.emoji2_name : comp.emoji1_name;
+                  return (
+                    <Link
+                      key={comp.slug}
+                      href={`/vs/${comp.slug}`}
+                      className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md text-sm font-medium text-neutral-700 hover:shadow-lg transition-shadow"
+                    >
+                      <span className="text-lg">{emoji.character}</span>
+                      <span className="text-neutral-400">vs</span>
+                      <span className="text-lg">{otherChar}</span>
+                      <span className="text-neutral-500">{otherName}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+        </AnimatedSection>
+
+        {/* Emoji Combos */}
+        <AnimatedSection>
+          {combos.length > 0 && (
+            <section className="mb-10">
+              <h2 className="text-xl font-bold text-primary-dark mb-4">Emoji Combos</h2>
+              <div className="flex flex-wrap gap-3">
+                {combos.map((combo) => (
+                  <Link
+                    key={combo.slug}
+                    href={`/combo/${combo.slug}`}
+                    className="flex items-center gap-2 px-4 py-3 bg-white rounded-xl shadow-md text-sm font-medium text-neutral-700 hover:shadow-lg transition-shadow"
+                  >
+                    <span className="text-lg">
+                      {combo.combos?.[0]?.emojis?.slice(0, 3).join("") || "🎉"}
+                    </span>
+                    <span>{combo.theme}</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+        </AnimatedSection>
 
         {/* See Also — opposite, confusing, replacement */}
-        {(emoji.relations?.opposite?.length > 0 ||
-          emoji.relations?.confusing?.length > 0 ||
-          emoji.relations?.replacement?.length > 0) && (
-          <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark mb-4">See Also</h2>
-            <div className="space-y-3">
-              {emoji.relations.opposite?.length > 0 && (
-                <div>
-                  <span className="text-sm font-medium text-neutral-500 block mb-2">Opposite</span>
-                  <div className="flex gap-2 flex-wrap">
-                    {emoji.relations.opposite.map((s: string) => (
-                      <Link
-                        key={s}
-                        href={`/emoji/${s}`}
-                        className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
-                      >
-                        {s.replace(/-/g, " ")}
-                      </Link>
-                    ))}
+        <AnimatedSection>
+          {(emoji.relations?.opposite?.length > 0 ||
+            emoji.relations?.confusing?.length > 0 ||
+            emoji.relations?.replacement?.length > 0) && (
+            <section className="mb-10">
+              <h2 className="text-xl font-bold text-primary-dark mb-4">See Also</h2>
+              <div className="space-y-3">
+                {emoji.relations.opposite?.length > 0 && (
+                  <div>
+                    <span className="text-sm font-medium text-neutral-500 block mb-2">Opposite</span>
+                    <div className="flex gap-2 flex-wrap">
+                      {emoji.relations.opposite.map((s: string) => (
+                        <Link
+                          key={s}
+                          href={`/emoji/${s}`}
+                          className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                        >
+                          {s.replace(/-/g, " ")}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-              {emoji.relations.confusing?.length > 0 && (
-                <div>
-                  <span className="text-sm font-medium text-neutral-500 block mb-2">Often Confused With</span>
-                  <div className="flex gap-2 flex-wrap">
-                    {emoji.relations.confusing.map((s: string) => (
-                      <Link
-                        key={s}
-                        href={`/emoji/${s}`}
-                        className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
-                      >
-                        {s.replace(/-/g, " ")}
-                      </Link>
-                    ))}
+                )}
+                {emoji.relations.confusing?.length > 0 && (
+                  <div>
+                    <span className="text-sm font-medium text-neutral-500 block mb-2">Often Confused With</span>
+                    <div className="flex gap-2 flex-wrap">
+                      {emoji.relations.confusing.map((s: string) => (
+                        <Link
+                          key={s}
+                          href={`/emoji/${s}`}
+                          className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                        >
+                          {s.replace(/-/g, " ")}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-              {emoji.relations.replacement?.length > 0 && (
-                <div>
-                  <span className="text-sm font-medium text-neutral-500 block mb-2">Can Replace</span>
-                  <div className="flex gap-2 flex-wrap">
-                    {emoji.relations.replacement.map((s: string) => (
-                      <Link
-                        key={s}
-                        href={`/emoji/${s}`}
-                        className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
-                      >
-                        {s.replace(/-/g, " ")}
-                      </Link>
-                    ))}
+                )}
+                {emoji.relations.replacement?.length > 0 && (
+                  <div>
+                    <span className="text-sm font-medium text-neutral-500 block mb-2">Can Replace</span>
+                    <div className="flex gap-2 flex-wrap">
+                      {emoji.relations.replacement.map((s: string) => (
+                        <Link
+                          key={s}
+                          href={`/emoji/${s}`}
+                          className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                        >
+                          {s.replace(/-/g, " ")}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
+                )}
+              </div>
+            </section>
+          )}
+        </AnimatedSection>
 
         {/* FAQ */}
-        <section id="faq" className="mb-10">
-          <h2 className="text-xl font-bold text-primary-dark mb-4">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {faqSchema.mainEntity.map((faq: { name: string; acceptedAnswer: { text: string } }, i: number) => (
-              <details key={i} className="bg-white rounded-xl shadow-md overflow-hidden">
-                <summary className="px-4 py-3 cursor-pointer font-medium text-neutral-900 hover:bg-neutral-50">{faq.name}</summary>
-                <p className="px-4 pb-4 text-sm text-neutral-600">{faq.acceptedAnswer.text}</p>
-              </details>
-            ))}
-          </div>
-        </section>
+        <AnimatedSection>
+          <section id="faq" className="mb-10">
+            <h2 className="text-xl font-bold text-primary-dark mb-4">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {faqSchema.mainEntity.map((faq: { name: string; acceptedAnswer: { text: string } }, i: number) => (
+                <details key={i} className="bg-white rounded-xl shadow-md overflow-hidden">
+                  <summary className="px-4 py-3 cursor-pointer font-medium text-neutral-900 hover:bg-neutral-50">{faq.name}</summary>
+                  <p className="px-4 pb-4 text-sm text-neutral-600">{faq.acceptedAnswer.text}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        </AnimatedSection>
 
         {/* Safety */}
-        {emoji.safety && (
-          <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark mb-4">Safety & Usage</h2>
-            <div className="flex flex-wrap gap-3">
-              <span className="px-3 py-1.5 rounded-full text-sm bg-emerald-50 text-accent-emerald font-medium">✅ {emoji.safety.safe_meaning}</span>
-              {emoji.safety.toxic_meaning && (
-                <span className="px-3 py-1.5 rounded-full text-sm bg-red-50 text-accent-red font-medium">⚠️ {emoji.safety.toxic_meaning}</span>
+        <AnimatedSection>
+          {emoji.safety && (
+            <section className="mb-10">
+              <h2 className="text-xl font-bold text-primary-dark mb-4">Safety & Usage</h2>
+              <div className="flex flex-wrap gap-3">
+                <span className="px-3 py-1.5 rounded-full text-sm bg-emerald-50 text-accent-emerald font-medium">✅ {emoji.safety.safe_meaning}</span>
+                {emoji.safety.toxic_meaning && (
+                  <span className="px-3 py-1.5 rounded-full text-sm bg-red-50 text-accent-red font-medium">⚠️ {emoji.safety.toxic_meaning}</span>
+                )}
+                {emoji.safety.nsfw && (
+                  <span className="px-3 py-1.5 rounded-full text-sm bg-red-100 text-accent-red font-bold">🔞 NSFW</span>
+                )}
+              </div>
+              {emoji.safety.warning_notes && (
+                <p className="mt-2 text-sm text-neutral-500">{emoji.safety.warning_notes}</p>
               )}
-              {emoji.safety.nsfw && (
-                <span className="px-3 py-1.5 rounded-full text-sm bg-red-100 text-accent-red font-bold">🔞 NSFW</span>
-              )}
-            </div>
-            {emoji.safety.warning_notes && (
-              <p className="mt-2 text-sm text-neutral-500">{emoji.safety.warning_notes}</p>
-            )}
-          </section>
-        )}
+            </section>
+          )}
+        </AnimatedSection>
 
         {/* Design Variations */}
-        <DesignVariations character={emoji.character} variations={emoji.design_variations} />
+        <AnimatedSection>
+          <DesignVariations character={emoji.character} variations={emoji.design_variations} />
+        </AnimatedSection>
       </main>
 
       <Footer />
