@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "@tailwindcss/typography";
 
 @theme {
   --color-primary: #4F46E5;
