@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getEmojiBySlug, getAllSlugs, getRelatedEmojis } from "@/lib/mongodb";
+import { getEmojiBySlug, getAllSlugs, getRelatedEmojis, getComparisonsByEmoji, getCombosByEmoji } from "@/lib/mongodb";
+import Link from "next/link";
 import { generateEmojiMeta, generateFAQSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import CopyButton from "@/components/CopyButton";
 import MeaningTabs from "@/components/MeaningTabs";
@@ -38,6 +39,10 @@ export default async function EmojiPage({ params }: PageProps) {
   if (!emoji) notFound();
 
   const relatedEmojis = await getRelatedEmojis(emoji.relations?.related?.slice(0, 15) || []);
+  const [comparisons, combos] = await Promise.all([
+    getComparisonsByEmoji(slug, 3),
+    getCombosByEmoji(emoji.character, 3),
+  ]);
   const faqSchema = generateFAQSchema(emoji);
   const breadcrumbSchema = generateBreadcrumbSchema(emoji);
 
@@ -164,6 +169,111 @@ export default async function EmojiPage({ params }: PageProps) {
           <h2 className="text-lg font-bold text-primary-dark mb-4">See on Every Platform</h2>
           <PlatformLinks emojiSlug={emoji.slug} />
         </section>
+
+        {/* Compare With */}
+        {comparisons.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-xl font-bold text-primary-dark mb-4">Compare With</h2>
+            <div className="flex flex-wrap gap-2">
+              {comparisons.map((comp) => {
+                const otherChar = comp.emoji1_slug === slug ? comp.emoji2_character : comp.emoji1_character;
+                const otherName = comp.emoji1_slug === slug ? comp.emoji2_name : comp.emoji1_name;
+                return (
+                  <Link
+                    key={comp.slug}
+                    href={`/vs/${comp.slug}`}
+                    className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md text-sm font-medium text-neutral-700 hover:shadow-lg transition-shadow"
+                  >
+                    <span className="text-lg">{emoji.character}</span>
+                    <span className="text-neutral-400">vs</span>
+                    <span className="text-lg">{otherChar}</span>
+                    <span className="text-neutral-500">{otherName}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* Emoji Combos */}
+        {combos.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-xl font-bold text-primary-dark mb-4">Emoji Combos</h2>
+            <div className="flex flex-wrap gap-3">
+              {combos.map((combo) => (
+                <Link
+                  key={combo.slug}
+                  href={`/combo/${combo.slug}`}
+                  className="flex items-center gap-2 px-4 py-3 bg-white rounded-xl shadow-md text-sm font-medium text-neutral-700 hover:shadow-lg transition-shadow"
+                >
+                  <span className="text-lg">
+                    {combo.combos?.[0]?.emojis?.slice(0, 3).join("") || "🎉"}
+                  </span>
+                  <span>{combo.theme}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* See Also — opposite, confusing, replacement */}
+        {(emoji.relations?.opposite?.length > 0 ||
+          emoji.relations?.confusing?.length > 0 ||
+          emoji.relations?.replacement?.length > 0) && (
+          <section className="mb-10">
+            <h2 className="text-xl font-bold text-primary-dark mb-4">See Also</h2>
+            <div className="space-y-3">
+              {emoji.relations.opposite?.length > 0 && (
+                <div>
+                  <span className="text-sm font-medium text-neutral-500 block mb-2">Opposite</span>
+                  <div className="flex gap-2 flex-wrap">
+                    {emoji.relations.opposite.map((s: string) => (
+                      <Link
+                        key={s}
+                        href={`/emoji/${s}`}
+                        className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                      >
+                        {s.replace(/-/g, " ")}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {emoji.relations.confusing?.length > 0 && (
+                <div>
+                  <span className="text-sm font-medium text-neutral-500 block mb-2">Often Confused With</span>
+                  <div className="flex gap-2 flex-wrap">
+                    {emoji.relations.confusing.map((s: string) => (
+                      <Link
+                        key={s}
+                        href={`/emoji/${s}`}
+                        className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                      >
+                        {s.replace(/-/g, " ")}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {emoji.relations.replacement?.length > 0 && (
+                <div>
+                  <span className="text-sm font-medium text-neutral-500 block mb-2">Can Replace</span>
+                  <div className="flex gap-2 flex-wrap">
+                    {emoji.relations.replacement.map((s: string) => (
+                      <Link
+                        key={s}
+                        href={`/emoji/${s}`}
+                        className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                      >
+                        {s.replace(/-/g, " ")}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* FAQ */}
         <section id="faq" className="mb-10">
