@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
+import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const STYLES = ["Emoji", "Cartoon", "Pixel Art", "Sticker"];
 
@@ -54,7 +55,7 @@ export default function EmojiMakerPage() {
           value={prompt}
           onChange={(e) => setPrompt(e.target.value.slice(0, 200))}
           placeholder="Describe your emoji... (e.g. happy cat with sunglasses)"
-          className="w-full px-5 py-3 rounded-xl border border-neutral-200 outline-none focus:ring-2 focus:ring-primary/30 text-lg"
+          className="w-full px-5 py-3 rounded-xl shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
         />
         <div className="flex items-center justify-between">
           <span className="text-xs text-neutral-400">{prompt.length}/200</span>
@@ -67,7 +68,7 @@ export default function EmojiMakerPage() {
               onClick={() => setStyle(s)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 style === s
-                  ? "bg-primary text-white"
+                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 text-primary ring-1 ring-primary/30"
                   : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
               }`}
             >
@@ -79,7 +80,7 @@ export default function EmojiMakerPage() {
         <button
           onClick={handleGenerate}
           disabled={!prompt.trim() || loading}
-          className="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-medium hover:shadow-lg transition-shadow disabled:opacity-50"
+          className="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-medium shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
         >
           {loading ? "Generating..." : "Generate →"}
         </button>
@@ -92,26 +93,25 @@ export default function EmojiMakerPage() {
       )}
 
       {images.length > 0 && (
-        <div className="grid grid-cols-2 gap-4">
+        <StaggerContainer className="grid grid-cols-2 gap-4">
           {images.map((img, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl p-4 shadow-sm border border-neutral-100 flex flex-col items-center gap-3"
-            >
-              <img
-                src={img}
-                alt={`Generated emoji ${i + 1}`}
-                className="w-32 h-32 object-contain"
-              />
-              <button
-                onClick={() => handleDownload(img, i)}
-                className="px-4 py-1.5 rounded-full text-sm font-medium bg-accent-emerald text-white hover:bg-emerald-700 transition-colors"
-              >
-                Download
-              </button>
-            </div>
+            <StaggerItem key={i}>
+              <div className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow flex flex-col items-center gap-3">
+                <img
+                  src={img}
+                  alt={`Generated emoji ${i + 1}`}
+                  className="w-32 h-32 object-contain"
+                />
+                <button
+                  onClick={() => handleDownload(img, i)}
+                  className="px-4 py-1.5 rounded-full text-sm font-medium bg-accent-emerald text-white hover:bg-emerald-700 transition-colors"
+                >
+                  Download
+                </button>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       )}
     </>
   );

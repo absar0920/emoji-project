@@ -68,7 +68,7 @@ export default function EmojiVsPage() {
         <button
           onClick={handleCompare}
           disabled={!emoji1 || !emoji2}
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-bold text-lg hover:shadow-lg transition-shadow disabled:opacity-50"
+          className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-bold text-lg shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
         >
           Compare Now →
         </button>
@@ -82,7 +82,7 @@ export default function EmojiVsPage() {
               <Link
                 key={p.slug}
                 href={`/vs/${p.slug}`}
-                className="flex items-center justify-center gap-2 p-3 bg-white rounded-xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow"
+                className="flex items-center justify-center gap-2 p-3 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
               >
                 <span className="text-2xl">{p.emoji1_character}</span>
                 <span className="text-xs font-bold text-neutral-400">vs</span>

@@ -57,7 +57,7 @@ export default function EmojiKeyboardPage() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search emojis..."
-        className="w-full px-4 py-3 rounded-xl border border-neutral-200 outline-none focus:ring-2 focus:ring-primary/30 mb-4"
+        className="w-full px-4 py-3 rounded-xl shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow mb-4"
       />
 
       {/* Categories */}
@@ -68,7 +68,9 @@ export default function EmojiKeyboardPage() {
               key={cat}
               onClick={() => setCategory(cat)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
-                category === cat ? "bg-primary text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                category === cat
+                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 text-primary ring-1 ring-primary/30"
+                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
               }`}
             >
               {cat}

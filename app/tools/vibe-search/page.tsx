@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
 import CopyAllButton from "@/components/CopyAllButton";
+import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const MOODS = ["sad", "love", "toxic", "funny", "aesthetic", "angry", "hype", "chill", "romantic", "dark"];
 
@@ -57,7 +58,7 @@ export default function VibeSearchPage() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch(query)}
             placeholder="Search by feeling, mood, or vibe..."
-            className="flex-1 px-5 py-3 rounded-full border border-neutral-200 outline-none focus:ring-2 focus:ring-primary/30 text-lg"
+            className="flex-1 px-5 py-3 rounded-full shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
           />
           <button
             onClick={() => handleSearch(query)}
@@ -93,18 +94,20 @@ export default function VibeSearchPage() {
             <h2 className="text-lg font-bold text-primary-dark">Results</h2>
             <CopyAllButton emojis={results.map((r) => r.emoji)} />
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {results.map((r, i) => (
-              <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-neutral-100 text-center">
-                <span className="text-4xl block mb-2">{r.emoji}</span>
-                <span className="text-xs font-medium text-neutral-900 block">{r.name}</span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-primary-light text-primary font-medium mt-1 inline-block">
-                  {r.match_percent}% match
-                </span>
-                <p className="text-xs text-neutral-500 mt-2">{r.reason}</p>
-              </div>
+              <StaggerItem key={i}>
+                <div className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow text-center">
+                  <span className="text-4xl block mb-2">{r.emoji}</span>
+                  <span className="text-xs font-medium text-neutral-900 block">{r.name}</span>
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-primary-light text-primary font-medium mt-1 inline-block">
+                    {r.match_percent}% match
+                  </span>
+                  <p className="text-xs text-neutral-500 mt-2">{r.reason}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </>
       )}
     </>

@@ -80,7 +80,7 @@ export default function EmojiKitchenPage() {
         <button
           onClick={handleCook}
           disabled={!emoji1 || !emoji2 || loading}
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-bold text-lg hover:shadow-lg transition-shadow disabled:opacity-50"
+          className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-bold text-lg shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
         >
           {loading ? "Cooking..." : "Cook It! 🍳"}
         </button>

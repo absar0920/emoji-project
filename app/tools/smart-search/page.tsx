@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import ToolHero from "@/components/ToolHero";
+import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const EXAMPLE_QUERIES = [
   "breakup emoji for tiktok",
@@ -67,7 +68,7 @@ export default function SmartSearchPage() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch(query)}
             placeholder="Try: breakup emoji for tiktok, sad emoji gen-z..."
-            className="flex-1 px-5 py-3 rounded-full border border-neutral-200 outline-none focus:ring-2 focus:ring-primary/30 text-lg"
+            className="flex-1 px-5 py-3 rounded-full shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
           />
           <button
             onClick={() => handleSearch(query)}
@@ -102,32 +103,33 @@ export default function SmartSearchPage() {
       {results.length > 0 && (
         <>
           <h2 className="text-lg font-bold text-primary-dark mb-4">Results</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {results.map((r, i) => (
-              <Link
-                key={i}
-                href={`/emoji/${r.slug}`}
-                className="bg-white rounded-xl p-5 shadow-sm border border-neutral-100 hover:border-primary/30 hover:shadow-md transition-all flex gap-4 items-start"
-              >
-                <span className="text-5xl leading-none flex-shrink-0">{r.character}</span>
-                <div className="min-w-0">
-                  <span className="text-sm font-semibold text-neutral-900 block capitalize">
-                    {r.name}
-                  </span>
-                  {r.why && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium mt-1 inline-block">
-                      {r.why}
+              <StaggerItem key={i}>
+                <Link
+                  href={`/emoji/${r.slug}`}
+                  className="bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition-shadow flex gap-4 items-start"
+                >
+                  <span className="text-5xl leading-none flex-shrink-0">{r.character}</span>
+                  <div className="min-w-0">
+                    <span className="text-sm font-semibold text-neutral-900 block capitalize">
+                      {r.name}
                     </span>
-                  )}
-                  {r.relevant_meaning && (
-                    <p className="text-xs text-neutral-500 mt-2 line-clamp-3">
-                      {r.relevant_meaning}
-                    </p>
-                  )}
-                </div>
-              </Link>
+                    {r.why && (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium mt-1 inline-block">
+                        {r.why}
+                      </span>
+                    )}
+                    {r.relevant_meaning && (
+                      <p className="text-xs text-neutral-500 mt-2 line-clamp-3">
+                        {r.relevant_meaning}
+                      </p>
+                    )}
+                  </div>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </>
       )}
 

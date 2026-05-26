@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
 import CopyButton from "@/components/CopyButton";
+import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const MOODS = ["Happy", "Sad", "Hype", "Aesthetic", "Funny", "Romantic", "Motivational", "Chill"];
 const PLATFORMS = ["Instagram", "TikTok", "WhatsApp", "Twitter", "LinkedIn"];
@@ -56,7 +57,7 @@ export default function CaptionGeneratorPage() {
           value={topic}
           onChange={(e) => setTopic(e.target.value.slice(0, 200))}
           placeholder="What's the post about?"
-          className="w-full px-5 py-3 rounded-xl border border-neutral-200 outline-none focus:ring-2 focus:ring-primary/30"
+          className="w-full px-5 py-3 rounded-xl shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow"
         />
 
         {/* Mood */}
@@ -68,7 +69,9 @@ export default function CaptionGeneratorPage() {
                 key={m}
                 onClick={() => setMood(m)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  mood === m ? "bg-primary text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  mood === m
+                    ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 text-primary ring-1 ring-primary/30"
+                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
                 }`}
               >
                 {m}
@@ -98,7 +101,7 @@ export default function CaptionGeneratorPage() {
         <button
           onClick={handleGenerate}
           disabled={!topic.trim() || loading}
-          className="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-medium hover:shadow-lg transition-shadow disabled:opacity-50"
+          className="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-medium shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
         >
           {loading ? "Generating..." : "Generate Captions →"}
         </button>
@@ -110,26 +113,28 @@ export default function CaptionGeneratorPage() {
 
       {/* Results */}
       {captions.length > 0 && (
-        <div className="space-y-3">
+        <StaggerContainer className="space-y-3">
           {captions.map((cap, i) => (
-            <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-neutral-100">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <p className="text-neutral-900 mb-2">{cap.text}</p>
-                  <div className="flex gap-2">
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-primary-light text-primary font-medium">
-                      {cap.emoji_count} emojis
-                    </span>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-accent-violet/10 text-accent-violet font-medium">
-                      {cap.vibe}
-                    </span>
+            <StaggerItem key={i}>
+              <div className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <p className="text-neutral-900 mb-2">{cap.text}</p>
+                    <div className="flex gap-2">
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-primary-light text-primary font-medium">
+                        {cap.emoji_count} emojis
+                      </span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-accent-violet/10 text-accent-violet font-medium">
+                        {cap.vibe}
+                      </span>
+                    </div>
                   </div>
+                  <CopyButton text={cap.text} label="Copy" />
                 </div>
-                <CopyButton text={cap.text} label="Copy" />
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       )}
     </>
   );

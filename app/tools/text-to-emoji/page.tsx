@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
 import CopyButton from "@/components/CopyButton";
+import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const STYLES = ["Balanced", "Heavy Emoji", "Minimal", "Gen-Z", "Professional"];
 
@@ -49,7 +50,7 @@ export default function TextToEmojiPage() {
           value={text}
           onChange={(e) => setText(e.target.value.slice(0, 500))}
           placeholder="Type your text here..."
-          className="w-full p-4 rounded-xl border border-neutral-200 min-h-[120px] outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+          className="w-full p-4 rounded-xl shadow-sm border-0 bg-white min-h-[120px] outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow resize-none"
         />
         <div className="flex items-center justify-between">
           <span className="text-xs text-neutral-400">{text.length}/500</span>
@@ -63,7 +64,7 @@ export default function TextToEmojiPage() {
               onClick={() => setStyle(s)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 style === s
-                  ? "bg-primary text-white"
+                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 text-primary ring-1 ring-primary/30"
                   : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
               }`}
             >
@@ -75,7 +76,7 @@ export default function TextToEmojiPage() {
         <button
           onClick={handleTranslate}
           disabled={!text.trim() || loading}
-          className="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-medium hover:shadow-lg transition-shadow disabled:opacity-50"
+          className="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-medium shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
         >
           {loading ? "Translating..." : "Translate →"}
         </button>
@@ -88,28 +89,32 @@ export default function TextToEmojiPage() {
 
       {/* Results */}
       {result && (
-        <div className="space-y-4">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-100">
-            <div className="flex items-start justify-between gap-4">
-              <p className="text-lg">{result}</p>
-              <CopyButton text={result} label="Copy" />
+        <StaggerContainer className="space-y-4">
+          <StaggerItem>
+            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+              <div className="flex items-start justify-between gap-4">
+                <p className="text-lg">{result}</p>
+                <CopyButton text={result} label="Copy" />
+              </div>
             </div>
-          </div>
+          </StaggerItem>
 
           {alternatives.length > 0 && (
             <>
               <h3 className="text-sm font-medium text-neutral-500 mt-6">Alternatives</h3>
               {alternatives.map((alt, i) => (
-                <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-neutral-100">
-                  <div className="flex items-start justify-between gap-4">
-                    <p className="text-sm">{alt}</p>
-                    <CopyButton text={alt} label="Copy" />
+                <StaggerItem key={i}>
+                  <div className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow">
+                    <div className="flex items-start justify-between gap-4">
+                      <p className="text-sm">{alt}</p>
+                      <CopyButton text={alt} label="Copy" />
+                    </div>
                   </div>
-                </div>
+                </StaggerItem>
               ))}
             </>
           )}
-        </div>
+        </StaggerContainer>
       )}
     </>
   );

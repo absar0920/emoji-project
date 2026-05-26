@@ -26,7 +26,7 @@ export default async function EmojiTrendsPage() {
           <Link
             key={emoji.slug}
             href={`/emoji/${emoji.slug}`}
-            className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow"
+            className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
           >
             <span className="text-sm font-bold text-neutral-400 w-6">#{i + 1}</span>
             <span className="text-4xl">{emoji.character}</span>
