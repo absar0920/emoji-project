@@ -23,11 +23,11 @@ const footerLinks = {
     { name: "Smart Search", href: "/tools/smart-search" },
   ],
   categories: [
-    { name: "Smileys & Emotion", href: "/search" },
-    { name: "People & Body", href: "/search" },
-    { name: "Animals & Nature", href: "/search" },
-    { name: "Food & Drink", href: "/search" },
-    { name: "Travel & Places", href: "/search" },
+    { name: "Smileys & Emotion", href: "/search?category=Smileys+%26+Emotion" },
+    { name: "People & Body", href: "/search?category=People+%26+Body" },
+    { name: "Animals & Nature", href: "/search?category=Animals+%26+Nature" },
+    { name: "Food & Drink", href: "/search?category=Food+%26+Drink" },
+    { name: "Travel & Places", href: "/search?category=Travel+%26+Places" },
   ],
   company: [
     { name: "About", href: "/about" },
@@ -39,6 +39,8 @@ const footerLinks = {
 
 export default function Footer() {
   return (
+    <>
+    <div className="h-0.5 bg-gradient-to-r from-primary to-accent-violet" />
     <footer className="bg-neutral-900 text-neutral-400 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -56,7 +58,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {footerLinks.popular.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-white transition-colors">{link.name}</Link>
+                  <Link href={link.href} className="hover:text-primary-300 transition-colors">{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -66,7 +68,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {footerLinks.tools.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-white transition-colors">{link.name}</Link>
+                  <Link href={link.href} className="hover:text-primary-300 transition-colors">{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -76,7 +78,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {footerLinks.categories.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-white transition-colors">{link.name}</Link>
+                  <Link href={link.href} className="hover:text-primary-300 transition-colors">{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -86,7 +88,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-white transition-colors">{link.name}</Link>
+                  <Link href={link.href} className="hover:text-primary-300 transition-colors">{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -97,5 +99,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

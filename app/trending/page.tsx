@@ -22,7 +22,7 @@ function EmojiRow({
   return (
     <Link
       href={`/emoji/${emoji.slug}`}
-      className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow"
+      className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
     >
       <span className="text-sm font-bold text-neutral-400 w-8">
         #{rank}
@@ -79,6 +79,8 @@ export default async function TrendingPage() {
           </div>
         </section>
 
+        <hr className="border-neutral-200 my-8" />
+
         {/* TikTok */}
         <section className="mb-12">
           <h2 className="text-lg font-bold text-primary-dark mb-4">
@@ -95,6 +97,8 @@ export default async function TrendingPage() {
             )}
           </div>
         </section>
+
+        <hr className="border-neutral-200 my-8" />
 
         {/* Instagram */}
         <section className="mb-12">
