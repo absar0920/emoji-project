@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTrendingEmojis } from "@/lib/mongodb";
 import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
+import HeroSearchBar from "@/components/HeroSearchBar";
 
 export const revalidate = 300;
 
@@ -49,15 +50,7 @@ export default async function HomePage() {
             </p>
 
             {/* Search bar */}
-            <div className="max-w-lg mx-auto">
-              <div className="flex items-center gap-3 px-5 py-4 bg-white rounded-full shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
-                <span className="text-xl">🔍</span>
-                <span className="flex-1 text-left text-neutral-400">Search any emoji or feeling...</span>
-                <span className="bg-primary text-white px-5 py-1.5 rounded-full text-sm font-semibold">
-                  Search
-                </span>
-              </div>
-            </div>
+            <HeroSearchBar />
           </div>
         </section>
 
