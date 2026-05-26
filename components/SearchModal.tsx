@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Fuse from "fuse.js";
 import { createSearchIndex, searchEmojis } from "@/lib/search";
 import { EmojiSearchItem } from "@/types/emoji";
+import { Skeleton } from "@/components/Skeleton";
+import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const SMART_KEYWORDS = [
   "meaning", "on tiktok", "for dating", "whatsapp", "instagram",
@@ -119,10 +121,28 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           <kbd className="px-2 py-1 rounded bg-neutral-100 text-xs text-neutral-500 font-mono">ESC</kbd>
         </div>
         <div className="max-h-80 overflow-y-auto">
-          {loading && <div className="p-6 text-center text-neutral-400">Loading search index...</div>}
+          {loading && (
+            <div className="px-5 py-4 space-y-3">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <Skeleton w="32px" h="32px" />
+                  <div className="flex-1">
+                    <Skeleton w="70%" h="14px" className="mb-1.5" />
+                    <Skeleton w="50%" h="12px" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
           {smartLoading && (
-            <div className="p-4 text-center text-neutral-400 text-sm">
-              Searching with AI...
+            <div className="p-4 text-center">
+              <span className="text-lg">🤖</span>
+              <div className="flex justify-center gap-1 my-2">
+                <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0ms" }} />
+                <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "150ms" }} />
+                <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "300ms" }} />
+              </div>
+              <span className="text-xs text-neutral-400">Finding the perfect emojis...</span>
             </div>
           )}
           {smartResults.length > 0 && (
@@ -130,34 +150,41 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               <div className="px-5 py-2 text-xs font-medium text-primary bg-primary/5">
                 AI Results
               </div>
-              {smartResults.map((item) => (
-                <button
-                  key={item.slug}
-                  onClick={() => handleSelect(item.slug)}
-                  className="w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-50 transition-colors text-left"
-                >
-                  <span className="text-3xl">{item.character}</span>
-                  <div className="flex-1">
-                    <div className="font-medium text-neutral-900">{item.name}</div>
-                    <div className="text-xs text-neutral-600 line-clamp-1">
-                      {item.relevant_meaning}
-                    </div>
-                    <div className="text-xs text-primary">{item.why}</div>
-                  </div>
-                </button>
-              ))}
+              <StaggerContainer>
+                {smartResults.map((item) => (
+                  <StaggerItem key={item.slug}>
+                    <button
+                      onClick={() => handleSelect(item.slug)}
+                      className="w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-50 transition-colors text-left"
+                    >
+                      <span className="text-3xl">{item.character}</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-neutral-900">{item.name}</div>
+                        <div className="text-xs text-neutral-600 line-clamp-1">
+                          {item.relevant_meaning}
+                        </div>
+                        <div className="text-xs text-primary">{item.why}</div>
+                      </div>
+                    </button>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
             </>
           )}
           {!loading && query && results.length === 0 && smartResults.length === 0 && !smartLoading && <div className="p-6 text-center text-neutral-400">No emojis found for &quot;{query}&quot;</div>}
-          {results.map((item) => (
-            <button key={item.slug} onClick={() => handleSelect(item.slug)} className="w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-50 transition-colors text-left">
-              <span className="text-3xl">{item.character}</span>
-              <div>
-                <div className="font-medium text-neutral-900">{item.name}</div>
-                <div className="text-xs text-neutral-500">{item.category} · {item.shortcode}</div>
-              </div>
-            </button>
-          ))}
+          <StaggerContainer>
+            {results.map((item) => (
+              <StaggerItem key={item.slug}>
+                <button onClick={() => handleSelect(item.slug)} className="w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-50 transition-colors text-left">
+                  <span className="text-3xl">{item.character}</span>
+                  <div>
+                    <div className="font-medium text-neutral-900">{item.name}</div>
+                    <div className="text-xs text-neutral-500">{item.category} · {item.shortcode}</div>
+                  </div>
+                </button>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
           {!loading && !query && <div className="p-4 text-sm text-neutral-400 text-center">Type to search emojis by name, feeling, or shortcode</div>}
         </div>
       </div>
