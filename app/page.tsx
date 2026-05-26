@@ -3,6 +3,7 @@ import { getTrendingEmojis } from "@/lib/mongodb";
 import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
 import HeroSearchBar from "@/components/HeroSearchBar";
+import { FadeIn, StaggerContainer, StaggerItem, AnimatedCard } from "@/components/MotionWrappers";
 
 export const revalidate = 300;
 
@@ -35,7 +36,7 @@ export default async function HomePage() {
       <main>
         {/* Hero */}
         <section className="bg-gradient-to-br from-[#F8F7FF] to-[#EEF2FF] py-16 sm:py-24">
-          <div className="max-w-3xl mx-auto px-4 text-center">
+          <FadeIn className="max-w-3xl mx-auto px-4 text-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
               ✨ AI-Powered Emoji Intelligence
             </span>
@@ -51,7 +52,7 @@ export default async function HomePage() {
 
             {/* Search bar */}
             <HeroSearchBar />
-          </div>
+          </FadeIn>
         </section>
 
         {/* Popular Emojis */}
@@ -63,18 +64,19 @@ export default async function HomePage() {
                 Show More →
               </Link>
             </div>
-            <div className="flex justify-center gap-3 sm:gap-4 flex-wrap">
+            <StaggerContainer className="flex justify-center gap-3 sm:gap-4 flex-wrap">
               {trending.map((e) => (
-                <Link
-                  key={e.slug}
-                  href={`/emoji/${e.slug}`}
-                  className="text-4xl sm:text-5xl hover:scale-110 transition-transform"
-                  title={e.name}
-                >
-                  {e.character}
-                </Link>
+                <StaggerItem key={e.slug}>
+                  <Link
+                    href={`/emoji/${e.slug}`}
+                    className="text-4xl sm:text-5xl hover:scale-110 transition-transform"
+                    title={e.name}
+                  >
+                    {e.character}
+                  </Link>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
 
@@ -82,21 +84,24 @@ export default async function HomePage() {
         <section className="py-12 bg-neutral-50/50">
           <div className="max-w-5xl mx-auto px-4">
             <h2 className="text-xl font-bold text-primary-dark mb-6">Tools Playground</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {TOOLS.map((tool) => (
-                <Link
-                  key={tool.href}
-                  href={tool.href}
-                  className="bg-gradient-to-br from-primary-light/50 to-violet-50/50 rounded-2xl shadow-md p-5 hover:shadow-lg transition-shadow"
-                >
-                  <div className="bg-white rounded-xl shadow-sm w-12 h-12 flex items-center justify-center text-2xl mb-3">
-                    {tool.icon}
-                  </div>
-                  <div className="font-semibold text-primary-dark">{tool.name}</div>
-                  <div className="text-sm text-neutral-500 mt-1">{tool.desc}</div>
-                </Link>
+                <StaggerItem key={tool.href}>
+                  <AnimatedCard>
+                    <Link
+                      href={tool.href}
+                      className="bg-gradient-to-br from-primary-light/50 to-violet-50/50 rounded-2xl shadow-md p-5 hover:shadow-lg transition-shadow block"
+                    >
+                      <div className="bg-white rounded-xl shadow-sm w-12 h-12 flex items-center justify-center text-2xl mb-3">
+                        {tool.icon}
+                      </div>
+                      <div className="font-semibold text-primary-dark">{tool.name}</div>
+                      <div className="text-sm text-neutral-500 mt-1">{tool.desc}</div>
+                    </Link>
+                  </AnimatedCard>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
 
@@ -104,18 +109,19 @@ export default async function HomePage() {
         <section className="py-12">
           <div className="max-w-5xl mx-auto px-4">
             <h2 className="text-xl font-bold text-primary-dark mb-6">Browse by Category</h2>
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <StaggerContainer className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
               {CATEGORIES.map((cat) => (
-                <Link
-                  key={cat.name}
-                  href={cat.href}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-neutral-100 text-sm font-medium text-neutral-700 hover:shadow-md transition-shadow whitespace-nowrap shrink-0"
-                >
-                  <span>{cat.icon}</span>
-                  <span>{cat.name}</span>
-                </Link>
+                <StaggerItem key={cat.name}>
+                  <Link
+                    href={cat.href}
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-neutral-100 text-sm font-medium text-neutral-700 hover:shadow-md transition-shadow whitespace-nowrap shrink-0"
+                  >
+                    <span>{cat.icon}</span>
+                    <span>{cat.name}</span>
+                  </Link>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
       </main>
