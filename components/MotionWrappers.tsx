@@ -64,3 +64,42 @@ export function StaggerItem({
     </motion.div>
   );
 }
+
+export function AnimatedSection({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.3 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function AnimatedCard({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      whileHover={{ y: -2, boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.15 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
