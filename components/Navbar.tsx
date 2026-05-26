@@ -67,6 +67,12 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
               >
                 Compare
               </Link>
+              <Link
+                href="/blog"
+                className="text-sm font-medium text-neutral-600 hover:text-primary transition-colors"
+              >
+                Blog
+              </Link>
             </div>
 
             {/* Right: Search + Dark toggle + Mobile hamburger */}

@@ -11,6 +11,7 @@ interface MobileMenuProps {
 const MENU_LINKS = [
   { label: "Trending", href: "/trending" },
   { label: "Compare", href: "/tools/emoji-vs" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const CATEGORY_LINKS = [
