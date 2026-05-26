@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllSlugs, getAllComparisonSlugs, getAllComboSlugs } from "@/lib/mongodb";
+import { getAllPostSlugs } from "@/lib/wordpress";
 import { PLATFORM_KEYS } from "@/types/emoji";
 import { CULTURE_REGIONS } from "@/types/emoji";
 
@@ -12,7 +13,7 @@ export async function generateSitemaps() {
   // Chunk 16: comparisons
   // Chunk 17: base emoji pages
   const ids = [];
-  for (let i = 0; i <= 17; i++) {
+  for (let i = 0; i <= 18; i++) {
     ids.push({ id: i });
   }
   return ids;
@@ -25,6 +26,7 @@ export default async function sitemap(props: { id: Promise<string> }): Promise<M
     const comboSlugs = await getAllComboSlugs();
     return [
       { url: SITE_URL, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },
+      { url: `${SITE_URL}/blog`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.6 },
       { url: `${SITE_URL}/search`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.5 },
       ...comboSlugs.map((slug) => ({
         url: `${SITE_URL}/combo/${slug}`,
@@ -73,6 +75,16 @@ export default async function sitemap(props: { id: Promise<string> }): Promise<M
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
+    }));
+  }
+
+  if (id === 18) {
+    const postSlugs = await getAllPostSlugs();
+    return postSlugs.map((slug) => ({
+      url: `${SITE_URL}/blog/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
     }));
   }
 
