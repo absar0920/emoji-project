@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import ToolHero from "@/components/ToolHero";
 import EmojiPicker from "@/components/EmojiPicker";
 import Link from "next/link";
+import { FadeIn } from "@/components/MotionWrappers";
 
 interface SelectedEmoji {
   character: string;
@@ -75,7 +76,7 @@ export default function EmojiVsPage() {
       </div>
 
       {popular.length > 0 && (
-        <>
+        <FadeIn>
           <h2 className="text-lg font-bold text-primary-dark mb-4">Popular Comparisons</h2>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {popular.map((p) => (
@@ -90,7 +91,7 @@ export default function EmojiVsPage() {
               </Link>
             ))}
           </div>
-        </>
+        </FadeIn>
       )}
     </>
   );

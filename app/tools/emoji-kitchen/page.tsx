@@ -4,6 +4,7 @@ import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
 import EmojiPicker from "@/components/EmojiPicker";
 import CopyButton from "@/components/CopyButton";
+import { FadeIn } from "@/components/MotionWrappers";
 
 interface SelectedEmoji {
   character: string;
@@ -88,7 +89,7 @@ export default function EmojiKitchenPage() {
 
       {/* Result */}
       {resultUrl && (
-        <div className="text-center">
+        <FadeIn className="text-center">
           <div className="inline-block bg-white rounded-2xl p-8 shadow-lg">
             <img src={resultUrl} alt="Emoji Kitchen result" width={128} height={128} className="mx-auto" />
           </div>
@@ -102,14 +103,14 @@ export default function EmojiKitchenPage() {
               Download
             </a>
           </div>
-        </div>
+        </FadeIn>
       )}
 
       {notFound && (
-        <div className="text-center py-8">
+        <FadeIn className="text-center py-8">
           <span className="text-6xl block mb-4">🤷</span>
           <p className="text-neutral-500">No combination found for these two emojis. Try different ones!</p>
-        </div>
+        </FadeIn>
       )}
     </>
   );
