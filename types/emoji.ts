@@ -261,6 +261,7 @@ export type EmojiDocument = EmojiBase &
     virality: Virality;
     relations: Relations;
     design_variations?: DesignVariations;
+    semantic_tags?: string[];
   } &
   SafetyLayer;
 
@@ -273,6 +274,7 @@ export interface EmojiSearchItem {
   category: string;
   shortcode: string;
   genz_summary: string;
+  semantic_tags: string[];
 }
 
 /** Seed emoji entry — base fields only, no meaning data */

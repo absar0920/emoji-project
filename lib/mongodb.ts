@@ -100,6 +100,7 @@ export async function getSearchIndex(): Promise<EmojiSearchItem[]> {
           category: 1,
           shortcode: 1,
           "genz_meaning.interpretation": 1,
+          semantic_tags: 1,
         },
       }
     )
@@ -113,6 +114,7 @@ export async function getSearchIndex(): Promise<EmojiSearchItem[]> {
     category: d.category,
     shortcode: d.shortcode,
     genz_summary: d.genz_meaning?.interpretation?.slice(0, 80) || "",
+    semantic_tags: d.semantic_tags || [],
   }));
 }
 

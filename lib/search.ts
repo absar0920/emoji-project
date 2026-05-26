@@ -5,6 +5,7 @@ const fuseOptions: IFuseOptions<EmojiSearchItem> = {
   keys: [
     { name: "name", weight: 1.0 },
     { name: "tags", weight: 0.8 },
+    { name: "semantic_tags", weight: 0.7 },
     { name: "genz_summary", weight: 0.7 },
     { name: "shortcode", weight: 0.6 },
     { name: "category", weight: 0.5 },
