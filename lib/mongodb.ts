@@ -339,4 +339,32 @@ export async function getTrendingByPlatform(
   return results;
 }
 
+export async function getComparisonsByEmoji(
+  slug: string,
+  limit: number = 3
+): Promise<ComparisonDocument[]> {
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  return conn.db
+    .collection<ComparisonDocument>("comparisons")
+    .find({
+      $or: [{ emoji1_slug: slug }, { emoji2_slug: slug }],
+    })
+    .limit(limit)
+    .toArray();
+}
+
+export async function getCombosByEmoji(
+  character: string,
+  limit: number = 3
+): Promise<ComboDocument[]> {
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  return conn.db
+    .collection<ComboDocument>("combos")
+    .find({ "combos.emojis": character })
+    .limit(limit)
+    .toArray();
+}
+
 export { connectToDatabase };
