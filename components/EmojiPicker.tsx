@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { EmojiSearchItem } from "@/types/emoji";
+import { Skeleton } from "@/components/Skeleton";
 
 interface EmojiPickerProps {
   onSelect: (emoji: { character: string; slug: string; name: string }) => void;
@@ -42,7 +43,11 @@ export default function EmojiPicker({ onSelect, selected }: EmojiPickerProps) {
         className="w-full px-3 py-2 rounded-lg border border-neutral-200 text-sm mb-2 outline-none focus:ring-2 focus:ring-primary/30"
       />
       {loading ? (
-        <div className="text-center text-neutral-400 py-4 text-sm">Loading...</div>
+        <div className="grid grid-cols-6 gap-1">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <Skeleton key={i} w="32px" h="32px" />
+          ))}
+        </div>
       ) : (
         <div className="grid grid-cols-6 gap-1 max-h-48 overflow-y-auto">
           {filtered.map((e) => (
