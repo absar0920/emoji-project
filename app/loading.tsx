@@ -4,7 +4,7 @@ export default function HomeLoading() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#F8F7FF] to-[#EEF2FF] py-16 sm:py-24">
+      <section className="bg-gradient-to-br from-[#F8F7FF] to-[#EEF2FF] dark:from-slate-800 dark:to-indigo-950 py-16 sm:py-24">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <Skeleton w="180px" h="28px" round className="mx-auto mb-6" />
           <Skeleton w="80%" h="40px" className="mx-auto mb-3" />
@@ -30,7 +30,7 @@ export default function HomeLoading() {
       </section>
 
       {/* Tools */}
-      <section className="py-12 bg-neutral-50/50">
+      <section className="py-12 bg-neutral-50/50 dark:bg-slate-800/50">
         <div className="max-w-5xl mx-auto px-4">
           <Skeleton w="160px" h="24px" className="mb-6" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

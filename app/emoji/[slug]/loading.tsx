@@ -7,7 +7,7 @@ export default function EmojiDetailLoading() {
       <Skeleton w="200px" h="14px" className="mb-4" />
 
       {/* Hero */}
-      <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 text-center mb-6">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-md dark:shadow-slate-900/30 p-6 sm:p-8 text-center mb-6">
         <Skeleton w="96px" h="96px" round className="mx-auto mb-4" />
         <Skeleton w="200px" h="28px" className="mx-auto mb-2" />
         <Skeleton w="140px" h="14px" className="mx-auto mb-3" />

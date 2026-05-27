@@ -6,7 +6,7 @@ export default function ComboLoading() {
       <Skeleton w="180px" h="14px" className="mb-4" />
       <Skeleton w="250px" h="28px" className="mb-2" />
       <Skeleton w="100%" h="14px" className="mb-8" />
-      <div className="bg-white rounded-xl p-6 shadow-md mb-6">
+      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md dark:shadow-slate-900/30 mb-6">
         <Skeleton w="200px" h="40px" className="mx-auto mb-3" />
         <Skeleton w="140px" h="14px" className="mx-auto" />
       </div>

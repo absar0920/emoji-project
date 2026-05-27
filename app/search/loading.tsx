@@ -7,7 +7,7 @@ export default function SearchLoading() {
       <Skeleton w="120px" h="16px" className="mb-8" />
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
         {Array.from({ length: 24 }).map((_, i) => (
-          <div key={i} className="flex flex-col items-center gap-1 p-3 bg-white rounded-xl shadow-sm border border-neutral-100">
+          <div key={i} className="flex flex-col items-center gap-1 p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700">
             <Skeleton w="36px" h="36px" />
             <Skeleton w="60px" h="12px" />
           </div>
