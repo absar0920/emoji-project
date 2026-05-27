@@ -118,23 +118,23 @@ export default async function EmojiPage({ params }: PageProps) {
     <ClientShell>
       <main className="max-w-4xl mx-auto px-4 py-6">
         {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 mb-4">
+        <nav className="text-sm text-neutral-400 dark:text-slate-500 mb-4">
           <a href="/" className="hover:text-primary">Home</a>{" › "}
           <a href="/search" className="hover:text-primary">Emojis</a>{" › "}
-          <span className="text-neutral-600">{emoji.character} {emoji.name}</span>
+          <span className="text-neutral-600 dark:text-slate-300">{emoji.character} {emoji.name}</span>
         </nav>
 
         {/* Hero — centered white card */}
         <FadeIn>
-          <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 text-center mb-6">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-md dark:shadow-slate-900/30 p-6 sm:p-8 text-center mb-6">
             <span className="text-8xl sm:text-[128px] leading-none block mb-4">{emoji.character}</span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark mb-1">{emoji.name} Emoji</h1>
-            <p className="text-sm text-neutral-500 font-mono mb-3">{emoji.unicode} · {emoji.shortcode}</p>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-1">{emoji.name} Emoji</h1>
+            <p className="text-sm text-neutral-500 dark:text-slate-400 font-mono mb-3">{emoji.unicode} · {emoji.shortcode}</p>
             <div className="flex flex-wrap gap-2 justify-center">
               <CopyButton text={emoji.character} />
-              <CopyButton text={emoji.shortcode} label={emoji.shortcode} className="bg-neutral-100 !text-neutral-700 hover:!bg-neutral-200" />
+              <CopyButton text={emoji.shortcode} label={emoji.shortcode} className="bg-neutral-100 dark:bg-slate-700 !text-neutral-700 dark:!text-slate-300 hover:!bg-neutral-200" />
               {emoji.virality?.trend_score != null && (
-                <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 text-accent-amber">🔥 {emoji.virality?.trend_score}</span>
+                <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 dark:bg-amber-900/30 text-accent-amber">🔥 {emoji.virality?.trend_score}</span>
               )}
             </div>
           </div>
@@ -153,7 +153,7 @@ export default async function EmojiPage({ params }: PageProps) {
         {/* Cultures */}
         <AnimatedSection>
           <section id="cultures" className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark mb-4">Cultural Meanings</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Cultural Meanings</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {emoji.cultures && Object.entries(emoji.cultures).map(([region, meaning]) => (
                 <CultureCard key={region} region={region} meaning={meaning as string} />
@@ -165,7 +165,7 @@ export default async function EmojiPage({ params }: PageProps) {
         {/* Timeline */}
         <AnimatedSection>
           <section id="timeline" className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark mb-4">Meaning Evolution</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Meaning Evolution</h2>
             {emoji.time_evolution && <TimelineSection timeEvolution={emoji.time_evolution} />}
           </section>
         </AnimatedSection>
@@ -180,7 +180,7 @@ export default async function EmojiPage({ params }: PageProps) {
         {/* Platform links */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-lg font-bold text-primary-dark mb-4">See on Every Platform</h2>
+            <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">See on Every Platform</h2>
             <PlatformLinks emojiSlug={emoji.slug} />
           </section>
         </AnimatedSection>
@@ -189,7 +189,7 @@ export default async function EmojiPage({ params }: PageProps) {
         <AnimatedSection>
           {comparisons.length > 0 && (
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-primary-dark mb-4">Compare With</h2>
+              <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Compare With</h2>
               <div className="flex flex-wrap gap-2">
                 {comparisons.map((comp) => {
                   const otherChar = comp.emoji1_slug === slug ? comp.emoji2_character : comp.emoji1_character;
@@ -198,12 +198,12 @@ export default async function EmojiPage({ params }: PageProps) {
                     <Link
                       key={comp.slug}
                       href={`/vs/${comp.slug}`}
-                      className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md text-sm font-medium text-neutral-700 hover:shadow-lg transition-shadow"
+                      className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md dark:shadow-slate-900/30 text-sm font-medium text-neutral-700 dark:text-slate-300 hover:shadow-lg transition-shadow"
                     >
                       <span className="text-lg">{emoji.character}</span>
-                      <span className="text-neutral-400">vs</span>
+                      <span className="text-neutral-400 dark:text-slate-500">vs</span>
                       <span className="text-lg">{otherChar}</span>
-                      <span className="text-neutral-500">{otherName}</span>
+                      <span className="text-neutral-500 dark:text-slate-400">{otherName}</span>
                     </Link>
                   );
                 })}
@@ -216,13 +216,13 @@ export default async function EmojiPage({ params }: PageProps) {
         <AnimatedSection>
           {combos.length > 0 && (
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-primary-dark mb-4">Emoji Combos</h2>
+              <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Emoji Combos</h2>
               <div className="flex flex-wrap gap-3">
                 {combos.map((combo) => (
                   <Link
                     key={combo.slug}
                     href={`/combo/${combo.slug}`}
-                    className="flex items-center gap-2 px-4 py-3 bg-white rounded-xl shadow-md text-sm font-medium text-neutral-700 hover:shadow-lg transition-shadow"
+                    className="flex items-center gap-2 px-4 py-3 bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 text-sm font-medium text-neutral-700 dark:text-slate-300 hover:shadow-lg transition-shadow"
                   >
                     <span className="text-lg">
                       {combo.combos?.[0]?.emojis?.slice(0, 3).join("") || "🎉"}
@@ -241,17 +241,17 @@ export default async function EmojiPage({ params }: PageProps) {
             emoji.relations?.confusing?.length > 0 ||
             emoji.relations?.replacement?.length > 0) && (
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-primary-dark mb-4">See Also</h2>
+              <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">See Also</h2>
               <div className="space-y-3">
                 {emoji.relations.opposite?.length > 0 && (
                   <div>
-                    <span className="text-sm font-medium text-neutral-500 block mb-2">Opposite</span>
+                    <span className="text-sm font-medium text-neutral-500 dark:text-slate-400 block mb-2">Opposite</span>
                     <div className="flex gap-2 flex-wrap">
                       {emoji.relations.opposite.map((s: string) => (
                         <Link
                           key={s}
                           href={`/emoji/${s}`}
-                          className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                          className="px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full shadow-sm dark:shadow-slate-900/30 text-sm hover:shadow-md transition-shadow"
                         >
                           {s.replace(/-/g, " ")}
                         </Link>
@@ -261,13 +261,13 @@ export default async function EmojiPage({ params }: PageProps) {
                 )}
                 {emoji.relations.confusing?.length > 0 && (
                   <div>
-                    <span className="text-sm font-medium text-neutral-500 block mb-2">Often Confused With</span>
+                    <span className="text-sm font-medium text-neutral-500 dark:text-slate-400 block mb-2">Often Confused With</span>
                     <div className="flex gap-2 flex-wrap">
                       {emoji.relations.confusing.map((s: string) => (
                         <Link
                           key={s}
                           href={`/emoji/${s}`}
-                          className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                          className="px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full shadow-sm dark:shadow-slate-900/30 text-sm hover:shadow-md transition-shadow"
                         >
                           {s.replace(/-/g, " ")}
                         </Link>
@@ -277,13 +277,13 @@ export default async function EmojiPage({ params }: PageProps) {
                 )}
                 {emoji.relations.replacement?.length > 0 && (
                   <div>
-                    <span className="text-sm font-medium text-neutral-500 block mb-2">Can Replace</span>
+                    <span className="text-sm font-medium text-neutral-500 dark:text-slate-400 block mb-2">Can Replace</span>
                     <div className="flex gap-2 flex-wrap">
                       {emoji.relations.replacement.map((s: string) => (
                         <Link
                           key={s}
                           href={`/emoji/${s}`}
-                          className="px-3 py-1.5 bg-white rounded-full shadow-sm text-sm hover:shadow-md transition-shadow"
+                          className="px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full shadow-sm dark:shadow-slate-900/30 text-sm hover:shadow-md transition-shadow"
                         >
                           {s.replace(/-/g, " ")}
                         </Link>
@@ -299,12 +299,12 @@ export default async function EmojiPage({ params }: PageProps) {
         {/* FAQ */}
         <AnimatedSection>
           <section id="faq" className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {faqSchema.mainEntity.map((faq: { name: string; acceptedAnswer: { text: string } }, i: number) => (
-                <details key={i} className="bg-white rounded-xl shadow-md overflow-hidden">
-                  <summary className="px-4 py-3 cursor-pointer font-medium text-neutral-900 hover:bg-neutral-50">{faq.name}</summary>
-                  <p className="px-4 pb-4 text-sm text-neutral-600">{faq.acceptedAnswer.text}</p>
+                <details key={i} className="bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 overflow-hidden">
+                  <summary className="px-4 py-3 cursor-pointer font-medium text-neutral-900 dark:text-slate-100 hover:bg-neutral-50 dark:hover:bg-slate-700">{faq.name}</summary>
+                  <p className="px-4 pb-4 text-sm text-neutral-600 dark:text-slate-300">{faq.acceptedAnswer.text}</p>
                 </details>
               ))}
             </div>
@@ -315,18 +315,18 @@ export default async function EmojiPage({ params }: PageProps) {
         <AnimatedSection>
           {emoji.safety && (
             <section className="mb-10">
-              <h2 className="text-xl font-bold text-primary-dark mb-4">Safety & Usage</h2>
+              <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Safety & Usage</h2>
               <div className="flex flex-wrap gap-3">
-                <span className="px-3 py-1.5 rounded-full text-sm bg-emerald-50 text-accent-emerald font-medium">✅ {emoji.safety.safe_meaning}</span>
+                <span className="px-3 py-1.5 rounded-full text-sm bg-emerald-50 dark:bg-emerald-900/30 text-accent-emerald font-medium">✅ {emoji.safety.safe_meaning}</span>
                 {emoji.safety.toxic_meaning && (
-                  <span className="px-3 py-1.5 rounded-full text-sm bg-red-50 text-accent-red font-medium">⚠️ {emoji.safety.toxic_meaning}</span>
+                  <span className="px-3 py-1.5 rounded-full text-sm bg-red-50 dark:bg-red-900/30 text-accent-red font-medium">⚠️ {emoji.safety.toxic_meaning}</span>
                 )}
                 {emoji.safety.nsfw && (
-                  <span className="px-3 py-1.5 rounded-full text-sm bg-red-100 text-accent-red font-bold">🔞 NSFW</span>
+                  <span className="px-3 py-1.5 rounded-full text-sm bg-red-100 dark:bg-red-900/40 text-accent-red font-bold">🔞 NSFW</span>
                 )}
               </div>
               {emoji.safety.warning_notes && (
-                <p className="mt-2 text-sm text-neutral-500">{emoji.safety.warning_notes}</p>
+                <p className="mt-2 text-sm text-neutral-500 dark:text-slate-400">{emoji.safety.warning_notes}</p>
               )}
             </section>
           )}
