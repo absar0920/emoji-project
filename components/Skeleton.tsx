@@ -23,7 +23,7 @@ export function Skeleton({ w = "100%", h = "14px", round = false, className = ""
 
 export function SkeletonCard({ className = "" }: { className?: string }) {
   return (
-    <div className={`bg-white rounded-xl p-4 shadow-sm border border-neutral-100 ${className}`}>
+    <div className={`bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 ${className}`}>
       <Skeleton w="48px" h="48px" className="mb-3" />
       <Skeleton w="70%" h="14px" className="mb-2" />
       <Skeleton w="50%" h="12px" />

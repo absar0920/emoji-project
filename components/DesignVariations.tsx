@@ -19,7 +19,7 @@ export default function DesignVariations({
 }: DesignVariationsProps) {
   return (
     <section id="design" className="mb-10">
-      <h2 className="text-xl font-bold text-primary-dark mb-4">
+      <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">
         How It Looks Across Platforms
       </h2>
       <div className="flex flex-wrap gap-3">
@@ -32,7 +32,7 @@ export default function DesignVariations({
           return (
             <div
               key={vendor.key}
-              className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm border border-neutral-100 min-w-[100px]"
+              className="flex flex-col items-center gap-2 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 min-w-[100px]"
             >
               {vendor.type === "native" || !imageUrl ? (
                 <span className="text-4xl leading-none">{character}</span>
@@ -46,14 +46,14 @@ export default function DesignVariations({
                   loading="lazy"
                 />
               )}
-              <span className="text-xs font-medium text-neutral-600">
+              <span className="text-xs font-medium text-neutral-600 dark:text-slate-300">
                 {vendor.label}
               </span>
             </div>
           );
         })}
       </div>
-      <p className="text-xs text-neutral-400 mt-2">
+      <p className="text-xs text-neutral-400 dark:text-slate-500 mt-2">
         Emoji appearance varies by platform and device. Google Noto, Twemoji,
         and OpenMoji are open-source.
       </p>

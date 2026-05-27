@@ -41,7 +41,7 @@ export default function StickyTOC() {
   }
 
   return (
-    <nav className="sticky top-16 z-40 bg-white/90 backdrop-blur-sm border-b border-neutral-200 -mx-4 px-4 sm:mx-0 sm:px-0 sm:rounded-lg">
+    <nav className="sticky top-16 z-40 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border-b border-neutral-200 dark:border-slate-700 -mx-4 px-4 sm:mx-0 sm:px-0 sm:rounded-lg">
       <div className="flex gap-1 overflow-x-auto py-2 scrollbar-hide">
         {sections.map((section) => (
           <button
@@ -50,7 +50,7 @@ export default function StickyTOC() {
             className={`px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
               active === section.id
                 ? "bg-primary text-white"
-                : "text-neutral-500 hover:text-neutral-800 hover:bg-neutral-100"
+                : "text-neutral-500 dark:text-slate-400 hover:text-neutral-800 dark:hover:text-slate-100 hover:bg-neutral-100 dark:hover:bg-slate-700"
             }`}
           >
             {section.label}
