@@ -31,15 +31,15 @@ export default async function BlogPage({ searchParams }: PageProps) {
     <ClientShell>
       <main className="max-w-5xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 mb-4">
+        <nav className="text-sm text-neutral-400 dark:text-slate-500 mb-4">
           <a href="/" className="hover:text-primary">Home</a>{" › "}
-          <span className="text-neutral-600">Blog</span>
+          <span className="text-neutral-600 dark:text-slate-400">Blog</span>
         </nav>
 
         {/* Header */}
         <FadeIn>
-          <h1 className="text-3xl font-extrabold text-primary-dark mb-2">Blog</h1>
-          <p className="text-neutral-500 mb-6">
+          <h1 className="text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-2">Blog</h1>
+          <p className="text-neutral-500 dark:text-slate-400 mb-6">
             Emoji guides, trending slang breakdowns, and cultural deep dives.
           </p>
         </FadeIn>
@@ -57,7 +57,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
               <Link
                 key={cat.id}
                 href={`/blog/category/${cat.slug}`}
-                className="px-3 py-1.5 rounded-full text-sm font-medium bg-neutral-100 text-neutral-600 hover:bg-neutral-200 transition-colors"
+                className="px-3 py-1.5 rounded-full text-sm font-medium bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors"
               >
                 {cat.name}
               </Link>
@@ -77,7 +77,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
         ) : (
           <div className="text-center py-16">
             <span className="text-6xl block mb-4">📝</span>
-            <p className="text-neutral-500">No blog posts yet. Check back soon!</p>
+            <p className="text-neutral-500 dark:text-slate-400">No blog posts yet. Check back soon!</p>
           </div>
         )}
 
@@ -87,18 +87,18 @@ export default async function BlogPage({ searchParams }: PageProps) {
             {page > 1 && (
               <Link
                 href={`/blog?page=${page - 1}`}
-                className="px-4 py-2 rounded-full bg-white shadow-sm border border-neutral-200 text-sm font-medium text-neutral-600 hover:shadow-md transition-shadow"
+                className="px-4 py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-900/30 border border-neutral-200 dark:border-slate-700 text-sm font-medium text-neutral-600 dark:text-slate-300 hover:shadow-md transition-shadow"
               >
                 ← Previous
               </Link>
             )}
-            <span className="px-4 py-2 text-sm text-neutral-400">
+            <span className="px-4 py-2 text-sm text-neutral-400 dark:text-slate-500">
               Page {page} of {totalPages}
             </span>
             {page < totalPages && (
               <Link
                 href={`/blog?page=${page + 1}`}
-                className="px-4 py-2 rounded-full bg-white shadow-sm border border-neutral-200 text-sm font-medium text-neutral-600 hover:shadow-md transition-shadow"
+                className="px-4 py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-900/30 border border-neutral-200 dark:border-slate-700 text-sm font-medium text-neutral-600 dark:text-slate-300 hover:shadow-md transition-shadow"
               >
                 Next →
               </Link>

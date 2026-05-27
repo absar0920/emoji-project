@@ -42,18 +42,18 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
     <ClientShell>
       <main className="max-w-5xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 mb-4">
+        <nav className="text-sm text-neutral-400 dark:text-slate-500 mb-4">
           <a href="/" className="hover:text-primary">Home</a>{" › "}
           <a href="/blog" className="hover:text-primary">Blog</a>{" › "}
-          <span className="text-neutral-600">{category.name}</span>
+          <span className="text-neutral-600 dark:text-slate-400">{category.name}</span>
         </nav>
 
         <FadeIn>
-          <h1 className="text-3xl font-extrabold text-primary-dark mb-2">
+          <h1 className="text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-2">
             {category.name}
           </h1>
           {category.description && (
-            <p className="text-neutral-500 mb-6">{category.description}</p>
+            <p className="text-neutral-500 dark:text-slate-400 mb-6">{category.description}</p>
           )}
         </FadeIn>
 
@@ -61,7 +61,7 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
         <div className="flex gap-2 flex-wrap mb-8">
           <Link
             href="/blog"
-            className="px-3 py-1.5 rounded-full text-sm font-medium bg-neutral-100 text-neutral-600 hover:bg-neutral-200 transition-colors"
+            className="px-3 py-1.5 rounded-full text-sm font-medium bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors"
           >
             All
           </Link>
@@ -72,7 +72,7 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
               className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 cat.slug === slug
                   ? "bg-primary text-white"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
               }`}
             >
               {cat.name}
@@ -92,7 +92,7 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
         ) : (
           <div className="text-center py-16">
             <span className="text-6xl block mb-4">📂</span>
-            <p className="text-neutral-500">No posts in this category yet.</p>
+            <p className="text-neutral-500 dark:text-slate-400">No posts in this category yet.</p>
           </div>
         )}
 
@@ -102,18 +102,18 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
             {page > 1 && (
               <Link
                 href={`/blog/category/${slug}?page=${page - 1}`}
-                className="px-4 py-2 rounded-full bg-white shadow-sm border border-neutral-200 text-sm font-medium text-neutral-600 hover:shadow-md transition-shadow"
+                className="px-4 py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-900/30 border border-neutral-200 dark:border-slate-700 text-sm font-medium text-neutral-600 dark:text-slate-300 hover:shadow-md transition-shadow"
               >
                 ← Previous
               </Link>
             )}
-            <span className="px-4 py-2 text-sm text-neutral-400">
+            <span className="px-4 py-2 text-sm text-neutral-400 dark:text-slate-500">
               Page {page} of {totalPages}
             </span>
             {page < totalPages && (
               <Link
                 href={`/blog/category/${slug}?page=${page + 1}`}
-                className="px-4 py-2 rounded-full bg-white shadow-sm border border-neutral-200 text-sm font-medium text-neutral-600 hover:shadow-md transition-shadow"
+                className="px-4 py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-900/30 border border-neutral-200 dark:border-slate-700 text-sm font-medium text-neutral-600 dark:text-slate-300 hover:shadow-md transition-shadow"
               >
                 Next →
               </Link>
