@@ -57,12 +57,12 @@ export default function CaptionGeneratorPage() {
           value={topic}
           onChange={(e) => setTopic(e.target.value.slice(0, 200))}
           placeholder="What's the post about?"
-          className="w-full px-5 py-3 rounded-xl shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow"
+          className="w-full px-5 py-3 rounded-xl shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow"
         />
 
         {/* Mood */}
         <div>
-          <span className="text-sm font-medium text-neutral-600 block mb-2">Mood</span>
+          <span className="text-sm font-medium text-neutral-600 dark:text-slate-300 block mb-2">Mood</span>
           <div className="flex flex-wrap gap-2">
             {MOODS.map((m) => (
               <button
@@ -70,8 +70,8 @@ export default function CaptionGeneratorPage() {
                 onClick={() => setMood(m)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                   mood === m
-                    ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 text-primary ring-1 ring-primary/30"
-                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                    ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 dark:from-indigo-500/20 dark:to-violet-500/20 text-primary ring-1 ring-primary/30 dark:ring-indigo-500/30"
+                    : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
                 }`}
               >
                 {m}
@@ -82,14 +82,14 @@ export default function CaptionGeneratorPage() {
 
         {/* Platform */}
         <div>
-          <span className="text-sm font-medium text-neutral-600 block mb-2">Platform</span>
+          <span className="text-sm font-medium text-neutral-600 dark:text-slate-300 block mb-2">Platform</span>
           <div className="flex flex-wrap gap-2">
             {PLATFORMS.map((p) => (
               <button
                 key={p}
                 onClick={() => setPlatform(p)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  platform === p ? "bg-accent-violet text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  platform === p ? "bg-accent-violet text-white" : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
                 }`}
               >
                 {p}
@@ -108,7 +108,7 @@ export default function CaptionGeneratorPage() {
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-red-50 text-accent-red text-sm mb-6">{error}</div>
+        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-accent-red text-sm mb-6">{error}</div>
       )}
 
       {/* Results */}
@@ -116,10 +116,10 @@ export default function CaptionGeneratorPage() {
         <StaggerContainer className="space-y-3">
           {captions.map((cap, i) => (
             <StaggerItem key={i}>
-              <div className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow">
+              <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <p className="text-neutral-900 mb-2">{cap.text}</p>
+                    <p className="text-neutral-900 dark:text-slate-100 mb-2">{cap.text}</p>
                     <div className="flex gap-2">
                       <span className="text-xs px-2 py-0.5 rounded-full bg-primary-light text-primary font-medium">
                         {cap.emoji_count} emojis

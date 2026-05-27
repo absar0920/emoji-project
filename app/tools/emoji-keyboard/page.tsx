@@ -57,7 +57,7 @@ export default function EmojiKeyboardPage() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search emojis..."
-        className="w-full px-4 py-3 rounded-xl shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow mb-4"
+        className="w-full px-4 py-3 rounded-xl shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow mb-4"
       />
 
       {/* Categories */}
@@ -69,8 +69,8 @@ export default function EmojiKeyboardPage() {
               onClick={() => setCategory(cat)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
                 category === cat
-                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 text-primary ring-1 ring-primary/30"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 dark:from-indigo-500/20 dark:to-violet-500/20 text-primary ring-1 ring-primary/30 dark:ring-indigo-500/30"
+                  : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
               }`}
             >
               {cat}
@@ -82,13 +82,13 @@ export default function EmojiKeyboardPage() {
       {/* Recent */}
       {recent.length > 0 && !search && (
         <div className="mb-4">
-          <span className="text-xs font-medium text-neutral-500 block mb-2">Recent</span>
+          <span className="text-xs font-medium text-neutral-500 dark:text-slate-400 block mb-2">Recent</span>
           <div className="flex gap-1">
             {recent.map((e, i) => (
               <button
                 key={i}
                 onClick={() => handleCopy(e)}
-                className="text-2xl p-1 rounded-lg hover:bg-neutral-100 transition-colors"
+                className="text-2xl p-1 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors"
               >
                 {e}
               </button>
@@ -103,8 +103,8 @@ export default function EmojiKeyboardPage() {
           <button
             key={e.slug}
             onClick={() => handleCopy(e.character)}
-            className={`text-3xl p-2 rounded-lg hover:bg-neutral-100 hover:scale-110 transition-all ${
-              copied === e.character ? "bg-accent-emerald/10 scale-110" : ""
+            className={`text-3xl p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-700 hover:scale-110 transition-all ${
+              copied === e.character ? "bg-accent-emerald/10 dark:bg-emerald-900/30 scale-110" : ""
             }`}
             title={e.name}
           >

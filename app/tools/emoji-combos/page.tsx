@@ -25,18 +25,18 @@ export default async function EmojiCombosPage() {
           <Link
             key={combo.slug}
             href={`/combo/${combo.slug}`}
-            className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow"
+            className="flex flex-col items-center gap-2 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 hover:shadow-md transition-shadow"
           >
             <span className="text-2xl">
               {combo.combos?.[0]?.emojis?.slice(0, 4).join("") || "🎉"}
             </span>
-            <span className="text-sm font-medium text-neutral-900">{combo.theme}</span>
+            <span className="text-sm font-medium text-neutral-900 dark:text-slate-100">{combo.theme}</span>
           </Link>
         ))}
       </div>
 
       {combos.length === 0 && (
-        <div className="text-center py-12 text-neutral-400">
+        <div className="text-center py-12 text-neutral-400 dark:text-slate-500">
           <span className="text-6xl block mb-4">🎨</span>
           <p>No combo themes available yet. Run the combo generation script first.</p>
         </div>

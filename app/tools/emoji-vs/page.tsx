@@ -77,16 +77,16 @@ export default function EmojiVsPage() {
 
       {popular.length > 0 && (
         <FadeIn>
-          <h2 className="text-lg font-bold text-primary-dark mb-4">Popular Comparisons</h2>
+          <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">Popular Comparisons</h2>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {popular.map((p) => (
               <Link
                 key={p.slug}
                 href={`/vs/${p.slug}`}
-                className="flex items-center justify-center gap-2 p-3 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                className="flex items-center justify-center gap-2 p-3 bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow"
               >
                 <span className="text-2xl">{p.emoji1_character}</span>
-                <span className="text-xs font-bold text-neutral-400">vs</span>
+                <span className="text-xs font-bold text-neutral-400 dark:text-slate-500">vs</span>
                 <span className="text-2xl">{p.emoji2_character}</span>
               </Link>
             ))}

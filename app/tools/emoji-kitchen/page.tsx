@@ -90,7 +90,7 @@ export default function EmojiKitchenPage() {
       {/* Result */}
       {resultUrl && (
         <FadeIn className="text-center">
-          <div className="inline-block bg-white rounded-2xl p-8 shadow-lg">
+          <div className="inline-block bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg dark:shadow-slate-900/30">
             <img src={resultUrl} alt="Emoji Kitchen result" width={128} height={128} className="mx-auto" />
           </div>
           <div className="flex gap-2 justify-center mt-4">
@@ -109,7 +109,7 @@ export default function EmojiKitchenPage() {
       {notFound && (
         <FadeIn className="text-center py-8">
           <span className="text-6xl block mb-4">🤷</span>
-          <p className="text-neutral-500">No combination found for these two emojis. Try different ones!</p>
+          <p className="text-neutral-500 dark:text-slate-400">No combination found for these two emojis. Try different ones!</p>
         </FadeIn>
       )}
     </>

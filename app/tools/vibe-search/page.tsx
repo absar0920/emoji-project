@@ -58,7 +58,7 @@ export default function VibeSearchPage() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch(query)}
             placeholder="Search by feeling, mood, or vibe..."
-            className="flex-1 px-5 py-3 rounded-full shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
+            className="flex-1 px-5 py-3 rounded-full shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
           />
           <button
             onClick={() => handleSearch(query)}
@@ -75,7 +75,7 @@ export default function VibeSearchPage() {
             <button
               key={mood}
               onClick={() => handleSearch(mood)}
-              className="px-3 py-1.5 rounded-full bg-neutral-100 text-sm text-neutral-600 hover:bg-neutral-200 transition-colors capitalize"
+              className="px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-slate-700 text-sm text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors capitalize"
             >
               {mood}
             </button>
@@ -84,26 +84,26 @@ export default function VibeSearchPage() {
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-red-50 text-accent-red text-sm mb-6">{error}</div>
+        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-accent-red text-sm mb-6">{error}</div>
       )}
 
       {/* Results */}
       {results.length > 0 && (
         <>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-primary-dark">Results</h2>
+            <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100">Results</h2>
             <CopyAllButton emojis={results.map((r) => r.emoji)} />
           </div>
           <StaggerContainer className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {results.map((r, i) => (
               <StaggerItem key={i}>
-                <div className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow text-center">
+                <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow text-center">
                   <span className="text-4xl block mb-2">{r.emoji}</span>
-                  <span className="text-xs font-medium text-neutral-900 block">{r.name}</span>
+                  <span className="text-xs font-medium text-neutral-900 dark:text-slate-100 block">{r.name}</span>
                   <span className="text-xs px-2 py-0.5 rounded-full bg-primary-light text-primary font-medium mt-1 inline-block">
                     {r.match_percent}% match
                   </span>
-                  <p className="text-xs text-neutral-500 mt-2">{r.reason}</p>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-2">{r.reason}</p>
                 </div>
               </StaggerItem>
             ))}

@@ -26,16 +26,16 @@ export default async function EmojiTrendsPage() {
           <Link
             key={emoji.slug}
             href={`/emoji/${emoji.slug}`}
-            className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+            className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow"
           >
-            <span className="text-sm font-bold text-neutral-400 w-6">#{i + 1}</span>
+            <span className="text-sm font-bold text-neutral-400 dark:text-slate-500 w-6">#{i + 1}</span>
             <span className="text-4xl">{emoji.character}</span>
             <div className="flex-1">
-              <span className="font-medium text-neutral-900">{emoji.name}</span>
-              <span className="text-xs text-neutral-500 block">{emoji.category}</span>
+              <span className="font-medium text-neutral-900 dark:text-slate-100">{emoji.name}</span>
+              <span className="text-xs text-neutral-500 dark:text-slate-400 block">{emoji.category}</span>
             </div>
             {emoji.virality?.trend_score != null && (
-              <span className="px-3 py-1 rounded-full bg-amber-50 text-accent-amber text-sm font-medium">
+              <span className="px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/30 text-accent-amber text-sm font-medium">
                 🔥 {emoji.virality.trend_score}
               </span>
             )}
@@ -43,7 +43,7 @@ export default async function EmojiTrendsPage() {
         ))}
 
         {trending.length === 0 && (
-          <div className="text-center py-12 text-neutral-400">
+          <div className="text-center py-12 text-neutral-400 dark:text-slate-500">
             <span className="text-6xl block mb-4">📊</span>
             <p>No trending data available yet.</p>
           </div>

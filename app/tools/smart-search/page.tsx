@@ -68,7 +68,7 @@ export default function SmartSearchPage() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch(query)}
             placeholder="Try: breakup emoji for tiktok, sad emoji gen-z..."
-            className="flex-1 px-5 py-3 rounded-full shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
+            className="flex-1 px-5 py-3 rounded-full shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
           />
           <button
             onClick={() => handleSearch(query)}
@@ -85,7 +85,7 @@ export default function SmartSearchPage() {
             <button
               key={q}
               onClick={() => handleSearch(q)}
-              className="px-3 py-1.5 rounded-full bg-neutral-100 text-sm text-neutral-600 hover:bg-neutral-200 transition-colors"
+              className="px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-slate-700 text-sm text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors"
             >
               {q}
             </button>
@@ -94,7 +94,7 @@ export default function SmartSearchPage() {
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-red-50 text-accent-red text-sm mb-6">
+        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-accent-red text-sm mb-6">
           {error}
         </div>
       )}
@@ -102,17 +102,17 @@ export default function SmartSearchPage() {
       {/* Results */}
       {results.length > 0 && (
         <>
-          <h2 className="text-lg font-bold text-primary-dark mb-4">Results</h2>
+          <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">Results</h2>
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {results.map((r, i) => (
               <StaggerItem key={i}>
                 <Link
                   href={`/emoji/${r.slug}`}
-                  className="bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition-shadow flex gap-4 items-start"
+                  className="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow flex gap-4 items-start"
                 >
                   <span className="text-5xl leading-none flex-shrink-0">{r.character}</span>
                   <div className="min-w-0">
-                    <span className="text-sm font-semibold text-neutral-900 block capitalize">
+                    <span className="text-sm font-semibold text-neutral-900 dark:text-slate-100 block capitalize">
                       {r.name}
                     </span>
                     {r.why && (
@@ -121,7 +121,7 @@ export default function SmartSearchPage() {
                       </span>
                     )}
                     {r.relevant_meaning && (
-                      <p className="text-xs text-neutral-500 mt-2 line-clamp-3">
+                      <p className="text-xs text-neutral-500 dark:text-slate-400 mt-2 line-clamp-3">
                         {r.relevant_meaning}
                       </p>
                     )}
@@ -134,7 +134,7 @@ export default function SmartSearchPage() {
       )}
 
       {searched && !loading && results.length === 0 && !error && (
-        <div className="text-center py-12 text-neutral-400">
+        <div className="text-center py-12 text-neutral-400 dark:text-slate-500">
           <span className="text-4xl block mb-3">🔍</span>
           <p>No results found. Try a different query.</p>
         </div>

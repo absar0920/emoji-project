@@ -50,10 +50,10 @@ export default function TextToEmojiPage() {
           value={text}
           onChange={(e) => setText(e.target.value.slice(0, 500))}
           placeholder="Type your text here..."
-          className="w-full p-4 rounded-xl shadow-sm border-0 bg-white min-h-[120px] outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow resize-none"
+          className="w-full p-4 rounded-xl shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 min-h-[120px] outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow resize-none"
         />
         <div className="flex items-center justify-between">
-          <span className="text-xs text-neutral-400">{text.length}/500</span>
+          <span className="text-xs text-neutral-400 dark:text-slate-500">{text.length}/500</span>
         </div>
 
         {/* Style selector */}
@@ -64,8 +64,8 @@ export default function TextToEmojiPage() {
               onClick={() => setStyle(s)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 style === s
-                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 text-primary ring-1 ring-primary/30"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 dark:from-indigo-500/20 dark:to-violet-500/20 text-primary ring-1 ring-primary/30 dark:ring-indigo-500/30"
+                  : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
               }`}
             >
               {s}
@@ -84,14 +84,14 @@ export default function TextToEmojiPage() {
 
       {/* Error */}
       {error && (
-        <div className="p-4 rounded-xl bg-red-50 text-accent-red text-sm mb-6">{error}</div>
+        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-accent-red text-sm mb-6">{error}</div>
       )}
 
       {/* Results */}
       {result && (
         <StaggerContainer className="space-y-4">
           <StaggerItem>
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow">
               <div className="flex items-start justify-between gap-4">
                 <p className="text-lg">{result}</p>
                 <CopyButton text={result} label="Copy" />
@@ -101,10 +101,10 @@ export default function TextToEmojiPage() {
 
           {alternatives.length > 0 && (
             <>
-              <h3 className="text-sm font-medium text-neutral-500 mt-6">Alternatives</h3>
+              <h3 className="text-sm font-medium text-neutral-500 dark:text-slate-400 mt-6">Alternatives</h3>
               {alternatives.map((alt, i) => (
                 <StaggerItem key={i}>
-                  <div className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow">
                     <div className="flex items-start justify-between gap-4">
                       <p className="text-sm">{alt}</p>
                       <CopyButton text={alt} label="Copy" />

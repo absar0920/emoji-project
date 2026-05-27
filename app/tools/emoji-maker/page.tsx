@@ -55,10 +55,10 @@ export default function EmojiMakerPage() {
           value={prompt}
           onChange={(e) => setPrompt(e.target.value.slice(0, 200))}
           placeholder="Describe your emoji... (e.g. happy cat with sunglasses)"
-          className="w-full px-5 py-3 rounded-xl shadow-sm border-0 bg-white outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
+          className="w-full px-5 py-3 rounded-xl shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
         />
         <div className="flex items-center justify-between">
-          <span className="text-xs text-neutral-400">{prompt.length}/200</span>
+          <span className="text-xs text-neutral-400 dark:text-slate-500">{prompt.length}/200</span>
         </div>
 
         <div className="flex flex-wrap gap-2">
@@ -68,8 +68,8 @@ export default function EmojiMakerPage() {
               onClick={() => setStyle(s)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 style === s
-                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 text-primary ring-1 ring-primary/30"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 dark:from-indigo-500/20 dark:to-violet-500/20 text-primary ring-1 ring-primary/30 dark:ring-indigo-500/30"
+                  : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
               }`}
             >
               {s}
@@ -87,7 +87,7 @@ export default function EmojiMakerPage() {
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-red-50 text-accent-red text-sm mb-6">
+        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-accent-red text-sm mb-6">
           {error}
         </div>
       )}
@@ -96,7 +96,7 @@ export default function EmojiMakerPage() {
         <StaggerContainer className="grid grid-cols-2 gap-4">
           {images.map((img, i) => (
             <StaggerItem key={i}>
-              <div className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow flex flex-col items-center gap-3">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow flex flex-col items-center gap-3">
                 <img
                   src={img}
                   alt={`Generated emoji ${i + 1}`}
