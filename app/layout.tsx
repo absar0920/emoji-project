@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-neutral-50 dark:bg-slate-900 text-neutral-700 dark:text-slate-300">
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}})();`,
+            __html: `(function(){var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark')}})();`,
           }}
         />
         <ThemeProvider>

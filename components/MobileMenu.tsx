@@ -89,7 +89,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Tools */}
         <div>
-          <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider px-3 mb-2">Tools</h3>
+          <h3 className="text-xs font-semibold text-neutral-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Tools</h3>
           <div className="space-y-0.5">
             {TOOL_LINKS.map((link) => (
               <Link

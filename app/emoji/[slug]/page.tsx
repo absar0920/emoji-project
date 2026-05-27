@@ -132,7 +132,7 @@ export default async function EmojiPage({ params }: PageProps) {
             <p className="text-sm text-neutral-500 dark:text-slate-400 font-mono mb-3">{emoji.unicode} · {emoji.shortcode}</p>
             <div className="flex flex-wrap gap-2 justify-center">
               <CopyButton text={emoji.character} />
-              <CopyButton text={emoji.shortcode} label={emoji.shortcode} className="bg-neutral-100 dark:bg-slate-700 !text-neutral-700 dark:!text-slate-300 hover:!bg-neutral-200" />
+              <CopyButton text={emoji.shortcode} label={emoji.shortcode} className="bg-neutral-100 dark:bg-slate-700 !text-neutral-700 dark:!text-slate-300 hover:!bg-neutral-200 dark:hover:!bg-slate-600" />
               {emoji.virality?.trend_score != null && (
                 <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 dark:bg-amber-900/30 text-accent-amber">🔥 {emoji.virality?.trend_score}</span>
               )}
