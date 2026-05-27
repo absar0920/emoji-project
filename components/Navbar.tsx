@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import NavDropdown from "./NavDropdown";
 import MobileMenu from "./MobileMenu";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
   onSearchClick: () => void;
@@ -40,13 +41,13 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200 shadow-sm">
+      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-slate-700 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Left: Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0">
               <span className="text-2xl">🧠</span>
-              <span className="text-lg font-bold text-primary-dark">
+              <span className="text-lg font-bold text-primary-dark dark:text-indigo-100">
                 Emoji Intelligence
               </span>
             </Link>
@@ -57,19 +58,19 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
               <NavDropdown label="Tools" items={TOOL_ITEMS} columns={2} />
               <Link
                 href="/trending"
-                className="text-sm font-medium text-neutral-600 hover:text-primary transition-colors"
+                className="text-sm font-medium text-neutral-600 dark:text-slate-300 hover:text-primary transition-colors"
               >
                 Trending
               </Link>
               <Link
                 href="/tools/emoji-vs"
-                className="text-sm font-medium text-neutral-600 hover:text-primary transition-colors"
+                className="text-sm font-medium text-neutral-600 dark:text-slate-300 hover:text-primary transition-colors"
               >
                 Compare
               </Link>
               <Link
                 href="/blog"
-                className="text-sm font-medium text-neutral-600 hover:text-primary transition-colors"
+                className="text-sm font-medium text-neutral-600 dark:text-slate-300 hover:text-primary transition-colors"
               >
                 Blog
               </Link>
@@ -77,9 +78,10 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
 
             {/* Right: Search + Dark toggle + Mobile hamburger */}
             <div className="flex items-center gap-2">
+              <ThemeToggle />
               <button
                 onClick={onSearchClick}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-500 transition-colors text-sm"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 dark:bg-slate-700 hover:bg-neutral-200 dark:hover:bg-slate-600 text-neutral-500 dark:text-slate-400 transition-colors text-sm"
               >
                 <svg
                   className="w-4 h-4"
@@ -95,7 +97,7 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
                   />
                 </svg>
                 <span className="hidden sm:inline">Search emojis...</span>
-                <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-neutral-200 text-xs text-neutral-500 font-mono">
+                <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-slate-600 text-xs text-neutral-500 dark:text-slate-400 font-mono">
                   ⌘K
                 </kbd>
               </button>
@@ -103,7 +105,7 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
               {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden flex items-center justify-center w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-500 transition-colors"
+                className="md:hidden flex items-center justify-center w-9 h-9 rounded-full bg-neutral-100 dark:bg-slate-700 hover:bg-neutral-200 dark:hover:bg-slate-600 text-neutral-500 dark:text-slate-400 transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
