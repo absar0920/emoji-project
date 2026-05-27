@@ -12,7 +12,7 @@ export default function ToolHero({ title, description, badge }: ToolHeroProps) {
           {badge}
         </span>
       )}
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-2">
+      <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
         {title}
       </h1>
       <p className="text-neutral-500 dark:text-slate-400">{description}</p>

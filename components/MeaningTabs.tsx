@@ -29,7 +29,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
 
   return (
     <section id="meanings" className="mb-10">
-      <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Meaning Layers</h2>
+      <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">Meaning Layers</h2>
 
       {/* Tab bar */}
       <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-4">

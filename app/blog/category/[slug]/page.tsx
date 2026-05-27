@@ -49,7 +49,7 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
         </nav>
 
         <FadeIn>
-          <h1 className="text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-2">
+          <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
             {category.name}
           </h1>
           {category.description && (

@@ -19,7 +19,7 @@ export default function DesignVariations({
 }: DesignVariationsProps) {
   return (
     <section id="design" className="mb-10">
-      <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">
+      <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">
         How It Looks Across Platforms
       </h2>
       <div className="flex flex-wrap gap-3">

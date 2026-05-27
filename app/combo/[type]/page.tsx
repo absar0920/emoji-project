@@ -42,7 +42,7 @@ export default async function ComboPage({ params }: PageProps) {
         {/* Hero */}
         <FadeIn>
           <div className="mb-8">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-2">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
               {combo.theme} Emoji Combos
             </h1>
             <p className="text-neutral-500 dark:text-slate-400">{combo.seo_description}</p>
@@ -62,7 +62,7 @@ export default async function ComboPage({ params }: PageProps) {
         <AnimatedSection>
           {combo.combos.length > 1 && (
             <section className="mb-10">
-              <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">More {combo.theme} Combos</h2>
+              <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">More {combo.theme} Combos</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {combo.combos.slice(1).map((c, i) => (
                   <ComboDisplay key={i} emojis={c.emojis} label={c.label} />
@@ -76,7 +76,7 @@ export default async function ComboPage({ params }: PageProps) {
         <AnimatedSection>
           {relatedCombos.length > 0 && (
             <section className="mb-10">
-              <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">Related Combos</h2>
+              <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Related Combos</h2>
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                 {relatedCombos.filter((r) => r.slug !== type).map((r) => (
                   <Link

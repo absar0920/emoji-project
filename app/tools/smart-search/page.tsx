@@ -102,7 +102,7 @@ export default function SmartSearchPage() {
       {/* Results */}
       {results.length > 0 && (
         <>
-          <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">Results</h2>
+          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Results</h2>
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {results.map((r, i) => (
               <StaggerItem key={i}>

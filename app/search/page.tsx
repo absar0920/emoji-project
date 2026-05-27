@@ -36,7 +36,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
   return (
     <ClientShell>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-primary-dark dark:text-indigo-100 mb-2">
+        <h1 className="text-2xl font-bold text-primary-dark dark:text-white mb-2">
           {q ? `Search results for "${q}"` : "All Emojis"}
         </h1>
         <p className="text-neutral-500 dark:text-slate-400 mb-8">

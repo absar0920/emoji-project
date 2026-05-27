@@ -47,7 +47,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
     <div className="fixed inset-0 z-[90] bg-white dark:bg-slate-900">
       <div className="flex items-center justify-between px-4 h-16 border-b border-neutral-200 dark:border-slate-700">
-        <span className="text-lg font-bold text-primary-dark dark:text-indigo-100">Menu</span>
+        <span className="text-lg font-bold text-primary-dark dark:text-white">Menu</span>
         <button onClick={onClose} className="p-2 text-neutral-500 dark:text-slate-400 hover:text-neutral-800">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

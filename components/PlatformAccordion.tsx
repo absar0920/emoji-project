@@ -34,7 +34,7 @@ export default function PlatformAccordion({ platforms }: PlatformAccordionProps)
 
   return (
     <section id="platforms" className="mb-10">
-      <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Platform Meanings</h2>
+      <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">Platform Meanings</h2>
 
       {/* Platform icon row */}
       <div className="flex gap-2 flex-wrap mb-4">

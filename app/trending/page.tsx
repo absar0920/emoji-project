@@ -54,7 +54,7 @@ export default async function TrendingPage() {
     <ClientShell>
       <main className="max-w-4xl mx-auto px-4 py-6">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
             Trending Emojis
           </h1>
           <p className="text-neutral-500 dark:text-slate-400">
@@ -64,7 +64,7 @@ export default async function TrendingPage() {
 
         {/* Top 20 */}
         <section className="mb-12">
-          <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">
+          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">
             Today&apos;s Top 20
           </h2>
           <div className="space-y-3">
@@ -83,7 +83,7 @@ export default async function TrendingPage() {
 
         {/* TikTok */}
         <section className="mb-12">
-          <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">
+          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">
             Trending on TikTok
           </h2>
           <div className="space-y-3">
@@ -102,7 +102,7 @@ export default async function TrendingPage() {
 
         {/* Instagram */}
         <section className="mb-12">
-          <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">
+          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">
             Trending on Instagram
           </h2>
           <div className="space-y-3">

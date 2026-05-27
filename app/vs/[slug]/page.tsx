@@ -59,7 +59,7 @@ export default async function ComparisonPage({ params }: PageProps) {
                 <span className="text-sm font-medium text-neutral-600 dark:text-slate-300">{comparison.emoji2_name}</span>
               </Link>
             </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-primary-dark dark:text-indigo-100 text-center mt-4">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-primary-dark dark:text-white text-center mt-4">
               {comparison.emoji1_name} vs {comparison.emoji2_name}
             </h1>
           </div>
@@ -76,7 +76,7 @@ export default async function ComparisonPage({ params }: PageProps) {
         {/* Differences */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Key Differences</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">Key Differences</h2>
             <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 p-4">
               <div className="grid grid-cols-[1fr_auto_1fr] gap-4 pb-2 border-b border-neutral-200 dark:border-slate-700 mb-2">
                 <span className="text-sm font-bold text-neutral-900 dark:text-slate-100">{comparison.emoji1_character} {comparison.emoji1_name}</span>
@@ -101,7 +101,7 @@ export default async function ComparisonPage({ params }: PageProps) {
         {/* When to use */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">When To Use Each</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">When To Use Each</h2>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700">
               <p className="text-neutral-700 dark:text-slate-300">{comparison.when_to_use}</p>
             </div>
@@ -112,7 +112,7 @@ export default async function ComparisonPage({ params }: PageProps) {
         <AnimatedSection>
           {related.length > 0 && (
             <section className="mb-10">
-              <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">Related Comparisons</h2>
+              <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Related Comparisons</h2>
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                 {related.filter((r) => r.slug !== slug).map((r) => (
                   <Link
@@ -133,7 +133,7 @@ export default async function ComparisonPage({ params }: PageProps) {
         {/* FAQ */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">FAQ</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">FAQ</h2>
             <div className="space-y-4">
               {faqSchema.mainEntity.map((faq: { name: string; acceptedAnswer: { text: string } }, i: number) => (
                 <details key={i} className="bg-white dark:bg-slate-800 rounded-lg shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 overflow-hidden">

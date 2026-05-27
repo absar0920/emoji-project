@@ -59,7 +59,7 @@ export default async function PlatformPage({ params }: PageProps) {
           <div className="bg-gradient-to-br from-primary-light to-violet-50 dark:from-indigo-900/30 dark:to-violet-900/20 rounded-2xl p-6 sm:p-8 mb-6 flex flex-col sm:flex-row items-center gap-6">
             <span className="text-8xl sm:text-[128px] leading-none">{emoji.character}</span>
             <div className="text-center sm:text-left">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-1">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-1">
                 {emoji.name} on {platformLabel} {platformIcon}
               </h1>
               <p className="text-sm text-neutral-500 dark:text-slate-400 font-mono mb-3">{emoji.unicode} · {emoji.shortcode}</p>
@@ -76,7 +76,7 @@ export default async function PlatformPage({ params }: PageProps) {
         {/* Platform meaning */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">
+            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">
               {platformIcon} {platformLabel} Meaning
             </h2>
             {platformData ? (
@@ -119,7 +119,7 @@ export default async function PlatformPage({ params }: PageProps) {
         {/* See on other platforms */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">See on Other Platforms</h2>
+            <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">See on Other Platforms</h2>
             <PlatformLinks emojiSlug={emoji.slug} currentPlatform={platformKey} />
           </section>
         </AnimatedSection>

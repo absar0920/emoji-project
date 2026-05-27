@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
 
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-primary-dark dark:text-indigo-100 mb-8">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-primary-dark dark:text-white mb-8">
             {post.title}
           </h1>
         </FadeIn>
@@ -146,7 +146,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Related Posts */}
         {related.length > 0 && (
           <AnimatedSection className="mt-12">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Related Posts</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">Related Posts</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {related.map((p) => (
                 <BlogCard key={p.id} post={p} />

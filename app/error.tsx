@@ -12,7 +12,7 @@ export default function Error({
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="text-center">
         <span className="text-[100px] leading-none block mb-6">😵‍💫</span>
-        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-3">
+        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-3">
           Something Went Wrong
         </h1>
         <p className="text-neutral-500 dark:text-slate-400 mb-8">

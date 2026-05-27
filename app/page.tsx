@@ -40,7 +40,7 @@ export default async function HomePage() {
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 dark:bg-indigo-500/20 text-primary text-sm font-medium mb-6">
               ✨ AI-Powered Emoji Intelligence
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary-dark dark:text-indigo-100 leading-tight mb-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary-dark dark:text-white leading-tight mb-4">
               Every Emoji.{" "}
               <span className="bg-gradient-to-r from-primary to-accent-violet bg-clip-text text-transparent">
                 Every Meaning.
@@ -59,7 +59,7 @@ export default async function HomePage() {
         <section className="py-12">
           <div className="max-w-5xl mx-auto px-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">Most Popular</h2>
+              <h2 className="text-xl font-bold text-primary-dark dark:text-white">Most Popular</h2>
               <Link href="/search" className="text-sm text-primary font-medium hover:underline">
                 Show More →
               </Link>
@@ -81,21 +81,21 @@ export default async function HomePage() {
         </section>
 
         {/* Tools Playground */}
-        <section className="py-12 bg-neutral-50/50 dark:bg-slate-800/50">
+        <section className="py-12 bg-neutral-50/50 dark:bg-slate-800/80">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-6">Tools Playground</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-6">Tools Playground</h2>
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {TOOLS.map((tool) => (
                 <StaggerItem key={tool.href}>
                   <AnimatedCard>
                     <Link
                       href={tool.href}
-                      className="bg-gradient-to-br from-primary-light/50 to-violet-50/50 dark:from-indigo-900/30 dark:to-violet-900/20 rounded-2xl shadow-md p-5 hover:shadow-lg transition-shadow block"
+                      className="bg-gradient-to-br from-primary-light/50 to-violet-50/50 dark:from-slate-700 dark:to-slate-700 rounded-2xl shadow-md dark:shadow-lg dark:shadow-black/20 p-5 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 transition-shadow block dark:border dark:border-slate-600"
                     >
-                      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm w-12 h-12 flex items-center justify-center text-2xl mb-3">
+                      <div className="bg-white dark:bg-slate-600 rounded-xl shadow-sm w-12 h-12 flex items-center justify-center text-2xl mb-3">
                         {tool.icon}
                       </div>
-                      <div className="font-semibold text-primary-dark dark:text-indigo-100">{tool.name}</div>
+                      <div className="font-semibold text-primary-dark dark:text-white">{tool.name}</div>
                       <div className="text-sm text-neutral-500 dark:text-slate-400 mt-1">{tool.desc}</div>
                     </Link>
                   </AnimatedCard>
@@ -108,7 +108,7 @@ export default async function HomePage() {
         {/* Category Browse */}
         <section className="py-12">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-6">Browse by Category</h2>
+            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-6">Browse by Category</h2>
             <StaggerContainer className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
               {CATEGORIES.map((cat) => (
                 <StaggerItem key={cat.name}>

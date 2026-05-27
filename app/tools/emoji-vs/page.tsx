@@ -77,7 +77,7 @@ export default function EmojiVsPage() {
 
       {popular.length > 0 && (
         <FadeIn>
-          <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">Popular Comparisons</h2>
+          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Popular Comparisons</h2>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {popular.map((p) => (
               <Link

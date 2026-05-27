@@ -11,7 +11,7 @@ export default function PrivacyPage() {
   return (
     <ClientShell>
       <main className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-6">
+        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-6">
           Privacy Policy
         </h1>
         <p className="text-sm text-neutral-400 dark:text-slate-500 mb-8">
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
         </p>
 
         <div className="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-neutral-700 dark:text-slate-300">
-          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">
+          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
             What We Collect
           </h2>
           <p>
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
             addresses, or phone numbers.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">
+          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
             Cookies &amp; Local Storage
           </h2>
           <p>
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
             Emoji Intelligence directly.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">
+          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
             Third-Party Services
           </h2>
           <p>We use the following third-party services:</p>
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
             </li>
           </ul>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">
+          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
             Data Retention
           </h2>
           <p>
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
             are not linked to individual users.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">Contact</h2>
+          <h2 className="text-xl font-bold text-primary-dark dark:text-white">Contact</h2>
           <p>
             For privacy-related questions, please reach out via the
             contact information on our About page.

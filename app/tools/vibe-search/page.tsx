@@ -91,7 +91,7 @@ export default function VibeSearchPage() {
       {results.length > 0 && (
         <>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100">Results</h2>
+            <h2 className="text-lg font-bold text-primary-dark dark:text-white">Results</h2>
             <CopyAllButton emojis={results.map((r) => r.emoji)} />
           </div>
           <StaggerContainer className="grid grid-cols-2 sm:grid-cols-4 gap-3">

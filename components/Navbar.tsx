@@ -47,7 +47,7 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
             {/* Left: Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0">
               <span className="text-2xl">🧠</span>
-              <span className="text-lg font-bold text-primary-dark dark:text-indigo-100">
+              <span className="text-lg font-bold text-primary-dark dark:text-white">
                 Emoji Intelligence
               </span>
             </Link>

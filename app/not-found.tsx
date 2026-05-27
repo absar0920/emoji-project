@@ -11,7 +11,7 @@ export default function NotFound() {
     <ClientShell>
       <main className="max-w-2xl mx-auto px-4 py-24 text-center">
         <span className="text-[120px] leading-none block mb-6">{emoji}</span>
-        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-3">
+        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-3">
           Page Not Found
         </h1>
         <p className="text-neutral-500 dark:text-slate-400 mb-8">

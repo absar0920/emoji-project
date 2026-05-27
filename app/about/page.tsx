@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <ClientShell>
       <main className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-6">
+        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-6">
           About Emoji Intelligence
         </h1>
 
@@ -25,7 +25,7 @@ export default function AboutPage() {
             platforms, and generations.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">What We Cover</h2>
+          <h2 className="text-xl font-bold text-primary-dark dark:text-white">What We Cover</h2>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>3,700+ emojis</strong> with full meaning breakdowns
@@ -48,7 +48,7 @@ export default function AboutPage() {
             </li>
           </ul>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">
+          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
             How It Works
           </h2>
           <p>
@@ -59,7 +59,7 @@ export default function AboutPage() {
             real conversations.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">Explore</h2>
+          <h2 className="text-xl font-bold text-primary-dark dark:text-white">Explore</h2>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/search"
