@@ -13,11 +13,11 @@ export default function AboutPage() {
   return (
     <ClientShell>
       <main className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-extrabold text-primary-dark mb-6">
+        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-indigo-100 mb-6">
           About Emoji Intelligence
         </h1>
 
-        <div className="prose prose-neutral max-w-none space-y-6 text-neutral-700">
+        <div className="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-neutral-700 dark:text-slate-300">
           <p className="text-lg">
             Emoji Intelligence is the world&apos;s most comprehensive emoji
             meaning platform. We go beyond simple definitions to provide
@@ -25,7 +25,7 @@ export default function AboutPage() {
             platforms, and generations.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark">What We Cover</h2>
+          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">What We Cover</h2>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>3,700+ emojis</strong> with full meaning breakdowns
@@ -48,7 +48,7 @@ export default function AboutPage() {
             </li>
           </ul>
 
-          <h2 className="text-xl font-bold text-primary-dark">
+          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">
             How It Works
           </h2>
           <p>
@@ -59,7 +59,7 @@ export default function AboutPage() {
             real conversations.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark">Explore</h2>
+          <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100">Explore</h2>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/search"
@@ -69,13 +69,13 @@ export default function AboutPage() {
             </Link>
             <Link
               href="/tools/emoji-kitchen"
-              className="px-4 py-2 rounded-full bg-neutral-100 text-neutral-700 text-sm font-medium hover:bg-neutral-200 transition-colors"
+              className="px-4 py-2 rounded-full bg-neutral-100 dark:bg-slate-700 text-neutral-700 dark:text-slate-300 text-sm font-medium hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors"
             >
               Emoji Kitchen
             </Link>
             <Link
               href="/trending"
-              className="px-4 py-2 rounded-full bg-neutral-100 text-neutral-700 text-sm font-medium hover:bg-neutral-200 transition-colors"
+              className="px-4 py-2 rounded-full bg-neutral-100 dark:bg-slate-700 text-neutral-700 dark:text-slate-300 text-sm font-medium hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors"
             >
               Trending Emojis
             </Link>
