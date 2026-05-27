@@ -94,7 +94,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t border-neutral-800 mt-12 pt-8 text-sm text-center">
+        <div className="border-t border-neutral-800 dark:border-slate-700 mt-12 pt-8 text-sm text-center">
           <p>&copy; {new Date().getFullYear()} Emoji Intelligence. All rights reserved.</p>
         </div>
       </div>
