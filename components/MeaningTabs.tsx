@@ -29,7 +29,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
 
   return (
     <section id="meanings" className="mb-10">
-      <h2 className="text-xl font-bold text-primary-dark mb-4">Meaning Layers</h2>
+      <h2 className="text-xl font-bold text-primary-dark dark:text-indigo-100 mb-4">Meaning Layers</h2>
 
       {/* Tab bar */}
       <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-4">
@@ -40,7 +40,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
             className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
               active === m.key
                 ? "bg-primary text-white"
-                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-700"
             }`}
           >
             {m.label}
@@ -51,7 +51,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
       {/* Active meaning card */}
       {activeMeaning && (
         <div
-          className={`bg-white rounded-xl shadow-md p-5 border-l-4 ${colors.border}`}
+          className={`bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 p-5 border-l-4 ${colors.border}`}
         >
           <h3 className={`text-sm font-bold mb-3 ${colors.label}`}>
             {activeMeaning.label} Meaning
@@ -61,7 +61,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
               if (typeof value === "boolean") {
                 return (
                   <div key={key} className="flex items-center gap-2 text-sm">
-                    <span className="text-neutral-500 capitalize">
+                    <span className="text-neutral-500 dark:text-slate-400 capitalize">
                       {key.replace(/_/g, " ")}:
                     </span>
                     <span className={value ? "text-accent-red" : "text-accent-emerald"}>
@@ -73,15 +73,15 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
               if (typeof value === "number") {
                 return (
                   <div key={key} className="flex items-center gap-2 text-sm">
-                    <span className="text-neutral-500 capitalize">
+                    <span className="text-neutral-500 dark:text-slate-400 capitalize">
                       {key.replace(/_/g, " ")}:
                     </span>
-                    <span className="font-medium text-neutral-800">{value}/10</span>
+                    <span className="font-medium text-neutral-800 dark:text-slate-100">{value}/10</span>
                   </div>
                 );
               }
               return (
-                <p key={key} className="text-sm text-neutral-700">
+                <p key={key} className="text-sm text-neutral-700 dark:text-slate-300">
                   {String(value)}
                 </p>
               );

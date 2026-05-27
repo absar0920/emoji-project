@@ -16,7 +16,7 @@ export default function PlatformLinks({ emojiSlug, currentPlatform }: PlatformLi
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-colors ${
             currentPlatform === platform
               ? "bg-primary text-white"
-              : "bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50"
+              : "bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-50 dark:hover:bg-slate-700"
           }`}
         >
           <span>{PLATFORM_ICONS[platform]}</span>

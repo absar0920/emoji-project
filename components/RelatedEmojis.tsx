@@ -10,7 +10,7 @@ export default function RelatedEmojis({ emojis, title = "Related Emojis" }: Rela
   if (emojis.length === 0) return null;
   return (
     <div>
-      <h2 className="text-lg font-bold text-primary-dark mb-4">{title}</h2>
+      <h2 className="text-lg font-bold text-primary-dark dark:text-indigo-100 mb-4">{title}</h2>
       <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
         {emojis.map((emoji) => (
           <div key={emoji.slug} className="flex-shrink-0">
