@@ -18,10 +18,10 @@ export default function BlogCard({ post }: BlogCardProps) {
     <AnimatedCard>
       <Link
         href={`/blog/${post.slug}`}
-        className="block bg-white rounded-xl shadow-sm border border-neutral-100 overflow-hidden hover:shadow-md transition-shadow"
+        className="block bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 overflow-hidden hover:shadow-md transition-shadow"
       >
         {/* Featured Image */}
-        <div className="aspect-[16/9] bg-gradient-to-br from-primary-light to-violet-50 relative">
+        <div className="aspect-[16/9] bg-gradient-to-br from-primary-light dark:from-indigo-900/30 to-violet-50 dark:to-violet-900/20 relative">
           {post.featuredImage ? (
             <Image
               src={post.featuredImage}
@@ -44,7 +44,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               {post.categories.map((cat) => (
                 <span
                   key={cat.id}
-                  className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium"
+                  className="text-xs px-2 py-0.5 rounded-full bg-primary/10 dark:bg-indigo-500/20 text-primary font-medium"
                 >
                   {cat.name}
                 </span>
@@ -52,13 +52,13 @@ export default function BlogCard({ post }: BlogCardProps) {
             </div>
           )}
 
-          <h3 className="font-semibold text-neutral-900 line-clamp-2 mb-1">
+          <h3 className="font-semibold text-neutral-900 dark:text-slate-100 line-clamp-2 mb-1">
             {post.title}
           </h3>
-          <p className="text-sm text-neutral-500 line-clamp-3 mb-3">
+          <p className="text-sm text-neutral-500 dark:text-slate-400 line-clamp-3 mb-3">
             {post.excerpt}
           </p>
-          <div className="flex items-center gap-2 text-xs text-neutral-400">
+          <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-slate-500">
             <span>{formattedDate}</span>
             <span>·</span>
             <span>{post.author}</span>

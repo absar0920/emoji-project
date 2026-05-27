@@ -34,13 +34,13 @@ export default function EmojiPicker({ onSelect, selected }: EmojiPickerProps) {
     : emojis.slice(0, 60);
 
   return (
-    <div className="bg-white rounded-xl border border-neutral-200 p-3 w-full max-w-xs">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-neutral-200 dark:border-slate-700 p-3 w-full max-w-xs">
       <input
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search emoji..."
-        className="w-full px-3 py-2 rounded-lg border border-neutral-200 text-sm mb-2 outline-none focus:ring-2 focus:ring-primary/30"
+        className="w-full px-3 py-2 rounded-lg border border-neutral-200 dark:border-slate-700 text-sm mb-2 outline-none focus:ring-2 focus:ring-primary/30 dark:bg-slate-700 dark:text-slate-100"
       />
       {loading ? (
         <div className="grid grid-cols-6 gap-1">
@@ -54,8 +54,8 @@ export default function EmojiPicker({ onSelect, selected }: EmojiPickerProps) {
             <button
               key={e.slug}
               onClick={() => onSelect({ character: e.character, slug: e.slug, name: e.name })}
-              className={`text-2xl p-1 rounded-lg hover:bg-neutral-100 transition-colors ${
-                selected === e.character ? "bg-primary-light ring-2 ring-primary" : ""
+              className={`text-2xl p-1 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors ${
+                selected === e.character ? "bg-primary-light dark:bg-indigo-900/30 ring-2 ring-primary" : ""
               }`}
               title={e.name}
             >
@@ -63,7 +63,7 @@ export default function EmojiPicker({ onSelect, selected }: EmojiPickerProps) {
             </button>
           ))}
           {filtered.length === 0 && (
-            <div className="col-span-6 text-center text-neutral-400 py-4 text-sm">No emojis found</div>
+            <div className="col-span-6 text-center text-neutral-400 dark:text-slate-500 py-4 text-sm">No emojis found</div>
           )}
         </div>
       )}
