@@ -3,6 +3,17 @@ import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
 import HeroSearchBar from "@/components/HeroSearchBar";
 import { FadeIn, StaggerContainer, StaggerItem, AnimatedCard } from "@/components/MotionWrappers";
+import WhatAreEmojiMeanings from "@/components/home/WhatAreEmojiMeanings";
+import QuickReferenceTable from "@/components/home/QuickReferenceTable";
+import EmojiOriginHistory from "@/components/home/EmojiOriginHistory";
+import CategoryReference from "@/components/home/CategoryReference";
+import MostUsedGlobally from "@/components/home/MostUsedGlobally";
+import FaceEmojiGuide from "@/components/home/FaceEmojiGuide";
+import EmojiDeepDives from "@/components/home/EmojiDeepDives";
+import HeartColorGuide from "@/components/home/HeartColorGuide";
+import HandEmojiGuide from "@/components/home/HandEmojiGuide";
+import TextingContextSection from "@/components/home/TextingContextSection";
+import FlirtingEmojiGuide from "@/components/home/FlirtingEmojiGuide";
 
 const TOOLS = [
   { icon: "🍳", name: "Emoji Kitchen", desc: "Mix emojis into new designs", href: "/tools/emoji-kitchen" },
@@ -96,6 +107,17 @@ export default function HomePage() {
         </section>
 
         {/* === EDITORIAL CONTENT SECTIONS === */}
+        <WhatAreEmojiMeanings />
+        <QuickReferenceTable />
+        <EmojiOriginHistory />
+        <CategoryReference />
+        <MostUsedGlobally />
+        <FaceEmojiGuide />
+        <EmojiDeepDives />
+        <HeartColorGuide />
+        <HandEmojiGuide />
+        <TextingContextSection />
+        <FlirtingEmojiGuide />
       </main>
 
       <Footer />
