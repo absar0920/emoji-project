@@ -14,6 +14,19 @@ import HeartColorGuide from "@/components/home/HeartColorGuide";
 import HandEmojiGuide from "@/components/home/HandEmojiGuide";
 import TextingContextSection from "@/components/home/TextingContextSection";
 import FlirtingEmojiGuide from "@/components/home/FlirtingEmojiGuide";
+import PlatformGuides from "@/components/home/PlatformGuides";
+import EmojiCombinations from "@/components/home/EmojiCombinations";
+import InternetSlangEmojis from "@/components/home/InternetSlangEmojis";
+import SymbolEmojis from "@/components/home/SymbolEmojis";
+import CulturalMeanings from "@/components/home/CulturalMeanings";
+import MisunderstoodEmojis from "@/components/home/MisunderstoodEmojis";
+import PlatformRendering from "@/components/home/PlatformRendering";
+import ProfessionalEtiquette from "@/components/home/ProfessionalEtiquette";
+import NewEmojis2026 from "@/components/home/NewEmojis2026";
+import HowToFindEmoji from "@/components/home/HowToFindEmoji";
+import CopyPasteReference from "@/components/home/CopyPasteReference";
+import FAQAccordion from "@/components/home/FAQAccordion";
+import BottomLine from "@/components/home/BottomLine";
 
 const TOOLS = [
   { icon: "🍳", name: "Emoji Kitchen", desc: "Mix emojis into new designs", href: "/tools/emoji-kitchen" },
@@ -118,6 +131,33 @@ export default function HomePage() {
         <HandEmojiGuide />
         <TextingContextSection />
         <FlirtingEmojiGuide />
+        <PlatformGuides />
+        <EmojiCombinations />
+        <InternetSlangEmojis />
+        <SymbolEmojis />
+        <CulturalMeanings />
+        <MisunderstoodEmojis />
+        <PlatformRendering />
+        <ProfessionalEtiquette />
+        <NewEmojis2026 />
+        <HowToFindEmoji />
+        <CopyPasteReference />
+        <FAQAccordion />
+        <BottomLine />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: "Emoji Meanings: The Complete Guide (2026)",
+              description: "The definitive guide to emoji meanings — every face, heart, hand, and symbol decoded across WhatsApp, Instagram, TikTok, Snapchat, and Discord.",
+              datePublished: "2026-01-01",
+              dateModified: "2026-05-28",
+              author: { "@type": "Organization", name: "Emoji Project" },
+            }),
+          }}
+        />
       </main>
 
       <Footer />
