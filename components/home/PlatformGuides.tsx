@@ -202,7 +202,7 @@ function DiscordTab() {
   );
 }
 
-const TAB_CONTENT: Record<Tab, () => JSX.Element> = {
+const TAB_CONTENT: Record<Tab, () => React.JSX.Element> = {
   WhatsApp: WhatsAppTab,
   Instagram: InstagramTab,
   TikTok: TikTokTab,
