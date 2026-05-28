@@ -8,14 +8,11 @@ interface SkeletonProps {
 export function Skeleton({ w = "100%", h = "14px", round = false, className = "" }: SkeletonProps) {
   return (
     <div
-      className={`skeleton ${className}`}
+      className={`shimmer-light dark:shimmer-dark ${className}`}
       style={{
         width: w,
         height: h,
         borderRadius: round ? "9999px" : "8px",
-        background: "linear-gradient(90deg, #E5E7EB 25%, #F3F4F6 50%, #E5E7EB 75%)",
-        backgroundSize: "200% 100%",
-        animation: "shimmer 1.5s ease-in-out infinite",
       }}
     />
   );

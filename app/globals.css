@@ -25,7 +25,13 @@ body {
   color: #CBD5E1;
 }
 
-.dark .skeleton {
+.shimmer-light {
+  background: linear-gradient(90deg, #E5E7EB 25%, #F3F4F6 50%, #E5E7EB 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.shimmer-dark {
   background: linear-gradient(90deg, #1E293B 25%, #334155 50%, #1E293B 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
