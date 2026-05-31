@@ -13,6 +13,7 @@ import PlatformLinks from "@/components/PlatformLinks";
 import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
 import DesignVariations from "@/components/DesignVariations";
+import ShareEmbed from "@/components/ShareEmbed";
 import { FadeIn, AnimatedSection } from "@/components/MotionWrappers";
 
 export const dynamic = "force-dynamic";
@@ -149,6 +150,9 @@ export default async function EmojiPage({ params }: PageProps) {
         <AnimatedSection>
           <PlatformAccordion platforms={platforms} />
         </AnimatedSection>
+
+        {/* Share & Embed */}
+        <ShareEmbed slug={emoji.slug} character={emoji.character} name={emoji.name} />
 
         {/* Cultures */}
         <AnimatedSection>
