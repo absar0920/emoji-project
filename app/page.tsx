@@ -27,6 +27,7 @@ import HowToFindEmoji from "@/components/home/HowToFindEmoji";
 import CopyPasteReference from "@/components/home/CopyPasteReference";
 import FAQAccordion from "@/components/home/FAQAccordion";
 import BottomLine from "@/components/home/BottomLine";
+import HomeSidebar from "@/components/HomeSidebar";
 
 const TOOLS = [
   { icon: "🍳", name: "Emoji Kitchen", desc: "Mix emojis into new designs", href: "/tools/emoji-kitchen" },
@@ -53,97 +54,99 @@ export default function HomePage() {
   return (
     <ClientShell>
       <main>
-        {/* Hero */}
-        <section className="bg-gradient-to-br from-[#F8F7FF] to-[#EEF2FF] dark:from-slate-800 dark:to-indigo-950 py-16 sm:py-24">
-          <FadeIn className="max-w-3xl mx-auto px-4 text-center">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 dark:bg-indigo-500/20 text-primary text-sm font-medium mb-6">
-              ✨ AI-Powered Emoji Intelligence
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary-dark dark:text-white leading-tight mb-4">
-              Every Emoji.{" "}
-              <span className="bg-gradient-to-r from-primary to-accent-violet bg-clip-text text-transparent">
-                Every Meaning.
-              </span>
-            </h1>
-            <p className="text-lg text-neutral-500 dark:text-slate-400 mb-8">
-              3,700+ emojis · 15 platforms · 31 cultures
-            </p>
+        {/* Sidebar + All Content */}
+        <div className="max-w-7xl mx-auto px-4 flex gap-8">
+          <HomeSidebar />
+          <div className="min-w-0 flex-1">
+            {/* Hero */}
+            <section className="bg-gradient-to-br from-[#F8F7FF] to-[#EEF2FF] dark:from-slate-800 dark:to-indigo-950 py-16 sm:py-24 lg:rounded-2xl">
+              <FadeIn className="max-w-3xl mx-auto px-4 text-center">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 dark:bg-indigo-500/20 text-primary text-sm font-medium mb-6">
+                  ✨ AI-Powered Emoji Intelligence
+                </span>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary-dark dark:text-white leading-tight mb-4">
+                  Every Emoji.{" "}
+                  <span className="bg-gradient-to-r from-primary to-accent-violet bg-clip-text text-transparent">
+                    Every Meaning.
+                  </span>
+                </h1>
+                <p className="text-lg text-neutral-500 dark:text-slate-400 mb-8">
+                  3,700+ emojis · 15 platforms · 31 cultures
+                </p>
 
-            {/* Search bar */}
-            <HeroSearchBar />
-          </FadeIn>
-        </section>
+                {/* Search bar */}
+                <HeroSearchBar />
+              </FadeIn>
+            </section>
 
-        {/* Tools Playground */}
-        <section className="py-12 bg-neutral-50/50 dark:bg-slate-800/80">
-          <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-6">Tools Playground</h2>
-            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {TOOLS.map((tool) => (
-                <StaggerItem key={tool.href}>
-                  <AnimatedCard>
+            {/* Tools Playground */}
+            <section className="py-12">
+              <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-6">Tools Playground</h2>
+              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {TOOLS.map((tool) => (
+                  <StaggerItem key={tool.href}>
+                    <AnimatedCard>
+                      <Link
+                        href={tool.href}
+                        className="bg-gradient-to-br from-primary-light/50 to-violet-50/50 dark:from-slate-700 dark:to-slate-700 rounded-2xl shadow-md dark:shadow-lg dark:shadow-black/20 p-5 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 transition-shadow block dark:border dark:border-slate-600"
+                      >
+                        <div className="bg-white dark:bg-slate-600 rounded-xl shadow-sm w-12 h-12 flex items-center justify-center text-2xl mb-3">
+                          {tool.icon}
+                        </div>
+                        <div className="font-semibold text-primary-dark dark:text-white">{tool.name}</div>
+                        <div className="text-sm text-neutral-500 dark:text-slate-400 mt-1">{tool.desc}</div>
+                      </Link>
+                    </AnimatedCard>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </section>
+
+            {/* Category Browse — mobile only */}
+            <section className="py-12 lg:hidden">
+              <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-6">Browse by Category</h2>
+              <StaggerContainer className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                {CATEGORIES.map((cat) => (
+                  <StaggerItem key={cat.name}>
                     <Link
-                      href={tool.href}
-                      className="bg-gradient-to-br from-primary-light/50 to-violet-50/50 dark:from-slate-700 dark:to-slate-700 rounded-2xl shadow-md dark:shadow-lg dark:shadow-black/20 p-5 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 transition-shadow block dark:border dark:border-slate-600"
+                      href={cat.href}
+                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-neutral-100 dark:border-slate-700 text-sm font-medium text-neutral-700 dark:text-slate-300 hover:shadow-md transition-shadow whitespace-nowrap shrink-0"
                     >
-                      <div className="bg-white dark:bg-slate-600 rounded-xl shadow-sm w-12 h-12 flex items-center justify-center text-2xl mb-3">
-                        {tool.icon}
-                      </div>
-                      <div className="font-semibold text-primary-dark dark:text-white">{tool.name}</div>
-                      <div className="text-sm text-neutral-500 dark:text-slate-400 mt-1">{tool.desc}</div>
+                      <span>{cat.icon}</span>
+                      <span>{cat.name}</span>
                     </Link>
-                  </AnimatedCard>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
-          </div>
-        </section>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </section>
 
-        {/* Category Browse */}
-        <section className="py-12">
-          <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-6">Browse by Category</h2>
-            <StaggerContainer className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-              {CATEGORIES.map((cat) => (
-                <StaggerItem key={cat.name}>
-                  <Link
-                    href={cat.href}
-                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-neutral-100 dark:border-slate-700 text-sm font-medium text-neutral-700 dark:text-slate-300 hover:shadow-md transition-shadow whitespace-nowrap shrink-0"
-                  >
-                    <span>{cat.icon}</span>
-                    <span>{cat.name}</span>
-                  </Link>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
+            {/* Editorial Content */}
+            <WhatAreEmojiMeanings />
+            <QuickReferenceTable />
+            <EmojiOriginHistory />
+            <CategoryReference />
+            <MostUsedGlobally />
+            <FaceEmojiGuide />
+            <EmojiDeepDives />
+            <HeartColorGuide />
+            <HandEmojiGuide />
+            <TextingContextSection />
+            <FlirtingEmojiGuide />
+            <PlatformGuides />
+            <EmojiCombinations />
+            <InternetSlangEmojis />
+            <SymbolEmojis />
+            <CulturalMeanings />
+            <MisunderstoodEmojis />
+            <PlatformRendering />
+            <ProfessionalEtiquette />
+            <NewEmojis2026 />
+            <HowToFindEmoji />
+            <CopyPasteReference />
+            <FAQAccordion />
+            <BottomLine />
           </div>
-        </section>
-
-        {/* === EDITORIAL CONTENT SECTIONS === */}
-        <WhatAreEmojiMeanings />
-        <QuickReferenceTable />
-        <EmojiOriginHistory />
-        <CategoryReference />
-        <MostUsedGlobally />
-        <FaceEmojiGuide />
-        <EmojiDeepDives />
-        <HeartColorGuide />
-        <HandEmojiGuide />
-        <TextingContextSection />
-        <FlirtingEmojiGuide />
-        <PlatformGuides />
-        <EmojiCombinations />
-        <InternetSlangEmojis />
-        <SymbolEmojis />
-        <CulturalMeanings />
-        <MisunderstoodEmojis />
-        <PlatformRendering />
-        <ProfessionalEtiquette />
-        <NewEmojis2026 />
-        <HowToFindEmoji />
-        <CopyPasteReference />
-        <FAQAccordion />
-        <BottomLine />
+        </div>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
