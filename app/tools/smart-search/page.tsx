@@ -68,12 +68,12 @@ export default function SmartSearchPage() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch(query)}
             placeholder="Try: breakup emoji for tiktok, sad emoji gen-z..."
-            className="flex-1 px-5 py-3 rounded-full shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
+            className="flex-1 px-5 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow text-lg"
           />
           <button
             onClick={() => handleSearch(query)}
             disabled={!query.trim() || loading}
-            className="px-6 py-3 rounded-full bg-primary text-white font-medium hover:bg-primary-dark transition-colors disabled:opacity-50"
+            className="px-6 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             {loading ? "..." : "Search"}
           </button>
@@ -85,7 +85,7 @@ export default function SmartSearchPage() {
             <button
               key={q}
               onClick={() => handleSearch(q)}
-              className="px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-slate-700 text-sm text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors"
+              className="px-3 py-1.5 rounded-full border border-neutral-200 dark:border-slate-700 text-sm text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors"
             >
               {q}
             </button>
@@ -102,13 +102,13 @@ export default function SmartSearchPage() {
       {/* Results */}
       {results.length > 0 && (
         <>
-          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Results</h2>
+          <h2 className="font-display text-xl sm:text-2xl text-primary-dark dark:text-white mb-4">Results</h2>
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {results.map((r, i) => (
               <StaggerItem key={i}>
                 <Link
                   href={`/emoji/${r.slug}`}
-                  className="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow flex gap-4 items-start"
+                  className="card-lift bg-white dark:bg-slate-800 rounded-2xl p-5 border border-neutral-200/80 dark:border-slate-700 shadow-sm flex gap-4 items-start"
                 >
                   <span className="text-5xl leading-none flex-shrink-0">{r.character}</span>
                   <div className="min-w-0">
@@ -116,7 +116,7 @@ export default function SmartSearchPage() {
                       {r.name}
                     </span>
                     {r.why && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium mt-1 inline-block">
+                      <span className="text-xs px-2 py-0.5 rounded-full border border-neutral-200 dark:border-slate-700 text-primary font-medium mt-1 inline-block">
                         {r.why}
                       </span>
                     )}

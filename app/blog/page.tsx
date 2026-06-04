@@ -38,7 +38,11 @@ export default async function BlogPage({ searchParams }: PageProps) {
 
         {/* Header */}
         <FadeIn>
-          <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-2">Blog</h1>
+          <p className="eyebrow mb-3 flex items-center gap-2">
+            <span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />
+            Blog
+          </p>
+          <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white mb-2">Blog</h1>
           <p className="text-neutral-500 dark:text-slate-400 mb-6">
             Emoji guides, trending slang breakdowns, and cultural deep dives.
           </p>

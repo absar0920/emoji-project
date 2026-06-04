@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const FAQS = [
   { q: "What does emoji mean?", a: "The Japanese word \"emoji\" combines \"e\" (image) and \"moji\" (character). Emojis are standardized pictogram symbols governed by the Unicode Consortium. The first 176 were created in 1999 by Shigetaka Kurita at NTT DoCoMo, Japan." },
@@ -44,19 +45,16 @@ export default function FAQAccordion() {
   };
 
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Quick answers to the most common emoji meaning questions</p>
-        </AnimatedSection>
-
+    <SectionShell
+      tone="plain"
+      eyebrow="FAQ"
+      title="Frequently Asked Questions"
+      subtitle="Quick answers to the most common emoji meaning questions"
+    >
         <div className="space-y-2">
           {FAQS.map((faq, i) => (
             <AnimatedSection key={i}>
-              <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl border border-neutral-100 dark:border-slate-700 overflow-hidden">
+              <div className="bg-neutral-50 dark:bg-slate-800 rounded-2xl border border-neutral-100 dark:border-slate-700 overflow-hidden">
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors"
@@ -78,7 +76,6 @@ export default function FAQAccordion() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
-      </div>
-    </section>
+    </SectionShell>
   );
 }

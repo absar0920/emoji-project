@@ -13,11 +13,12 @@ export default function AboutPage() {
   return (
     <ClientShell>
       <main className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-6">
+        <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />ABOUT</p>
+        <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-6">
           About Emoji Intelligence
         </h1>
 
-        <div className="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-neutral-700 dark:text-slate-300">
+        <div className="prose prose-neutral dark:prose-invert max-w-3xl space-y-6 text-neutral-700 dark:text-slate-300">
           <p className="text-lg">
             Emoji Intelligence is the world&apos;s most comprehensive emoji
             meaning platform. We go beyond simple definitions to provide
@@ -25,7 +26,7 @@ export default function AboutPage() {
             platforms, and generations.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">What We Cover</h2>
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">What We Cover</h2>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>3,700+ emojis</strong> with full meaning breakdowns
@@ -48,7 +49,7 @@ export default function AboutPage() {
             </li>
           </ul>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             How It Works
           </h2>
           <p>
@@ -59,7 +60,7 @@ export default function AboutPage() {
             real conversations.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">Explore</h2>
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">Explore</h2>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/search"

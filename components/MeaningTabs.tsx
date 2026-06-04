@@ -29,7 +29,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
 
   return (
     <section id="meanings" className="mb-10">
-      <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">Meaning Layers</h2>
+      <h2 className="font-display text-xl font-bold text-primary-dark dark:text-white mb-4">Meaning Layers</h2>
 
       {/* Tab bar */}
       <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-4">
@@ -40,7 +40,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
             className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
               active === m.key
                 ? "bg-primary text-white"
-                : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-700"
+                : "text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700"
             }`}
           >
             {m.label}
@@ -51,7 +51,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
       {/* Active meaning card */}
       {activeMeaning && (
         <div
-          className={`bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 p-5 border-l-4 ${colors.border}`}
+          className={`rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 border-l-4 ${colors.border}`}
         >
           <h3 className={`text-sm font-bold mb-3 ${colors.label}`}>
             {activeMeaning.label} Meaning

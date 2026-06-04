@@ -10,8 +10,9 @@
   --color-accent-red: #DC2626;
   --color-accent-amber: #D97706;
   --color-accent-violet: #7C3AED;
-  --font-sans: "Inter", "system-ui", "sans-serif";
+  --font-sans: var(--font-public), "Inter", "system-ui", "sans-serif";
   --font-mono: "JetBrains Mono", "monospace";
+  --font-serif: var(--font-bodoni), "Georgia", "serif";
 }
 
 body {
@@ -41,3 +42,82 @@ body {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* === Design language v2 === */
+
+/* Section eyebrow label */
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.dark .eyebrow {
+  color: #F9A8D4;
+}
+
+/* Gradient text accent */
+.text-gradient {
+  background-image: linear-gradient(90deg, var(--color-primary), var(--color-accent-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Decorative dotted grid for the hero */
+.hero-dots {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Soft entrance float for decorative hero emojis */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
+}
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+/* Card lift utility — used across editorial cards */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === Editorial / Magazine theme — SITE-WIDE ===
+   Tailwind v4 resolves text-primary / bg-primary / border-primary to these
+   CSS variables, so overriding them globally re-skins every page at once
+   (indigo brand -> editorial magenta + near-black) without touching files. */
+:root {
+  --color-primary: #BE185D;        /* magenta accent, AA on white for text */
+  --color-primary-dark: #18181B;   /* near-black display + headings */
+  --color-primary-light: #FDF2F8;  /* faint pink wash */
+  --color-accent-violet: #BE185D;  /* collapse the old indigo->violet gradient to one accent */
+}
+.dark {
+  --color-primary: #F9A8D4;        /* lighter magenta for contrast on dark */
+  --color-primary-light: #2A1622;
+}
+
+/* Wider tracking for editorial eyebrows */
+.eyebrow { letter-spacing: 0.22em; }
+
+/* Editorial display type */
+.font-display { font-family: var(--font-serif); font-weight: 700; letter-spacing: -0.01em; }
+
+/* Hairline rule used to separate editorial bands */
+.rule-top { border-top: 1px solid rgb(0 0 0 / 0.10); }
+.dark .rule-top { border-top-color: rgb(255 255 255 / 0.12); }

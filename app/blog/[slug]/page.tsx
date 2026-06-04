@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               />
             </div>
           ) : (
-            <div className="aspect-[3/1] bg-gradient-to-br from-primary-light dark:from-indigo-900/30 to-violet-50 dark:to-violet-900/20 rounded-2xl flex items-center justify-center mb-6">
+            <div className="aspect-[3/1] bg-primary-light dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-6">
               <span className="text-6xl">📝</span>
             </div>
           )}
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <Link
                   key={cat.id}
                   href={`/blog/category/${cat.slug}`}
-                  className="text-xs px-2 py-0.5 rounded-full bg-primary/10 dark:bg-indigo-500/20 text-primary font-medium hover:bg-primary/20 dark:hover:bg-indigo-500/30 transition-colors"
+                  className="text-xs px-2 py-0.5 rounded-full bg-primary/10 dark:bg-primary/20 text-primary font-medium hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
                 >
                   {cat.name}
                 </Link>
@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
 
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-primary-dark dark:text-white mb-8">
+          <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white mb-8">
             {post.title}
           </h1>
         </FadeIn>
@@ -146,7 +146,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Related Posts */}
         {related.length > 0 && (
           <AnimatedSection className="mt-12">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">Related Posts</h2>
+            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white mb-4">Related Posts</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {related.map((p) => (
                 <BlogCard key={p.id} post={p} />

@@ -66,13 +66,14 @@ export default function BestCombos() {
   const data = TAB_DATA[activeTab];
 
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
+    <section className="py-14 rule-top">
       <div className="max-w-5xl mx-auto px-4">
         <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />Combos</p>
+          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
             Best Emoji Kitchen Combos in 2026
           </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-6">The most shared, funniest, and most surprising combinations</p>
+          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-6">The most shared, funniest, and most surprising combinations</p>
         </AnimatedSection>
 
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-6">
@@ -94,7 +95,7 @@ export default function BestCombos() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
           {data.combos.map((c) => (
-            <div key={c.combo} className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 border border-neutral-100 dark:border-slate-700">
+            <div key={c.combo} className="bg-neutral-50 dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/40">
               <span className="text-sm font-mono font-bold text-primary block mb-1">{c.combo}</span>
               <p className="text-sm font-medium text-primary-dark dark:text-white mb-1">{c.result}</p>
               <p className="text-xs text-neutral-500 dark:text-slate-400">{c.why || c.note}</p>

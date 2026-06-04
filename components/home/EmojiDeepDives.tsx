@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const DEEP_DIVES = [
   { emoji: "🥺", title: "What Does 🥺 Mean?", text: "The Pleading Face expresses vulnerability, softness, and near-irresistible emotional appeal. People deploy it to make requests feel impossible to refuse, to signal that something is overwhelmingly adorable, or to communicate fragility. It frequently pairs with 👉👈 on Instagram and TikTok to accentuate timid, apprehensive energy. The entire message lives in the downturned eyes." },
@@ -15,37 +16,28 @@ export default function EmojiDeepDives() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Individual Emoji Deep Dives
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Tap to expand each emoji&apos;s full meaning</p>
-        </AnimatedSection>
-
-        <div className="space-y-3">
-          {DEEP_DIVES.map((item, i) => (
-            <AnimatedSection key={item.emoji}>
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full text-left bg-neutral-50 dark:bg-slate-800 rounded-xl border border-neutral-100 dark:border-slate-700 overflow-hidden transition-shadow hover:shadow-md"
-              >
-                <div className="flex items-center gap-4 p-4">
-                  <span className="text-4xl">{item.emoji}</span>
-                  <span className="font-bold text-primary-dark dark:text-white flex-1">{item.title}</span>
-                  <span className="text-neutral-400 dark:text-slate-500 text-lg">{openIndex === i ? "▼" : "▸"}</span>
+    <SectionShell tone="plain" eyebrow="Deep Dives" title="Individual Emoji Deep Dives" subtitle="Tap to expand each emoji's full meaning">
+      <div className="space-y-3">
+        {DEEP_DIVES.map((item, i) => (
+          <AnimatedSection key={item.emoji}>
+            <button
+              onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              className="w-full text-left bg-neutral-50 dark:bg-slate-800 rounded-2xl border border-neutral-100 dark:border-slate-700 overflow-hidden transition-shadow hover:shadow-md card-lift"
+            >
+              <div className="flex items-center gap-4 p-4">
+                <span className="text-4xl">{item.emoji}</span>
+                <span className="font-bold text-primary-dark dark:text-white flex-1">{item.title}</span>
+                <span className="text-neutral-400 dark:text-slate-500 text-lg">{openIndex === i ? "▼" : "▸"}</span>
+              </div>
+              {openIndex === i && (
+                <div className="px-4 pb-4 pt-0">
+                  <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed pl-14">{item.text}</p>
                 </div>
-                {openIndex === i && (
-                  <div className="px-4 pb-4 pt-0">
-                    <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed pl-14">{item.text}</p>
-                  </div>
-                )}
-              </button>
-            </AnimatedSection>
-          ))}
-        </div>
+              )}
+            </button>
+          </AnimatedSection>
+        ))}
       </div>
-    </section>
+    </SectionShell>
   );
 }

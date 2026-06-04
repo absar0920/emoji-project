@@ -55,7 +55,7 @@ export default function EmojiMakerPage() {
           value={prompt}
           onChange={(e) => setPrompt(e.target.value.slice(0, 200))}
           placeholder="Describe your emoji... (e.g. happy cat with sunglasses)"
-          className="w-full px-5 py-3 rounded-xl shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow text-lg"
+          className="w-full px-5 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow text-lg"
         />
         <div className="flex items-center justify-between">
           <span className="text-xs text-neutral-400 dark:text-slate-500">{prompt.length}/200</span>
@@ -66,10 +66,10 @@ export default function EmojiMakerPage() {
             <button
               key={s}
               onClick={() => setStyle(s)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
                 style === s
-                  ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 dark:from-indigo-500/20 dark:to-violet-500/20 text-primary ring-1 ring-primary/30 dark:ring-indigo-500/30"
-                  : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
+                  ? "bg-primary text-white border-primary"
+                  : "border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700"
               }`}
             >
               {s}
@@ -80,7 +80,7 @@ export default function EmojiMakerPage() {
         <button
           onClick={handleGenerate}
           disabled={!prompt.trim() || loading}
-          className="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-medium shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
+          className="w-full sm:w-auto px-8 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
         >
           {loading ? "Generating..." : "Generate →"}
         </button>
@@ -96,7 +96,7 @@ export default function EmojiMakerPage() {
         <StaggerContainer className="grid grid-cols-2 gap-4">
           {images.map((img, i) => (
             <StaggerItem key={i}>
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow flex flex-col items-center gap-3">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm flex flex-col items-center gap-3">
                 <img
                   src={img}
                   alt={`Generated emoji ${i + 1}`}
@@ -104,7 +104,7 @@ export default function EmojiMakerPage() {
                 />
                 <button
                   onClick={() => handleDownload(img, i)}
-                  className="px-4 py-1.5 rounded-full text-sm font-medium bg-accent-emerald text-white hover:bg-emerald-700 transition-colors"
+                  className="px-4 py-1.5 rounded-lg text-sm font-medium border border-neutral-200 dark:border-slate-700 text-neutral-700 dark:text-slate-200 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors"
                 >
                   Download
                 </button>

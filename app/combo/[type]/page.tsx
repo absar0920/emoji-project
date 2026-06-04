@@ -42,7 +42,7 @@ export default async function ComboPage({ params }: PageProps) {
         {/* Hero */}
         <FadeIn>
           <div className="mb-8">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+            <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white mb-2">
               {combo.theme} Emoji Combos
             </h1>
             <p className="text-neutral-500 dark:text-slate-400">{combo.seo_description}</p>
@@ -62,7 +62,7 @@ export default async function ComboPage({ params }: PageProps) {
         <AnimatedSection>
           {combo.combos.length > 1 && (
             <section className="mb-10">
-              <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">More {combo.theme} Combos</h2>
+              <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">More {combo.theme} Combos</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {combo.combos.slice(1).map((c, i) => (
                   <ComboDisplay key={i} emojis={c.emojis} label={c.label} />
@@ -76,13 +76,13 @@ export default async function ComboPage({ params }: PageProps) {
         <AnimatedSection>
           {relatedCombos.length > 0 && (
             <section className="mb-10">
-              <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Related Combos</h2>
+              <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">Related Combos</h2>
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                 {relatedCombos.filter((r) => r.slug !== type).map((r) => (
                   <Link
                     key={r.slug}
                     href={`/combo/${r.slug}`}
-                    className="flex-shrink-0 px-4 py-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 hover:shadow-md transition-shadow"
+                    className="flex-shrink-0 px-4 py-3 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
                   >
                     <span className="text-2xl block mb-1">{r.combos[0]?.emojis.slice(0, 4).join("")}</span>
                     <span className="text-xs text-neutral-600 dark:text-slate-300 font-medium">{r.theme}</span>

@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const MISUNDERSTOOD = [
   { emoji: "😤", think: "Angry, frustrated", official: "Face with Steam = triumph", actual: "Both readings coexist — original meaning largely lost" },
@@ -20,40 +21,36 @@ const MISUNDERSTOOD = [
 
 export default function MisunderstoodEmojis() {
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            The 15 Most Misunderstood Emojis in the World
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">What most people think vs. what they officially mean vs. how they&apos;re actually used</p>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Emoji</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">What People Think</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Official Meaning</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Actual Usage in 2026</th>
+    <SectionShell
+      tone="plain"
+      eyebrow="Misread"
+      title="The 15 Most Misunderstood Emojis in the World"
+      subtitle="What most people think vs. what they officially mean vs. how they're actually used"
+    >
+      <AnimatedSection>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
+                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Emoji</th>
+                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">What People Think</th>
+                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Official Meaning</th>
+                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Actual Usage in 2026</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MISUNDERSTOOD.map((row, i) => (
+                <tr key={row.emoji} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
+                  <td className="px-4 py-3 text-2xl">{row.emoji}</td>
+                  <td className="px-4 py-3 text-neutral-500 dark:text-slate-400">{row.think}</td>
+                  <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{row.official}</td>
+                  <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{row.actual}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {MISUNDERSTOOD.map((row, i) => (
-                  <tr key={row.emoji} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-                    <td className="px-4 py-3 text-2xl">{row.emoji}</td>
-                    <td className="px-4 py-3 text-neutral-500 dark:text-slate-400">{row.think}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{row.official}</td>
-                    <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{row.actual}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </AnimatedSection>
+    </SectionShell>
   );
 }

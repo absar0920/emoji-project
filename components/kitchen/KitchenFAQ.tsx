@@ -36,19 +36,20 @@ export default function KitchenFAQ() {
   };
 
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
+    <section className="py-14 rule-top">
       <div className="max-w-5xl mx-auto px-4">
         <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />FAQ</p>
+          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
             Frequently Asked Questions
           </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Everything you need to know about Emoji Kitchen</p>
+          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-8">Everything you need to know about Emoji Kitchen</p>
         </AnimatedSection>
 
         <div className="space-y-2">
           {FAQS.map((faq, i) => (
             <AnimatedSection key={i}>
-              <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl border border-neutral-100 dark:border-slate-700 overflow-hidden">
+              <div className="bg-neutral-50 dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/40 overflow-hidden">
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors"

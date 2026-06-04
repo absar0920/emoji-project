@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const SECTIONS = [
   { label: "Face Emojis", emojis: ["😀","😃","😄","😁","😆","😅","😂","🤣","😊","😇","😍","🥰","😘","😗","🙂","🤗","🤩","🤔","😏","😌","😛","😜","🥺","🫠","😭","😤","😬","🥴","🤪","😎","🫡","😮‍💨","🥲","🫥","🫩"] },
@@ -20,15 +21,12 @@ export default function CopyPasteReference() {
   }
 
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Emoji Copy & Paste
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Click any emoji to copy it to your clipboard</p>
-        </AnimatedSection>
-
+    <SectionShell
+      tone="tint"
+      eyebrow="Copy & Paste"
+      title="Emoji Copy & Paste"
+      subtitle="Click any emoji to copy it to your clipboard"
+    >
         {SECTIONS.map((section) => (
           <AnimatedSection key={section.label}>
             <div className="mb-6">
@@ -58,7 +56,6 @@ export default function CopyPasteReference() {
             {copied} copied!
           </div>
         )}
-      </div>
-    </section>
+    </SectionShell>
   );
 }

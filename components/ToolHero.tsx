@@ -6,16 +6,17 @@ interface ToolHeroProps {
 
 export default function ToolHero({ title, description, badge }: ToolHeroProps) {
   return (
-    <div className="bg-gradient-to-b from-primary-light/30 dark:from-indigo-900/20 to-transparent -mx-4 px-4 py-8 mb-8 rounded-2xl">
+    <div className="rule-top pt-10 pb-8 mb-8">
       {badge && (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 dark:bg-indigo-500/20 text-primary text-sm font-medium mb-4">
+        <p className="eyebrow mb-3 flex items-center gap-2">
+          <span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />
           {badge}
-        </span>
+        </p>
       )}
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+      <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05]">
         {title}
       </h1>
-      <p className="text-neutral-500 dark:text-slate-400">{description}</p>
+      <p className="mt-4 text-lg text-neutral-500 dark:text-slate-400 max-w-2xl leading-relaxed">{description}</p>
     </div>
   );
 }

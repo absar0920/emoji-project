@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const ETIQUETTE = [
   { context: "Formal email to client", safe: "None", caution: "✅ 📌 for clarity only", avoid: "All face emojis, all hearts" },
@@ -10,15 +11,7 @@ const ETIQUETTE = [
 
 export default function ProfessionalEtiquette() {
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Professional Emoji Etiquette — Usage at Work in 2026
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">What&apos;s safe, what&apos;s risky, and what to never send</p>
-        </AnimatedSection>
-
+    <SectionShell tone="plain" eyebrow="At Work" title="Professional Emoji Etiquette — Usage at Work in 2026" subtitle="What's safe, what's risky, and what to never send">
         <AnimatedSection>
           <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
             <table className="w-full text-sm">
@@ -50,7 +43,6 @@ export default function ProfessionalEtiquette() {
             <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">A manager sending 😊 at the end of a correction intends warmth. A younger recipient may read it as passive-aggression. The safest rule: use symbols that behave like punctuation — ✅ 📌 ✔️ 💡 — rather than expression emojis.</p>
           </div>
         </AnimatedSection>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

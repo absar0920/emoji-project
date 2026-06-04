@@ -42,9 +42,9 @@ export default async function CulturePage({ params }: PageProps) {
 
         {/* Hero */}
         <FadeIn>
-          <div className="bg-gradient-to-br from-primary-light to-violet-50 dark:from-indigo-900/30 dark:to-violet-900/20 rounded-2xl p-6 sm:p-8 mb-8 text-center">
+          <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6 sm:p-8 mb-8 text-center">
             <span className="text-6xl block mb-3">{info.flag}</span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white">
+            <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white">
               Emoji Meanings in {info.label}
             </h1>
             <p className="text-neutral-500 dark:text-slate-400 mt-2">
@@ -56,7 +56,7 @@ export default async function CulturePage({ params }: PageProps) {
         {/* Emoji grid */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">
+            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">
               Top Emojis in {info.label}
             </h2>
             <div className="space-y-4">
@@ -66,7 +66,7 @@ export default async function CulturePage({ params }: PageProps) {
                   <Link
                     key={emoji.slug}
                     href={`/emoji/${emoji.slug}`}
-                    className="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 hover:shadow-md transition-shadow"
+                    className="flex items-start gap-4 p-4 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
                   >
                     <span className="text-4xl flex-shrink-0">{emoji.character}</span>
                     <div>
@@ -83,7 +83,7 @@ export default async function CulturePage({ params }: PageProps) {
         {/* Other cultures */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Explore Other Cultures</h2>
+            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">Explore Other Cultures</h2>
             <div className="flex flex-wrap gap-2">
               {CULTURE_REGIONS.filter((r) => r !== regionKey).map((r) => {
                 const rInfo = CULTURE_INFO[r];

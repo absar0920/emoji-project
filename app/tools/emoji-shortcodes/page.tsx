@@ -36,11 +36,11 @@ export default function ShortcodesPage() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search by name or shortcode..."
-        className="w-full px-4 py-3 rounded-xl shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow mb-6"
+        className="w-full px-4 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow mb-6"
       />
 
       {/* Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

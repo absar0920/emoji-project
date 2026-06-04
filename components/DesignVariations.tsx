@@ -19,7 +19,7 @@ export default function DesignVariations({
 }: DesignVariationsProps) {
   return (
     <section id="design" className="mb-10">
-      <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">
+      <h2 className="font-display text-xl font-bold text-primary-dark dark:text-white mb-4">
         How It Looks Across Platforms
       </h2>
       <div className="flex flex-wrap gap-3">
@@ -32,7 +32,7 @@ export default function DesignVariations({
           return (
             <div
               key={vendor.key}
-              className="flex flex-col items-center gap-2 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 min-w-[100px]"
+              className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm min-w-[100px]"
             >
               {vendor.type === "native" || !imageUrl ? (
                 <span className="text-4xl leading-none">{character}</span>

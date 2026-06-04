@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const HANDS = [
   { emoji: "👋", gesture: "Waving Hand", meaning: "Hello or goodbye", warning: "" },
@@ -17,17 +18,9 @@ const HANDS = [
 
 export default function HandEmojiGuide() {
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Hand Emoji Meanings — Gestures & Cultural Warnings
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Hand emojis are the most culturally variable symbols in the vocabulary.</p>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
+    <SectionShell tone="plain" eyebrow="Hands" title="Hand Emoji Meanings — Gestures & Cultural Warnings" subtitle="Hand emojis are the most culturally variable symbols in the vocabulary.">
+      <AnimatedSection>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
@@ -64,8 +57,7 @@ export default function HandEmojiGuide() {
               In the United States, 👌 means &ldquo;perfect&rdquo; or &ldquo;okay.&rdquo; In Brazil and parts of Southern Europe, the same gesture is a vulgar insult. In France it has historically meant &ldquo;zero&rdquo; or &ldquo;worthless.&rdquo; No platform will alert you when your &ldquo;perfect&rdquo; reads as offensive to someone else.
             </p>
           </div>
-        </AnimatedSection>
-      </div>
-    </section>
+      </AnimatedSection>
+    </SectionShell>
   );
 }

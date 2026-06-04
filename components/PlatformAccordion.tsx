@@ -34,7 +34,7 @@ export default function PlatformAccordion({ platforms }: PlatformAccordionProps)
 
   return (
     <section id="platforms" className="mb-10">
-      <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">Platform Meanings</h2>
+      <h2 className="font-display text-xl font-bold text-primary-dark dark:text-white mb-4">Platform Meanings</h2>
 
       {/* Platform icon row */}
       <div className="flex gap-2 flex-wrap mb-4">
@@ -44,8 +44,8 @@ export default function PlatformAccordion({ platforms }: PlatformAccordionProps)
             onClick={() => setOpen(open === p.key ? null : p.key)}
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
               open === p.key
-                ? "bg-primary text-white shadow-md dark:shadow-slate-900/30"
-                : "bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 text-neutral-600 dark:text-slate-300 hover:shadow-md"
+                ? "bg-primary text-white"
+                : "bg-white dark:bg-slate-800 border border-neutral-200/80 dark:border-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700"
             }`}
           >
             <span>{PLATFORM_ICONS[p.key] || "📱"}</span>
@@ -56,12 +56,12 @@ export default function PlatformAccordion({ platforms }: PlatformAccordionProps)
 
       {/* Expanded platform card */}
       {open && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 p-5 border border-neutral-100 dark:border-slate-700">
-          <div className="flex items-center gap-2 mb-3">
+        <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5">
+          <div className="flex items-center gap-2 mb-3 pb-3 border-b border-neutral-200 dark:border-slate-700">
             <span className="text-xl">
               {PLATFORM_ICONS[open] || "📱"}
             </span>
-            <h3 className="font-bold text-neutral-900 dark:text-slate-100 capitalize">{open}</h3>
+            <h3 className="font-display font-bold text-neutral-900 dark:text-slate-100 capitalize">{open}</h3>
           </div>
           <div className="space-y-2">
             {Object.entries(
@@ -77,7 +77,7 @@ export default function PlatformAccordion({ platforms }: PlatformAccordionProps)
                       {value.map((tag) => (
                         <span
                           key={tag}
-                          className="text-xs px-2 py-0.5 bg-primary-light dark:bg-indigo-900/30 text-primary rounded-full"
+                          className="text-xs px-2 py-0.5 bg-primary/10 dark:bg-primary/20 text-primary rounded-full"
                         >
                           {tag}
                         </span>

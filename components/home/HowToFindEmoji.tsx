@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const PLATFORMS = [
   { name: "iPhone (iOS 14+)", icon: "📱", steps: "Open any text field → tap the emoji icon on the keyboard → type a keyword in the search bar." },
@@ -10,19 +11,11 @@ const PLATFORMS = [
 
 export default function HowToFindEmoji() {
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            How to Find What Any Emoji Means
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Platform-specific search instructions</p>
-        </AnimatedSection>
-
+    <SectionShell tone="plain" eyebrow="How To" title="How to Find What Any Emoji Means" subtitle="Platform-specific search instructions">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
           {PLATFORMS.map((p) => (
             <AnimatedSection key={p.name}>
-              <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-5 border border-neutral-100 dark:border-slate-700">
+              <div className="bg-neutral-50 dark:bg-slate-800 rounded-2xl p-5 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">{p.icon}</span>
                   <h3 className="font-bold text-sm text-primary-dark dark:text-white">{p.name}</h3>
@@ -39,7 +32,6 @@ export default function HowToFindEmoji() {
             <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">When you don&apos;t know the official name, describe what the emoji looks like. Searching &ldquo;melting&rdquo; finds 🫠. &ldquo;Pleading&rdquo; finds 🥺. &ldquo;Fire heart&rdquo; finds ❤️‍🔥.</p>
           </div>
         </AnimatedSection>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

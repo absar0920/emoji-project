@@ -24,7 +24,7 @@ interface MeaningCardProps {
 
 export default function MeaningCard({ type, label, content }: MeaningCardProps) {
   return (
-    <div className={`bg-white dark:bg-slate-800 rounded-lg p-4 border-l-4 shadow-sm dark:shadow-slate-900/30 ${borderColors[type] || "border-l-neutral-300"}`}>
+    <div className={`bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 border-l-4 shadow-sm ${borderColors[type] || "border-l-neutral-300"}`}>
       <h3 className={`text-sm font-bold mb-2 ${labelColors[type] || "text-neutral-600 dark:text-slate-300"}`}>{label}</h3>
       <div className="space-y-1.5">
         {Object.entries(content).map(([key, value]) => {

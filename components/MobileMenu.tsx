@@ -47,7 +47,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
     <div className="fixed inset-0 z-[90] bg-white dark:bg-slate-900">
       <div className="flex items-center justify-between px-4 h-16 border-b border-neutral-200 dark:border-slate-700">
-        <span className="text-lg font-bold text-primary-dark dark:text-white">Menu</span>
+        <span className="font-display text-lg font-bold text-primary-dark dark:text-white">Menu</span>
         <button onClick={onClose} className="p-2 text-neutral-500 dark:text-slate-400 hover:text-neutral-800">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -62,7 +62,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               key={link.href}
               href={link.href}
               onClick={onClose}
-              className="block px-3 py-2.5 text-neutral-700 dark:text-slate-300 font-medium rounded-lg hover:bg-neutral-50 dark:hover:bg-slate-800"
+              className="block px-3 py-2.5 text-neutral-700 dark:text-slate-300 font-medium rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-800"
             >
               {link.label}
             </Link>
@@ -71,14 +71,14 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Categories */}
         <div>
-          <h3 className="text-xs font-semibold text-neutral-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Emojis</h3>
+          <h3 className="eyebrow text-xs font-semibold text-neutral-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Emojis</h3>
           <div className="space-y-0.5">
             {CATEGORY_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={onClose}
-                className="flex items-center gap-2.5 px-3 py-2 text-sm text-neutral-600 dark:text-slate-300 rounded-lg hover:bg-neutral-50 dark:hover:bg-slate-800"
+                className="flex items-center gap-2.5 px-3 py-2 text-sm text-neutral-600 dark:text-slate-300 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-800"
               >
                 <span>{link.icon}</span>
                 <span>{link.name}</span>
@@ -89,14 +89,14 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Tools */}
         <div>
-          <h3 className="text-xs font-semibold text-neutral-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Tools</h3>
+          <h3 className="eyebrow text-xs font-semibold text-neutral-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Tools</h3>
           <div className="space-y-0.5">
             {TOOL_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={onClose}
-                className="flex items-center gap-2.5 px-3 py-2 text-sm text-neutral-600 dark:text-slate-300 rounded-lg hover:bg-neutral-50 dark:hover:bg-slate-800"
+                className="flex items-center gap-2.5 px-3 py-2 text-sm text-neutral-600 dark:text-slate-300 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-800"
               >
                 <span>{link.icon}</span>
                 <span>{link.name}</span>

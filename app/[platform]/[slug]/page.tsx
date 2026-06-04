@@ -56,10 +56,10 @@ export default async function PlatformPage({ params }: PageProps) {
 
         {/* Hero */}
         <FadeIn>
-          <div className="bg-gradient-to-br from-primary-light to-violet-50 dark:from-indigo-900/30 dark:to-violet-900/20 rounded-2xl p-6 sm:p-8 mb-6 flex flex-col sm:flex-row items-center gap-6">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm p-6 sm:p-8 mb-6 flex flex-col sm:flex-row items-center gap-6">
             <span className="text-8xl sm:text-[128px] leading-none">{emoji.character}</span>
             <div className="text-center sm:text-left">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-1">
+              <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-1">
                 {emoji.name} on {platformLabel} {platformIcon}
               </h1>
               <p className="text-sm text-neutral-500 dark:text-slate-400 font-mono mb-3">{emoji.unicode} · {emoji.shortcode}</p>
@@ -76,11 +76,11 @@ export default async function PlatformPage({ params }: PageProps) {
         {/* Platform meaning */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">
+            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">
               {platformIcon} {platformLabel} Meaning
             </h2>
             {platformData ? (
-              <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 space-y-4">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-neutral-200/80 dark:border-slate-700 space-y-4">
                 {Object.entries(platformData).map(([key, value]) => {
                   if (Array.isArray(value)) {
                     return (
@@ -88,7 +88,7 @@ export default async function PlatformPage({ params }: PageProps) {
                         <span className="text-sm text-neutral-500 dark:text-slate-400 capitalize block mb-1">{key.replace(/_/g, " ")}</span>
                         <div className="flex flex-wrap gap-1">
                           {value.map((tag: string) => (
-                            <span key={tag} className="text-sm px-2 py-0.5 bg-primary-light dark:bg-indigo-900/30 text-primary rounded-full">{tag}</span>
+                            <span key={tag} className="text-sm px-2 py-0.5 bg-primary/10 dark:bg-primary/20 text-primary rounded-full">{tag}</span>
                           ))}
                         </div>
                       </div>
@@ -119,7 +119,7 @@ export default async function PlatformPage({ params }: PageProps) {
         {/* See on other platforms */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">See on Other Platforms</h2>
+            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">See on Other Platforms</h2>
             <PlatformLinks emojiSlug={emoji.slug} currentPlatform={platformKey} />
           </section>
         </AnimatedSection>

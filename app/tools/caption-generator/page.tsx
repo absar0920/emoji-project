@@ -57,7 +57,7 @@ export default function CaptionGeneratorPage() {
           value={topic}
           onChange={(e) => setTopic(e.target.value.slice(0, 200))}
           placeholder="What's the post about?"
-          className="w-full px-5 py-3 rounded-xl shadow-sm border-0 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:shadow-md focus:ring-2 focus:ring-primary/20 transition-shadow"
+          className="w-full px-5 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow"
         />
 
         {/* Mood */}
@@ -68,10 +68,10 @@ export default function CaptionGeneratorPage() {
               <button
                 key={m}
                 onClick={() => setMood(m)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                   mood === m
-                    ? "bg-gradient-to-r from-primary/10 to-accent-violet/10 dark:from-indigo-500/20 dark:to-violet-500/20 text-primary ring-1 ring-primary/30 dark:ring-indigo-500/30"
-                    : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
+                    ? "bg-primary text-white border-primary"
+                    : "border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700"
                 }`}
               >
                 {m}
@@ -88,8 +88,8 @@ export default function CaptionGeneratorPage() {
               <button
                 key={p}
                 onClick={() => setPlatform(p)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  platform === p ? "bg-accent-violet text-white" : "bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600"
+                className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
+                  platform === p ? "bg-primary text-white border-primary" : "border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700"
                 }`}
               >
                 {p}
@@ -101,7 +101,7 @@ export default function CaptionGeneratorPage() {
         <button
           onClick={handleGenerate}
           disabled={!topic.trim() || loading}
-          className="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-medium shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
+          className="w-full sm:w-auto px-8 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
         >
           {loading ? "Generating..." : "Generate Captions →"}
         </button>
@@ -116,15 +116,15 @@ export default function CaptionGeneratorPage() {
         <StaggerContainer className="space-y-3">
           {captions.map((cap, i) => (
             <StaggerItem key={i}>
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <p className="text-neutral-900 dark:text-slate-100 mb-2">{cap.text}</p>
                     <div className="flex gap-2">
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-primary-light text-primary font-medium">
+                      <span className="text-xs px-2 py-0.5 rounded-full border border-neutral-200 dark:border-slate-700 text-primary font-medium">
                         {cap.emoji_count} emojis
                       </span>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-accent-violet/10 text-accent-violet font-medium">
+                      <span className="text-xs px-2 py-0.5 rounded-full border border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-300 font-medium">
                         {cap.vibe}
                       </span>
                     </div>

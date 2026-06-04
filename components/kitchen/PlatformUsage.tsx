@@ -72,11 +72,11 @@ function DiscordTab() {
         On Android with Gboard, Emoji Kitchen stickers send in Discord DMs and server channels as image uploads. They appear embedded in the chat thread as full-size images.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-        <div className="bg-neutral-50 dark:bg-slate-700/50 rounded-xl p-4">
+        <div className="bg-neutral-50 dark:bg-slate-700/50 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm">
           <h4 className="font-bold text-sm text-primary-dark dark:text-white mb-2">📱 Mobile (Android)</h4>
           <p className="text-sm text-neutral-600 dark:text-slate-300">Stickers send directly from Gboard into DMs and server channels as image uploads — indistinguishable from any other uploaded image.</p>
         </div>
-        <div className="bg-neutral-50 dark:bg-slate-700/50 rounded-xl p-4">
+        <div className="bg-neutral-50 dark:bg-slate-700/50 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm">
           <h4 className="font-bold text-sm text-primary-dark dark:text-white mb-2">🖥️ Desktop / Web</h4>
           <p className="text-sm text-neutral-600 dark:text-slate-300">Desktop clients don&apos;t use Gboard. Generate a sticker through Google Search, download the PNG, and drag it into any Discord channel or DM window.</p>
         </div>
@@ -119,13 +119,14 @@ export default function PlatformUsage() {
   const Content = TAB_CONTENT[activeTab];
 
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
+    <section className="py-14 rule-top">
       <div className="max-w-5xl mx-auto px-4">
         <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />Platforms</p>
+          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
             Emoji Kitchen on Every Platform
           </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-6">Platform-specific guides for WhatsApp, TikTok, Discord, and Snapchat</p>
+          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-6">Platform-specific guides for WhatsApp, TikTok, Discord, and Snapchat</p>
         </AnimatedSection>
 
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-6">
@@ -145,7 +146,7 @@ export default function PlatformUsage() {
           ))}
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-neutral-200 dark:border-slate-700">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-neutral-200/80 dark:border-slate-700 shadow-sm">
           <Content />
         </div>
       </div>

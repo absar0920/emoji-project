@@ -41,13 +41,13 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-slate-700 shadow-sm">
+      <nav className="sticky top-0 z-50 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-neutral-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Left: Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0">
               <span className="text-2xl">🧠</span>
-              <span className="text-lg font-bold text-primary-dark dark:text-white">
+              <span className="font-display text-xl text-primary-dark dark:text-white">
                 Emoji Intelligence
               </span>
             </Link>

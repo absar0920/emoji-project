@@ -22,7 +22,7 @@ function EmojiRow({
   return (
     <Link
       href={`/emoji/${emoji.slug}`}
-      className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow"
+      className="flex items-center gap-4 p-4 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
     >
       <span className="text-sm font-bold text-neutral-400 dark:text-slate-500 w-8">
         #{rank}
@@ -54,7 +54,8 @@ export default async function TrendingPage() {
     <ClientShell>
       <main className="max-w-4xl mx-auto px-4 py-6">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />TRENDING</p>
+          <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-2">
             Trending Emojis
           </h1>
           <p className="text-neutral-500 dark:text-slate-400">
@@ -64,7 +65,7 @@ export default async function TrendingPage() {
 
         {/* Top 20 */}
         <section className="mb-12">
-          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">
             Today&apos;s Top 20
           </h2>
           <div className="space-y-3">
@@ -83,7 +84,7 @@ export default async function TrendingPage() {
 
         {/* TikTok */}
         <section className="mb-12">
-          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">
             Trending on TikTok
           </h2>
           <div className="space-y-3">
@@ -102,7 +103,7 @@ export default async function TrendingPage() {
 
         {/* Instagram */}
         <section className="mb-12">
-          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">
             Trending on Instagram
           </h2>
           <div className="space-y-3">

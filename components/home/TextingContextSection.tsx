@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const RISK_COLORS: Record<string, string> = {
   "Very High": "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300",
@@ -22,15 +23,12 @@ const CONTEXT_TABLE = [
 
 export default function TextingContextSection() {
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Emoji Meanings in Texting — Context Changes Everything
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">What you think you&apos;re sending vs. what they actually read</p>
-        </AnimatedSection>
-
+    <SectionShell
+      tone="tint"
+      eyebrow="Texting"
+      title="Emoji Meanings in Texting — Context Changes Everything"
+      subtitle="What you think you're sending vs. what they actually read"
+    >
         <AnimatedSection>
           <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
             <table className="w-full text-sm">
@@ -60,17 +58,16 @@ export default function TextingContextSection() {
 
         <AnimatedSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-5 border border-neutral-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
               <h3 className="font-bold text-primary-dark dark:text-white mb-2">Frequency Matters</h3>
               <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">One ❤️ signals care. Three in a row signals enthusiasm. Five or more means either overwhelming emotion or performative excess — and the receiver usually knows which based on the relationship.</p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-5 border border-neutral-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
               <h3 className="font-bold text-primary-dark dark:text-white mb-2">Single-Emoji Replies</h3>
               <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">A standalone 👍 after something personal reads as dismissive. A solitary 🙂 after a vulnerable message is almost never warm. These one-symbol responses communicate &ldquo;I received this and I am not going further.&rdquo;</p>
             </div>
           </div>
         </AnimatedSection>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

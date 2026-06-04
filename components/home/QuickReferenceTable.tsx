@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const QUICK_REF = [
   { emoji: "🥺", name: "Pleading Face", meaning: "Vulnerable plea — nearly impossible to refuse" },
@@ -17,27 +18,23 @@ const QUICK_REF = [
 
 export default function QuickReferenceTable() {
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Most Searched Emoji Meanings in 2026
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Quick reference for the emojis people search most</p>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-          {QUICK_REF.map((item) => (
-            <AnimatedSection key={item.emoji}>
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-neutral-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-4xl block mb-2">{item.emoji}</span>
-                <h3 className="font-bold text-sm text-primary-dark dark:text-white">{item.name}</h3>
-                <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1 leading-relaxed">{item.meaning}</p>
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
+    <SectionShell
+      tone="tint"
+      eyebrow="Quick Reference"
+      title="Most Searched Emoji Meanings in 2026"
+      subtitle="Quick reference for the emojis people search most"
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+        {QUICK_REF.map((item) => (
+          <AnimatedSection key={item.emoji}>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow card-lift hover:border-primary/30">
+              <span className="text-4xl block mb-2">{item.emoji}</span>
+              <h3 className="font-bold text-sm text-primary-dark dark:text-white">{item.name}</h3>
+              <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1 leading-relaxed">{item.meaning}</p>
+            </div>
+          </AnimatedSection>
+        ))}
       </div>
-    </section>
+    </SectionShell>
   );
 }

@@ -69,7 +69,7 @@ export default function EmojiVsPage() {
         <button
           onClick={handleCompare}
           disabled={!emoji1 || !emoji2}
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-bold text-lg shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
+          className="px-8 py-3 rounded-lg bg-primary text-white font-bold text-lg hover:opacity-90 transition-opacity disabled:opacity-50"
         >
           Compare Now →
         </button>
@@ -77,13 +77,13 @@ export default function EmojiVsPage() {
 
       {popular.length > 0 && (
         <FadeIn>
-          <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Popular Comparisons</h2>
+          <h2 className="font-display text-xl sm:text-2xl text-primary-dark dark:text-white mb-4">Popular Comparisons</h2>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {popular.map((p) => (
               <Link
                 key={p.slug}
                 href={`/vs/${p.slug}`}
-                className="flex items-center justify-center gap-2 p-3 bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow"
+                className="card-lift flex items-center justify-center gap-2 p-3 bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm"
               >
                 <span className="text-2xl">{p.emoji1_character}</span>
                 <span className="text-xs font-bold text-neutral-400 dark:text-slate-500">vs</span>

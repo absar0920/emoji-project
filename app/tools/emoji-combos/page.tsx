@@ -25,7 +25,7 @@ export default async function EmojiCombosPage() {
           <Link
             key={combo.slug}
             href={`/combo/${combo.slug}`}
-            className="flex flex-col items-center gap-2 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 hover:shadow-md transition-shadow"
+            className="card-lift flex flex-col items-center gap-2 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm"
           >
             <span className="text-2xl">
               {combo.combos?.[0]?.emojis?.slice(0, 4).join("") || "🎉"}

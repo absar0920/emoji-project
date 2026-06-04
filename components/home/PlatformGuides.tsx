@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const TABS = ["WhatsApp", "Instagram", "TikTok", "Snapchat", "Discord"] as const;
 type Tab = typeof TABS[number];
@@ -215,15 +215,12 @@ export default function PlatformGuides() {
   const Content = TAB_CONTENT[activeTab];
 
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Platform-Specific Emoji Guides
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-6">Every platform has its own emoji dialect — pick a platform to see the differences</p>
-        </AnimatedSection>
-
+    <SectionShell
+      tone="tint"
+      eyebrow="Platforms"
+      title="Platform-Specific Emoji Guides"
+      subtitle="Every platform has its own emoji dialect — pick a platform to see the differences"
+    >
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-6">
           {TABS.map((tab) => (
             <button
@@ -244,7 +241,6 @@ export default function PlatformGuides() {
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-neutral-200 dark:border-slate-700">
           <Content />
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

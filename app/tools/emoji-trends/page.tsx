@@ -26,7 +26,7 @@ export default async function EmojiTrendsPage() {
           <Link
             key={emoji.slug}
             href={`/emoji/${emoji.slug}`}
-            className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-md dark:shadow-slate-900/30 hover:shadow-lg transition-shadow"
+            className="card-lift flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm"
           >
             <span className="text-sm font-bold text-neutral-400 dark:text-slate-500 w-6">#{i + 1}</span>
             <span className="text-4xl">{emoji.character}</span>
@@ -35,7 +35,7 @@ export default async function EmojiTrendsPage() {
               <span className="text-xs text-neutral-500 dark:text-slate-400 block">{emoji.category}</span>
             </div>
             {emoji.virality?.trend_score != null && (
-              <span className="px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/30 text-accent-amber text-sm font-medium">
+              <span className="px-3 py-1 rounded-full border border-neutral-200 dark:border-slate-700 text-accent-amber text-sm font-medium">
                 🔥 {emoji.virality.trend_score}
               </span>
             )}

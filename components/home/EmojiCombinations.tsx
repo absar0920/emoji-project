@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const COMBOS = [
   { combo: "🥺👉👈", meaning: "Maximum vulnerability plea — shy, irresistible ask", origin: "Twitter/X ~2019" },
@@ -15,19 +16,16 @@ const COMBOS = [
 
 export default function EmojiCombinations() {
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Emoji Combination Meanings
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Combinations generate meanings that neither symbol carries alone</p>
-        </AnimatedSection>
-
+    <SectionShell
+      tone="plain"
+      eyebrow="Combos"
+      title="Emoji Combination Meanings"
+      subtitle="Combinations generate meanings that neither symbol carries alone"
+    >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
           {COMBOS.map((c) => (
             <AnimatedSection key={c.combo}>
-              <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 border border-neutral-100 dark:border-slate-700">
+              <div className="bg-neutral-50 dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
                 <span className="text-2xl block mb-2">{c.combo}</span>
                 <p className="text-sm font-medium text-primary-dark dark:text-white mb-1">{c.meaning}</p>
                 <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 dark:bg-indigo-500/20 text-primary">{c.origin}</span>
@@ -50,7 +48,6 @@ export default function EmojiCombinations() {
             </div>
           </AnimatedSection>
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

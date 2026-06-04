@@ -36,7 +36,8 @@ export default async function SearchPage({ searchParams }: PageProps) {
   return (
     <ClientShell>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-primary-dark dark:text-white mb-2">
+        <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />SEARCH</p>
+        <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-2">
           {q ? `Search results for "${q}"` : "All Emojis"}
         </h1>
         <p className="text-neutral-500 dark:text-slate-400 mb-8">
@@ -47,7 +48,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
             <Link
               key={emoji.slug}
               href={`/emoji/${emoji.slug}`}
-              className="flex flex-col items-center gap-1 p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 hover:shadow-md dark:hover:shadow-slate-900/30 transition-shadow border border-neutral-100 dark:border-slate-700"
+              className="flex flex-col items-center gap-1 p-3 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
             >
               <span className="text-3xl">{emoji.character}</span>
               <span className="text-xs text-neutral-600 dark:text-slate-300 text-center truncate w-full">{emoji.name}</span>

@@ -11,15 +11,16 @@ export default function PrivacyPage() {
   return (
     <ClientShell>
       <main className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-6">
+        <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />LEGAL</p>
+        <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-6">
           Privacy Policy
         </h1>
         <p className="text-sm text-neutral-400 dark:text-slate-500 mb-8">
           Last updated: May 2026
         </p>
 
-        <div className="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-neutral-700 dark:text-slate-300">
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+        <div className="prose prose-neutral dark:prose-invert max-w-3xl space-y-6 text-neutral-700 dark:text-slate-300">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             What We Collect
           </h2>
           <p>
@@ -28,7 +29,7 @@ export default function PrivacyPage() {
             addresses, or phone numbers.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Cookies &amp; Local Storage
           </h2>
           <p>
@@ -37,7 +38,7 @@ export default function PrivacyPage() {
             Emoji Intelligence directly.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Third-Party Services
           </h2>
           <p>We use the following third-party services:</p>
@@ -58,7 +59,7 @@ export default function PrivacyPage() {
             </li>
           </ul>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Data Retention
           </h2>
           <p>
@@ -67,7 +68,7 @@ export default function PrivacyPage() {
             are not linked to individual users.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">Contact</h2>
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">Contact</h2>
           <p>
             For privacy-related questions, please reach out via the
             contact information on our About page.

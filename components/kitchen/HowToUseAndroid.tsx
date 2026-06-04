@@ -11,19 +11,21 @@ const STEPS = [
 
 export default function HowToUseAndroid() {
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
+    <section className="py-14">
       <div className="max-w-5xl mx-auto px-4">
+        <div className="rounded-2xl border border-neutral-200/70 dark:border-slate-700/50 bg-neutral-50 dark:bg-slate-800/50 p-6 sm:p-8">
         <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />Setup</p>
+          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
             How to Use Emoji Kitchen on Android (Gboard)
           </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Emoji Kitchen is natively built into Gboard — no separate download required</p>
+          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-8">Emoji Kitchen is natively built into Gboard — no separate download required</p>
         </AnimatedSection>
 
         <div className="space-y-3 mb-8">
           {STEPS.map((s) => (
             <AnimatedSection key={s.step}>
-              <div className="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-4 border border-neutral-100 dark:border-slate-700">
+              <div className="flex gap-4 bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold text-sm shrink-0">{s.step}</span>
                 <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">{s.text}</p>
               </div>
@@ -39,6 +41,7 @@ export default function HowToUseAndroid() {
             </p>
           </div>
         </AnimatedSection>
+        </div>
       </div>
     </section>
   );

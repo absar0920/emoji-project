@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const CATEGORIES = [
   { name: "Smileys & People", count: "200+", mostUsed: "😂 😊 ❤️ 🙏", misunderstood: "😌 (looks sleepy, signals contentment)" },
@@ -13,40 +14,36 @@ const CATEGORIES = [
 
 export default function CategoryReference() {
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Complete Emoji Category Reference
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">The Unicode Consortium organizes all 3,700+ emojis into eight major categories.</p>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Category</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Count</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Most Used</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Most Misunderstood</th>
+    <SectionShell
+      tone="tint"
+      eyebrow="Categories"
+      title="Complete Emoji Category Reference"
+      subtitle="The Unicode Consortium organizes all 3,700+ emojis into eight major categories."
+    >
+      <AnimatedSection>
+        <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
+                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Category</th>
+                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Count</th>
+                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Most Used</th>
+                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Most Misunderstood</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CATEGORIES.map((cat, i) => (
+                <tr key={cat.name} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
+                  <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{cat.name}</td>
+                  <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{cat.count}</td>
+                  <td className="px-4 py-3">{cat.mostUsed}</td>
+                  <td className="px-4 py-3 text-neutral-500 dark:text-slate-400 text-xs">{cat.misunderstood}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {CATEGORIES.map((cat, i) => (
-                  <tr key={cat.name} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-                    <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{cat.name}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{cat.count}</td>
-                    <td className="px-4 py-3">{cat.mostUsed}</td>
-                    <td className="px-4 py-3 text-neutral-500 dark:text-slate-400 text-xs">{cat.misunderstood}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </AnimatedSection>
+    </SectionShell>
   );
 }

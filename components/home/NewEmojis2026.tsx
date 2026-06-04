@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const NEW_EMOJIS = [
   { emoji: "🫩", name: "Face with Bags Under Eyes", meaning: "Exhaustion, sleep deprivation, tired humor", availability: "iOS 18+, Android 15+" },
@@ -13,19 +14,11 @@ const NEW_EMOJIS = [
 
 export default function NewEmojis2026() {
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            New Emojis in 2026 — Unicode 15.1 & 16.0
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">The latest additions to the emoji vocabulary</p>
-        </AnimatedSection>
-
+    <SectionShell tone="tint" eyebrow="New in 2026" title="New Emojis in 2026 — Unicode 15.1 & 16.0" subtitle="The latest additions to the emoji vocabulary">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
           {NEW_EMOJIS.map((item) => (
             <AnimatedSection key={item.name}>
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-neutral-100 dark:border-slate-700">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-3xl">{item.emoji}</span>
                   <h3 className="font-bold text-sm text-primary-dark dark:text-white">{item.name}</h3>
@@ -51,7 +44,6 @@ export default function NewEmojis2026() {
             </div>
           </AnimatedSection>
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

@@ -20,13 +20,15 @@ const COMBOS = [
 
 export default function ComboReferenceTable() {
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
+    <section className="py-14">
       <div className="max-w-5xl mx-auto px-4">
+        <div className="rounded-2xl border border-neutral-200/70 dark:border-slate-700/50 bg-neutral-50 dark:bg-slate-800/50 p-6 sm:p-8">
         <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />Reference</p>
+          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
             Emoji Kitchen Combos — Complete Category Reference
           </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Quick reference for the best combinations across every category</p>
+          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-8">Quick reference for the best combinations across every category</p>
         </AnimatedSection>
 
         <AnimatedSection>
@@ -53,6 +55,7 @@ export default function ComboReferenceTable() {
             </table>
           </div>
         </AnimatedSection>
+        </div>
       </div>
     </section>
   );

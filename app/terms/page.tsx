@@ -11,15 +11,16 @@ export default function TermsPage() {
   return (
     <ClientShell>
       <main className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-extrabold text-primary-dark dark:text-white mb-6">
+        <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />LEGAL</p>
+        <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-6">
           Terms of Service
         </h1>
         <p className="text-sm text-neutral-400 dark:text-slate-500 mb-8">
           Last updated: May 2026
         </p>
 
-        <div className="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-neutral-700 dark:text-slate-300">
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+        <div className="prose prose-neutral dark:prose-invert max-w-3xl space-y-6 text-neutral-700 dark:text-slate-300">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Acceptance of Terms
           </h2>
           <p>
@@ -28,7 +29,7 @@ export default function TermsPage() {
             do not use the service.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Description of Service
           </h2>
           <p>
@@ -38,7 +39,7 @@ export default function TermsPage() {
             charge and supported by advertising.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Content Disclaimer
           </h2>
           <p>
@@ -50,7 +51,7 @@ export default function TermsPage() {
             meanings in real conversations.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Intellectual Property
           </h2>
           <p>
@@ -60,7 +61,7 @@ export default function TermsPage() {
             to their respective owners (Apple, Google, etc.).
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Limitation of Liability
           </h2>
           <p>
@@ -70,7 +71,7 @@ export default function TermsPage() {
             limited to misinterpretation of emoji meanings.
           </p>
 
-          <h2 className="text-xl font-bold text-primary-dark dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
             Changes to Terms
           </h2>
           <p>

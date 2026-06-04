@@ -11,19 +11,20 @@ const UPDATES = [
 
 export default function Android16Updates() {
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
+    <section className="py-14 rule-top">
       <div className="max-w-5xl mx-auto px-4">
         <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />What&apos;s New</p>
+          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
             Emoji Kitchen and Android 16 — What&apos;s New in 2026
           </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">New combinations, faster suggestions, and expanded blob access</p>
+          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-8">New combinations, faster suggestions, and expanded blob access</p>
         </AnimatedSection>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {UPDATES.map((u) => (
             <AnimatedSection key={u.title}>
-              <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-5 border border-neutral-100 dark:border-slate-700">
+              <div className="bg-neutral-50 dark:bg-slate-800 rounded-2xl p-5 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/40">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">{u.icon}</span>
                   <h3 className="font-bold text-sm text-primary-dark dark:text-white">{u.title}</h3>

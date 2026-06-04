@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const CORE_FACES = [
   { emoji: "😊", name: "Smiling Face with Smiling Eyes", meaning: "Warm, genuine happiness", note: "Gen Z in ironic contexts: slightly passive-aggressive" },
@@ -35,59 +36,50 @@ const EXTENDED_FACES = [
 
 export default function FaceEmojiGuide() {
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Face Emoji Meanings — Every Expression Decoded
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">The gap between official Unicode names and real conversational meanings is wider here than anywhere else.</p>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <h3 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Core Face Emojis</h3>
-        </AnimatedSection>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-          {CORE_FACES.map((item) => (
-            <AnimatedSection key={item.emoji}>
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-neutral-100 dark:border-slate-700">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">{item.emoji}</span>
-                  <h4 className="font-bold text-sm text-primary-dark dark:text-white leading-tight">{item.name}</h4>
-                </div>
-                <p className="text-sm text-neutral-600 dark:text-slate-300 mb-1">{item.meaning}</p>
-                <p className="text-xs text-neutral-400 dark:text-slate-500">{item.note}</p>
+    <SectionShell tone="tint" eyebrow="Faces" title="Face Emoji Meanings — Every Expression Decoded" subtitle="The gap between official Unicode names and real conversational meanings is wider here than anywhere else.">
+      <AnimatedSection>
+        <h3 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Core Face Emojis</h3>
+      </AnimatedSection>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+        {CORE_FACES.map((item) => (
+          <AnimatedSection key={item.emoji}>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">{item.emoji}</span>
+                <h4 className="font-bold text-sm text-primary-dark dark:text-white leading-tight">{item.name}</h4>
               </div>
-            </AnimatedSection>
-          ))}
-        </div>
-
-        <AnimatedSection>
-          <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-accent-amber rounded-r-xl p-5 mb-8">
-            <h3 className="font-bold text-primary-dark dark:text-white mb-1">⚠️ Why 🙂 Is the Most Dangerous Face Emoji</h3>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-              Officially it means a gentle smile. In practice by 2024–2026, a standalone 🙂 in conversation signals lukewarm engagement at best and deliberate emotional distance at worst. Nobody sends it when genuinely happy. It has become the emoji equivalent of &ldquo;noted.&rdquo;
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <h3 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Extended Face Emoji Meanings</h3>
-        </AnimatedSection>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {EXTENDED_FACES.map((item) => (
-            <AnimatedSection key={item.emoji}>
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-neutral-100 dark:border-slate-700">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">{item.emoji}</span>
-                </div>
-                <p className="text-sm text-neutral-600 dark:text-slate-300 mb-1">{item.meaning}</p>
-                <p className="text-xs text-neutral-400 dark:text-slate-500">{item.note}</p>
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
+              <p className="text-sm text-neutral-600 dark:text-slate-300 mb-1">{item.meaning}</p>
+              <p className="text-xs text-neutral-400 dark:text-slate-500">{item.note}</p>
+            </div>
+          </AnimatedSection>
+        ))}
       </div>
-    </section>
+
+      <AnimatedSection>
+        <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-accent-amber rounded-r-xl p-5 mb-8">
+          <h3 className="font-bold text-primary-dark dark:text-white mb-1">⚠️ Why 🙂 Is the Most Dangerous Face Emoji</h3>
+          <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
+            Officially it means a gentle smile. In practice by 2024–2026, a standalone 🙂 in conversation signals lukewarm engagement at best and deliberate emotional distance at worst. Nobody sends it when genuinely happy. It has become the emoji equivalent of &ldquo;noted.&rdquo;
+          </p>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <h3 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Extended Face Emoji Meanings</h3>
+      </AnimatedSection>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {EXTENDED_FACES.map((item) => (
+          <AnimatedSection key={item.emoji}>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">{item.emoji}</span>
+              </div>
+              <p className="text-sm text-neutral-600 dark:text-slate-300 mb-1">{item.meaning}</p>
+              <p className="text-xs text-neutral-400 dark:text-slate-500">{item.note}</p>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+    </SectionShell>
   );
 }

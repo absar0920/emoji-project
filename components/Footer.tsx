@@ -40,21 +40,21 @@ const footerLinks = {
 export default function Footer() {
   return (
     <>
-    <div className="h-0.5 bg-gradient-to-r from-primary to-accent-violet" />
-    <footer className="bg-neutral-900 text-neutral-400 py-16">
+    <div className="h-px bg-primary" />
+    <footer className="bg-neutral-950 text-neutral-400 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl">🧠</span>
-              <span className="text-lg font-bold text-white">Emoji Intelligence</span>
+              <span className="font-display text-xl text-white">Emoji Intelligence</span>
             </div>
-            <p className="text-sm">
+            <p className="text-sm leading-relaxed">
               The world&apos;s most comprehensive emoji meaning platform. Gen-Z slang, platform context, and cultural intelligence.
             </p>
           </div>
           <div>
-            <h3 className="text-white font-semibold mb-4">Popular Emojis</h3>
+            <h3 className="eyebrow text-neutral-500 mb-4">Popular Emojis</h3>
             <ul className="space-y-2 text-sm">
               {footerLinks.popular.map((link) => (
                 <li key={link.href}>
@@ -64,7 +64,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-white font-semibold mb-4">Tools</h3>
+            <h3 className="eyebrow text-neutral-500 mb-4">Tools</h3>
             <ul className="space-y-2 text-sm">
               {footerLinks.tools.map((link) => (
                 <li key={link.href}>
@@ -74,7 +74,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-white font-semibold mb-4">Categories</h3>
+            <h3 className="eyebrow text-neutral-500 mb-4">Categories</h3>
             <ul className="space-y-2 text-sm">
               {footerLinks.categories.map((link) => (
                 <li key={link.name}>
@@ -84,7 +84,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
+            <h3 className="eyebrow text-neutral-500 mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>

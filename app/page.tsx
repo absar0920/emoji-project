@@ -2,7 +2,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
 import HeroSearchBar from "@/components/HeroSearchBar";
-import { FadeIn, StaggerContainer, StaggerItem, AnimatedCard } from "@/components/MotionWrappers";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 import WhatAreEmojiMeanings from "@/components/home/WhatAreEmojiMeanings";
 import QuickReferenceTable from "@/components/home/QuickReferenceTable";
 import EmojiOriginHistory from "@/components/home/EmojiOriginHistory";
@@ -53,50 +53,81 @@ const CATEGORIES = [
 export default function HomePage() {
   return (
     <ClientShell>
-      <main>
+      <main className="theme-editorial">
         {/* Sidebar + All Content */}
-        <div className="max-w-7xl mx-auto px-4 flex gap-8">
+        <div className="max-w-7xl mx-auto px-4 flex gap-10">
           <HomeSidebar />
           <div className="min-w-0 flex-1">
-            {/* Hero */}
-            <section className="bg-gradient-to-br from-[#F8F7FF] to-[#EEF2FF] dark:from-slate-800 dark:to-indigo-950 py-16 sm:py-24 lg:rounded-2xl">
-              <FadeIn className="max-w-3xl mx-auto px-4 text-center">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 dark:bg-indigo-500/20 text-primary text-sm font-medium mb-6">
-                  ✨ AI-Powered Emoji Intelligence
-                </span>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary-dark dark:text-white leading-tight mb-4">
+            {/* Hero — editorial masthead */}
+            <section className="pt-10 sm:pt-14 pb-14">
+              <FadeIn>
+                <p className="eyebrow mb-6 flex items-center gap-2.5">
+                  <span className="inline-block w-8 h-px bg-primary" aria-hidden="true" />
+                  AI-Powered Emoji Intelligence
+                </p>
+                <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl text-primary-dark dark:text-white leading-[0.98] max-w-3xl">
                   Every Emoji.{" "}
-                  <span className="bg-gradient-to-r from-primary to-accent-violet bg-clip-text text-transparent">
-                    Every Meaning.
-                  </span>
+                  <span className="text-primary italic">Every Meaning.</span>
                 </h1>
-                <p className="text-lg text-neutral-500 dark:text-slate-400 mb-8">
-                  3,700+ emojis · 15 platforms · 31 cultures
+                <p className="mt-7 text-lg sm:text-xl text-neutral-600 dark:text-slate-300 max-w-xl leading-relaxed">
+                  Decode what every emoji really means across platforms, cultures, and generations.
                 </p>
 
                 {/* Search bar */}
-                <HeroSearchBar />
+                <div className="mt-8 max-w-xl">
+                  <HeroSearchBar />
+                </div>
+
+                {/* Stat row — ruled, tabular */}
+                <div className="mt-10 max-w-xl rule-top pt-5 flex items-center gap-6 text-sm text-neutral-600 dark:text-slate-300">
+                  {[
+                    { value: "3,700+", label: "emojis" },
+                    { value: "15", label: "platforms" },
+                    { value: "31", label: "cultures" },
+                  ].map((stat, i) => (
+                    <div key={stat.label} className="flex items-center gap-6">
+                      {i > 0 && <span className="w-px h-5 bg-current opacity-20" aria-hidden="true" />}
+                      <span>
+                        <span className="font-display text-xl text-primary-dark dark:text-white tabular-nums">{stat.value}</span>{" "}
+                        <span className="text-neutral-500 dark:text-slate-400">{stat.label}</span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </FadeIn>
             </section>
 
-            {/* Tools Playground */}
-            <section className="py-12">
-              <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-6">Tools Playground</h2>
+            {/* Tools Playground — editorial index */}
+            <section className="py-14 sm:py-16 rule-top">
+              <FadeIn className="mb-10">
+                <p className="eyebrow mb-3 flex items-center gap-2">
+                  <span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />
+                  Tools Playground
+                </p>
+                <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1]">
+                  Play, create &amp; explore
+                </h2>
+                <p className="text-neutral-500 dark:text-slate-400 mt-3">Interactive tools for every emoji need.</p>
+              </FadeIn>
               <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {TOOLS.map((tool) => (
+                {TOOLS.map((tool, i) => (
                   <StaggerItem key={tool.href}>
-                    <AnimatedCard>
-                      <Link
-                        href={tool.href}
-                        className="bg-gradient-to-br from-primary-light/50 to-violet-50/50 dark:from-slate-700 dark:to-slate-700 rounded-2xl shadow-md dark:shadow-lg dark:shadow-black/20 p-5 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 transition-shadow block dark:border dark:border-slate-600"
-                      >
-                        <div className="bg-white dark:bg-slate-600 rounded-xl shadow-sm w-12 h-12 flex items-center justify-center text-2xl mb-3">
-                          {tool.icon}
-                        </div>
-                        <div className="font-semibold text-primary-dark dark:text-white">{tool.name}</div>
-                        <div className="text-sm text-neutral-500 dark:text-slate-400 mt-1">{tool.desc}</div>
-                      </Link>
-                    </AnimatedCard>
+                    <Link
+                      href={tool.href}
+                      className="card-lift group block h-full rounded-xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 hover:border-primary/60 hover:shadow-md"
+                    >
+                      <div className="flex items-center justify-between mb-5">
+                        <span className="font-mono text-xs text-neutral-400 dark:text-slate-500 tabular-nums">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-2xl">{tool.icon}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 font-semibold text-primary-dark dark:text-white group-hover:text-primary transition-colors">
+                        {tool.name}
+                        <span className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" aria-hidden="true">→</span>
+                      </div>
+                      <div className="text-sm text-neutral-500 dark:text-slate-400 mt-1.5 leading-relaxed">{tool.desc}</div>
+                    </Link>
                   </StaggerItem>
                 ))}
               </StaggerContainer>

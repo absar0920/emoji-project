@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
+import SectionShell from "./SectionShell";
 
 const RENDERING = [
   { emoji: "😬", apple: "Slightly strained — mild cringe", google: "Moderately uncomfortable", samsung: "Most teeth showing — most alarmed", meta: "More alarmed than Apple" },
@@ -10,15 +11,7 @@ const RENDERING = [
 
 export default function PlatformRendering() {
   return (
-    <section className="py-14 bg-neutral-50 dark:bg-slate-800/50">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
-            Apple vs. Android vs. Samsung vs. WhatsApp
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">The same emoji can look strikingly different across devices — and visual differences carry emotional weight.</p>
-        </AnimatedSection>
-
+    <SectionShell tone="tint" eyebrow="Rendering" title="Apple vs. Android vs. Samsung vs. WhatsApp" subtitle="The same emoji can look strikingly different across devices — and visual differences carry emotional weight.">
         <AnimatedSection>
           <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
             <table className="w-full text-sm">
@@ -52,7 +45,6 @@ export default function PlatformRendering() {
             <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">If emotional precision matters in an important conversation, be aware that subtle face emojis may render differently on the receiver&apos;s device. When in doubt, use words alongside the symbol.</p>
           </div>
         </AnimatedSection>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

@@ -18,13 +18,14 @@ const APPS = [
 
 export default function SupportedApps() {
   return (
-    <section className="py-14 bg-white dark:bg-slate-900">
+    <section className="py-14 rule-top">
       <div className="max-w-5xl mx-auto px-4">
         <AnimatedSection>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-dark dark:text-white mb-2">
+          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />Compatibility</p>
+          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
             Emoji Kitchen Supported Apps — Where It Works and Where It Doesn&apos;t
           </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mb-8">Works in any app that accepts image messages — fails in plain text input fields</p>
+          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-8">Works in any app that accepts image messages — fails in plain text input fields</p>
         </AnimatedSection>
 
         <AnimatedSection>

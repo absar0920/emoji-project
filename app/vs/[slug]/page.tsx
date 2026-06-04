@@ -47,19 +47,19 @@ export default async function ComparisonPage({ params }: PageProps) {
 
         {/* Hero */}
         <FadeIn>
-          <div className="bg-gradient-to-br from-primary-light to-violet-50 dark:from-indigo-900/30 dark:to-violet-900/20 rounded-2xl p-6 sm:p-8 mb-6">
+          <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6 sm:p-8 mb-6">
             <div className="flex items-center justify-center gap-6 sm:gap-12">
               <Link href={`/emoji/${comparison.emoji1_slug}`} className="text-center hover:scale-105 transition-transform">
                 <span className="text-6xl sm:text-8xl block mb-2">{comparison.emoji1_character}</span>
                 <span className="text-sm font-medium text-neutral-600 dark:text-slate-300">{comparison.emoji1_name}</span>
               </Link>
-              <span className="text-2xl sm:text-4xl font-extrabold text-primary">VS</span>
+              <span className="text-2xl sm:text-4xl font-display text-primary">VS</span>
               <Link href={`/emoji/${comparison.emoji2_slug}`} className="text-center hover:scale-105 transition-transform">
                 <span className="text-6xl sm:text-8xl block mb-2">{comparison.emoji2_character}</span>
                 <span className="text-sm font-medium text-neutral-600 dark:text-slate-300">{comparison.emoji2_name}</span>
               </Link>
             </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-primary-dark dark:text-white text-center mt-4">
+            <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white text-center mt-4">
               {comparison.emoji1_name} vs {comparison.emoji2_name}
             </h1>
           </div>
@@ -76,8 +76,8 @@ export default async function ComparisonPage({ params }: PageProps) {
         {/* Differences */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">Key Differences</h2>
-            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 p-4">
+            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">Key Differences</h2>
+            <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-4">
               <div className="grid grid-cols-[1fr_auto_1fr] gap-4 pb-2 border-b border-neutral-200 dark:border-slate-700 mb-2">
                 <span className="text-sm font-bold text-neutral-900 dark:text-slate-100">{comparison.emoji1_character} {comparison.emoji1_name}</span>
                 <span className="text-xs text-neutral-400 dark:text-slate-500">Category</span>
@@ -101,8 +101,8 @@ export default async function ComparisonPage({ params }: PageProps) {
         {/* When to use */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">When To Use Each</h2>
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700">
+            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">When To Use Each</h2>
+            <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-4">
               <p className="text-neutral-700 dark:text-slate-300">{comparison.when_to_use}</p>
             </div>
           </section>
@@ -112,13 +112,13 @@ export default async function ComparisonPage({ params }: PageProps) {
         <AnimatedSection>
           {related.length > 0 && (
             <section className="mb-10">
-              <h2 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Related Comparisons</h2>
+              <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">Related Comparisons</h2>
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                 {related.filter((r) => r.slug !== slug).map((r) => (
                   <Link
                     key={r.slug}
                     href={`/vs/${r.slug}`}
-                    className="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 hover:shadow-md transition-shadow"
+                    className="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
                   >
                     <span className="text-2xl">{r.emoji1_character}</span>
                     <span className="text-sm font-bold text-neutral-400 dark:text-slate-500">vs</span>
@@ -133,10 +133,10 @@ export default async function ComparisonPage({ params }: PageProps) {
         {/* FAQ */}
         <AnimatedSection>
           <section className="mb-10">
-            <h2 className="text-xl font-bold text-primary-dark dark:text-white mb-4">FAQ</h2>
+            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">FAQ</h2>
             <div className="space-y-4">
               {faqSchema.mainEntity.map((faq: { name: string; acceptedAnswer: { text: string } }, i: number) => (
-                <details key={i} className="bg-white dark:bg-slate-800 rounded-lg shadow-sm dark:shadow-slate-900/30 border border-neutral-100 dark:border-slate-700 overflow-hidden">
+                <details key={i} className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm overflow-hidden">
                   <summary className="px-4 py-3 cursor-pointer font-medium text-neutral-900 dark:text-slate-100 hover:bg-neutral-50 dark:hover:bg-slate-700">{faq.name}</summary>
                   <p className="px-4 pb-4 text-sm text-neutral-600 dark:text-slate-300">{faq.acceptedAnswer.text}</p>
                 </details>
