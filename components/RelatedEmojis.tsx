@@ -1,23 +1,20 @@
-import EmojiCard from "./EmojiCard";
+import Link from "next/link";
 import { EmojiDocument } from "@/types/emoji";
 
 interface RelatedEmojisProps {
   emojis: Pick<EmojiDocument, "character" | "name" | "slug">[];
-  title?: string;
 }
 
-export default function RelatedEmojis({ emojis, title = "Related Emojis" }: RelatedEmojisProps) {
+export default function RelatedEmojis({ emojis }: RelatedEmojisProps) {
   if (emojis.length === 0) return null;
   return (
-    <div>
-      <h2 className="font-display text-lg text-primary-dark dark:text-white mb-4">{title}</h2>
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-        {emojis.map((emoji) => (
-          <div key={emoji.slug} className="flex-shrink-0">
-            <EmojiCard character={emoji.character} name={emoji.name} slug={emoji.slug} />
-          </div>
-        ))}
-      </div>
+    <div className="flex gap-7 sm:gap-9 overflow-x-auto scrollbar-hide pb-2 border-y border-[var(--line)] py-6">
+      {emojis.map((emoji) => (
+        <Link key={emoji.slug} href={`/emoji/${emoji.slug}`} className="fg-specimen fg-link shrink-0 w-20">
+          <span className="fg-specimen__g">{emoji.character}</span>
+          <span className="fg-specimen__c block text-center leading-tight line-clamp-2">{emoji.name}</span>
+        </Link>
+      ))}
     </div>
   );
 }

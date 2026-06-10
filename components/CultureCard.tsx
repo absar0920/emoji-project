@@ -8,12 +8,12 @@ interface CultureCardProps {
 export default function CultureCard({ region, meaning }: CultureCardProps) {
   const info = CULTURE_INFO[region as CultureRegion];
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-neutral-200/80 dark:border-slate-700">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-xl">{info?.flag || "🌐"}</span>
-        <h3 className="font-semibold text-primary-dark dark:text-white text-sm">{info?.label || region}</h3>
+    <div className="fg-entry fg-entry--ledger">
+      <span className="fg-entry__glyph" style={{ fontSize: "1.5rem" }}>{info?.flag || "🌐"}</span>
+      <div className="fg-entry__main">
+        <span className="fg-entry__name">{info?.label || region}</span>
+        <p className="fg-entry__text">{meaning}</p>
       </div>
-      <p className="text-sm text-neutral-700 dark:text-slate-300">{meaning}</p>
     </div>
   );
 }

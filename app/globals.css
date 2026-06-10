@@ -401,6 +401,24 @@ body {
 }
 .theme-editorial .fg-menuitem:hover { background: var(--paper-2); color: var(--accent); }
 
+/* ---------- native <details> ---------- */
+.theme-editorial details.fg-detail > summary { list-style: none; }
+.theme-editorial details.fg-detail > summary::-webkit-details-marker { display: none; }
+.theme-editorial .fg-chev { transition: transform 0.2s ease; }
+.theme-editorial details.fg-detail[open] .fg-chev { transform: rotate(180deg); }
+
+/* ---------- mono input (share/embed) ---------- */
+.theme-editorial .fg-input {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.theme-editorial .fg-input:focus { border-color: var(--accent); }
+
 /* ---------- links ---------- */
 .theme-editorial .fg-link { color: var(--ink); text-decoration: none; transition: color 0.15s ease; }
 .theme-editorial .fg-link:hover { color: var(--accent); }

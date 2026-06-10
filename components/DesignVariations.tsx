@@ -13,50 +13,28 @@ const VENDORS = [
   { key: "samsung", label: "Samsung", type: "native" as const },
 ];
 
-export default function DesignVariations({
-  character,
-  variations,
-}: DesignVariationsProps) {
+export default function DesignVariations({ character, variations }: DesignVariationsProps) {
   return (
-    <section id="design" className="mb-10">
-      <h2 className="font-display text-xl font-bold text-primary-dark dark:text-white mb-4">
-        How It Looks Across Platforms
-      </h2>
-      <div className="flex flex-wrap gap-3">
+    <div>
+      <div className="flex flex-wrap gap-x-10 gap-y-6 border-y border-[var(--line)] py-7">
         {VENDORS.map((vendor) => {
-          const imageUrl =
-            vendor.type === "image"
-              ? variations?.[vendor.key as keyof DesignVariationsType]
-              : null;
-
+          const imageUrl = vendor.type === "image" ? variations?.[vendor.key as keyof DesignVariationsType] : null;
           return (
-            <div
-              key={vendor.key}
-              className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm min-w-[100px]"
-            >
+            <figure key={vendor.key} className="fg-specimen">
               {vendor.type === "native" || !imageUrl ? (
-                <span className="text-4xl leading-none">{character}</span>
+                <span className="fg-specimen__g">{character}</span>
               ) : (
-                <img
-                  src={imageUrl}
-                  alt={`${vendor.label} ${character}`}
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 object-contain"
-                  loading="lazy"
-                />
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={imageUrl} alt={`${vendor.label} ${character}`} width={40} height={40} className="w-10 h-10 object-contain" loading="lazy" />
               )}
-              <span className="text-xs font-medium text-neutral-600 dark:text-slate-300">
-                {vendor.label}
-              </span>
-            </div>
+              <figcaption className="fg-specimen__c">{vendor.label}</figcaption>
+            </figure>
           );
         })}
       </div>
-      <p className="text-xs text-neutral-400 dark:text-slate-500 mt-2">
-        Emoji appearance varies by platform and device. Google Noto, Twemoji,
-        and OpenMoji are open-source.
+      <p className="mono text-[0.66rem] leading-relaxed t-muted mt-4">
+        Appearance varies by platform and device. Google Noto, Twemoji, and OpenMoji are open-source.
       </p>
-    </section>
+    </div>
   );
 }

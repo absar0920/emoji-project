@@ -16,11 +16,8 @@ const footerLinks = {
     { name: "Caption Generator", href: "/tools/caption-generator" },
     { name: "Trending Emojis", href: "/tools/emoji-trends" },
     { name: "Emoji Keyboard", href: "/tools/emoji-keyboard" },
-    { name: "Shortcodes", href: "/tools/emoji-shortcodes" },
     { name: "Emoji Compare", href: "/tools/emoji-vs" },
     { name: "Emoji Combos", href: "/tools/emoji-combos" },
-    { name: "Emoji Maker", href: "/tools/emoji-maker" },
-    { name: "Smart Search", href: "/tools/smart-search" },
   ],
   categories: [
     { name: "Smileys & Emotion", href: "/search?category=Smileys+%26+Emotion" },
@@ -37,68 +34,46 @@ const footerLinks = {
   ],
 };
 
+function Column({ title, links }: { title: string; links: { name: string; href: string }[] }) {
+  return (
+    <div>
+      <h3 className="fg-label mb-4">{title}</h3>
+      <ul className="space-y-2.5">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className="fg-link font-read text-[0.92rem]">{link.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function Footer() {
   return (
-    <>
-    <div className="h-px bg-primary" />
-    <footer className="bg-neutral-950 text-neutral-400 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">🧠</span>
-              <span className="font-display text-xl text-white">Emoji Intelligence</span>
+    <footer className="theme-editorial border-t-2 border-[var(--rule)]">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 py-14">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10">
+          <div className="col-span-2 sm:col-span-3 lg:col-span-1">
+            <div className="flex items-baseline gap-2 mb-3">
+              <span className="text-lg" aria-hidden="true">🧠</span>
+              <span className="font-display t-ink text-xl">Emoji Intelligence</span>
             </div>
-            <p className="text-sm leading-relaxed">
-              The world&apos;s most comprehensive emoji meaning platform. Gen-Z slang, platform context, and cultural intelligence.
+            <p className="t-muted text-sm leading-relaxed max-w-xs">
+              A complete field guide to what every emoji really means — Gen-Z slang, platform context, and cultural intelligence.
             </p>
           </div>
-          <div>
-            <h3 className="eyebrow text-neutral-500 mb-4">Popular Emojis</h3>
-            <ul className="space-y-2 text-sm">
-              {footerLinks.popular.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="hover:text-primary-300 transition-colors">{link.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="eyebrow text-neutral-500 mb-4">Tools</h3>
-            <ul className="space-y-2 text-sm">
-              {footerLinks.tools.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="hover:text-primary-300 transition-colors">{link.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="eyebrow text-neutral-500 mb-4">Categories</h3>
-            <ul className="space-y-2 text-sm">
-              {footerLinks.categories.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="hover:text-primary-300 transition-colors">{link.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="eyebrow text-neutral-500 mb-4">Company</h3>
-            <ul className="space-y-2 text-sm">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="hover:text-primary-300 transition-colors">{link.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Column title="Popular Emojis" links={footerLinks.popular} />
+          <Column title="Tools" links={footerLinks.tools} />
+          <Column title="Categories" links={footerLinks.categories} />
+          <Column title="Company" links={footerLinks.company} />
         </div>
-        <div className="border-t border-neutral-800 dark:border-slate-700 mt-12 pt-8 text-sm text-center">
-          <p>&copy; {new Date().getFullYear()} Emoji Intelligence. All rights reserved.</p>
+
+        <div className="border-t border-[var(--line)] mt-12 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 fg-label">
+          <span>© {new Date().getFullYear()} Emoji Intelligence</span>
+          <span>Emoji Meanings — A Field Guide · Nº 2026</span>
         </div>
       </div>
     </footer>
-    </>
   );
 }
