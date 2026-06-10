@@ -40,74 +40,46 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <>
-      <nav className="sticky top-0 z-50 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-neutral-200 dark:border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Left: Logo */}
-            <Link href="/" className="flex items-center gap-2 shrink-0">
-              <span className="text-2xl">🧠</span>
-              <span className="font-display text-xl text-primary-dark dark:text-white">
-                Emoji Intelligence
-              </span>
+    <div className="theme-editorial">
+      <nav
+        className="sticky top-0 z-50 border-b-[1.5px] border-[var(--rule)] backdrop-blur-md"
+        style={{ background: "color-mix(in srgb, var(--paper) 86%, transparent)" }}
+      >
+        <div className="max-w-6xl mx-auto px-5 sm:px-6">
+          <div className="flex items-center justify-between h-16 gap-4">
+            {/* Wordmark */}
+            <Link href="/" className="flex items-baseline gap-2 shrink-0 fg-link">
+              <span className="text-lg" aria-hidden="true">🧠</span>
+              <span className="font-display t-ink text-xl leading-none">Emoji Intelligence</span>
             </Link>
 
-            {/* Center: Nav links (desktop) */}
-            <div className="hidden md:flex items-center gap-6 ml-8">
+            {/* Center nav (desktop) */}
+            <div className="hidden md:flex items-center gap-7">
               <NavDropdown label="Emojis" items={EMOJI_CATEGORIES} />
               <NavDropdown label="Tools" items={TOOL_ITEMS} columns={2} />
-              <Link
-                href="/trending"
-                className="text-sm font-medium text-neutral-600 dark:text-slate-300 hover:text-primary transition-colors"
-              >
-                Trending
-              </Link>
-              <Link
-                href="/tools/emoji-vs"
-                className="text-sm font-medium text-neutral-600 dark:text-slate-300 hover:text-primary transition-colors"
-              >
-                Compare
-              </Link>
-              <Link
-                href="/blog"
-                className="text-sm font-medium text-neutral-600 dark:text-slate-300 hover:text-primary transition-colors"
-              >
-                Blog
-              </Link>
+              <Link href="/trending" className="fg-navlink">Trending</Link>
+              <Link href="/tools/emoji-vs" className="fg-navlink">Compare</Link>
+              <Link href="/blog" className="fg-navlink">Blog</Link>
             </div>
 
-            {/* Right: Search + Dark toggle + Mobile hamburger */}
+            {/* Right cluster */}
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              <button
-                onClick={onSearchClick}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 dark:bg-slate-700 hover:bg-neutral-200 dark:hover:bg-slate-600 text-neutral-500 dark:text-slate-400 transition-colors text-sm"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
+              <button onClick={onSearchClick} className="fg-navlink hidden sm:inline-flex h-9 px-3 border border-[var(--line)] hover:border-[var(--accent)] transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <span className="hidden sm:inline">Search emojis...</span>
-                <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-slate-600 text-xs text-neutral-500 dark:text-slate-400 font-mono">
-                  ⌘K
-                </kbd>
+                <span>Search</span>
+                <span className="opacity-50 ml-1" aria-hidden="true">⌘K</span>
               </button>
-
-              {/* Mobile hamburger */}
-              <button
-                onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden flex items-center justify-center w-9 h-9 rounded-full bg-neutral-100 dark:bg-slate-700 hover:bg-neutral-200 dark:hover:bg-slate-600 text-neutral-500 dark:text-slate-400 transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {/* Mobile: search + hamburger */}
+              <button onClick={onSearchClick} className="fg-iconbtn w-9 h-9 sm:hidden" aria-label="Search">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+              <button onClick={() => setMobileMenuOpen(true)} className="fg-iconbtn w-9 h-9 md:hidden" aria-label="Open menu">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
@@ -117,6 +89,6 @@ export default function Navbar({ onSearchClick }: NavbarProps) {
       </nav>
 
       <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-    </>
+    </div>
   );
 }

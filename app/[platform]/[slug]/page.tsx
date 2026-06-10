@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getEmojiBySlug, getAllSlugs } from "@/lib/mongodb";
+import Link from "next/link";
+import { getEmojiBySlug } from "@/lib/mongodb";
 import { generatePlatformMeta, generatePlatformBreadcrumb, generatePlatformFAQ } from "@/lib/seo";
 import { PLATFORM_KEYS, PLATFORM_LABELS, PLATFORM_ICONS, PlatformKey } from "@/types/emoji";
 import CopyButton from "@/components/CopyButton";
@@ -29,6 +30,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+function MeaningRow({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <dt>{label.replace(/_/g, " ")}</dt>
+      <dd>{children}</dd>
+    </div>
+  );
+}
+
 export default async function PlatformPage({ params }: PageProps) {
   const { platform, slug } = await params;
   if (!PLATFORM_KEYS.includes(platform as PlatformKey)) notFound();
@@ -37,7 +47,9 @@ export default async function PlatformPage({ params }: PageProps) {
   if (!emoji) notFound();
 
   const platformKey = platform as PlatformKey;
-  const platformData = ((emoji as any).platforms?.[platformKey] || (emoji as any)[platformKey]) as Record<string, unknown> | undefined;
+  const emojiRec = emoji as unknown as Record<string, unknown>;
+  const platforms = emojiRec.platforms as Record<string, Record<string, unknown>> | undefined;
+  const platformData = (platforms?.[platformKey] ?? (emojiRec[platformKey] as Record<string, unknown> | undefined)) as Record<string, unknown> | undefined;
   const platformLabel = PLATFORM_LABELS[platformKey];
   const platformIcon = PLATFORM_ICONS[platformKey];
 
@@ -46,83 +58,89 @@ export default async function PlatformPage({ params }: PageProps) {
 
   return (
     <ClientShell>
-      <main className="max-w-4xl mx-auto px-4 py-6">
-        {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 dark:text-slate-500 mb-4">
-          <a href="/" className="hover:text-primary">Home</a>{" › "}
-          <span className="capitalize">{platformLabel}</span>{" › "}
-          <span className="text-neutral-600 dark:text-slate-300">{emoji.character} {emoji.name}</span>
-        </nav>
+      <main className="theme-editorial min-h-screen">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 py-9 sm:py-12">
+          {/* Breadcrumb / running head */}
+          <div className="fg-runhead mb-10 sm:mb-12">
+            <span className="flex items-center gap-2 min-w-0">
+              <Link href="/" className="fg-link">Home</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span>{platformLabel}</span>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span className="t-ink truncate">{emoji.character} {emoji.name}</span>
+            </span>
+            <span className="hidden sm:inline shrink-0">Field Guide</span>
+          </div>
 
-        {/* Hero */}
-        <FadeIn>
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm p-6 sm:p-8 mb-6 flex flex-col sm:flex-row items-center gap-6">
-            <span className="text-8xl sm:text-[128px] leading-none">{emoji.character}</span>
-            <div className="text-center sm:text-left">
-              <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-1">
-                {emoji.name} on {platformLabel} {platformIcon}
-              </h1>
-              <p className="text-sm text-neutral-500 dark:text-slate-400 font-mono mb-3">{emoji.unicode} · {emoji.shortcode}</p>
-              <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                <CopyButton text={emoji.character} />
-                <a href={`/emoji/${emoji.slug}`} className="px-3 py-1.5 rounded-full text-sm font-medium bg-neutral-100 dark:bg-slate-700 text-neutral-700 dark:text-slate-300 hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors">
-                  See all meanings →
-                </a>
+          {/* Masthead */}
+          <FadeIn>
+            <div className="flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-8 border-b-2 border-[var(--rule)] pb-9">
+              <span className="text-[6.5rem] sm:text-[8.5rem] leading-[0.8] shrink-0">{emoji.character}</span>
+              <div className="flex-1 min-w-0 pb-1">
+                <p className="fg-kicker mb-3">{platformLabel} reading</p>
+                <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2.1rem] sm:text-[3rem]">
+                  {emoji.name} <span className="t-accent">on {platformLabel}</span>
+                </h1>
+                <p className="mono t-muted text-[0.72rem] tracking-wider mt-3">{emoji.unicode} · {emoji.shortcode}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <CopyButton text={emoji.character} tone="editorial" label={`Copy ${emoji.character}`} />
+                  <Link href={`/emoji/${emoji.slug}`} className="fg-navlink">All meanings →</Link>
+                </div>
               </div>
             </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
 
-        {/* Platform meaning */}
-        <AnimatedSection>
-          <section className="mb-10">
-            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">
-              {platformIcon} {platformLabel} Meaning
-            </h2>
-            {platformData ? (
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-neutral-200/80 dark:border-slate-700 space-y-4">
-                {Object.entries(platformData).map(([key, value]) => {
-                  if (Array.isArray(value)) {
-                    return (
-                      <div key={key}>
-                        <span className="text-sm text-neutral-500 dark:text-slate-400 capitalize block mb-1">{key.replace(/_/g, " ")}</span>
-                        <div className="flex flex-wrap gap-1">
-                          {value.map((tag: string) => (
-                            <span key={tag} className="text-sm px-2 py-0.5 bg-primary/10 dark:bg-primary/20 text-primary rounded-full">{tag}</span>
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  }
-                  if (typeof value === "number") {
-                    return (
-                      <div key={key} className="flex items-center justify-between">
-                        <span className="text-sm text-neutral-500 dark:text-slate-400 capitalize">{key.replace(/_/g, " ")}</span>
-                        <span className="font-medium text-accent-amber">{value}/100</span>
-                      </div>
-                    );
-                  }
-                  return (
-                    <div key={key}>
-                      <span className="text-xs text-neutral-500 dark:text-slate-400 capitalize block">{key.replace(/_/g, " ")}</span>
-                      <p className="text-neutral-700 dark:text-slate-300">{String(value)}</p>
-                    </div>
-                  );
-                })}
+          {/* Platform meaning */}
+          <AnimatedSection>
+            <section className="pt-12">
+              <div className="fg-chapter__bar">
+                <span className="fg-chapter__n">{platformIcon} {platformLabel}</span>
+                <span className="fg-chapter__count">the reading</span>
               </div>
-            ) : (
-              <p className="text-neutral-500 dark:text-slate-400">No {platformLabel} data available for this emoji.</p>
-            )}
-          </section>
-        </AnimatedSection>
+              <h2 className="fg-chapter__title mt-5 text-[1.6rem] sm:text-[2rem]">What it signals here</h2>
 
-        {/* See on other platforms */}
-        <AnimatedSection>
-          <section className="mb-10">
-            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">See on Other Platforms</h2>
-            <PlatformLinks emojiSlug={emoji.slug} currentPlatform={platformKey} />
-          </section>
-        </AnimatedSection>
+              {platformData && Object.keys(platformData).length > 0 ? (
+                <dl className="fg-deflist mt-7 border-t border-[var(--line)]">
+                  {Object.entries(platformData).map(([key, value]) => {
+                    if (Array.isArray(value)) {
+                      return (
+                        <MeaningRow key={key} label={key}>
+                          <span className="flex flex-wrap gap-x-3 gap-y-1 mono text-[0.7rem] uppercase tracking-wider t-accent">
+                            {value.map((tag: string) => <span key={tag}>{tag}</span>)}
+                          </span>
+                        </MeaningRow>
+                      );
+                    }
+                    if (typeof value === "number") {
+                      return (
+                        <MeaningRow key={key} label={key}>
+                          <span className="mono"><b className="t-accent text-base">{value}</b> <span className="t-muted">/ 100</span></span>
+                        </MeaningRow>
+                      );
+                    }
+                    return <MeaningRow key={key} label={key}>{String(value)}</MeaningRow>;
+                  })}
+                </dl>
+              ) : (
+                <p className="fg-prose t-muted italic mt-6">No {platformLabel} data is recorded for this emoji yet.</p>
+              )}
+            </section>
+          </AnimatedSection>
+
+          {/* Other platforms */}
+          <AnimatedSection>
+            <section className="pt-14">
+              <div className="fg-chapter__bar">
+                <span className="fg-chapter__n">Cross-platform</span>
+                <span className="fg-chapter__count">{PLATFORM_KEYS.length} platforms</span>
+              </div>
+              <h2 className="fg-chapter__title mt-5 text-[1.6rem] sm:text-[2rem]">See it elsewhere</h2>
+              <div className="mt-7">
+                <PlatformLinks emojiSlug={emoji.slug} currentPlatform={platformKey} tone="editorial" />
+              </div>
+            </section>
+          </AnimatedSection>
+        </div>
       </main>
       <Footer />
 

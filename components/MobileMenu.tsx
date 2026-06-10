@@ -45,60 +45,43 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[90] bg-white dark:bg-slate-900">
-      <div className="flex items-center justify-between px-4 h-16 border-b border-neutral-200 dark:border-slate-700">
-        <span className="font-display text-lg font-bold text-primary-dark dark:text-white">Menu</span>
-        <button onClick={onClose} className="p-2 text-neutral-500 dark:text-slate-400 hover:text-neutral-800">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="fixed inset-0 z-[90] bg-[var(--paper)]">
+      <div className="flex items-center justify-between px-5 h-16 border-b-[1.5px] border-[var(--rule)]">
+        <span className="fg-label">Menu</span>
+        <button onClick={onClose} className="fg-iconbtn w-9 h-9" aria-label="Close menu">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <div className="overflow-y-auto max-h-[calc(100vh-64px)] p-4 space-y-6">
-        {/* Direct links */}
-        <div className="space-y-1">
+
+      <div className="overflow-y-auto max-h-[calc(100vh-64px)] px-5 py-6 space-y-8">
+        <div className="fg-list border-t-0">
           {MENU_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={onClose}
-              className="block px-3 py-2.5 text-neutral-700 dark:text-slate-300 font-medium rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-800"
-            >
+            <Link key={link.href} href={link.href} onClick={onClose} className="fg-link block font-read text-lg py-2.5 border-b border-[var(--line)]">
               {link.label}
             </Link>
           ))}
         </div>
 
-        {/* Categories */}
         <div>
-          <h3 className="eyebrow text-xs font-semibold text-neutral-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Emojis</h3>
-          <div className="space-y-0.5">
+          <h3 className="fg-label mb-3">Emojis</h3>
+          <div>
             {CATEGORY_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={onClose}
-                className="flex items-center gap-2.5 px-3 py-2 text-sm text-neutral-600 dark:text-slate-300 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-800"
-              >
-                <span>{link.icon}</span>
+              <Link key={link.href} href={link.href} onClick={onClose} className="fg-menuitem flex items-center gap-2.5 py-2 font-read">
+                <span aria-hidden="true">{link.icon}</span>
                 <span>{link.name}</span>
               </Link>
             ))}
           </div>
         </div>
 
-        {/* Tools */}
         <div>
-          <h3 className="eyebrow text-xs font-semibold text-neutral-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Tools</h3>
-          <div className="space-y-0.5">
+          <h3 className="fg-label mb-3">Tools</h3>
+          <div>
             {TOOL_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={onClose}
-                className="flex items-center gap-2.5 px-3 py-2 text-sm text-neutral-600 dark:text-slate-300 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-800"
-              >
-                <span>{link.icon}</span>
+              <Link key={link.href} href={link.href} onClick={onClose} className="fg-menuitem flex items-center gap-2.5 py-2 font-read">
+                <span aria-hidden="true">{link.icon}</span>
                 <span>{link.name}</span>
               </Link>
             ))}
