@@ -9,28 +9,17 @@ export default function Error({
   unstable_retry: () => void;
 }) {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="text-center">
-        <span className="text-[100px] leading-none block mb-6">😵‍💫</span>
-        <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white mb-3">
-          Something Went Wrong
+    <div className="theme-editorial min-h-screen bg-[var(--paper)] flex items-center justify-center px-5">
+      <div className="text-center max-w-md">
+        <span className="text-[5.5rem] leading-none block mb-6">😵‍💫</span>
+        <p className="fg-kicker mb-4">Error</p>
+        <h1 className="font-display t-ink leading-[1.04] tracking-[-0.015em] text-[2.4rem] sm:text-[3rem] mb-4">
+          Something went wrong
         </h1>
-        <p className="text-neutral-500 dark:text-slate-400 mb-8">
-          An unexpected error occurred. Please try again.
-        </p>
+        <p className="t-muted font-read mb-8">An unexpected error occurred. Please try again.</p>
         <div className="flex flex-wrap gap-3 justify-center">
-          <button
-            onClick={unstable_retry}
-            className="px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors"
-          >
-            Try Again
-          </button>
-          <Link
-            href="/"
-            className="px-6 py-3 rounded-lg bg-neutral-100 dark:bg-slate-700 text-neutral-700 dark:text-slate-300 font-medium hover:bg-neutral-200 dark:hover:bg-slate-600 transition-colors"
-          >
-            Go Home
-          </Link>
+          <button onClick={unstable_retry} className="fg-btn px-6 py-3">Try again</button>
+          <Link href="/" className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-6 py-3">Go home</Link>
         </div>
       </div>
     </div>

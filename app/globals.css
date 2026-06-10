@@ -35,6 +35,18 @@ body {
 }
 @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
+/* Field-guide skeleton shimmer (warm; var fallbacks so it works anywhere) */
+.fg-shimmer {
+  background: linear-gradient(90deg, var(--paper-2, #efe8da) 25%, var(--paper, #f7f2e9) 50%, var(--paper-2, #efe8da) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+.dark .fg-shimmer {
+  background: linear-gradient(90deg, #1c1916 25%, #2a2620 50%, #1c1916 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
 /* =========================================================================
    THE FIELD GUIDE — homepage design system (scoped to .theme-editorial)
    A typeset reference book: Didone display, serif reading body, mono labels.

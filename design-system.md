@@ -203,6 +203,25 @@ Large italic Didone between ink rules. Use `fg-pull--sm` for 2–3 sentence note
 
 ---
 
+## 4b. Loading, empty & error states
+
+- **Route loading** (`loading.tsx`): use the helpers in `components/Skeleton.tsx` —
+  `<PageSkeleton wide?>` wraps theme-editorial + container + a `MastheadSkeleton`; fill it
+  with `<SkeletonRows>`, `<SkeletonGrid>`, or `<SkeletonSpecimens>`. Tool routes share a
+  single `app/tools/loading.tsx` (rendered inside the tools layout, so no wrapper needed).
+- **Skeletons** use the warm token-based `.fg-shimmer` (works in light/dark, anywhere).
+  No shadows, zero radius — same as everything else.
+- **Empty states**: a centered glyph + a mono uppercase line
+  (`mono text-[0.78rem] uppercase tracking-[0.14em] t-muted`) inside `border-y border-[var(--line)]`.
+- **Error / 404** (`app/error.tsx`, `app/not-found.tsx`): big glyph, `fg-kicker`, Didone
+  title, `t-muted` dek, `fg-btn` + `fg-btn-ghost` actions.
+- **Search modal** (`components/SearchModal.tsx`): a `theme-editorial` paper panel, ruled
+  input + `ESC` chip, `fg-kicker` section labels, hairline result rows (hover → `paper-2`),
+  accent loading dots. Reference pattern for any future overlay/dialog.
+
+The site `<body>` background is warm paper (`#f7f2e9` / dark `#100e0c`) so there's no cool-gray
+flash behind the translucent nav or during loads.
+
 ## 5. Do / Don't
 
 | Do | Don't |

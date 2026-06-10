@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable react-hooks/set-state-in-effect -- intentional state syncs on modal open/close + query change */
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Fuse from "fuse.js";
@@ -113,13 +114,26 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-start justify-center pt-[15vh]" onClick={onClose}>
-      <div className="w-full max-w-xl bg-white dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-2xl shadow-md overflow-hidden" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-neutral-200 dark:border-slate-700">
-          <span className="text-xl text-neutral-400 dark:text-slate-500">🔍</span>
-          <input ref={inputRef} type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search any emoji or feeling..." className="flex-1 text-lg outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-slate-500 dark:text-slate-100" />
-          <kbd className="px-2 py-1 rounded bg-neutral-100 dark:bg-slate-700 text-xs text-neutral-500 dark:text-slate-400 font-mono">ESC</kbd>
+    <div className="fixed inset-0 z-[100] bg-black/55 backdrop-blur-sm flex items-start justify-center pt-[14vh] px-4" onClick={onClose}>
+      <div
+        className="theme-editorial w-full max-w-xl bg-[var(--paper)] border border-[var(--line)] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center gap-3 px-5 py-4 border-b-2 border-[var(--rule)]">
+          <svg className="w-5 h-5 shrink-0 text-[var(--ink-3)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search any emoji or feeling…"
+            className="flex-1 min-w-0 text-lg outline-none bg-transparent font-read t-ink placeholder:text-[var(--ink-3)]"
+          />
+          <kbd className="mono text-[0.62rem] tracking-widest text-[var(--ink-3)] border border-[var(--line)] px-1.5 py-0.5">ESC</kbd>
         </div>
+
         <div className="max-h-80 overflow-y-auto">
           {loading && (
             <div className="px-5 py-4 space-y-3">
@@ -127,43 +141,38 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 <div key={i} className="flex items-center gap-3">
                   <Skeleton w="32px" h="32px" />
                   <div className="flex-1">
-                    <Skeleton w="70%" h="14px" className="mb-1.5" />
-                    <Skeleton w="50%" h="12px" />
+                    <Skeleton w="70%" h="13px" className="mb-1.5" />
+                    <Skeleton w="50%" h="11px" />
                   </div>
                 </div>
               ))}
             </div>
           )}
+
           {smartLoading && (
-            <div className="p-4 text-center">
-              <span className="text-lg">🤖</span>
-              <div className="flex justify-center gap-1 my-2">
-                <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0ms" }} />
-                <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "150ms" }} />
-                <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "300ms" }} />
+            <div className="p-6 text-center">
+              <span className="fg-kicker block mb-3">Thinking</span>
+              <div className="flex justify-center gap-1.5">
+                {[0, 150, 300].map((d) => (
+                  <span key={d} className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ background: "var(--accent)", animationDelay: `${d}ms` }} />
+                ))}
               </div>
-              <span className="text-xs text-neutral-400 dark:text-slate-500">Finding the perfect emojis...</span>
+              <span className="mono text-[0.66rem] uppercase tracking-[0.14em] t-muted block mt-3">Finding the perfect emojis…</span>
             </div>
           )}
+
           {smartResults.length > 0 && (
             <>
-              <div className="eyebrow px-5 py-2 text-xs font-medium text-primary bg-primary/5 dark:bg-primary/10">
-                AI Results
-              </div>
+              <div className="fg-kicker px-5 py-2 border-b border-[var(--line)] bg-[var(--paper-2)]">AI Results</div>
               <StaggerContainer>
                 {smartResults.map((item) => (
                   <StaggerItem key={item.slug}>
-                    <button
-                      onClick={() => handleSelect(item.slug)}
-                      className="w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-100 dark:hover:bg-slate-800 transition-colors text-left"
-                    >
-                      <span className="text-3xl">{item.character}</span>
-                      <div className="flex-1">
-                        <div className="font-medium text-neutral-900 dark:text-slate-100">{item.name}</div>
-                        <div className="text-xs text-neutral-600 dark:text-slate-300 line-clamp-1">
-                          {item.relevant_meaning}
-                        </div>
-                        <div className="text-xs text-primary">{item.why}</div>
+                    <button onClick={() => handleSelect(item.slug)} className="w-full flex items-center gap-3.5 px-5 py-3 text-left border-b border-[var(--line-2)] transition-colors hover:bg-[var(--paper-2)]">
+                      <span className="text-3xl shrink-0">{item.character}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-read t-ink">{item.name}</div>
+                        <div className="text-xs t-muted line-clamp-1">{item.relevant_meaning}</div>
+                        {item.why && <div className="fg-kicker mt-0.5">{item.why}</div>}
                       </div>
                     </button>
                   </StaggerItem>
@@ -171,21 +180,28 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               </StaggerContainer>
             </>
           )}
-          {!loading && query && results.length === 0 && smartResults.length === 0 && !smartLoading && <div className="p-6 text-center text-neutral-400 dark:text-slate-500">No emojis found for &quot;{query}&quot;</div>}
+
+          {!loading && query && results.length === 0 && smartResults.length === 0 && !smartLoading && (
+            <div className="p-6 text-center mono text-[0.72rem] uppercase tracking-[0.14em] t-muted">No emojis found for &ldquo;{query}&rdquo;</div>
+          )}
+
           <StaggerContainer>
             {results.map((item) => (
               <StaggerItem key={item.slug}>
-                <button onClick={() => handleSelect(item.slug)} className="w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-100 dark:hover:bg-slate-800 transition-colors text-left">
-                  <span className="text-3xl">{item.character}</span>
-                  <div>
-                    <div className="font-medium text-neutral-900 dark:text-slate-100">{item.name}</div>
-                    <div className="text-xs text-neutral-500 dark:text-slate-400">{item.category} · {item.shortcode}</div>
+                <button onClick={() => handleSelect(item.slug)} className="w-full flex items-center gap-3.5 px-5 py-3 text-left border-b border-[var(--line-2)] transition-colors hover:bg-[var(--paper-2)]">
+                  <span className="text-3xl shrink-0">{item.character}</span>
+                  <div className="min-w-0">
+                    <div className="font-read t-ink">{item.name}</div>
+                    <div className="fg-label normal-case mt-0.5" style={{ textTransform: "none" }}>{item.category} · {item.shortcode}</div>
                   </div>
                 </button>
               </StaggerItem>
             ))}
           </StaggerContainer>
-          {!loading && !query && <div className="p-4 text-sm text-neutral-400 dark:text-slate-500 text-center">Type to search emojis by name, feeling, or shortcode</div>}
+
+          {!loading && !query && (
+            <div className="p-6 text-center mono text-[0.72rem] uppercase tracking-[0.14em] t-muted">Search emojis by name, feeling, or shortcode</div>
+          )}
         </div>
       </div>
     </div>
