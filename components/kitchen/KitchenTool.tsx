@@ -28,11 +28,8 @@ export default function KitchenTool() {
         `/api/tools/kitchen?emoji1=${encodeURIComponent(emoji1.character)}&emoji2=${encodeURIComponent(emoji2.character)}`
       );
       const data = await res.json();
-      if (data.result_url) {
-        setResultUrl(data.result_url);
-      } else {
-        setNotFound(true);
-      }
+      if (data.result_url) setResultUrl(data.result_url);
+      else setNotFound(true);
     } catch {
       setNotFound(true);
     } finally {
@@ -41,68 +38,44 @@ export default function KitchenTool() {
   }
 
   return (
-    <section className="mb-10">
-      {/* Pickers */}
-      <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
-        <div className="flex-1 w-full">
-          <div className="text-center mb-2">
-            {emoji1 ? (
-              <span className="text-6xl">{emoji1.character}</span>
-            ) : (
-              <span className="text-6xl opacity-30">❓</span>
-            )}
-          </div>
+    <section className="mb-4">
+      <div className="flex flex-col sm:flex-row items-center gap-5 mb-7">
+        <div className="flex-1 w-full flex flex-col items-center gap-3">
+          <span className={`text-6xl ${emoji1 ? "" : "opacity-30"}`}>{emoji1?.character || "❓"}</span>
           <EmojiPicker onSelect={setEmoji1} selected={emoji1?.character} />
         </div>
 
-        <span className="text-3xl font-bold text-primary">+</span>
+        <span className="font-display t-accent text-4xl shrink-0">+</span>
 
-        <div className="flex-1 w-full">
-          <div className="text-center mb-2">
-            {emoji2 ? (
-              <span className="text-6xl">{emoji2.character}</span>
-            ) : (
-              <span className="text-6xl opacity-30">❓</span>
-            )}
-          </div>
+        <div className="flex-1 w-full flex flex-col items-center gap-3">
+          <span className={`text-6xl ${emoji2 ? "" : "opacity-30"}`}>{emoji2?.character || "❓"}</span>
           <EmojiPicker onSelect={setEmoji2} selected={emoji2?.character} />
         </div>
       </div>
 
-      {/* Cook button */}
       <div className="text-center mb-8">
-        <button
-          onClick={handleCook}
-          disabled={!emoji1 || !emoji2 || loading}
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-accent-violet text-white font-bold text-lg shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
-        >
-          {loading ? "Cooking..." : "Cook It! 🍳"}
+        <button onClick={handleCook} disabled={!emoji1 || !emoji2 || loading} className="fg-btn px-8 py-3">
+          {loading ? "Cooking…" : "Cook it 🍳"}
         </button>
       </div>
 
-      {/* Result */}
       {resultUrl && (
         <FadeIn className="text-center">
-          <div className="inline-block bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg dark:shadow-slate-900/30">
+          <div className="inline-block fg-card p-8">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={resultUrl} alt="Emoji Kitchen result" width={128} height={128} className="mx-auto" />
           </div>
-          <div className="flex gap-2 justify-center mt-4">
-            <CopyButton text={resultUrl} label="Copy URL" />
-            <a
-              href={resultUrl}
-              download
-              className="px-3 py-1.5 rounded-full text-sm font-medium bg-accent-emerald text-white hover:bg-emerald-700 transition-colors"
-            >
-              Download
-            </a>
+          <div className="flex gap-3 justify-center mt-5">
+            <CopyButton text={resultUrl} label="Copy URL" tone="editorial" />
+            <a href={resultUrl} download className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-4 py-2">Download</a>
           </div>
         </FadeIn>
       )}
 
       {notFound && (
-        <FadeIn className="text-center py-8">
-          <span className="text-6xl block mb-4">🤷</span>
-          <p className="text-neutral-500 dark:text-slate-400">No combination found for these two emojis. Try different ones!</p>
+        <FadeIn className="text-center py-8 border-y border-[var(--line)]">
+          <span className="text-5xl block mb-4">🤷</span>
+          <p className="mono text-[0.78rem] uppercase tracking-[0.14em] t-muted">No combination found — try a different pair</p>
         </FadeIn>
       )}
     </section>

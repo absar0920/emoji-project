@@ -46,9 +46,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) notFound();
 
   const categoryId = post.categories[0]?.id;
-  const { posts: relatedPosts } = categoryId
-    ? await getPosts(1, 4, categoryId)
-    : { posts: [] };
+  const { posts: relatedPosts } = categoryId ? await getPosts(1, 4, categoryId) : { posts: [] };
   const related = relatedPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
@@ -65,10 +63,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     dateModified: post.modified,
     author: { "@type": "Person", name: post.author },
     ...(post.featuredImage ? { image: post.featuredImage } : {}),
-    publisher: {
-      "@type": "Organization",
-      name: process.env.NEXT_PUBLIC_SITE_NAME || "Emoji Intelligence",
-    },
+    publisher: { "@type": "Organization", name: process.env.NEXT_PUBLIC_SITE_NAME || "Emoji Intelligence" },
   };
 
   const breadcrumbSchema = {
@@ -83,77 +78,75 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <ClientShell>
-      <main className="max-w-3xl mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 dark:text-slate-500 mb-4">
-          <a href="/" className="hover:text-primary">Home</a>{" › "}
-          <a href="/blog" className="hover:text-primary">Blog</a>{" › "}
-          <span className="text-neutral-600 dark:text-slate-400 line-clamp-1">{post.title}</span>
-        </nav>
-
-        <FadeIn>
-          {/* Featured Image */}
-          {post.featuredImage ? (
-            <div className="aspect-[2/1] relative rounded-2xl overflow-hidden mb-6">
-              <Image
-                src={post.featuredImage}
-                alt={post.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
-                priority
-              />
-            </div>
-          ) : (
-            <div className="aspect-[3/1] bg-primary-light dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-6">
-              <span className="text-6xl">📝</span>
-            </div>
-          )}
-
-          {/* Meta */}
-          <div className="flex items-center gap-3 text-sm text-neutral-400 dark:text-slate-500 mb-3">
-            <span>{formattedDate}</span>
-            <span>·</span>
-            <span>{post.author}</span>
+      <main className="theme-editorial min-h-screen">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 py-9 sm:py-12">
+          {/* Running head */}
+          <div className="fg-runhead mb-10">
+            <span className="flex items-center gap-2 min-w-0">
+              <Link href="/" className="fg-link">Home</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <Link href="/blog" className="fg-link">Journal</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span className="t-ink truncate">{post.title}</span>
+            </span>
+            <span className="hidden sm:inline shrink-0">Field Guide</span>
           </div>
 
-          {/* Categories */}
-          {post.categories.length > 0 && (
-            <div className="flex gap-1.5 mb-4">
-              {post.categories.map((cat) => (
-                <Link
-                  key={cat.id}
-                  href={`/blog/category/${cat.slug}`}
-                  className="text-xs px-2 py-0.5 rounded-full bg-primary/10 dark:bg-primary/20 text-primary font-medium hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
-                >
-                  {cat.name}
-                </Link>
-              ))}
-            </div>
-          )}
+          <FadeIn>
+            {/* Categories */}
+            {post.categories.length > 0 && (
+              <div className="flex flex-wrap gap-x-3 gap-y-1 mb-5">
+                {post.categories.map((cat) => (
+                  <Link key={cat.id} href={`/blog/category/${cat.slug}`} className="fg-kicker hover:underline">{cat.name}</Link>
+                ))}
+              </div>
+            )}
 
-          {/* Title */}
-          <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white mb-8">
-            {post.title}
-          </h1>
-        </FadeIn>
+            {/* Title */}
+            <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2.4rem] sm:text-[3.4rem]">{post.title}</h1>
 
-        {/* Content */}
-        <AnimatedSection>
-          <BlogContent html={post.content} />
-        </AnimatedSection>
+            {/* Meta */}
+            <p className="fg-label mt-5 flex items-center gap-2.5">
+              <span>{formattedDate}</span>
+              <span className="opacity-40" aria-hidden="true">·</span>
+              <span>{post.author}</span>
+            </p>
 
-        {/* Related Posts */}
-        {related.length > 0 && (
-          <AnimatedSection className="mt-12">
-            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white mb-4">Related Posts</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {related.map((p) => (
-                <BlogCard key={p.id} post={p} />
-              ))}
+            {/* Featured Image */}
+            {post.featuredImage ? (
+              <div className="aspect-[2/1] relative overflow-hidden border border-[var(--line)] mt-8">
+                <Image src={post.featuredImage} alt={post.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 768px" priority />
+              </div>
+            ) : (
+              <div className="aspect-[3/1] bg-[var(--paper-2)] border border-[var(--line)] flex items-center justify-center mt-8">
+                <span className="text-6xl">📝</span>
+              </div>
+            )}
+          </FadeIn>
+
+          {/* Content */}
+          <AnimatedSection>
+            <div className="mt-10 border-t-2 border-[var(--rule)] pt-9">
+              <BlogContent html={post.content} />
             </div>
           </AnimatedSection>
-        )}
+
+          {/* Related */}
+          {related.length > 0 && (
+            <AnimatedSection>
+              <section className="pt-12">
+                <div className="fg-chapter__bar">
+                  <span className="fg-chapter__n">More</span>
+                  <span className="fg-chapter__count">from the journal</span>
+                </div>
+                <h2 className="fg-chapter__title mt-5 text-[1.6rem] sm:text-[2rem]">Related reading</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-7">
+                  {related.map((p) => <BlogCard key={p.id} post={p} />)}
+                </div>
+              </section>
+            </AnimatedSection>
+          )}
+        </div>
       </main>
       <Footer />
 

@@ -8,8 +8,8 @@ export default function ToolsLayout({
 }) {
   return (
     <ClientShell>
-      <main className="max-w-4xl mx-auto px-4 py-6">
-        {children}
+      <main className="theme-editorial min-h-screen">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 py-9 sm:py-12">{children}</div>
       </main>
       <Footer />
     </ClientShell>

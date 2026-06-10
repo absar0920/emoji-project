@@ -5,6 +5,8 @@ metadata:
   type: reference
 ---
 
+**Canonical reference: [`design-system.md`](../../design-system.md) at the repo root** documents every Field Guide token and `fg-*` primitive, the page recipe, and do/don't — read it before building or restyling any page. The whole site (home, nav, footer, search, blog, emoji, platform, trending, all tools, vs/combo/culture, about/privacy/terms) is now on this system.
+
 In this project (Tailwind v4 + Next 16), a bare `:root { --color-primary: ... }` or `.dark { --color-primary: ... }` block that redefines a variable declared in `@theme` is **silently dropped at compile** (Lightning CSS treats `@theme` as the source of truth for `--color-*`). This is why the old "editorial magenta" override in `app/globals.css` never applied and the site rendered the indigo `@theme` default instead.
 
 **How to re-skin reliably:**

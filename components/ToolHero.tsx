@@ -6,17 +6,12 @@ interface ToolHeroProps {
 
 export default function ToolHero({ title, description, badge }: ToolHeroProps) {
   return (
-    <div className="rule-top pt-10 pb-8 mb-8">
-      {badge && (
-        <p className="eyebrow mb-3 flex items-center gap-2">
-          <span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />
-          {badge}
-        </p>
-      )}
-      <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05]">
+    <header className="border-b-2 border-[var(--rule)] pb-7 mb-9">
+      <p className="fg-kicker mb-4">{badge || "Tool"}</p>
+      <h1 className="font-display t-ink leading-[1.0] tracking-[-0.015em] text-[2.4rem] sm:text-[3.4rem]">
         {title}
       </h1>
-      <p className="mt-4 text-lg text-neutral-500 dark:text-slate-400 max-w-2xl leading-relaxed">{description}</p>
-    </div>
+      <p className="t-muted font-read mt-4 max-w-2xl text-lg leading-relaxed">{description}</p>
+    </header>
   );
 }

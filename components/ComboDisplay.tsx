@@ -8,14 +8,16 @@ interface ComboDisplayProps {
 
 export default function ComboDisplay({ emojis, label, primary = false }: ComboDisplayProps) {
   return (
-    <div className={`bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-neutral-200/80 dark:border-slate-700 ${primary ? "border-primary/40" : ""}`}>
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-sm font-medium text-neutral-600 dark:text-slate-300">{label}</span>
-        {primary && <span className="text-xs px-2 py-0.5 bg-primary text-white rounded-full font-medium">Top Pick</span>}
+    <div className="fg-card p-4" style={primary ? { borderColor: "var(--accent)" } : undefined}>
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <span className="fg-label">{label}</span>
+        {primary && (
+          <span className="mono text-[0.58rem] uppercase tracking-[0.12em] px-2 py-0.5 bg-accent-ed text-[var(--paper)] shrink-0">Top Pick</span>
+        )}
       </div>
-      <div className="flex gap-1 text-4xl mb-3 flex-wrap">
+      <div className="flex gap-1.5 text-4xl mb-4 flex-wrap">
         {emojis.map((emoji, i) => (
-          <span key={i} className="hover:scale-110 transition-transform cursor-default">{emoji}</span>
+          <span key={i}>{emoji}</span>
         ))}
       </div>
       <CopyAllButton emojis={emojis} />

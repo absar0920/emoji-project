@@ -15,40 +15,30 @@ export default async function EmojiTrendsPage() {
 
   return (
     <>
-      <ToolHero
-        title="Trending Emojis"
-        description="See which emojis are trending right now across all platforms."
-        badge="🔥 Live"
-      />
+      <ToolHero title="Trending Emojis" description="See which emojis are trending right now across all platforms." badge="Live" />
 
-      <div className="space-y-3">
-        {trending.map((emoji, i) => (
-          <Link
-            key={emoji.slug}
-            href={`/emoji/${emoji.slug}`}
-            className="card-lift flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm"
-          >
-            <span className="text-sm font-bold text-neutral-400 dark:text-slate-500 w-6">#{i + 1}</span>
-            <span className="text-4xl">{emoji.character}</span>
-            <div className="flex-1">
-              <span className="font-medium text-neutral-900 dark:text-slate-100">{emoji.name}</span>
-              <span className="text-xs text-neutral-500 dark:text-slate-400 block">{emoji.category}</span>
-            </div>
-            {emoji.virality?.trend_score != null && (
-              <span className="px-3 py-1 rounded-full border border-neutral-200 dark:border-slate-700 text-accent-amber text-sm font-medium">
-                🔥 {emoji.virality.trend_score}
-              </span>
-            )}
-          </Link>
-        ))}
-
-        {trending.length === 0 && (
-          <div className="text-center py-12 text-neutral-400 dark:text-slate-500">
-            <span className="text-6xl block mb-4">📊</span>
-            <p>No trending data available yet.</p>
-          </div>
-        )}
-      </div>
+      {trending.length > 0 ? (
+        <div className="fg-list">
+          {trending.map((emoji, i) => (
+            <Link key={emoji.slug} href={`/emoji/${emoji.slug}`} className="fg-link flex items-center gap-4 py-3.5 border-b border-[var(--line)]">
+              <span className="mono t-muted text-[0.7rem] w-7 shrink-0 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+              <span className="text-3xl shrink-0">{emoji.character}</span>
+              <div className="flex-1 min-w-0">
+                <span className="font-read t-ink block truncate">{emoji.name}</span>
+                {emoji.category && <span className="fg-label">{emoji.category}</span>}
+              </div>
+              {emoji.virality?.trend_score != null && (
+                <span className="fg-label shrink-0">Trend <b className="t-accent text-sm">{emoji.virality.trend_score}</b></span>
+              )}
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="py-16 border-y border-[var(--line)] text-center">
+          <span className="text-5xl block mb-4">📊</span>
+          <p className="mono text-[0.78rem] uppercase tracking-[0.14em] t-muted">No trending data available yet</p>
+        </div>
+      )}
     </>
   );
 }

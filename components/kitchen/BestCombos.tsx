@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatedSection } from "@/components/MotionWrappers";
+import { KSection } from "./Section";
 
 const TABS = ["Faces", "Animals", "Food", "Weird & Viral", "Blob Trick"] as const;
 type Tab = typeof TABS[number];
@@ -18,7 +18,6 @@ const FACE_COMBOS = [
   { combo: "😂 + 😂", result: "Ultra-laughing face", why: "Double emoji trick — amplified version of the same expression" },
   { combo: "😭 + 😭", result: "Ultra-crying face", why: "More tears, more intensity, more visual weight" },
 ];
-
 const ANIMAL_COMBOS = [
   { combo: "🐸 + 🐱", result: "Frog-cat hybrid", why: "Unsettling big eyes with a tiny cat mouth" },
   { combo: "🐶 + 🦊", result: "Fox-dog", why: "Simultaneously feral and fluffy" },
@@ -27,7 +26,6 @@ const ANIMAL_COMBOS = [
   { combo: "🐻 + 😴", result: "Sleeping bear", why: "Cozy combination — perfect for goodnight messages" },
   { combo: "🦊 + 😎", result: "Sunglasses fox", why: "Charismatic animal combo" },
 ];
-
 const FOOD_COMBOS = [
   { combo: "🍕 + 🍣", result: "Sushi-pizza hybrid", why: "Gloriously wrong food fusion" },
   { combo: "🍕 + 😭", result: "Crying pizza", why: "Genuine pathos from a food item" },
@@ -36,7 +34,6 @@ const FOOD_COMBOS = [
   { combo: "🌶️ + 😤", result: "Angry pepper face", why: "Fiery personality energy" },
   { combo: "🍕 + 👻", result: "Ghost pizza", why: "Surreal viral content" },
 ];
-
 const WEIRD_COMBOS = [
   { combo: "🪣 + 😭", result: "Face crying into bucket", why: "Or is itself the bucket of tears — no one is sure" },
   { combo: "💀 + 🎂", result: "Birthday-death cake", why: "Congratulatory dread" },
@@ -45,86 +42,56 @@ const WEIRD_COMBOS = [
   { combo: "🌕 + 😭", result: "Crying moon", why: "Lonely/late-night energy" },
   { combo: "😈 + 🥺", result: "Devil pleading", why: "Conflict between cute and evil — viral on TikTok and Twitter/X" },
 ];
-
 const BLOB_CONTENT = [
-  { combo: "🪄 + 😊", result: "Blob smiley", note: "The classic pre-2017 Google smiley" },
-  { combo: "🪄 + 😂", result: "Blob laughing", note: "Rounded, amorphous laughing face" },
-  { combo: "🪄 + 😍", result: "Blob heart-eyes", note: "Nostalgic heart-eyes in blob style" },
-  { combo: "🪄 + 😭", result: "Blob crying", note: "The original Google crying blob" },
+  { combo: "🪄 + 😊", result: "Blob smiley", why: "The classic pre-2017 Google smiley" },
+  { combo: "🪄 + 😂", result: "Blob laughing", why: "Rounded, amorphous laughing face" },
+  { combo: "🪄 + 😍", result: "Blob heart-eyes", why: "Nostalgic heart-eyes in blob style" },
+  { combo: "🪄 + 😭", result: "Blob crying", why: "The original Google crying blob" },
 ];
 
-const TAB_DATA: Record<Tab, { combos: { combo: string; result: string; why?: string; note?: string }[] }> = {
-  Faces: { combos: FACE_COMBOS },
-  Animals: { combos: ANIMAL_COMBOS },
-  Food: { combos: FOOD_COMBOS },
-  "Weird & Viral": { combos: WEIRD_COMBOS },
-  "Blob Trick": { combos: BLOB_CONTENT },
+const TAB_DATA: Record<Tab, { combo: string; result: string; why: string }[]> = {
+  Faces: FACE_COMBOS, Animals: ANIMAL_COMBOS, Food: FOOD_COMBOS, "Weird & Viral": WEIRD_COMBOS, "Blob Trick": BLOB_CONTENT,
 };
 
 export default function BestCombos() {
   const [activeTab, setActiveTab] = useState<Tab>("Faces");
-  const data = TAB_DATA[activeTab];
+  const combos = TAB_DATA[activeTab];
 
   return (
-    <section className="py-14 rule-top">
-      <div className="max-w-5xl mx-auto px-4">
-        <AnimatedSection>
-          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />Combos</p>
-          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
-            Best Emoji Kitchen Combos in 2026
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-6">The most shared, funniest, and most surprising combinations</p>
-        </AnimatedSection>
+    <KSection kicker="Combos" title="Best Emoji Kitchen Combos in 2026" dek="The most shared, funniest, and most surprising combinations.">
+      <div className="fg-tabs mb-7 overflow-x-auto scrollbar-hide">
+        {TABS.map((tab) => (
+          <button key={tab} onClick={() => setActiveTab(tab)} aria-pressed={activeTab === tab} data-active={activeTab === tab} className="fg-tab">
+            <span aria-hidden="true">{TAB_ICONS[tab]}</span>{tab}
+          </button>
+        ))}
+      </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-6">
-          {TABS.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                activeTab === tab
-                  ? "bg-primary text-white shadow-md"
-                  : "bg-white dark:bg-slate-700 text-neutral-600 dark:text-slate-300 border border-neutral-200 dark:border-slate-600 hover:bg-neutral-50 dark:hover:bg-slate-600"
-              }`}
-            >
-              <span>{TAB_ICONS[tab]}</span>
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-          {data.combos.map((c) => (
-            <div key={c.combo} className="bg-neutral-50 dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/40">
-              <span className="text-sm font-mono font-bold text-primary block mb-1">{c.combo}</span>
-              <p className="text-sm font-medium text-primary-dark dark:text-white mb-1">{c.result}</p>
-              <p className="text-xs text-neutral-500 dark:text-slate-400">{c.why || c.note}</p>
+      <div className="fg-list mb-8">
+        {combos.map((c) => (
+          <div key={c.combo} className="fg-entry fg-entry--ledger">
+            <span className="fg-entry__glyph" style={{ width: "4rem", fontSize: "1.4rem" }}>{c.combo}</span>
+            <div className="fg-entry__main">
+              <span className="fg-entry__name">{c.result}</span>
+              <p className="fg-entry__text">{c.why}</p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
-        {activeTab === "Blob Trick" && (
-          <AnimatedSection>
-            <div className="bg-violet-50 dark:bg-violet-950/30 border-l-4 border-accent-violet rounded-r-xl p-5">
-              <h3 className="font-bold text-primary-dark dark:text-white mb-1">💡 The Secret Blob Emojis</h3>
-              <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-                When you select the 🪄 magic wand and then a face emoji, certain combinations surface Google&apos;s legacy blob emoji designs — the rounded, amorphous style used from 2013 to 2017. These were retired from the main emoji set but preserved inside Emoji Kitchen&apos;s library. The Android 16 update expanded the number of accessible blob variants.
-              </p>
-            </div>
-          </AnimatedSection>
-        )}
-
-        {activeTab !== "Blob Trick" && (
-          <AnimatedSection>
-            <div className="bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-primary rounded-r-xl p-5">
-              <h3 className="font-bold text-primary-dark dark:text-white mb-1">Why These Combos Go Viral</h3>
-              <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-                The combinations with the highest surprise-to-source-emoji ratio are the ones that spread — the gap between what you put in and what you get out is the joke. Face mashups dominate share volume because they mirror real emotional complexity that no single Unicode emoji can express.
-              </p>
-            </div>
-          </AnimatedSection>
+      <div className="fg-pull fg-pull--sm">
+        {activeTab === "Blob Trick" ? (
+          <>
+            <span className="fg-kicker">The Secret Blobs</span>
+            <p>Select 🪄 then a face emoji and certain pairings surface Google&apos;s legacy blob designs — the rounded, amorphous style from 2013–2017, retired from the main set but preserved in the Kitchen library. Android 16 expanded the accessible blob variants.</p>
+          </>
+        ) : (
+          <>
+            <span className="fg-kicker">Why They Go Viral</span>
+            <p>The combos with the highest surprise-to-source ratio spread fastest — the gap between input and output is the joke. Face mashups dominate share volume because they mirror emotional complexity no single Unicode emoji can express.</p>
+          </>
         )}
       </div>
-    </section>
+    </KSection>
   );
 }

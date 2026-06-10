@@ -1,4 +1,4 @@
-import { AnimatedSection } from "@/components/MotionWrappers";
+import { KSection } from "./Section";
 
 const COMBOS = [
   { category: "Emotional extremes", combo: "😂 + 😭", result: "Crying-laughing hybrid", why: "Captures \"too funny to handle\"" },
@@ -20,43 +20,24 @@ const COMBOS = [
 
 export default function ComboReferenceTable() {
   return (
-    <section className="py-14">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="rounded-2xl border border-neutral-200/70 dark:border-slate-700/50 bg-neutral-50 dark:bg-slate-800/50 p-6 sm:p-8">
-        <AnimatedSection>
-          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />Reference</p>
-          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
-            Emoji Kitchen Combos — Complete Category Reference
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-8">Quick reference for the best combinations across every category</p>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Category</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Combo</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">What You Get</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Why It Works</th>
-                </tr>
-              </thead>
-              <tbody>
-                {COMBOS.map((row, i) => (
-                  <tr key={row.combo} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-                    <td className="px-4 py-3 font-medium text-primary-dark dark:text-white text-xs">{row.category}</td>
-                    <td className="px-4 py-3 font-mono text-sm">{row.combo}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{row.result}</td>
-                    <td className="px-4 py-3 text-neutral-500 dark:text-slate-400 text-xs">{row.why}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </AnimatedSection>
-        </div>
+    <KSection kicker="Reference" title="Emoji Kitchen Combos — Complete Reference" dek="Quick reference for the best combinations across every category.">
+      <div className="fg-table-wrap">
+        <table className="fg-table">
+          <thead>
+            <tr><th>Category</th><th>Combo</th><th>What You Get</th><th>Why It Works</th></tr>
+          </thead>
+          <tbody>
+            {COMBOS.map((row) => (
+              <tr key={row.combo}>
+                <td className="muted whitespace-nowrap">{row.category}</td>
+                <td className="mono whitespace-nowrap" style={{ fontSize: "1rem" }}>{row.combo}</td>
+                <td className="strong">{row.result}</td>
+                <td className="muted">{row.why}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    </section>
+    </KSection>
   );
 }

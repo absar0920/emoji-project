@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
 
@@ -10,69 +11,43 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <ClientShell>
-      <main className="max-w-3xl mx-auto px-4 py-12">
-        <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />LEGAL</p>
-        <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-6">
-          Privacy Policy
-        </h1>
-        <p className="text-sm text-neutral-400 dark:text-slate-500 mb-8">
-          Last updated: May 2026
-        </p>
+      <main className="theme-editorial min-h-screen">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 py-9 sm:py-12">
+          <div className="fg-runhead mb-10 sm:mb-12">
+            <span className="flex items-center gap-2">
+              <Link href="/" className="fg-link">Home</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span className="t-ink">Privacy</span>
+            </span>
+            <span className="hidden sm:inline">Field Guide</span>
+          </div>
 
-        <div className="prose prose-neutral dark:prose-invert max-w-3xl space-y-6 text-neutral-700 dark:text-slate-300">
-          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
-            What We Collect
-          </h2>
-          <p>
-            Emoji Intelligence does not require user accounts or login.
-            We do not collect personal information such as names, email
-            addresses, or phone numbers.
-          </p>
+          <div className="border-b-2 border-[var(--rule)] pb-7 mb-9">
+            <p className="fg-kicker mb-4">Legal · Last updated May 2026</p>
+            <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2.6rem] sm:text-[3.6rem]">Privacy Policy</h1>
+          </div>
 
-          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
-            Cookies &amp; Local Storage
-          </h2>
-          <p>
-            We use browser localStorage to store your recent emoji
-            selections for convenience. No tracking cookies are set by
-            Emoji Intelligence directly.
-          </p>
+          <div className="fg-article">
+            <h2>What We Collect</h2>
+            <p>Emoji Intelligence does not require user accounts or login. We do not collect personal information such as names, email addresses, or phone numbers.</p>
 
-          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
-            Third-Party Services
-          </h2>
-          <p>We use the following third-party services:</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>
-              <strong>Google AdSense</strong> — for displaying
-              advertisements. Google may use cookies for ad
-              personalization.
-            </li>
-            <li>
-              <strong>Google Gemini API</strong> — for powering AI
-              features. Text prompts are sent to Google&apos;s servers for
-              processing.
-            </li>
-            <li>
-              <strong>Vercel</strong> — for hosting and analytics.
-              Standard server logs may be collected.
-            </li>
-          </ul>
+            <h2>Cookies &amp; Local Storage</h2>
+            <p>We use browser localStorage to store your recent emoji selections for convenience. No tracking cookies are set by Emoji Intelligence directly.</p>
 
-          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">
-            Data Retention
-          </h2>
-          <p>
-            We do not store personal data on our servers. AI tool inputs
-            may be cached temporarily (up to 1 hour) for performance but
-            are not linked to individual users.
-          </p>
+            <h2>Third-Party Services</h2>
+            <p>We use the following third-party services:</p>
+            <ul>
+              <li><strong>Google AdSense</strong> — for displaying advertisements. Google may use cookies for ad personalization.</li>
+              <li><strong>Google Gemini API</strong> — for powering AI features. Text prompts are sent to Google&apos;s servers for processing.</li>
+              <li><strong>Vercel</strong> — for hosting and analytics. Standard server logs may be collected.</li>
+            </ul>
 
-          <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1]">Contact</h2>
-          <p>
-            For privacy-related questions, please reach out via the
-            contact information on our About page.
-          </p>
+            <h2>Data Retention</h2>
+            <p>We do not store personal data on our servers. AI tool inputs may be cached temporarily (up to 1 hour) for performance but are not linked to individual users.</p>
+
+            <h2>Contact</h2>
+            <p>For privacy-related questions, please reach out via the contact information on our About page.</p>
+          </div>
         </div>
       </main>
       <Footer />

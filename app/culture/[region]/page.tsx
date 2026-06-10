@@ -32,75 +32,80 @@ export default async function CulturePage({ params }: PageProps) {
 
   return (
     <ClientShell>
-      <main className="max-w-4xl mx-auto px-4 py-6">
-        {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 dark:text-slate-500 mb-4">
-          <a href="/" className="hover:text-primary">Home</a>{" › "}
-          <span>Cultures</span>{" › "}
-          <span className="text-neutral-600 dark:text-slate-300">{info.label}</span>
-        </nav>
-
-        {/* Hero */}
-        <FadeIn>
-          <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6 sm:p-8 mb-8 text-center">
-            <span className="text-6xl block mb-3">{info.flag}</span>
-            <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white">
-              Emoji Meanings in {info.label}
-            </h1>
-            <p className="text-neutral-500 dark:text-slate-400 mt-2">
-              How emojis are interpreted and used in {info.label}
-            </p>
+      <main className="theme-editorial min-h-screen">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 py-9 sm:py-12">
+          <div className="fg-runhead mb-10 sm:mb-12">
+            <span className="flex items-center gap-2 min-w-0">
+              <Link href="/" className="fg-link">Home</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span>Cultures</span>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span className="t-ink truncate">{info.label}</span>
+            </span>
+            <span className="hidden sm:inline shrink-0">Field Guide</span>
           </div>
-        </FadeIn>
 
-        {/* Emoji grid */}
-        <AnimatedSection>
-          <section className="mb-10">
-            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">
-              Top Emojis in {info.label}
-            </h2>
-            <div className="space-y-4">
-              {emojis.map((emoji) => {
-                const culturalMeaning = (emoji.cultures as Record<string, string>)?.[regionKey] || "";
-                return (
-                  <Link
-                    key={emoji.slug}
-                    href={`/emoji/${emoji.slug}`}
-                    className="flex items-start gap-4 p-4 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
-                  >
-                    <span className="text-4xl flex-shrink-0">{emoji.character}</span>
-                    <div>
-                      <span className="font-medium text-neutral-900 dark:text-slate-100">{emoji.name}</span>
-                      <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">{culturalMeaning}</p>
-                    </div>
-                  </Link>
-                );
-              })}
+          {/* Masthead */}
+          <FadeIn>
+            <div className="flex items-end gap-5 sm:gap-7 border-b-2 border-[var(--rule)] pb-8">
+              <span className="text-[4.5rem] sm:text-[6rem] leading-[0.8] shrink-0">{info.flag}</span>
+              <div className="pb-1">
+                <p className="fg-kicker mb-3">Across Cultures</p>
+                <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2rem] sm:text-[2.8rem]">
+                  Emoji Meanings in {info.label}
+                </h1>
+                <p className="t-muted font-read mt-3">How emojis are read and used in {info.label}.</p>
+              </div>
             </div>
-          </section>
-        </AnimatedSection>
+          </FadeIn>
 
-        {/* Other cultures */}
-        <AnimatedSection>
-          <section className="mb-10">
-            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">Explore Other Cultures</h2>
-            <div className="flex flex-wrap gap-2">
-              {CULTURE_REGIONS.filter((r) => r !== regionKey).map((r) => {
-                const rInfo = CULTURE_INFO[r];
-                return (
-                  <Link
-                    key={r}
-                    href={`/culture/${r}`}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full text-sm border border-neutral-200 dark:border-slate-700 hover:bg-neutral-50 dark:hover:bg-slate-700 transition-colors"
-                  >
-                    <span>{rInfo.flag}</span>
-                    <span className="text-neutral-600 dark:text-slate-300">{rInfo.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-        </AnimatedSection>
+          <AnimatedSection>
+            <section className="pt-12">
+              <div className="fg-chapter__bar">
+                <span className="fg-chapter__n">Top emojis</span>
+                <span className="fg-chapter__count">{emojis.length}</span>
+              </div>
+              <h2 className="fg-chapter__title mt-5 text-[1.6rem] sm:text-[2rem]">Most used in {info.label}</h2>
+              {emojis.length > 0 ? (
+                <div className="fg-list mt-7">
+                  {emojis.map((emoji) => {
+                    const culturalMeaning = (emoji.cultures as Record<string, string>)?.[regionKey] || "";
+                    return (
+                      <Link key={emoji.slug} href={`/emoji/${emoji.slug}`} className="fg-entry fg-entry--ledger fg-link">
+                        <span className="fg-entry__glyph">{emoji.character}</span>
+                        <div className="fg-entry__main">
+                          <span className="fg-entry__name">{emoji.name}</span>
+                          <p className="fg-entry__text">{culturalMeaning}</p>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="mono text-[0.78rem] uppercase tracking-[0.14em] t-muted py-8 border-y border-[var(--line)] mt-7">No data for this region yet</p>
+              )}
+            </section>
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <section className="pt-12">
+              <div className="fg-chapter__bar">
+                <span className="fg-chapter__n">Explore</span>
+              </div>
+              <h2 className="fg-chapter__title mt-5 text-[1.6rem] sm:text-[2rem]">Other cultures</h2>
+              <div className="flex flex-wrap gap-x-6 gap-y-2.5 mt-7 border-t border-[var(--line)] pt-5">
+                {CULTURE_REGIONS.filter((r) => r !== regionKey).map((r) => {
+                  const rInfo = CULTURE_INFO[r];
+                  return (
+                    <Link key={r} href={`/culture/${r}`} className="fg-navlink">
+                      <span aria-hidden="true">{rInfo.flag}</span>{rInfo.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          </AnimatedSection>
+        </div>
       </main>
       <Footer />
 

@@ -3,10 +3,5 @@ interface BlogContentProps {
 }
 
 export default function BlogContent({ html }: BlogContentProps) {
-  return (
-    <div
-      className="prose prose-neutral dark:prose-invert max-w-none prose-headings:text-primary-dark dark:prose-headings:text-white prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+  return <div className="fg-article max-w-none" dangerouslySetInnerHTML={{ __html: html }} />;
 }

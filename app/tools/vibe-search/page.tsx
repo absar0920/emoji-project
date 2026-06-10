@@ -3,7 +3,6 @@
 import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
 import CopyAllButton from "@/components/CopyAllButton";
-import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const MOODS = ["sad", "love", "toxic", "funny", "aesthetic", "angry", "hype", "chill", "romantic", "dark"];
 
@@ -46,68 +45,49 @@ export default function VibeSearchPage() {
       <ToolHero
         title="Vibe Search"
         description="Search emojis by mood, feeling, or vibe. Find the perfect emoji for any emotion."
-        badge="✨ AI-Powered"
+        badge="AI-Powered"
       />
 
-      {/* Search */}
-      <div className="mb-6">
+      <div className="mb-7">
         <div className="flex gap-2">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch(query)}
-            placeholder="Search by feeling, mood, or vibe..."
-            className="flex-1 px-5 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow text-lg"
+            placeholder="Search by feeling, mood, or vibe…"
+            className="fg-field flex-1 min-w-0 px-4 py-3 text-base"
           />
-          <button
-            onClick={() => handleSearch(query)}
-            disabled={!query.trim() || loading}
-            className="px-6 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
-          >
-            {loading ? "..." : "Search"}
+          <button onClick={() => handleSearch(query)} disabled={!query.trim() || loading} className="fg-btn px-6 shrink-0">
+            {loading ? "…" : "Search"}
           </button>
         </div>
 
-        {/* Mood chips */}
-        <div className="flex flex-wrap gap-2 mt-3">
+        <div className="flex flex-wrap gap-2 mt-4">
           {MOODS.map((mood) => (
-            <button
-              key={mood}
-              onClick={() => handleSearch(mood)}
-              className="px-3 py-1.5 rounded-full border border-neutral-200 dark:border-slate-700 text-sm text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors capitalize"
-            >
-              {mood}
-            </button>
+            <button key={mood} onClick={() => handleSearch(mood)} className="fg-chip px-3 py-1.5">{mood}</button>
           ))}
         </div>
       </div>
 
-      {error && (
-        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-accent-red text-sm mb-6">{error}</div>
-      )}
+      {error && <div className="fg-alert px-4 py-3 mb-6">{error}</div>}
 
-      {/* Results */}
       {results.length > 0 && (
         <>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display text-xl sm:text-2xl text-primary-dark dark:text-white">Results</h2>
+          <div className="flex items-center justify-between mb-5">
+            <p className="fg-kicker">{results.length} matches</p>
             <CopyAllButton emojis={results.map((r) => r.emoji)} />
           </div>
-          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {results.map((r, i) => (
-              <StaggerItem key={i}>
-                <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm text-center">
-                  <span className="text-4xl block mb-2">{r.emoji}</span>
-                  <span className="text-xs font-medium text-neutral-900 dark:text-slate-100 block">{r.name}</span>
-                  <span className="text-xs px-2 py-0.5 rounded-full border border-neutral-200 dark:border-slate-700 text-primary font-medium mt-1 inline-block">
-                    {r.match_percent}% match
-                  </span>
-                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-2">{r.reason}</p>
-                </div>
-              </StaggerItem>
+              <div key={i} className="fg-card p-4 text-center">
+                <span className="text-4xl block mb-2">{r.emoji}</span>
+                <span className="font-read text-sm t-ink block">{r.name}</span>
+                <span className="fg-kicker inline-block mt-1.5">{r.match_percent}% match</span>
+                <p className="text-xs t-muted mt-2 leading-relaxed">{r.reason}</p>
+              </div>
             ))}
-          </StaggerContainer>
+          </div>
         </>
       )}
     </>

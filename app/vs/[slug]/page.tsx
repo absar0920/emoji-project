@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getComparisonBySlug, getAllComparisonSlugs, getRelatedComparisons } from "@/lib/mongodb";
+import { getComparisonBySlug, getRelatedComparisons } from "@/lib/mongodb";
 import { generateComparisonMeta, generateComparisonFAQ } from "@/lib/seo";
 import ComparisonRow from "@/components/ComparisonRow";
 import ClientShell from "@/components/ClientShell";
@@ -22,6 +22,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return { title: meta.title, description: meta.description, alternates: { canonical: meta.canonical } };
 }
 
+function Chapter({ label, meta, title, children }: { label: string; meta?: string; title: string; children: React.ReactNode }) {
+  return (
+    <AnimatedSection>
+      <section className="pt-12">
+        <div className="fg-chapter__bar">
+          <span className="fg-chapter__n">{label}</span>
+          {meta && <span className="fg-chapter__count">{meta}</span>}
+        </div>
+        <h2 className="fg-chapter__title mt-5 text-[1.6rem] sm:text-[2rem]">{title}</h2>
+        <div className="mt-7">{children}</div>
+      </section>
+    </AnimatedSection>
+  );
+}
+
 export default async function ComparisonPage({ params }: PageProps) {
   const { slug } = await params;
   const comparison = await getComparisonBySlug(slug);
@@ -32,118 +47,103 @@ export default async function ComparisonPage({ params }: PageProps) {
 
   const diffRows = Object.entries(comparison.differences).map(([key, value]) => ({
     label: key.charAt(0).toUpperCase() + key.slice(1),
-    value: value,
+    value: value as string,
   }));
 
   return (
     <ClientShell>
-      <main className="max-w-4xl mx-auto px-4 py-6">
-        {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 dark:text-slate-500 mb-4">
-          <a href="/" className="hover:text-primary">Home</a>{" › "}
-          <span>Comparisons</span>{" › "}
-          <span className="text-neutral-600 dark:text-slate-300">{comparison.emoji1_character} vs {comparison.emoji2_character}</span>
-        </nav>
-
-        {/* Hero */}
-        <FadeIn>
-          <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6 sm:p-8 mb-6">
-            <div className="flex items-center justify-center gap-6 sm:gap-12">
-              <Link href={`/emoji/${comparison.emoji1_slug}`} className="text-center hover:scale-105 transition-transform">
-                <span className="text-6xl sm:text-8xl block mb-2">{comparison.emoji1_character}</span>
-                <span className="text-sm font-medium text-neutral-600 dark:text-slate-300">{comparison.emoji1_name}</span>
-              </Link>
-              <span className="text-2xl sm:text-4xl font-display text-primary">VS</span>
-              <Link href={`/emoji/${comparison.emoji2_slug}`} className="text-center hover:scale-105 transition-transform">
-                <span className="text-6xl sm:text-8xl block mb-2">{comparison.emoji2_character}</span>
-                <span className="text-sm font-medium text-neutral-600 dark:text-slate-300">{comparison.emoji2_name}</span>
-              </Link>
-            </div>
-            <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white text-center mt-4">
-              {comparison.emoji1_name} vs {comparison.emoji2_name}
-            </h1>
+      <main className="theme-editorial min-h-screen">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 py-9 sm:py-12">
+          <div className="fg-runhead mb-10 sm:mb-12">
+            <span className="flex items-center gap-2 min-w-0">
+              <Link href="/" className="fg-link">Home</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <Link href="/tools/emoji-vs" className="fg-link">Compare</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span className="t-ink truncate">{comparison.emoji1_character} vs {comparison.emoji2_character}</span>
+            </span>
+            <span className="hidden sm:inline shrink-0">Field Guide</span>
           </div>
-        </FadeIn>
 
-        {/* Winner */}
-        <AnimatedSection>
-          <div className="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-8 text-center">
-            <span className="text-sm font-medium text-accent-amber">🏆 Winner: {comparison.winner}</span>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">{comparison.winner_reason}</p>
-          </div>
-        </AnimatedSection>
-
-        {/* Differences */}
-        <AnimatedSection>
-          <section className="mb-10">
-            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">Key Differences</h2>
-            <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-4">
-              <div className="grid grid-cols-[1fr_auto_1fr] gap-4 pb-2 border-b border-neutral-200 dark:border-slate-700 mb-2">
-                <span className="text-sm font-bold text-neutral-900 dark:text-slate-100">{comparison.emoji1_character} {comparison.emoji1_name}</span>
-                <span className="text-xs text-neutral-400 dark:text-slate-500">Category</span>
-                <span className="text-sm font-bold text-neutral-900 dark:text-slate-100 text-right">{comparison.emoji2_character} {comparison.emoji2_name}</span>
+          {/* Masthead */}
+          <FadeIn>
+            <div className="border-b-2 border-[var(--rule)] pb-9">
+              <p className="fg-kicker mb-5">The Comparison</p>
+              <div className="flex items-center justify-center gap-6 sm:gap-12 mb-6">
+                <Link href={`/emoji/${comparison.emoji1_slug}`} className="fg-link text-center">
+                  <span className="text-6xl sm:text-8xl block mb-2">{comparison.emoji1_character}</span>
+                  <span className="fg-label">{comparison.emoji1_name}</span>
+                </Link>
+                <span className="font-display t-accent italic text-2xl sm:text-4xl shrink-0">vs</span>
+                <Link href={`/emoji/${comparison.emoji2_slug}`} className="fg-link text-center">
+                  <span className="text-6xl sm:text-8xl block mb-2">{comparison.emoji2_character}</span>
+                  <span className="fg-label">{comparison.emoji2_name}</span>
+                </Link>
               </div>
-              {diffRows.map((row) => {
-                const parts = row.value.split(/\bvs\.?\b|\bwhile\b|\bbut\b/i);
-                return (
-                  <ComparisonRow
-                    key={row.label}
-                    label={row.label}
-                    emoji1Value={parts[0]?.trim() || row.value}
-                    emoji2Value={parts[1]?.trim() || ""}
-                  />
-                );
-              })}
+              <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2rem] sm:text-[2.8rem] text-center">
+                {comparison.emoji1_name} vs {comparison.emoji2_name}
+              </h1>
             </div>
-          </section>
-        </AnimatedSection>
+          </FadeIn>
 
-        {/* When to use */}
-        <AnimatedSection>
-          <section className="mb-10">
-            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">When To Use Each</h2>
-            <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-4">
-              <p className="text-neutral-700 dark:text-slate-300">{comparison.when_to_use}</p>
+          <AnimatedSection>
+            <div className="fg-pull mt-10">
+              <span className="fg-kicker">Winner · {comparison.winner}</span>
+              <p>{comparison.winner_reason}</p>
             </div>
-          </section>
-        </AnimatedSection>
+          </AnimatedSection>
 
-        {/* Related comparisons */}
-        <AnimatedSection>
-          {related.length > 0 && (
-            <section className="mb-10">
-              <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">Related Comparisons</h2>
+          <Chapter label="Differences" title="Key differences">
+            <div className="grid grid-cols-[1fr_auto_1fr] gap-4 pb-2 border-b-2 border-[var(--rule)] mb-2">
+              <span className="fg-label">{comparison.emoji1_character} {comparison.emoji1_name}</span>
+              <span className="fg-label text-center">Category</span>
+              <span className="fg-label text-right">{comparison.emoji2_character} {comparison.emoji2_name}</span>
+            </div>
+            {diffRows.map((row) => {
+              const parts = row.value.split(/\bvs\.?\b|\bwhile\b|\bbut\b/i);
+              return (
+                <ComparisonRow key={row.label} label={row.label} emoji1Value={parts[0]?.trim() || row.value} emoji2Value={parts[1]?.trim() || ""} />
+              );
+            })}
+          </Chapter>
+
+          <Chapter label="Usage" title="When to use each">
+            <p className="fg-prose t-body max-w-2xl">{comparison.when_to_use}</p>
+          </Chapter>
+
+          {related.filter((r) => r.slug !== slug).length > 0 && (
+            <Chapter label="Related" title="Related comparisons">
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                 {related.filter((r) => r.slug !== slug).map((r) => (
-                  <Link
-                    key={r.slug}
-                    href={`/vs/${r.slug}`}
-                    className="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
-                  >
+                  <Link key={r.slug} href={`/vs/${r.slug}`} className="fg-card fg-link flex items-center gap-2 px-4 py-2.5 shrink-0">
                     <span className="text-2xl">{r.emoji1_character}</span>
-                    <span className="text-sm font-bold text-neutral-400 dark:text-slate-500">vs</span>
+                    <span className="mono t-muted text-[0.6rem]">VS</span>
                     <span className="text-2xl">{r.emoji2_character}</span>
                   </Link>
                 ))}
               </div>
-            </section>
+            </Chapter>
           )}
-        </AnimatedSection>
 
-        {/* FAQ */}
-        <AnimatedSection>
-          <section className="mb-10">
-            <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">FAQ</h2>
-            <div className="space-y-4">
-              {faqSchema.mainEntity.map((faq: { name: string; acceptedAnswer: { text: string } }, i: number) => (
-                <details key={i} className="rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm overflow-hidden">
-                  <summary className="px-4 py-3 cursor-pointer font-medium text-neutral-900 dark:text-slate-100 hover:bg-neutral-50 dark:hover:bg-slate-700">{faq.name}</summary>
-                  <p className="px-4 pb-4 text-sm text-neutral-600 dark:text-slate-300">{faq.acceptedAnswer.text}</p>
-                </details>
-              ))}
-            </div>
-          </section>
-        </AnimatedSection>
+          {faqSchema.mainEntity.length > 0 && (
+            <Chapter label="FAQ" meta={`${faqSchema.mainEntity.length} questions`} title="Frequently asked">
+              <div className="fg-list">
+                {faqSchema.mainEntity.map((faq: { name: string; acceptedAnswer: { text: string } }, i: number) => (
+                  <details key={i} className="fg-detail border-b border-[var(--line)]">
+                    <summary className="flex items-baseline gap-3 sm:gap-4 py-3.5 cursor-pointer">
+                      <span className="mono t-muted text-[0.62rem] w-6 shrink-0 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="font-read t-ink flex-1">{faq.name}</span>
+                      <svg className="fg-chev w-4 h-4 t-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <p className="t-body leading-relaxed pb-4 max-w-2xl sm:pl-[2.6rem]">{faq.acceptedAnswer.text}</p>
+                  </details>
+                ))}
+              </div>
+            </Chapter>
+          )}
+        </div>
       </main>
       <Footer />
 

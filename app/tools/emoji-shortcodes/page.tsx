@@ -26,51 +26,45 @@ export default function ShortcodesPage() {
 
   return (
     <>
-      <ToolHero
-        title="Emoji Shortcodes"
-        description="Find shortcodes for every emoji. Copy for Slack, Discord, GitHub, and more."
-      />
+      <ToolHero title="Emoji Shortcodes" description="Find shortcodes for every emoji. Copy for Slack, Discord, GitHub, and more." badge="Reference" />
 
       <input
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search by name or shortcode..."
-        className="w-full px-4 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow mb-6"
+        placeholder="Search by name or shortcode…"
+        className="fg-field w-full px-4 py-3 mb-7"
       />
 
-      {/* Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-neutral-200 dark:border-slate-700 bg-neutral-50 dark:bg-slate-700">
-                <th className="px-4 py-3 text-left font-medium text-neutral-500 dark:text-slate-400">Emoji</th>
-                <th className="px-4 py-3 text-left font-medium text-neutral-500 dark:text-slate-400">Name</th>
-                <th className="px-4 py-3 text-left font-medium text-neutral-500 dark:text-slate-400">Shortcode</th>
-                <th className="px-4 py-3 text-right font-medium text-neutral-500 dark:text-slate-400">Copy</th>
+      <div className="fg-table-wrap">
+        <table className="fg-table">
+          <thead>
+            <tr>
+              <th>Emoji</th>
+              <th>Name</th>
+              <th>Shortcode</th>
+              <th className="text-right">Copy</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.slice(0, 100).map((e) => (
+              <tr key={e.slug}>
+                <td className="em">{e.character}</td>
+                <td className="strong">{e.name}</td>
+                <td className="mono t-accent">{e.shortcode}</td>
+                <td className="text-right">
+                  <CopyButton text={e.shortcode} label="Copy" tone="editorial" />
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {filtered.slice(0, 100).map((e) => (
-                <tr key={e.slug} className="border-b border-neutral-100 dark:border-slate-700 hover:bg-neutral-50 dark:hover:bg-slate-700">
-                  <td className="px-4 py-2 text-2xl">{e.character}</td>
-                  <td className="px-4 py-2 text-neutral-900 dark:text-slate-100">{e.name}</td>
-                  <td className="px-4 py-2 font-mono text-primary text-xs">{e.shortcode}</td>
-                  <td className="px-4 py-2 text-right">
-                    <CopyButton text={e.shortcode} label="Copy" />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {filtered.length > 100 && (
-          <div className="text-center py-3 text-sm text-neutral-400 dark:text-slate-500">
-            Showing 100 of {filtered.length} results. Use search to narrow down.
-          </div>
-        )}
+            ))}
+          </tbody>
+        </table>
       </div>
+      {filtered.length > 100 && (
+        <p className="mono text-[0.72rem] uppercase tracking-[0.12em] t-muted text-center mt-5">
+          Showing 100 of {filtered.length} — search to narrow down
+        </p>
+      )}
     </>
   );
 }

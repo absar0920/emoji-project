@@ -1,65 +1,31 @@
-import { AnimatedSection } from "@/components/MotionWrappers";
+import { KSection } from "./Section";
 
 const FEATURES = [
-  {
-    icon: "🔁",
-    title: "The Double Emoji Trick",
-    desc: "Select the same emoji twice to get an exaggerated, maximalist version. 😭+😭 produces ultra-crying with more tears and intensity. 🤡+🤡 produces a more chaotic, distorted clown. 😍+😍 renders over-the-top heart-eyes. The fastest way to amplify a single emotion.",
-  },
-  {
-    icon: "💾",
-    title: "Save Favorite Combos",
-    desc: "Long-press any sticker in the suggestion row on Android to save it to your gallery as a standard PNG. Gboard also retains recently used stickers in the recents row, so frequent combinations resurface without re-selecting the source emojis.",
-  },
-  {
-    icon: "📡",
-    title: "Offline Limitations",
-    desc: "Kitchen requires an internet connection for new combinations — sticker images are fetched from Google's servers, not stored on-device. Once loaded in a session, stickers may be cached briefly. New pairings won't load without connectivity.",
-  },
-  {
-    icon: "🔄",
-    title: "Update Frequency",
-    desc: "Google adds new combinations with major Gboard releases, typically aligning with annual Unicode releases and Pixel hardware launches. Major expansion batches arrived with every Android version from 12 through 16.",
-  },
+  { icon: "🔁", title: "The Double Emoji Trick", desc: "Select the same emoji twice for an exaggerated, maximalist version. 😭+😭 produces ultra-crying; 🤡+🤡 a more chaotic clown; 😍+😍 over-the-top heart-eyes. The fastest way to amplify a single emotion." },
+  { icon: "💾", title: "Save Favorite Combos", desc: "Long-press any sticker in the suggestion row on Android to save it to your gallery as a PNG. Gboard also retains recently used stickers, so frequent combos resurface without re-selecting." },
+  { icon: "📡", title: "Offline Limitations", desc: "Kitchen needs an internet connection for new combinations — stickers are fetched from Google's servers, not stored on-device. Loaded stickers may cache briefly; new pairings won't load offline." },
+  { icon: "🔄", title: "Update Frequency", desc: "Google adds combinations with major Gboard releases, usually aligned with annual Unicode releases and Pixel launches. Major expansions arrived with every Android version from 12 through 16." },
 ];
 
 export default function HiddenFeatures() {
   return (
-    <section className="py-14">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="rounded-2xl border border-neutral-200/70 dark:border-slate-700/50 bg-neutral-50 dark:bg-slate-800/50 p-6 sm:p-8">
-        <AnimatedSection>
-          <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />Pro Tips</p>
-          <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1] mb-2">
-            Hidden Features & Pro Tips
-          </h2>
-          <p className="text-neutral-500 dark:text-slate-400 mt-3 mb-8">Tricks most Emoji Kitchen guides don&apos;t cover</p>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-          {FEATURES.map((f) => (
-            <AnimatedSection key={f.title}>
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/40">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">{f.icon}</span>
-                  <h3 className="font-bold text-primary-dark dark:text-white">{f.title}</h3>
-                </div>
-                <p className="text-sm text-neutral-600 dark:text-slate-400 leading-relaxed">{f.desc}</p>
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
-
-        <AnimatedSection>
-          <div className="bg-violet-50 dark:bg-violet-950/30 border-l-4 border-accent-violet rounded-r-xl p-5">
-            <h3 className="font-bold text-primary-dark dark:text-white mb-1">💡 Regular Emojis vs. Kitchen Stickers Offline</h3>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-              Regular emojis render entirely offline as Unicode characters drawn by your device&apos;s emoji font. Emoji Kitchen stickers are fetched images that require connectivity for first-time loads. The emoji picker itself opens offline; the suggestion row simply displays nothing for unfetched combinations until the connection is restored.
-            </p>
+    <KSection kicker="Pro Tips" title="Hidden Features & Pro Tips" dek="Tricks most Emoji Kitchen guides don't cover.">
+      <div className="fg-list mb-8">
+        {FEATURES.map((f) => (
+          <div key={f.title} className="fg-entry fg-entry--ledger">
+            <span className="fg-entry__glyph" style={{ fontSize: "1.5rem" }}>{f.icon}</span>
+            <div className="fg-entry__main">
+              <span className="fg-entry__name">{f.title}</span>
+              <p className="fg-entry__text">{f.desc}</p>
+            </div>
           </div>
-        </AnimatedSection>
-        </div>
+        ))}
       </div>
-    </section>
+
+      <div className="fg-pull fg-pull--sm">
+        <span className="fg-kicker">Offline · The Difference</span>
+        <p>Regular emojis render fully offline as Unicode characters from your device font. Kitchen stickers are fetched images that need connectivity for first loads — the picker opens offline, but the suggestion row stays empty for unfetched combos until you reconnect.</p>
+      </div>
+    </KSection>
   );
 }

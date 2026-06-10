@@ -42,51 +42,36 @@ export default function EmojiVsPage() {
 
   return (
     <>
-      <ToolHero
-        title="Emoji Comparison"
-        description="Compare any two emojis side by side. See differences across meaning layers."
-      />
+      <ToolHero title="Emoji Comparison" description="Compare any two emojis side by side. See differences across meaning layers." badge="Compare" />
 
-      <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
-        <div className="flex-1 w-full">
-          <div className="text-center mb-2">
-            <span className="text-6xl">{emoji1?.character || "❓"}</span>
-          </div>
+      <div className="flex flex-col sm:flex-row items-center gap-5 mb-8">
+        <div className="flex-1 w-full flex flex-col items-center gap-3">
+          <span className="text-6xl">{emoji1?.character || "❓"}</span>
           <EmojiPicker onSelect={setEmoji1} selected={emoji1?.character} />
         </div>
 
-        <span className="text-3xl font-extrabold text-primary">VS</span>
+        <span className="font-display t-accent text-3xl italic shrink-0">vs</span>
 
-        <div className="flex-1 w-full">
-          <div className="text-center mb-2">
-            <span className="text-6xl">{emoji2?.character || "❓"}</span>
-          </div>
+        <div className="flex-1 w-full flex flex-col items-center gap-3">
+          <span className="text-6xl">{emoji2?.character || "❓"}</span>
           <EmojiPicker onSelect={setEmoji2} selected={emoji2?.character} />
         </div>
       </div>
 
-      <div className="text-center mb-10">
-        <button
-          onClick={handleCompare}
-          disabled={!emoji1 || !emoji2}
-          className="px-8 py-3 rounded-lg bg-primary text-white font-bold text-lg hover:opacity-90 transition-opacity disabled:opacity-50"
-        >
-          Compare Now →
+      <div className="text-center mb-12">
+        <button onClick={handleCompare} disabled={!emoji1 || !emoji2} className="fg-btn px-8 py-3">
+          Compare now →
         </button>
       </div>
 
       {popular.length > 0 && (
         <FadeIn>
-          <h2 className="font-display text-xl sm:text-2xl text-primary-dark dark:text-white mb-4">Popular Comparisons</h2>
+          <p className="fg-kicker mb-5">Popular comparisons</p>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {popular.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/vs/${p.slug}`}
-                className="card-lift flex items-center justify-center gap-2 p-3 bg-white dark:bg-slate-800 rounded-2xl border border-neutral-200/80 dark:border-slate-700 shadow-sm"
-              >
+              <Link key={p.slug} href={`/vs/${p.slug}`} className="fg-card fg-link flex items-center justify-center gap-2 p-3">
                 <span className="text-2xl">{p.emoji1_character}</span>
-                <span className="text-xs font-bold text-neutral-400 dark:text-slate-500">vs</span>
+                <span className="mono t-muted text-[0.6rem]">VS</span>
                 <span className="text-2xl">{p.emoji2_character}</span>
               </Link>
             ))}

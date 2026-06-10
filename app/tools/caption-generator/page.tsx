@@ -3,7 +3,6 @@
 import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
 import CopyButton from "@/components/CopyButton";
-import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const MOODS = ["Happy", "Sad", "Hype", "Aesthetic", "Funny", "Romantic", "Motivational", "Chill"];
 const PLATFORMS = ["Instagram", "TikTok", "WhatsApp", "Twitter", "LinkedIn"];
@@ -47,94 +46,60 @@ export default function CaptionGeneratorPage() {
       <ToolHero
         title="Caption Generator"
         description="Generate viral captions with emojis for Instagram, TikTok, WhatsApp, and more."
-        badge="✨ AI-Powered"
+        badge="AI-Powered"
       />
 
-      {/* Input */}
-      <div className="space-y-4 mb-8">
+      <div className="space-y-5 mb-9">
         <input
           type="text"
           value={topic}
           onChange={(e) => setTopic(e.target.value.slice(0, 200))}
           placeholder="What's the post about?"
-          className="w-full px-5 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow"
+          className="fg-field w-full px-4 py-3 text-base"
         />
 
-        {/* Mood */}
         <div>
-          <span className="text-sm font-medium text-neutral-600 dark:text-slate-300 block mb-2">Mood</span>
+          <span className="fg-label block mb-2.5">Mood</span>
           <div className="flex flex-wrap gap-2">
             {MOODS.map((m) => (
-              <button
-                key={m}
-                onClick={() => setMood(m)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
-                  mood === m
-                    ? "bg-primary text-white border-primary"
-                    : "border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700"
-                }`}
-              >
-                {m}
-              </button>
+              <button key={m} onClick={() => setMood(m)} data-active={mood === m} className="fg-chip px-3 py-1.5">{m}</button>
             ))}
           </div>
         </div>
 
-        {/* Platform */}
         <div>
-          <span className="text-sm font-medium text-neutral-600 dark:text-slate-300 block mb-2">Platform</span>
+          <span className="fg-label block mb-2.5">Platform</span>
           <div className="flex flex-wrap gap-2">
             {PLATFORMS.map((p) => (
-              <button
-                key={p}
-                onClick={() => setPlatform(p)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
-                  platform === p ? "bg-primary text-white border-primary" : "border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700"
-                }`}
-              >
-                {p}
-              </button>
+              <button key={p} onClick={() => setPlatform(p)} data-active={platform === p} className="fg-chip px-3 py-1.5">{p}</button>
             ))}
           </div>
         </div>
 
-        <button
-          onClick={handleGenerate}
-          disabled={!topic.trim() || loading}
-          className="w-full sm:w-auto px-8 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
-        >
-          {loading ? "Generating..." : "Generate Captions →"}
+        <button onClick={handleGenerate} disabled={!topic.trim() || loading} className="fg-btn w-full sm:w-auto px-8 py-3">
+          {loading ? "Generating…" : "Generate captions →"}
         </button>
       </div>
 
-      {error && (
-        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-accent-red text-sm mb-6">{error}</div>
-      )}
+      {error && <div className="fg-alert px-4 py-3 mb-6">{error}</div>}
 
-      {/* Results */}
       {captions.length > 0 && (
-        <StaggerContainer className="space-y-3">
+        <div className="space-y-3">
           {captions.map((cap, i) => (
-            <StaggerItem key={i}>
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <p className="text-neutral-900 dark:text-slate-100 mb-2">{cap.text}</p>
-                    <div className="flex gap-2">
-                      <span className="text-xs px-2 py-0.5 rounded-full border border-neutral-200 dark:border-slate-700 text-primary font-medium">
-                        {cap.emoji_count} emojis
-                      </span>
-                      <span className="text-xs px-2 py-0.5 rounded-full border border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-300 font-medium">
-                        {cap.vibe}
-                      </span>
-                    </div>
+            <div key={i} className="fg-card p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <p className="t-ink mb-2.5">{cap.text}</p>
+                  <div className="flex gap-x-4 gap-y-1 flex-wrap fg-label">
+                    <span>{cap.emoji_count} emojis</span>
+                    <span className="t-accent">{cap.vibe}</span>
                   </div>
-                  <CopyButton text={cap.text} label="Copy" />
                 </div>
+                <CopyButton text={cap.text} label="Copy" tone="editorial" />
               </div>
-            </StaggerItem>
+            </div>
           ))}
-        </StaggerContainer>
+        </div>
       )}
     </>
   );

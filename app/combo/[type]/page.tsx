@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getComboBySlug, getAllComboSlugs, getRelatedCombos } from "@/lib/mongodb";
+import { getComboBySlug, getRelatedCombos } from "@/lib/mongodb";
 import { generateComboMeta } from "@/lib/seo";
 import ComboDisplay from "@/components/ComboDisplay";
 import ClientShell from "@/components/ClientShell";
@@ -31,67 +31,73 @@ export default async function ComboPage({ params }: PageProps) {
 
   return (
     <ClientShell>
-      <main className="max-w-4xl mx-auto px-4 py-6">
-        {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 dark:text-slate-500 mb-4">
-          <a href="/" className="hover:text-primary">Home</a>{" › "}
-          <span>Combos</span>{" › "}
-          <span className="text-neutral-600 dark:text-slate-300">{combo.theme}</span>
-        </nav>
-
-        {/* Hero */}
-        <FadeIn>
-          <div className="mb-8">
-            <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] text-primary-dark dark:text-white mb-2">
-              {combo.theme} Emoji Combos
-            </h1>
-            <p className="text-neutral-500 dark:text-slate-400">{combo.seo_description}</p>
+      <main className="theme-editorial min-h-screen">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 py-9 sm:py-12">
+          <div className="fg-runhead mb-10 sm:mb-12">
+            <span className="flex items-center gap-2 min-w-0">
+              <Link href="/" className="fg-link">Home</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <Link href="/tools/emoji-combos" className="fg-link">Combos</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span className="t-ink truncate">{combo.theme}</span>
+            </span>
+            <span className="hidden sm:inline shrink-0">Field Guide</span>
           </div>
-        </FadeIn>
 
-        {/* Primary combo */}
-        <AnimatedSection>
-          {combo.combos[0] && (
-            <div className="mb-6">
-              <ComboDisplay emojis={combo.combos[0].emojis} label={combo.combos[0].label} primary />
+          {/* Masthead */}
+          <FadeIn>
+            <div className="border-b-2 border-[var(--rule)] pb-7">
+              <p className="fg-kicker mb-4">Emoji Combos</p>
+              <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2.4rem] sm:text-[3.4rem]">{combo.theme}</h1>
+              {combo.seo_description && <p className="t-muted font-read mt-4 max-w-2xl">{combo.seo_description}</p>}
             </div>
-          )}
-        </AnimatedSection>
+          </FadeIn>
 
-        {/* Alternate combos */}
-        <AnimatedSection>
+          {combo.combos[0] && (
+            <AnimatedSection>
+              <div className="mt-9">
+                <ComboDisplay emojis={combo.combos[0].emojis} label={combo.combos[0].label} primary />
+              </div>
+            </AnimatedSection>
+          )}
+
           {combo.combos.length > 1 && (
-            <section className="mb-10">
-              <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">More {combo.theme} Combos</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {combo.combos.slice(1).map((c, i) => (
-                  <ComboDisplay key={i} emojis={c.emojis} label={c.label} />
-                ))}
-              </div>
-            </section>
+            <AnimatedSection>
+              <section className="pt-12">
+                <div className="fg-chapter__bar">
+                  <span className="fg-chapter__n">More</span>
+                  <span className="fg-chapter__count">{combo.combos.length - 1} sets</span>
+                </div>
+                <h2 className="fg-chapter__title mt-5 text-[1.6rem] sm:text-[2rem]">More {combo.theme} combos</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-7">
+                  {combo.combos.slice(1).map((c, i) => (
+                    <ComboDisplay key={i} emojis={c.emojis} label={c.label} />
+                  ))}
+                </div>
+              </section>
+            </AnimatedSection>
           )}
-        </AnimatedSection>
 
-        {/* Related combos */}
-        <AnimatedSection>
-          {relatedCombos.length > 0 && (
-            <section className="mb-10">
-              <h2 className="font-display text-2xl sm:text-3xl text-primary-dark dark:text-white leading-[1.1] mb-4">Related Combos</h2>
-              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                {relatedCombos.filter((r) => r.slug !== type).map((r) => (
-                  <Link
-                    key={r.slug}
-                    href={`/combo/${r.slug}`}
-                    className="flex-shrink-0 px-4 py-3 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
-                  >
-                    <span className="text-2xl block mb-1">{r.combos[0]?.emojis.slice(0, 4).join("")}</span>
-                    <span className="text-xs text-neutral-600 dark:text-slate-300 font-medium">{r.theme}</span>
-                  </Link>
-                ))}
-              </div>
-            </section>
+          {relatedCombos.filter((r) => r.slug !== type).length > 0 && (
+            <AnimatedSection>
+              <section className="pt-12">
+                <div className="fg-chapter__bar">
+                  <span className="fg-chapter__n">Related</span>
+                  <span className="fg-chapter__count">themes</span>
+                </div>
+                <h2 className="fg-chapter__title mt-5 text-[1.6rem] sm:text-[2rem]">Related combos</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-7">
+                  {relatedCombos.filter((r) => r.slug !== type).map((r) => (
+                    <Link key={r.slug} href={`/combo/${r.slug}`} className="fg-card fg-link flex flex-col items-center gap-2 p-4 text-center">
+                      <span className="text-2xl">{r.combos[0]?.emojis.slice(0, 4).join("")}</span>
+                      <span className="font-read text-sm t-ink">{r.theme}</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            </AnimatedSection>
           )}
-        </AnimatedSection>
+        </div>
       </main>
       <Footer />
     </ClientShell>

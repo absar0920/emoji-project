@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import ToolHero from "@/components/ToolHero";
-import { StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
 
 const EXAMPLE_QUERIES = [
   "breakup emoji for tiktok",
@@ -56,87 +55,55 @@ export default function SmartSearchPage() {
       <ToolHero
         title="Smart Search"
         description="Search emojis by meaning, feeling, platform context, or cultural use. AI understands what you're looking for."
-        badge="✨ AI-Powered"
+        badge="AI-Powered"
       />
 
-      {/* Search input */}
-      <div className="mb-6">
+      <div className="mb-7">
         <div className="flex gap-2">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch(query)}
-            placeholder="Try: breakup emoji for tiktok, sad emoji gen-z..."
-            className="flex-1 px-5 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow text-lg"
+            placeholder="Try: breakup emoji for tiktok, sad emoji gen-z…"
+            className="fg-field flex-1 min-w-0 px-4 py-3 text-base"
           />
-          <button
-            onClick={() => handleSearch(query)}
-            disabled={!query.trim() || loading}
-            className="px-6 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
-          >
-            {loading ? "..." : "Search"}
+          <button onClick={() => handleSearch(query)} disabled={!query.trim() || loading} className="fg-btn px-6 shrink-0">
+            {loading ? "…" : "Search"}
           </button>
         </div>
 
-        {/* Example query chips */}
-        <div className="flex flex-wrap gap-2 mt-3">
+        <div className="flex flex-wrap gap-2 mt-4">
           {EXAMPLE_QUERIES.map((q) => (
-            <button
-              key={q}
-              onClick={() => handleSearch(q)}
-              className="px-3 py-1.5 rounded-full border border-neutral-200 dark:border-slate-700 text-sm text-neutral-600 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors"
-            >
-              {q}
-            </button>
+            <button key={q} onClick={() => handleSearch(q)} className="fg-chip px-3 py-1.5">{q}</button>
           ))}
         </div>
       </div>
 
-      {error && (
-        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-accent-red text-sm mb-6">
-          {error}
-        </div>
-      )}
+      {error && <div className="fg-alert px-4 py-3 mb-6">{error}</div>}
 
-      {/* Results */}
       {results.length > 0 && (
         <>
-          <h2 className="font-display text-xl sm:text-2xl text-primary-dark dark:text-white mb-4">Results</h2>
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <p className="fg-kicker mb-5">{results.length} results</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {results.map((r, i) => (
-              <StaggerItem key={i}>
-                <Link
-                  href={`/emoji/${r.slug}`}
-                  className="card-lift bg-white dark:bg-slate-800 rounded-2xl p-5 border border-neutral-200/80 dark:border-slate-700 shadow-sm flex gap-4 items-start"
-                >
-                  <span className="text-5xl leading-none flex-shrink-0">{r.character}</span>
-                  <div className="min-w-0">
-                    <span className="text-sm font-semibold text-neutral-900 dark:text-slate-100 block capitalize">
-                      {r.name}
-                    </span>
-                    {r.why && (
-                      <span className="text-xs px-2 py-0.5 rounded-full border border-neutral-200 dark:border-slate-700 text-primary font-medium mt-1 inline-block">
-                        {r.why}
-                      </span>
-                    )}
-                    {r.relevant_meaning && (
-                      <p className="text-xs text-neutral-500 dark:text-slate-400 mt-2 line-clamp-3">
-                        {r.relevant_meaning}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              </StaggerItem>
+              <Link key={i} href={`/emoji/${r.slug}`} className="fg-card fg-link p-5 flex gap-4 items-start">
+                <span className="text-5xl leading-none shrink-0">{r.character}</span>
+                <div className="min-w-0">
+                  <span className="font-read t-ink block capitalize">{r.name}</span>
+                  {r.why && <span className="fg-kicker inline-block mt-1.5">{r.why}</span>}
+                  {r.relevant_meaning && <p className="text-xs t-muted mt-2 line-clamp-3 leading-relaxed">{r.relevant_meaning}</p>}
+                </div>
+              </Link>
             ))}
-          </StaggerContainer>
+          </div>
         </>
       )}
 
       {searched && !loading && results.length === 0 && !error && (
-        <div className="text-center py-12 text-neutral-400 dark:text-slate-500">
+        <div className="py-16 border-y border-[var(--line)] text-center">
           <span className="text-4xl block mb-3">🔍</span>
-          <p>No results found. Try a different query.</p>
+          <p className="mono text-[0.78rem] uppercase tracking-[0.14em] t-muted">No results — try a different query</p>
         </div>
       )}
     </>

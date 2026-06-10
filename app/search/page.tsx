@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ClientShell from "@/components/ClientShell";
 
 interface PageProps {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; category?: string }>;
 }
 
 export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
@@ -35,32 +35,47 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
   return (
     <ClientShell>
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <p className="eyebrow mb-3 flex items-center gap-2"><span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />SEARCH</p>
-        <h1 className="font-display text-4xl sm:text-5xl text-primary-dark dark:text-white leading-[1.05] mb-2">
-          {q ? `Search results for "${q}"` : "All Emojis"}
-        </h1>
-        <p className="text-neutral-500 dark:text-slate-400 mb-8">
-          {results.length} emoji{results.length !== 1 ? "s" : ""} found
-        </p>
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
-          {results.map((emoji) => (
-            <Link
-              key={emoji.slug}
-              href={`/emoji/${emoji.slug}`}
-              className="flex flex-col items-center gap-1 p-3 rounded-2xl border border-neutral-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm card-lift hover:shadow-md hover:border-primary/40"
-            >
-              <span className="text-3xl">{emoji.character}</span>
-              <span className="text-xs text-neutral-600 dark:text-slate-300 text-center truncate w-full">{emoji.name}</span>
-            </Link>
-          ))}
-        </div>
-        {results.length === 0 && (
-          <div className="text-center py-16">
-            <span className="text-6xl mb-4 block">🔍</span>
-            <p className="text-neutral-500 dark:text-slate-400">No emojis found for &quot;{q}&quot;. Try a different search term.</p>
+      <main className="theme-editorial min-h-screen">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 py-9 sm:py-12">
+          {/* Running head */}
+          <div className="fg-runhead mb-10 sm:mb-12">
+            <span className="flex items-center gap-2">
+              <Link href="/" className="fg-link">Home</Link>
+              <span className="opacity-40" aria-hidden="true">/</span>
+              <span className="t-ink">Index</span>
+            </span>
+            <span className="hidden sm:inline">Field Guide</span>
           </div>
-        )}
+
+          {/* Masthead */}
+          <div className="border-b-2 border-[var(--rule)] pb-7 mb-9">
+            <p className="fg-kicker mb-4">{q ? "Search results" : "The index"}</p>
+            <h1 className="font-display t-ink leading-[1.0] tracking-[-0.015em] text-[2.4rem] sm:text-[3.4rem]">
+              {q ? <>&ldquo;{q}&rdquo;</> : "All emojis"}
+            </h1>
+            <p className="fg-label mt-4">
+              {results.length} {results.length === 1 ? "entry" : "entries"}
+            </p>
+          </div>
+
+          {results.length > 0 ? (
+            <div className="fg-specimen-grid">
+              {results.map((emoji) => (
+                <Link key={emoji.slug} href={`/emoji/${emoji.slug}`} className="fg-specimen fg-link">
+                  <span className="fg-specimen__g">{emoji.character}</span>
+                  <span className="fg-specimen__c block text-center leading-tight line-clamp-2">{emoji.name}</span>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="py-20 border-y border-[var(--line)] text-center">
+              <span className="text-5xl block mb-5">🔍</span>
+              <p className="mono text-[0.8rem] uppercase tracking-[0.14em] t-muted">
+                No entries for &ldquo;{q}&rdquo; — try another term
+              </p>
+            </div>
+          )}
+        </div>
       </main>
       <Footer />
     </ClientShell>
