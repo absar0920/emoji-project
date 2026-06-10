@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Emoji Keyboard — Copy and Paste Every Emoji [2026]",
-  description: "Browse, search, and copy any emoji. Organized by category with one-click copy to clipboard.",
+  title: "Emoji Keyboard – Copy & Paste Any Emoji Instantly",
+  description:
+    "Why scroll endlessly? Our Emoji Keyboard gives you 3700+ emojis, instant copy-paste, and zero downloads. Find your emoji in seconds — free!",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
