@@ -1,59 +1,36 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
 
-interface SectionShellProps {
-  /** Visual band: "plain" = page bg, "tint" = subtle raised panel */
-  tone?: "plain" | "tint";
-  eyebrow?: string;
-  title?: string;
-  subtitle?: string;
-  /** Center the header block */
-  centered?: boolean;
-  children: React.ReactNode;
+interface ChapterProps {
+  /** Chapter number, e.g. "01" */
+  n: string;
+  /** Chapter title (Didone) */
+  title: string;
+  /** Optional italic dek / standfirst */
+  dek?: string;
+  /** Optional right-aligned meta, e.g. "13 entries" */
+  count?: string;
+  /** Anchor id for the Contents index */
   id?: string;
+  children: React.ReactNode;
 }
 
 /**
- * Consistent wrapper for every editorial section on the homepage.
- * Standardizes vertical rhythm, alternating background tone, and the
- * eyebrow + title + subtitle header treatment.
+ * Field-guide chapter frame: a thick rule, a mono chapter number + meta,
+ * a Didone title and an italic dek. One consistent masthead for every
+ * section — the layout *inside* varies by content type.
  */
-export default function SectionShell({
-  tone = "plain",
-  eyebrow,
-  title,
-  subtitle,
-  centered = false,
-  children,
-  id,
-}: SectionShellProps) {
+export default function SectionShell({ n, title, dek, count, id, children }: ChapterProps) {
   return (
-    <section
-      id={id}
-      className={
-        tone === "tint"
-          ? "my-8 py-12 sm:py-14 px-6 sm:px-8 rounded-2xl bg-neutral-50 dark:bg-slate-800/40 border border-neutral-200/70 dark:border-slate-700/50"
-          : "py-14 sm:py-16 rule-top"
-      }
-    >
-      {(eyebrow || title || subtitle) && (
-        <AnimatedSection className={centered ? "text-center max-w-2xl mx-auto mb-10" : "mb-10"}>
-          {eyebrow && (
-            <p className={`eyebrow mb-3 flex items-center gap-2 ${centered ? "justify-center" : ""}`}>
-              <span className="inline-block w-6 h-px bg-primary" aria-hidden="true" />
-              {eyebrow}
-            </p>
-          )}
-          {title && (
-            <h2 className="font-display text-3xl sm:text-4xl text-primary-dark dark:text-white leading-[1.1]">
-              {title}
-            </h2>
-          )}
-          {subtitle && (
-            <p className="text-neutral-500 dark:text-slate-400 mt-3 leading-relaxed max-w-2xl">{subtitle}</p>
-          )}
-        </AnimatedSection>
-      )}
-      {children}
+    <section id={id} className="fg-chapter scroll-mt-24">
+      <AnimatedSection>
+        <div className="fg-chapter__bar">
+          <span className="fg-chapter__n">{n}</span>
+          {count && <span className="fg-chapter__count">{count}</span>}
+        </div>
+        <h2 className="fg-chapter__title">{title}</h2>
+        {dek && <p className="fg-chapter__dek">{dek}</p>}
+      </AnimatedSection>
+      <div className="mt-8">{children}</div>
     </section>
   );
 }

@@ -9,32 +9,34 @@ const MILESTONES = [
 
 export default function EmojiOriginHistory() {
   return (
-    <SectionShell tone="plain" eyebrow="History" title="What Is an Emoji? Origin, History & How the Standard Works">
+    <SectionShell n="03" id="origin" title="What Is an Emoji? Origin &amp; History">
       <AnimatedSection>
-        <p className="text-neutral-600 dark:text-slate-300 leading-relaxed mb-8 max-w-3xl -mt-4">
-          An emoji is a standardized graphic pictogram governed by the Unicode standard. The <strong className="text-primary-dark dark:text-white">Unicode Consortium</strong> — a global non-profit — controls all approvals, assigns each symbol a unique codepoint, and releases additions on an annual cycle.
-        </p>
-      </AnimatedSection>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        {MILESTONES.map((m) => (
-          <AnimatedSection key={m.year}>
-            <div className="bg-neutral-50 dark:bg-slate-800 rounded-2xl p-5 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
-              <span className="text-2xl font-extrabold text-primary">{m.year}</span>
-              <h3 className="font-bold text-primary-dark dark:text-white mt-2 mb-1">{m.title}</h3>
-              <p className="text-sm text-neutral-600 dark:text-slate-400 leading-relaxed">{m.desc}</p>
-            </div>
-          </AnimatedSection>
-        ))}
-      </div>
-
-      <AnimatedSection>
-        <div className="bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-primary rounded-r-xl p-5">
-          <h3 className="font-bold text-primary-dark dark:text-white mb-1">Emoji vs. Emoticon — What Is the Difference?</h3>
-          <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-            Emoticons are text symbols assembled from keyboard characters — like :-) or :( — used in early internet communication. Emojis are standardized graphic pictograms displayed as colorful images and governed by an international standard. Same communicative purpose. Completely different technology, visual form, and cultural weight.
+        <div className="fg-prose max-w-3xl">
+          <p className="fg-lead fg-lead--cap">
+            An emoji is a standardized graphic pictogram governed by the Unicode standard. The <strong className="t-ink">Unicode Consortium</strong> — a global non-profit — controls all approvals, assigns each symbol a unique codepoint, and releases additions on an annual cycle.
           </p>
         </div>
+
+        <ol className="fg-steps mt-9 max-w-3xl">
+          {MILESTONES.map((m) => (
+            <li key={m.year} className="fg-step">
+              <span className="fg-step__n tabular-nums" style={{ width: "4.75rem" }}>{m.year}</span>
+              <div>
+                <h3 className="fg-step__h">{m.title}</h3>
+                <p className="fg-step__t">{m.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <dl className="fg-deflist mt-10 max-w-3xl border-t-2 border-[var(--rule)] pt-6">
+          <p className="fg-kicker mb-1">Emoji vs. Emoticon</p>
+          <dt>Emoticon</dt>
+          <dd>Text symbols assembled from keyboard characters — like :-) or :( — used in early internet communication to suggest emotion.</dd>
+          <dt>Emoji</dt>
+          <dd>Standardized graphic pictograms displayed as colorful images and governed by an international standard.</dd>
+          <dd className="!mt-3 italic t-muted">Same communicative purpose. Completely different technology, visual form, and cultural weight.</dd>
+        </dl>
       </AnimatedSection>
     </SectionShell>
   );

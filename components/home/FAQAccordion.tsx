@@ -45,37 +45,32 @@ export default function FAQAccordion() {
   };
 
   return (
-    <SectionShell
-      tone="plain"
-      eyebrow="FAQ"
-      title="Frequently Asked Questions"
-      subtitle="Quick answers to the most common emoji meaning questions"
-    >
-        <div className="space-y-2">
-          {FAQS.map((faq, i) => (
+    <SectionShell n="23" id="faq" title="Frequently Asked Questions" count={`${FAQS.length} questions`} dek="Quick answers to the most common emoji-meaning questions.">
+      <div className="fg-list">
+        {FAQS.map((faq, i) => {
+          const open = openIndex === i;
+          return (
             <AnimatedSection key={i}>
-              <div className="bg-neutral-50 dark:bg-slate-800 rounded-2xl border border-neutral-100 dark:border-slate-700 overflow-hidden">
+              <div className="border-b border-[var(--line)]">
                 <button
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors"
+                  onClick={() => setOpenIndex(open ? null : i)}
+                  aria-expanded={open}
+                  className="w-full text-left flex items-baseline gap-3 sm:gap-4 py-3.5 cursor-pointer"
                 >
-                  <span className="font-semibold text-sm text-primary-dark dark:text-white">{faq.q}</span>
-                  <span className="text-neutral-400 dark:text-slate-500 shrink-0">{openIndex === i ? "▼" : "▸"}</span>
+                  <span className="mono t-muted text-[0.62rem] w-6 shrink-0 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-read t-ink flex-1">{faq.q}</span>
+                  <svg className={`w-4 h-4 t-muted shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </button>
-                {openIndex === i && (
-                  <div className="px-5 pb-4 border-t border-neutral-100 dark:border-slate-700">
-                    <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed pt-3">{faq.a}</p>
-                  </div>
-                )}
+                {open && <p className="t-body leading-relaxed pb-4 max-w-2xl sm:pl-[2.6rem]">{faq.a}</p>}
               </div>
             </AnimatedSection>
-          ))}
-        </div>
+          );
+        })}
+      </div>
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
     </SectionShell>
   );
 }

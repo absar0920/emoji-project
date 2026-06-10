@@ -2,7 +2,7 @@ import { AnimatedSection } from "@/components/MotionWrappers";
 import SectionShell from "./SectionShell";
 
 const NEW_EMOJIS = [
-  { emoji: "🫩", name: "Face with Bags Under Eyes", meaning: "Exhaustion, sleep deprivation, tired humor", availability: "iOS 18+, Android 15+" },
+  { emoji: "🫩", name: "Face w/ Bags Under Eyes", meaning: "Exhaustion, sleep deprivation, tired humor", availability: "iOS 18+, Android 15+" },
   { emoji: "🪮", name: "Hair Pick", meaning: "Grooming, Black hair care culture", availability: "iOS 18+, Android 15+" },
   { emoji: "🐦‍🔥", name: "Phoenix", meaning: "Rebirth, resilience, rising from difficulty", availability: "iOS 18+, Android 15+" },
   { emoji: "🍋‍🟩", name: "Lime", meaning: "Citrus, cocktails — finally distinct from 🍋 lemon", availability: "iOS 17.4+, Android 14+" },
@@ -14,36 +14,38 @@ const NEW_EMOJIS = [
 
 export default function NewEmojis2026() {
   return (
-    <SectionShell tone="tint" eyebrow="New in 2026" title="New Emojis in 2026 — Unicode 15.1 & 16.0" subtitle="The latest additions to the emoji vocabulary">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+    <SectionShell
+      n="20"
+      id="new-2026"
+      title="New Emojis in 2026 — Unicode 15.1 &amp; 16.0"
+      count="8 new"
+      dek="The latest additions to the emoji vocabulary."
+    >
+      <AnimatedSection>
+        <div className="fg-list">
           {NEW_EMOJIS.map((item) => (
-            <AnimatedSection key={item.name}>
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">{item.emoji}</span>
-                  <h3 className="font-bold text-sm text-primary-dark dark:text-white">{item.name}</h3>
+            <div key={item.name} className="fg-entry fg-entry--ledger">
+              <span className="fg-entry__glyph">{item.emoji}</span>
+              <div className="fg-entry__main">
+                <span className="fg-entry__name">{item.name}</span>
+                <div>
+                  <p className="fg-entry__text">{item.meaning}</p>
+                  <p className="fg-entry__meta">Available — {item.availability}</p>
                 </div>
-                <p className="text-sm text-neutral-600 dark:text-slate-300 mb-2">{item.meaning}</p>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">{item.availability}</span>
               </div>
-            </AnimatedSection>
+            </div>
           ))}
         </div>
+      </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <AnimatedSection>
-            <div className="bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-primary rounded-r-xl p-5">
-              <h3 className="font-bold text-primary-dark dark:text-white mb-1">How the Unicode Approval Process Works</h3>
-              <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">Anyone may submit an emoji proposal. The Emoji Subcommittee evaluates based on predicted usage frequency, distinctiveness, and cross-cultural accessibility. From submission to keyboard: typically 18+ months.</p>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection>
-            <div className="bg-emerald-50 dark:bg-emerald-950/30 border-l-4 border-accent-emerald rounded-r-xl p-5">
-              <h3 className="font-bold text-primary-dark dark:text-white mb-1">How to Get New Emojis on iPhone</h3>
-              <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">Go to Settings → General → Software Update and install any available update. New emojis arrive through iOS system updates — there is no separate download.</p>
-            </div>
-          </AnimatedSection>
-        </div>
+      <AnimatedSection>
+        <dl className="fg-deflist mt-10 max-w-3xl border-t-2 border-[var(--rule)] pt-6">
+          <dt>How approval works</dt>
+          <dd>Anyone may submit a proposal. The Emoji Subcommittee evaluates predicted usage, distinctiveness, and cross-cultural accessibility. From submission to keyboard: typically 18+ months.</dd>
+          <dt>Getting them on iPhone</dt>
+          <dd>Settings → General → Software Update, then install any available update. New emojis arrive through iOS system updates — there is no separate download.</dd>
+        </dl>
+      </AnimatedSection>
     </SectionShell>
   );
 }

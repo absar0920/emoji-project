@@ -5,9 +5,9 @@ import { AnimatedSection } from "@/components/MotionWrappers";
 import SectionShell from "./SectionShell";
 
 const SECTIONS = [
-  { label: "Face Emojis", emojis: ["😀","😃","😄","😁","😆","😅","😂","🤣","😊","😇","😍","🥰","😘","😗","🙂","🤗","🤩","🤔","😏","😌","😛","😜","🥺","🫠","😭","😤","😬","🥴","🤪","😎","🫡","😮‍💨","🥲","🫥","🫩"] },
-  { label: "Heart Emojis", emojis: ["❤️","🧡","💛","💚","💙","💜","🖤","🤍","🤎","💕","💞","💓","💗","💖","💘","💝","❤️‍🔥","❤️‍🩹","💔","🫶"] },
-  { label: "Hand Emojis", emojis: ["👋","🤚","🖐️","✋","👌","🤌","🤏","✌️","🤞","🤟","🤘","🤙","👈","👉","👆","🖕","👇","☝️","👍","👎","✊","👊","🤛","🤜","👏","🙌","🤲","🤝","🙏"] },
+  { label: "Face emojis", emojis: ["😀","😃","😄","😁","😆","😅","😂","🤣","😊","😇","😍","🥰","😘","😗","🙂","🤗","🤩","🤔","😏","😌","😛","😜","🥺","🫠","😭","😤","😬","🥴","🤪","😎","🫡","😮‍💨","🥲","🫥","🫩"] },
+  { label: "Heart emojis", emojis: ["❤️","🧡","💛","💚","💙","💜","🖤","🤍","🤎","💕","💞","💓","💗","💖","💘","💝","❤️‍🔥","❤️‍🩹","💔","🫶"] },
+  { label: "Hand emojis", emojis: ["👋","🤚","🖐️","✋","👌","🤌","🤏","✌️","🤞","🤟","🤘","🤙","👈","👉","👆","🖕","👇","☝️","👍","👎","✊","👊","🤛","🤜","👏","🙌","🤲","🤝","🙏"] },
   { label: "Symbols", emojis: ["✨","🔥","💯","✅","❌","⭐","🌟","💫","⚡","🎉","💡","📌","👑","🏆","🚩","💢","⚜️","🧿","‼️"] },
 ];
 
@@ -21,41 +21,31 @@ export default function CopyPasteReference() {
   }
 
   return (
-    <SectionShell
-      tone="tint"
-      eyebrow="Copy & Paste"
-      title="Emoji Copy & Paste"
-      subtitle="Click any emoji to copy it to your clipboard"
-    >
-        {SECTIONS.map((section) => (
-          <AnimatedSection key={section.label}>
-            <div className="mb-6">
-              <h3 className="font-bold text-sm text-primary-dark dark:text-white mb-3">{section.label}</h3>
-              <div className="flex flex-wrap gap-2">
-                {section.emojis.map((emoji) => (
-                  <button
-                    key={emoji}
-                    onClick={() => handleCopy(emoji)}
-                    className={`w-11 h-11 flex items-center justify-center rounded-lg text-xl transition-all ${
-                      copied === emoji
-                        ? "bg-emerald-100 dark:bg-emerald-900/40 scale-110"
-                        : "bg-white dark:bg-slate-700 border border-neutral-200 dark:border-slate-600 hover:scale-105 hover:shadow-sm"
-                    }`}
-                    title={`Copy ${emoji}`}
-                  >
-                    {emoji}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-        ))}
-
-        {copied && (
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg z-50">
-            {copied} copied!
+    <SectionShell n="22" id="copy-paste" title="Emoji Copy &amp; Paste" dek="Click any glyph to copy it to your clipboard.">
+      {SECTIONS.map((section) => (
+        <AnimatedSection key={section.label}>
+          <p className="fg-kicker mt-9 first:mt-0 mb-3">{section.label}</p>
+          <div className="fg-glyphgrid">
+            {section.emojis.map((emoji) => (
+              <button
+                key={emoji}
+                onClick={() => handleCopy(emoji)}
+                className={`fg-glyph ${copied === emoji ? "copied" : ""}`}
+                title={`Copy ${emoji}`}
+                aria-label={`Copy ${emoji}`}
+              >
+                {emoji}
+              </button>
+            ))}
           </div>
-        )}
+        </AnimatedSection>
+      ))}
+
+      {copied && (
+        <div role="status" aria-live="polite" className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-accent-ed text-[var(--paper)] px-4 py-2 text-sm font-medium z-50 mono">
+          {copied} copied
+        </div>
+      )}
     </SectionShell>
   );
 }

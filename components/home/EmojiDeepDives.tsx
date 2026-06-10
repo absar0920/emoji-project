@@ -13,30 +13,35 @@ const DEEP_DIVES = [
 ];
 
 export default function EmojiDeepDives() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <SectionShell tone="plain" eyebrow="Deep Dives" title="Individual Emoji Deep Dives" subtitle="Tap to expand each emoji's full meaning">
-      <div className="space-y-3">
-        {DEEP_DIVES.map((item, i) => (
-          <AnimatedSection key={item.emoji}>
-            <button
-              onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="w-full text-left bg-neutral-50 dark:bg-slate-800 rounded-2xl border border-neutral-100 dark:border-slate-700 overflow-hidden transition-shadow hover:shadow-md card-lift"
-            >
-              <div className="flex items-center gap-4 p-4">
-                <span className="text-4xl">{item.emoji}</span>
-                <span className="font-bold text-primary-dark dark:text-white flex-1">{item.title}</span>
-                <span className="text-neutral-400 dark:text-slate-500 text-lg">{openIndex === i ? "▼" : "▸"}</span>
+    <SectionShell n="07" id="deep-dives" title="Individual Emoji Deep Dives" dek="The five most-searched meanings, in full.">
+      <div className="fg-list">
+        {DEEP_DIVES.map((item, i) => {
+          const open = openIndex === i;
+          return (
+            <AnimatedSection key={item.emoji}>
+              <div className="border-b border-[var(--line)]">
+                <button
+                  onClick={() => setOpenIndex(open ? null : i)}
+                  aria-expanded={open}
+                  className="w-full text-left flex items-center gap-3 sm:gap-4 py-4 cursor-pointer"
+                >
+                  <span className="mono t-muted text-[0.62rem] w-5 shrink-0 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-2xl shrink-0">{item.emoji}</span>
+                  <span className="font-read font-medium t-ink flex-1">{item.title}</span>
+                  <svg className={`w-4 h-4 t-muted shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {open && (
+                  <p className="t-body leading-relaxed pb-5 max-w-2xl sm:pl-[3.65rem]">{item.text}</p>
+                )}
               </div>
-              {openIndex === i && (
-                <div className="px-4 pb-4 pt-0">
-                  <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed pl-14">{item.text}</p>
-                </div>
-              )}
-            </button>
-          </AnimatedSection>
-        ))}
+            </AnimatedSection>
+          );
+        })}
       </div>
     </SectionShell>
   );

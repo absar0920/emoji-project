@@ -11,38 +11,43 @@ const ETIQUETTE = [
 
 export default function ProfessionalEtiquette() {
   return (
-    <SectionShell tone="plain" eyebrow="At Work" title="Professional Emoji Etiquette — Usage at Work in 2026" subtitle="What's safe, what's risky, and what to never send">
-        <AnimatedSection>
-          <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Context</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white"><span className="text-emerald-600">Safe</span></th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white"><span className="text-amber-600">Caution</span></th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white"><span className="text-red-600">Avoid</span></th>
+    <SectionShell
+      n="19"
+      id="work"
+      title="Professional Emoji Etiquette — Usage at Work in 2026"
+      dek="What's safe, what's risky, and what to never send."
+    >
+      <AnimatedSection>
+        <div className="fg-table-wrap">
+          <table className="fg-table">
+            <thead>
+              <tr>
+                <th>Context</th>
+                <th style={{ color: "var(--accent)" }}>Safe</th>
+                <th>Caution</th>
+                <th>Avoid</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ETIQUETTE.map((row) => (
+                <tr key={row.context}>
+                  <td className="strong whitespace-nowrap">{row.context}</td>
+                  <td className="emrow">{row.safe}</td>
+                  <td className="emrow muted">{row.caution}</td>
+                  <td className="emrow muted">{row.avoid}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {ETIQUETTE.map((row, i) => (
-                  <tr key={row.context} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-                    <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{row.context}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{row.safe}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{row.caution}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{row.avoid}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </AnimatedSection>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </AnimatedSection>
 
-        <AnimatedSection>
-          <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-accent-amber rounded-r-xl p-5">
-            <h3 className="font-bold text-primary-dark dark:text-white mb-1">⚠️ The Generational Reading Problem at Work</h3>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">A manager sending 😊 at the end of a correction intends warmth. A younger recipient may read it as passive-aggression. The safest rule: use symbols that behave like punctuation — ✅ 📌 ✔️ 💡 — rather than expression emojis.</p>
-          </div>
-        </AnimatedSection>
+      <AnimatedSection>
+        <div className="fg-pull fg-pull--sm mt-10">
+          <span className="fg-kicker">The Safest Rule</span>
+          <p>A manager&apos;s 😊 after a correction means warmth; a younger reader may hear passive-aggression. Use symbols that behave like punctuation — ✅ 📌 ✔️ 💡 — over expression emojis.</p>
+        </div>
+      </AnimatedSection>
     </SectionShell>
   );
 }

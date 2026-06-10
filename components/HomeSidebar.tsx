@@ -1,41 +1,48 @@
 import Link from "next/link";
 
-const CATEGORIES = [
-  { icon: "😀", name: "Smileys & Emotion", href: "/search?category=Smileys+%26+Emotion" },
-  { icon: "👥", name: "People & Body", href: "/search?category=People+%26+Body" },
-  { icon: "🐱", name: "Animals & Nature", href: "/search?category=Animals+%26+Nature" },
-  { icon: "🍕", name: "Food & Drink", href: "/search?category=Food+%26+Drink" },
-  { icon: "✈️", name: "Travel & Places", href: "/search?category=Travel+%26+Places" },
-  { icon: "⚽", name: "Activities", href: "/search?category=Activities" },
-  { icon: "💡", name: "Objects", href: "/search?category=Objects" },
-  { icon: "❤️", name: "Symbols", href: "/search?category=Symbols" },
-  { icon: "🏁", name: "Flags", href: "/search?category=Flags" },
+// Canonical chapter index — ids must match the `id` passed to each section.
+export const CHAPTERS = [
+  { n: "01", id: "what-are", t: "What Meanings Are" },
+  { n: "02", id: "quick-ref", t: "Quick Reference" },
+  { n: "03", id: "origin", t: "Origin & History" },
+  { n: "04", id: "categories", t: "Category Reference" },
+  { n: "05", id: "most-used", t: "Most Used Globally" },
+  { n: "06", id: "faces", t: "Face Emojis" },
+  { n: "07", id: "deep-dives", t: "Deep Dives" },
+  { n: "08", id: "hearts", t: "Heart Emojis" },
+  { n: "09", id: "hands", t: "Hand Emojis" },
+  { n: "10", id: "texting", t: "In Texting" },
+  { n: "11", id: "flirting", t: "Flirting" },
+  { n: "12", id: "platforms", t: "By Platform" },
+  { n: "13", id: "combos", t: "Combinations" },
+  { n: "14", id: "slang", t: "Internet Slang" },
+  { n: "15", id: "symbols", t: "Symbols" },
+  { n: "16", id: "culture", t: "Across Cultures" },
+  { n: "17", id: "misread", t: "Most Misunderstood" },
+  { n: "18", id: "rendering", t: "Platform Rendering" },
+  { n: "19", id: "work", t: "At Work" },
+  { n: "20", id: "new-2026", t: "New in 2026" },
+  { n: "21", id: "how-to-find", t: "Finding Meanings" },
+  { n: "22", id: "copy-paste", t: "Copy & Paste" },
+  { n: "23", id: "faq", t: "FAQ" },
+  { n: "24", id: "bottom-line", t: "The Bottom Line" },
 ];
 
 export default function HomeSidebar() {
   return (
-    <aside className="hidden lg:block w-56 shrink-0">
-      <nav className="sticky top-24">
-        <h3 className="eyebrow mb-4 flex items-center gap-2">
-          <span className="inline-block w-5 h-px bg-primary" aria-hidden="true" />
-          Categories
-        </h3>
-        <ul className="divide-y divide-neutral-200/70 dark:divide-slate-700/60 border-y border-neutral-200/70 dark:border-slate-700/60">
-          {CATEGORIES.map((cat, i) => (
-            <li key={cat.name}>
-              <Link
-                href={cat.href}
-                className="group flex items-center gap-3 py-2.5 text-sm text-neutral-600 dark:text-slate-300 hover:text-primary transition-colors"
-              >
-                <span className="font-mono text-[10px] text-neutral-300 dark:text-slate-600 tabular-nums w-4">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-base">{cat.icon}</span>
-                <span className="font-medium group-hover:translate-x-0.5 transition-transform">{cat.name}</span>
+    <aside className="hidden lg:block w-52 shrink-0">
+      <nav className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto scrollbar-hide">
+        <p className="fg-label pb-2 mb-1 border-b-2 border-[var(--rule)]">Contents</p>
+        <ol>
+          {CHAPTERS.map((c) => (
+            <li key={c.id} className="border-b border-[var(--line)]">
+              <Link href={`#${c.id}`} className="fg-link flex items-baseline gap-2.5 py-2">
+                <span className="mono text-[0.6rem] t-muted w-4 shrink-0">{c.n}</span>
+                <span className="text-[0.92rem] leading-snug">{c.t}</span>
               </Link>
             </li>
           ))}
-        </ul>
+        </ol>
       </nav>
     </aside>
   );

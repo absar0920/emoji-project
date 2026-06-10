@@ -2,20 +2,20 @@ import { AnimatedSection } from "@/components/MotionWrappers";
 import SectionShell from "./SectionShell";
 
 const CORE_FACES = [
-  { emoji: "😊", name: "Smiling Face with Smiling Eyes", meaning: "Warm, genuine happiness", note: "Gen Z in ironic contexts: slightly passive-aggressive" },
-  { emoji: "😍", name: "Smiling Face with Heart-Eyes", meaning: "Intense admiration or attraction", note: "Instagram DMs, visual appreciation" },
+  { emoji: "😊", name: "Smiling, Smiling Eyes", meaning: "Warm, genuine happiness", note: "Gen Z, ironic contexts: slightly passive-aggressive" },
+  { emoji: "😍", name: "Heart-Eyes", meaning: "Intense admiration or attraction", note: "Instagram DMs, visual appreciation" },
   { emoji: "🥺", name: "Pleading Face", meaning: "Vulnerability plea — hard to refuse", note: "Pairs with 👉👈 for maximum effect" },
   { emoji: "🫠", name: "Melting Face", meaning: "Overwhelmed, embarrassed, want to vanish", note: "Viral since Unicode 14.0 (2022)" },
-  { emoji: "😇", name: "Smiling Face with Halo", meaning: "Sarcastic innocence — \"I did the thing\"", note: "Almost never sincere in modern texting" },
+  { emoji: "😇", name: "Halo", meaning: "Sarcastic innocence — \"I did the thing\"", note: "Almost never sincere in modern texting" },
   { emoji: "😌", name: "Relieved Face", meaning: "Smug contentment — not sleepy", note: "Closed-eye design causes widespread misreading" },
-  { emoji: "😘", name: "Face Blowing a Kiss", meaning: "Playful affection, light flirtation", note: "Light enough for close non-romantic friends" },
-  { emoji: "🥰", name: "Smiling Face with Hearts", meaning: "Genuine warmth toward someone", note: "Heavier emotional weight than 😊" },
+  { emoji: "😘", name: "Blowing a Kiss", meaning: "Playful affection, light flirtation", note: "Light enough for close non-romantic friends" },
+  { emoji: "🥰", name: "Smiling w/ Hearts", meaning: "Genuine warmth toward someone", note: "Heavier emotional weight than 😊" },
   { emoji: "🤗", name: "Hugging Face", meaning: "Virtual embrace, supportive warmth", note: "After long silence: can read as hollow" },
-  { emoji: "😅", name: "Grinning Face with Sweat", meaning: "Nervous laughter — \"this is awkward\"", note: "Clearest on Apple where sweat drop is visible" },
-  { emoji: "😂", name: "Face with Tears of Joy", meaning: "Genuine laughter for Millennials+", note: "Gen Z prefers 💀" },
+  { emoji: "😅", name: "Grinning w/ Sweat", meaning: "Nervous laughter — \"this is awkward\"", note: "Clearest on Apple where sweat drop is visible" },
+  { emoji: "😂", name: "Tears of Joy", meaning: "Genuine laughter for Millennials+", note: "Gen Z prefers 💀" },
   { emoji: "😒", name: "Unamused Face", meaning: "Quiet irritation or deliberate boredom", note: "Carries more weight than its expression suggests" },
   { emoji: "😉", name: "Winking Face", meaning: "Playful suggestion, mild flirtation", note: "Cleaner flirt signal than 😏" },
-  { emoji: "🙂", name: "Slightly Smiling Face", meaning: "Passive-aggression or cold acknowledgment", note: "Highest misread risk of any face emoji" },
+  { emoji: "🙂", name: "Slightly Smiling", meaning: "Passive-aggression or cold acknowledgment", note: "Highest misread risk of any face emoji" },
   { emoji: "☺️", name: "Smiling Face", meaning: "Soft, bashful happiness", note: "Renders especially warmly on Apple" },
 ];
 
@@ -36,50 +36,54 @@ const EXTENDED_FACES = [
 
 export default function FaceEmojiGuide() {
   return (
-    <SectionShell tone="tint" eyebrow="Faces" title="Face Emoji Meanings — Every Expression Decoded" subtitle="The gap between official Unicode names and real conversational meanings is wider here than anywhere else.">
+    <SectionShell
+      n="06"
+      id="faces"
+      title="Face Emoji Meanings — Every Expression Decoded"
+      count="27 faces"
+      dek="The gap between official Unicode names and real conversational meanings is wider here than anywhere else."
+    >
       <AnimatedSection>
-        <h3 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Core Face Emojis</h3>
-      </AnimatedSection>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-        {CORE_FACES.map((item) => (
-          <AnimatedSection key={item.emoji}>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-3xl">{item.emoji}</span>
-                <h4 className="font-bold text-sm text-primary-dark dark:text-white leading-tight">{item.name}</h4>
+        <p className="fg-kicker mb-4">Core faces</p>
+        <div className="fg-list">
+          {CORE_FACES.map((item) => (
+            <div key={item.emoji} className="fg-entry fg-entry--ledger">
+              <span className="fg-entry__glyph">{item.emoji}</span>
+              <div className="fg-entry__main">
+                <span className="fg-entry__name">{item.name}</span>
+                <div>
+                  <p className="fg-entry__text">{item.meaning}</p>
+                  <p className="fg-entry__meta">{item.note}</p>
+                </div>
               </div>
-              <p className="text-sm text-neutral-600 dark:text-slate-300 mb-1">{item.meaning}</p>
-              <p className="text-xs text-neutral-400 dark:text-slate-500">{item.note}</p>
             </div>
-          </AnimatedSection>
-        ))}
-      </div>
+          ))}
+        </div>
+      </AnimatedSection>
 
       <AnimatedSection>
-        <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-accent-amber rounded-r-xl p-5 mb-8">
-          <h3 className="font-bold text-primary-dark dark:text-white mb-1">⚠️ Why 🙂 Is the Most Dangerous Face Emoji</h3>
-          <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-            Officially it means a gentle smile. In practice by 2024–2026, a standalone 🙂 in conversation signals lukewarm engagement at best and deliberate emotional distance at worst. Nobody sends it when genuinely happy. It has become the emoji equivalent of &ldquo;noted.&rdquo;
+        <div className="fg-pull fg-pull--sm my-11">
+          <span className="fg-kicker">In Practice</span>
+          <p>
+            🙂 is the most dangerous face in modern texting. Officially a gentle smile — but by 2024 a standalone 🙂 reads as cold distance. Nobody sends it when they&apos;re happy. It&apos;s become the emoji for &ldquo;noted.&rdquo;
           </p>
         </div>
       </AnimatedSection>
 
       <AnimatedSection>
-        <h3 className="text-lg font-bold text-primary-dark dark:text-white mb-4">Extended Face Emoji Meanings</h3>
-      </AnimatedSection>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {EXTENDED_FACES.map((item) => (
-          <AnimatedSection key={item.emoji}>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-3xl">{item.emoji}</span>
+        <p className="fg-kicker mb-4">Extended readings</p>
+        <div className="fg-list">
+          {EXTENDED_FACES.map((item) => (
+            <div key={item.emoji} className="fg-entry">
+              <span className="fg-entry__glyph">{item.emoji}</span>
+              <div className="fg-entry__main">
+                <p className="fg-entry__text">{item.meaning}</p>
+                <p className="fg-entry__meta">{item.note}</p>
               </div>
-              <p className="text-sm text-neutral-600 dark:text-slate-300 mb-1">{item.meaning}</p>
-              <p className="text-xs text-neutral-400 dark:text-slate-500">{item.note}</p>
             </div>
-          </AnimatedSection>
-        ))}
-      </div>
+          ))}
+        </div>
+      </AnimatedSection>
     </SectionShell>
   );
 }

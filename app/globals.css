@@ -11,8 +11,9 @@
   --color-accent-amber: #D97706;
   --color-accent-violet: #7C3AED;
   --font-sans: var(--font-public), "Inter", "system-ui", "sans-serif";
-  --font-mono: "JetBrains Mono", "monospace";
+  --font-mono: var(--font-mono-jb), "JetBrains Mono", "monospace";
   --font-serif: var(--font-bodoni), "Georgia", "serif";
+  --font-read: var(--font-source-serif), "Georgia", "serif";
 }
 
 body {
@@ -20,73 +21,362 @@ body {
   color: #374151;
   background-color: #F9FAFB;
 }
-
-.dark body {
-  background-color: #0F172A;
-  color: #CBD5E1;
-}
+.dark body { background-color: #0F172A; color: #CBD5E1; }
 
 .shimmer-light {
   background: linear-gradient(90deg, #E5E7EB 25%, #F3F4F6 50%, #E5E7EB 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
-
 .shimmer-dark {
   background: linear-gradient(90deg, #1E293B 25%, #334155 50%, #1E293B 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+/* =========================================================================
+   THE FIELD GUIDE — homepage design system (scoped to .theme-editorial)
+   A typeset reference book: Didone display, serif reading body, mono labels.
+   Ink on warm paper + a single oxblood accent. Hairline rules, no shadows,
+   no rounded corners. Tokens are NON --color-* vars so Tailwind v4 keeps them.
+   ========================================================================= */
+.theme-editorial {
+  --paper:   #f7f2e9;   /* warm page */
+  --paper-2: #efe8da;   /* faint inset / hover */
+  --ink:     #1c1916;   /* headings, strong text */
+  --ink-2:   #4b443c;   /* reading body */
+  --ink-3:   #8c8475;   /* labels, captions, muted */
+  --line:    #ddd3c2;   /* hairline rules */
+  --rule:    #1c1916;   /* strong ink rules */
+  --accent:  #8a2b22;   /* oxblood */
+  --accent-2:#6f221b;
+
+  background-color: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--font-read);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.dark .theme-editorial {
+  --paper:   #131110;
+  --paper-2: #1c1916;
+  --ink:     #f1e9da;
+  --ink-2:   #c4bcae;
+  --ink-3:   #8c8475;
+  --line:    #322d27;
+  --rule:    #f1e9da;
+  --accent:  #e08c7f;
+  --accent-2:#e08c7f;
 }
 
-/* === Design language v2 === */
+/* ---------- text + label helpers (theme-aware) ---------- */
+.theme-editorial .t-ink    { color: var(--ink); }
+.theme-editorial .t-body   { color: var(--ink-2); }
+.theme-editorial .t-muted  { color: var(--ink-3); }
+.theme-editorial .t-accent { color: var(--accent); }
+.theme-editorial .mono     { font-family: var(--font-mono); }
+.theme-editorial .bg-accent-ed { background-color: var(--accent); }
+.theme-editorial .font-read { font-family: var(--font-read); }
+.font-display { font-family: var(--font-serif); font-weight: 700; letter-spacing: -0.015em; }
 
-/* Section eyebrow label */
-.eyebrow {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
+.theme-editorial .fg-label {
+  font-family: var(--font-mono);
   text-transform: uppercase;
-  color: var(--color-primary);
+  letter-spacing: 0.18em;
+  font-size: 0.66rem;
+  color: var(--ink-3);
+  font-weight: 500;
 }
-.dark .eyebrow {
-  color: #F9A8D4;
-}
-
-/* Gradient text accent */
-.text-gradient {
-  background-image: linear-gradient(90deg, var(--color-primary), var(--color-accent-violet));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Decorative dotted grid for the hero */
-.hero-dots {
-  background-image: radial-gradient(currentColor 1px, transparent 1px);
-  background-size: 22px 22px;
+.theme-editorial .fg-kicker {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.62rem;
+  color: var(--accent);
+  font-weight: 600;
 }
 
-/* Soft entrance float for decorative hero emojis */
-@keyframes floaty {
-  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-  50% { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
-}
-.floaty {
-  animation: floaty 6s ease-in-out infinite;
+/* ---------- rules ---------- */
+.theme-editorial .rule-hair   { border-top: 1px solid var(--line); }
+.theme-editorial .rule-strong { border-top: 2px solid var(--rule); }
+
+/* ---------- running head (masthead bar) ---------- */
+.theme-editorial .fg-runhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.64rem;
+  color: var(--ink-3);
+  padding-bottom: 0.7rem;
+  border-bottom: 2px solid var(--rule);
 }
 
-/* Card lift utility — used across editorial cards */
-.card-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+/* ---------- chapter frame ---------- */
+.theme-editorial .fg-chapter { padding: 3.25rem 0; }
+.theme-editorial .fg-chapter:first-of-type { padding-top: 2rem; }
+.theme-editorial .fg-chapter__bar {
+  border-top: 2px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-top: 0.6rem;
 }
-.card-lift:hover {
-  transform: translateY(-3px);
+.theme-editorial .fg-chapter__n {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  font-weight: 600;
 }
+.theme-editorial .fg-chapter__count {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.theme-editorial .fg-chapter__title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  margin-top: 1.1rem;
+  max-width: 18ch;
+}
+.theme-editorial .fg-chapter__dek {
+  color: var(--ink-3);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin-top: 0.85rem;
+  max-width: 46ch;
+}
+
+/* ---------- dictionary / ledger entries ---------- */
+.theme-editorial .fg-list { border-top: 1px solid var(--line); }
+.theme-editorial .fg-entry {
+  display: flex;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.theme-editorial .fg-entry__glyph {
+  flex: none;
+  width: 2.6rem;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.15;
+}
+.theme-editorial .fg-entry__main { flex: 1 1 auto; min-width: 0; }
+.theme-editorial .fg-entry__name {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.theme-editorial .fg-entry__text { color: var(--ink-2); margin-top: 0.15rem; }
+.theme-editorial .fg-entry__meta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  margin-top: 0.4rem;
+}
+.theme-editorial .fg-entry__meta b { color: var(--accent); font-weight: 600; }
+/* desktop: name becomes a left ledger column */
+@media (min-width: 720px) {
+  .theme-editorial .fg-entry--ledger .fg-entry__main {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    gap: 0 1.75rem;
+    align-items: baseline;
+  }
+  .theme-editorial .fg-entry--ledger .fg-entry__meta { grid-column: 2; }
+}
+
+/* ---------- ledger table ---------- */
+.theme-editorial .fg-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.theme-editorial .fg-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 36rem;
+  border-top: 2px solid var(--rule);
+  border-bottom: 2px solid var(--rule);
+}
+.theme-editorial .fg-table thead th {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.theme-editorial .fg-table tbody td {
+  padding: 0.85rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  vertical-align: top;
+  font-size: 0.95rem;
+}
+.theme-editorial .fg-table tbody tr:last-child td { border-bottom: 0; }
+.theme-editorial .fg-table .em { font-size: 1.5rem; line-height: 1; }
+.theme-editorial .fg-table .emrow { font-size: 1.15rem; letter-spacing: 0.06em; white-space: nowrap; }
+.theme-editorial .fg-table .strong { color: var(--ink); font-weight: 600; }
+.theme-editorial .fg-table .muted { color: var(--ink-3); font-size: 0.85rem; }
+.theme-editorial .fg-table .mono { font-size: 0.8rem; }
+
+/* ---------- pull quote (replaces callouts) ---------- */
+.theme-editorial .fg-pull {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.7rem 0;
+}
+.theme-editorial .fg-pull .fg-kicker { display: block; margin-bottom: 0.8rem; }
+.theme-editorial .fg-pull p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ink);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  line-height: 1.42;
+  max-width: 34ch;
+}
+.theme-editorial .fg-pull--sm p { font-size: clamp(1.05rem, 1.8vw, 1.28rem); line-height: 1.5; max-width: 56ch; }
+
+/* ---------- lead paragraph w/ drop cap + multi-column prose ---------- */
+.theme-editorial .fg-lead { font-size: 1.18rem; line-height: 1.62; color: var(--ink-2); }
+.theme-editorial .fg-lead--cap::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 3.5em;
+  line-height: 0.74;
+  padding: 0.08em 0.1em 0 0;
+}
+.theme-editorial .fg-prose p { margin-bottom: 1rem; color: var(--ink-2); }
+.theme-editorial .fg-prose p:last-child { margin-bottom: 0; }
+@media (min-width: 900px) {
+  .theme-editorial .fg-cols2 { column-count: 2; column-gap: 3rem; text-align: justify; hyphens: auto; }
+  .theme-editorial .fg-cols2 > p:first-child { margin-top: 0; }
+}
+
+/* ---------- definition list ---------- */
+.theme-editorial .fg-deflist dt {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--ink);
+  margin-top: 1.1rem;
+}
+.theme-editorial .fg-deflist dd { color: var(--ink-2); margin: 0.25rem 0 0; }
+
+/* ---------- numbered steps (layers / how-to) ---------- */
+.theme-editorial .fg-steps { border-top: 1px solid var(--line); }
+.theme-editorial .fg-step {
+  display: flex;
+  gap: 1.4rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.theme-editorial .fg-step__n {
+  flex: none;
+  width: 2.4rem;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.theme-editorial .fg-step__h { font-family: var(--font-serif); font-weight: 700; color: var(--ink); font-size: 1.1rem; }
+.theme-editorial .fg-step__t { color: var(--ink-2); margin-top: 0.2rem; font-size: 0.97rem; }
+
+/* ---------- glyph specimen grid (copy & paste) ---------- */
+.theme-editorial .fg-glyphgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.9rem, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.theme-editorial .fg-glyph {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+@media (hover: hover) { .theme-editorial .fg-glyph:hover { background: var(--paper-2); } }
+.theme-editorial .fg-glyph.copied { background: var(--accent); }
+
+/* ---------- filing-index tabs (platforms) ---------- */
+.theme-editorial .fg-tabs {
+  display: flex;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--rule);
+}
+.theme-editorial .fg-tab {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  padding: 0.55rem 0;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+.theme-editorial .fg-tab[data-active="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* ---------- specimen plate (hero cover art) ---------- */
+.theme-editorial .fg-specimen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0;
+}
+.theme-editorial .fg-specimen__g { font-size: clamp(2.1rem, 5vw, 2.9rem); line-height: 1; }
+.theme-editorial .fg-specimen__c {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.56rem;
+  color: var(--ink-3);
+}
+
+/* ---------- links ---------- */
+.theme-editorial .fg-link { color: var(--ink); text-decoration: none; transition: color 0.15s ease; }
+.theme-editorial .fg-link:hover { color: var(--accent); }
+.theme-editorial ::selection { background: var(--accent); color: var(--paper); }
+
+/* utility */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -96,28 +386,3 @@ body {
     scroll-behavior: auto !important;
   }
 }
-
-/* === Editorial / Magazine theme — SITE-WIDE ===
-   Tailwind v4 resolves text-primary / bg-primary / border-primary to these
-   CSS variables, so overriding them globally re-skins every page at once
-   (indigo brand -> editorial magenta + near-black) without touching files. */
-:root {
-  --color-primary: #BE185D;        /* magenta accent, AA on white for text */
-  --color-primary-dark: #18181B;   /* near-black display + headings */
-  --color-primary-light: #FDF2F8;  /* faint pink wash */
-  --color-accent-violet: #BE185D;  /* collapse the old indigo->violet gradient to one accent */
-}
-.dark {
-  --color-primary: #F9A8D4;        /* lighter magenta for contrast on dark */
-  --color-primary-light: #2A1622;
-}
-
-/* Wider tracking for editorial eyebrows */
-.eyebrow { letter-spacing: 0.22em; }
-
-/* Editorial display type */
-.font-display { font-family: var(--font-serif); font-weight: 700; letter-spacing: -0.01em; }
-
-/* Hairline rule used to separate editorial bands */
-.rule-top { border-top: 1px solid rgb(0 0 0 / 0.10); }
-.dark .rule-top { border-top-color: rgb(255 255 255 / 0.12); }

@@ -18,45 +18,45 @@ const HANDS = [
 
 export default function HandEmojiGuide() {
   return (
-    <SectionShell tone="plain" eyebrow="Hands" title="Hand Emoji Meanings — Gestures & Cultural Warnings" subtitle="Hand emojis are the most culturally variable symbols in the vocabulary.">
+    <SectionShell
+      n="09"
+      id="hands"
+      title="Hand Emoji Meanings — Gestures &amp; Cultural Warnings"
+      count="12 gestures"
+      dek="Hand emojis are the most culturally variable symbols in the vocabulary."
+    >
       <AnimatedSection>
-        <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Emoji</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Gesture</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Core Meaning</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Cultural Warning</th>
+        <div className="fg-table-wrap">
+          <table className="fg-table">
+            <thead>
+              <tr>
+                <th>Emoji</th>
+                <th>Gesture</th>
+                <th>Core Meaning</th>
+                <th>Cultural Warning</th>
+              </tr>
+            </thead>
+            <tbody>
+              {HANDS.map((h) => (
+                <tr key={h.emoji}>
+                  <td className="em">{h.emoji}</td>
+                  <td className="strong whitespace-nowrap">{h.gesture}</td>
+                  <td>{h.meaning}</td>
+                  <td className={h.warning ? "t-accent" : "muted"} style={h.warning ? { color: "var(--accent)" } : undefined}>
+                    {h.warning || "— none —"}
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {HANDS.map((h, i) => (
-                  <tr key={h.emoji} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-                    <td className="px-4 py-3 text-2xl">{h.emoji}</td>
-                    <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{h.gesture}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{h.meaning}</td>
-                    <td className="px-4 py-3">
-                      {h.warning ? (
-                        <span className="inline-block text-xs px-2 py-1 rounded-full bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300">{h.warning}</span>
-                      ) : (
-                        <span className="text-xs text-neutral-400 dark:text-slate-500">None</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </AnimatedSection>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </AnimatedSection>
 
-        <AnimatedSection>
-          <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-accent-amber rounded-r-xl p-5">
-            <h3 className="font-bold text-primary-dark dark:text-white mb-1">⚠️ The 👌 Situation</h3>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-              In the United States, 👌 means &ldquo;perfect&rdquo; or &ldquo;okay.&rdquo; In Brazil and parts of Southern Europe, the same gesture is a vulgar insult. In France it has historically meant &ldquo;zero&rdquo; or &ldquo;worthless.&rdquo; No platform will alert you when your &ldquo;perfect&rdquo; reads as offensive to someone else.
-            </p>
-          </div>
+      <AnimatedSection>
+        <div className="fg-pull mt-10">
+          <span className="fg-kicker">Watch Out · 👌</span>
+          <p>In the US it means &ldquo;perfect.&rdquo; In Brazil and parts of Southern Europe it&apos;s a vulgar insult. No platform warns you.</p>
+        </div>
       </AnimatedSection>
     </SectionShell>
   );

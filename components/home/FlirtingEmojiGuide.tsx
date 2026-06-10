@@ -1,14 +1,6 @@
 import { AnimatedSection } from "@/components/MotionWrappers";
 import SectionShell from "./SectionShell";
 
-const WEIGHT_COLORS: Record<string, string> = {
-  "Very High": "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300",
-  "High": "bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300",
-  "Medium-High": "bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300",
-  "Medium": "bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-300",
-  "Medium-Low": "bg-lime-100 dark:bg-lime-900/40 text-lime-700 dark:text-lime-300",
-};
-
 const FLIRT_EMOJIS = [
   { emoji: "❤️", signal: "Direct, serious — \"I have real feelings\"", weight: "High" },
   { emoji: "❤️‍🔥", signal: "Intense attraction with urgency attached", weight: "Very High" },
@@ -25,42 +17,34 @@ const FLIRT_EMOJIS = [
 export default function FlirtingEmojiGuide() {
   return (
     <SectionShell
-      tone="plain"
-      eyebrow="Flirting"
+      n="11"
+      id="flirting"
       title="Flirting Emoji Meanings — Romantic Signals Decoded"
-      subtitle="What each emoji communicates in a romantic context"
+      count="10 signals"
+      dek="What each emoji communicates in a romantic context — and how much weight it carries."
     >
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+      <AnimatedSection>
+        <div className="fg-list">
           {FLIRT_EMOJIS.map((item) => (
-            <AnimatedSection key={item.emoji}>
-              <div className="flex items-start gap-4 bg-neutral-50 dark:bg-slate-800 rounded-2xl p-4 border border-neutral-200/80 dark:border-slate-700 shadow-sm card-lift hover:shadow-md hover:border-primary/30">
-                <span className="text-3xl shrink-0">{item.emoji}</span>
-                <div className="min-w-0">
-                  <p className="text-sm text-neutral-600 dark:text-slate-300 mb-2">{item.signal}</p>
-                  <span className={`inline-block text-xs font-medium px-2 py-1 rounded-full ${WEIGHT_COLORS[item.weight]}`}>{item.weight}</span>
-                </div>
+            <div key={item.emoji} className="fg-entry">
+              <span className="fg-entry__glyph">{item.emoji}</span>
+              <div className="fg-entry__main">
+                <p className="fg-entry__text">{item.signal}</p>
+                <p className="fg-entry__meta">Weight — {item.weight}</p>
               </div>
-            </AnimatedSection>
+            </div>
           ))}
         </div>
+      </AnimatedSection>
 
-        <AnimatedSection>
-          <div className="bg-pink-50 dark:bg-pink-950/30 border-l-4 border-pink-400 rounded-r-xl p-5">
-            <h3 className="font-bold text-primary-dark dark:text-white mb-1">What Does 😏 Mean When a Guy Sends It?</h3>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-              The Smirking Face signals playful confidence, flirtation, or mild suggestion. In light conversation it reads as teasing. In response to something personal or complimentary, it signals romantic interest — he noticed something and chose to acknowledge it with a deliberate smirk rather than words.
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="bg-violet-50 dark:bg-violet-950/30 border-l-4 border-accent-violet rounded-r-xl p-5 mt-4">
-            <h3 className="font-bold text-primary-dark dark:text-white mb-1">💡 Receiving 👀 With No Text Following</h3>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">
-              Usually signals the sender is thinking about something they have not decided to say yet. It is an invitation, not a statement.
-            </p>
-          </div>
-        </AnimatedSection>
+      <AnimatedSection>
+        <dl className="fg-deflist mt-10 max-w-3xl border-t-2 border-[var(--rule)] pt-6">
+          <dt>😏 when a guy sends it</dt>
+          <dd>Playful confidence, flirtation, or mild suggestion. In light conversation it reads as teasing; in response to something personal, it signals interest — he noticed something and chose a smirk over words.</dd>
+          <dt>👀 with no text following</dt>
+          <dd>Usually the sender is thinking about something they haven&apos;t decided to say yet. It is an invitation, not a statement.</dd>
+        </dl>
+      </AnimatedSection>
     </SectionShell>
   );
 }

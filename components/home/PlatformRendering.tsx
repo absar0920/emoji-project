@@ -11,40 +11,39 @@ const RENDERING = [
 
 export default function PlatformRendering() {
   return (
-    <SectionShell tone="tint" eyebrow="Rendering" title="Apple vs. Android vs. Samsung vs. WhatsApp" subtitle="The same emoji can look strikingly different across devices — and visual differences carry emotional weight.">
-        <AnimatedSection>
-          <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Emoji</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Apple (iOS)</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Google (Android)</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Samsung</th>
-                  <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">WhatsApp / Meta</th>
+    <SectionShell
+      n="18"
+      id="rendering"
+      title="Apple vs. Android vs. Samsung vs. WhatsApp"
+      dek="The same emoji can look strikingly different across devices — and visual differences carry emotional weight."
+    >
+      <AnimatedSection>
+        <div className="fg-table-wrap">
+          <table className="fg-table">
+            <thead>
+              <tr><th>Emoji</th><th>Apple (iOS)</th><th>Google</th><th>Samsung</th><th>WhatsApp / Meta</th></tr>
+            </thead>
+            <tbody>
+              {RENDERING.map((row) => (
+                <tr key={row.emoji}>
+                  <td className="em">{row.emoji}</td>
+                  <td className="muted">{row.apple}</td>
+                  <td className="muted">{row.google}</td>
+                  <td className="muted">{row.samsung}</td>
+                  <td className="muted">{row.meta}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {RENDERING.map((row, i) => (
-                  <tr key={row.emoji} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-                    <td className="px-4 py-3 text-2xl">{row.emoji}</td>
-                    <td className="px-4 py-3 text-xs text-neutral-600 dark:text-slate-300">{row.apple}</td>
-                    <td className="px-4 py-3 text-xs text-neutral-600 dark:text-slate-300">{row.google}</td>
-                    <td className="px-4 py-3 text-xs text-neutral-600 dark:text-slate-300">{row.samsung}</td>
-                    <td className="px-4 py-3 text-xs text-neutral-600 dark:text-slate-300">{row.meta}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </AnimatedSection>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </AnimatedSection>
 
-        <AnimatedSection>
-          <div className="bg-violet-50 dark:bg-violet-950/30 border-l-4 border-accent-violet rounded-r-xl p-5">
-            <h3 className="font-bold text-primary-dark dark:text-white mb-1">💡 Practical Guidance</h3>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">If emotional precision matters in an important conversation, be aware that subtle face emojis may render differently on the receiver&apos;s device. When in doubt, use words alongside the symbol.</p>
-          </div>
-        </AnimatedSection>
+      <AnimatedSection>
+        <div className="fg-pull fg-pull--sm mt-10">
+          <span className="fg-kicker">Practical Guidance</span>
+          <p>When emotional precision matters, remember subtle faces — 😬 😌 🙂 — may render differently on the receiver&apos;s device. When in doubt, use words alongside the symbol.</p>
+        </div>
+      </AnimatedSection>
     </SectionShell>
   );
 }

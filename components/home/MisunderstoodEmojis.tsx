@@ -22,29 +22,25 @@ const MISUNDERSTOOD = [
 export default function MisunderstoodEmojis() {
   return (
     <SectionShell
-      tone="plain"
-      eyebrow="Misread"
+      n="17"
+      id="misread"
       title="The 15 Most Misunderstood Emojis in the World"
-      subtitle="What most people think vs. what they officially mean vs. how they're actually used"
+      count="15 entries"
+      dek="What most people think · what it officially means · how it's actually used."
     >
       <AnimatedSection>
-        <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700">
-          <table className="w-full text-sm">
+        <div className="fg-table-wrap">
+          <table className="fg-table">
             <thead>
-              <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Emoji</th>
-                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">What People Think</th>
-                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Official Meaning</th>
-                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Actual Usage in 2026</th>
-              </tr>
+              <tr><th>Emoji</th><th>People Think</th><th>Official Meaning</th><th>Actual Usage, 2026</th></tr>
             </thead>
             <tbody>
-              {MISUNDERSTOOD.map((row, i) => (
-                <tr key={row.emoji} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-                  <td className="px-4 py-3 text-2xl">{row.emoji}</td>
-                  <td className="px-4 py-3 text-neutral-500 dark:text-slate-400">{row.think}</td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-slate-300">{row.official}</td>
-                  <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{row.actual}</td>
+              {MISUNDERSTOOD.map((row) => (
+                <tr key={row.emoji}>
+                  <td className="em">{row.emoji}</td>
+                  <td className="muted">{row.think}</td>
+                  <td>{row.official}</td>
+                  <td className="strong">{row.actual}</td>
                 </tr>
               ))}
             </tbody>

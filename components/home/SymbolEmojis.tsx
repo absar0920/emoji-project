@@ -3,7 +3,7 @@ import SectionShell from "./SectionShell";
 
 const SYMBOLS = [
   { symbol: "‼️", context: "Universal", meaning: "Urgency, shock, emphasis", note: "Gen Z also uses for ironic theatrical emphasis" },
-  { symbol: ")) or )", context: "Russian/E. European texting", meaning: "Smile or laughter — a text emoticon tradition", note: "Common in WhatsApp from CIS-region users" },
+  { symbol: ")) or )", context: "Russian / E. European", meaning: "Smile or laughter — a text emoticon tradition", note: "Common in WhatsApp from CIS-region users" },
   { symbol: "^^ or ^_^", context: "East Asian internet", meaning: "Happy, pleased, smiling", note: "From Japanese and Korean online culture" },
   { symbol: ".-. or ._.", context: "Western internet", meaning: "Uncomfortable, awkward, deadpan", note: "Signals mild distress or social unease" },
   { symbol: ">:(", context: "Universal", meaning: "Angry or frustrated", note: "Classic text emoticon still in use" },
@@ -17,29 +17,24 @@ const SYMBOLS = [
 export default function SymbolEmojis() {
   return (
     <SectionShell
-      tone="plain"
-      eyebrow="Symbols"
+      n="15"
+      id="symbols"
       title="Symbol Emoji Meanings — ‼️ )) 〽️ and More"
-      subtitle="Punctuation marks, keyboard symbols, and text emoticons that most guides never cover"
+      dek="Punctuation marks, keyboard symbols, and text emoticons that most guides never cover."
     >
       <AnimatedSection>
-        <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-8">
-          <table className="w-full text-sm">
+        <div className="fg-table-wrap">
+          <table className="fg-table">
             <thead>
-              <tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Symbol</th>
-                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Context</th>
-                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Meaning</th>
-                <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Notes</th>
-              </tr>
+              <tr><th>Symbol</th><th>Context</th><th>Meaning</th><th>Notes</th></tr>
             </thead>
             <tbody>
-              {SYMBOLS.map((row, i) => (
-                <tr key={row.symbol} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-                  <td className="px-4 py-3 font-mono text-lg">{row.symbol}</td>
-                  <td className="px-4 py-3 text-neutral-500 dark:text-slate-400 text-xs">{row.context}</td>
-                  <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{row.meaning}</td>
-                  <td className="px-4 py-3 text-xs text-neutral-400 dark:text-slate-500">{row.note}</td>
+              {SYMBOLS.map((row) => (
+                <tr key={row.symbol}>
+                  <td className="mono t-ink whitespace-nowrap" style={{ fontSize: "0.95rem" }}>{row.symbol}</td>
+                  <td className="muted whitespace-nowrap">{row.context}</td>
+                  <td className="strong">{row.meaning}</td>
+                  <td className="muted">{row.note}</td>
                 </tr>
               ))}
             </tbody>
@@ -48,9 +43,9 @@ export default function SymbolEmojis() {
       </AnimatedSection>
 
       <AnimatedSection>
-        <div className="bg-violet-50 dark:bg-violet-950/30 border-l-4 border-accent-violet rounded-r-xl p-5">
-          <h3 className="font-bold text-primary-dark dark:text-white mb-1">💡 Why ‼️ Is One of the Most Searched Symbols</h3>
-          <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">The Double Exclamation Mark signals genuine urgency when used sincerely (&ldquo;CALL ME NOW ‼️&rdquo;), but in Gen Z texting it is frequently deployed for ironic theatrical emphasis — treating something minor as dramatically important.</p>
+        <div className="fg-pull fg-pull--sm mt-10">
+          <span className="fg-kicker">Most Searched</span>
+          <p>‼️ signals genuine urgency when sincere (&ldquo;CALL ME NOW ‼️&rdquo;) — but in Gen Z texting it&apos;s ironic theatrical emphasis, treating something minor as dramatically important.</p>
         </div>
       </AnimatedSection>
     </SectionShell>

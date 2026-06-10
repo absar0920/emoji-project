@@ -5,10 +5,7 @@ import SectionShell from "./SectionShell";
 
 const TABS = ["WhatsApp", "Instagram", "TikTok", "Snapchat", "Discord"] as const;
 type Tab = typeof TABS[number];
-
-const TAB_ICONS: Record<Tab, string> = {
-  WhatsApp: "💬", Instagram: "📸", TikTok: "🎵", Snapchat: "👻", Discord: "🎮",
-};
+const TAB_ICONS: Record<Tab, string> = { WhatsApp: "💬", Instagram: "📸", TikTok: "🎵", Snapchat: "👻", Discord: "🎮" };
 
 const WHATSAPP_DATA = [
   { emoji: "🙂", misreading: "Friendly smile", actual: "Passive-aggression in modern use" },
@@ -19,7 +16,6 @@ const WHATSAPP_DATA = [
   { emoji: "💯", misreading: "\"100 percent\"", actual: "Full endorsement, perfection, no notes" },
   { emoji: "😪", misreading: "Tired or sleepy", actual: "Sneezing or sick — the drop is a snot bubble" },
 ];
-
 const INSTAGRAM_BIOS = [
   { emoji: "✨", meaning: "Magic, positivity, sparkle energy", identity: "Creator, wellness, optimist" },
   { emoji: "🌙", meaning: "Night aesthetic, introspective", identity: "Aesthetic accounts, poets" },
@@ -34,7 +30,6 @@ const INSTAGRAM_BIOS = [
   { emoji: "🦋", meaning: "Transformation, growth", identity: "Mental health, self-dev" },
   { emoji: "🌊", meaning: "Nature, travel, free spirit", identity: "Travel bloggers, surfers" },
 ];
-
 const TIKTOK_DATA = [
   { emoji: "💀", meaning: "Dying of laughter — \"this killed me\"", why: "Replaced 😂 as authentic laughter ~2022" },
   { emoji: "😭", meaning: "Overwhelmingly moved or funny — not sad", why: "\"Crying\" became ironic positive overwhelm" },
@@ -46,7 +41,6 @@ const TIKTOK_DATA = [
   { emoji: "😤", meaning: "\"I did that\" — satisfied triumph", why: "Opposite of how most people read it" },
   { emoji: "🫃", meaning: "Food baby, bloated from overeating", why: "Ironic self-deprecation" },
 ];
-
 const SNAPCHAT_DATA = [
   { emoji: "🌟", meaning: "Super BFF — mutual #1 for 2+ months", trigger: "Both send most snaps for 2+ months" },
   { emoji: "💛", meaning: "#1 Best Friends mutually", trigger: "You are each other's top snap contact" },
@@ -59,7 +53,6 @@ const SNAPCHAT_DATA = [
   { emoji: "⌛", meaning: "Streak about to end", trigger: "No snap exchanged in past 24 hours" },
   { emoji: "🎂", meaning: "Birthday", trigger: "Birthday date from their profile" },
 ];
-
 const DISCORD_DATA = [
   { emoji: "🗿", standard: "Moai / Easter Island Statue", discord: "Deadpan, emotionless witness to chaos" },
   { emoji: "👀", standard: "Looking, watching", discord: "\"I see what is happening here\"" },
@@ -71,176 +64,126 @@ const DISCORD_DATA = [
   { emoji: "🧌", standard: "Troll", discord: "Internet troll reference" },
 ];
 
+function Table({ head, rows }: { head: string[]; rows: React.ReactNode }) {
+  return (
+    <div className="fg-table-wrap">
+      <table className="fg-table">
+        <thead><tr>{head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
+  );
+}
+
 function WhatsAppTab() {
   return (
     <div>
-      <p className="text-neutral-600 dark:text-slate-300 leading-relaxed mb-6">WhatsApp uses Meta&apos;s custom emoji designs, which can appear noticeably different from Apple iOS or Android versions.</p>
-      <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-6">
-        <table className="w-full text-sm">
-          <thead><tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Emoji</th>
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Common Misreading</th>
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Actual Meaning</th>
-          </tr></thead>
-          <tbody>{WHATSAPP_DATA.map((row, i) => (
-            <tr key={row.emoji} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-              <td className="px-4 py-3 text-2xl">{row.emoji}</td>
-              <td className="px-4 py-3 text-neutral-500 dark:text-slate-400">{row.misreading}</td>
-              <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{row.actual}</td>
-            </tr>
-          ))}</tbody>
-        </table>
-      </div>
-      <div className="bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-primary rounded-r-xl p-5">
-        <h4 className="font-bold text-primary-dark dark:text-white mb-1">🧿 The Nazar Amulet</h4>
-        <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">A centuries-old tradition across Turkish, Middle Eastern, and South Asian cultures — a blue glass eye charm to deflect negative energy. On WhatsApp it became mainstream: people send it to bless good news, celebrate milestones, or as culturally familiar shorthand.</p>
-      </div>
+      <p className="fg-prose max-w-2xl mb-6">WhatsApp uses Meta&apos;s custom emoji designs, which can appear noticeably different from Apple iOS or Android versions.</p>
+      <Table head={["Emoji", "Common Misreading", "Actual Meaning"]} rows={WHATSAPP_DATA.map((r) => (
+        <tr key={r.emoji}><td className="em">{r.emoji}</td><td className="muted">{r.misreading}</td><td className="strong">{r.actual}</td></tr>
+      ))} />
+      <dl className="fg-deflist mt-7 max-w-2xl">
+        <dt>🧿 The Nazar Amulet</dt>
+        <dd>A centuries-old tradition across Turkish, Middle Eastern, and South Asian cultures — a blue glass eye charm to deflect negative energy. On WhatsApp it went mainstream: sent to bless good news or celebrate milestones.</dd>
+      </dl>
     </div>
   );
 }
-
 function InstagramTab() {
   return (
     <div>
-      <p className="text-neutral-600 dark:text-slate-300 leading-relaxed mb-4">Instagram has developed its own emoji dialect. Bio emojis function as compressed personal branding.</p>
-      <h4 className="font-bold text-primary-dark dark:text-white mb-3">Instagram Bio Emoji Meanings</h4>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+      <p className="fg-prose max-w-2xl mb-6">Instagram developed its own dialect. Bio emojis function as compressed personal branding.</p>
+      <div className="fg-list">
         {INSTAGRAM_BIOS.map((item) => (
-          <div key={item.emoji} className="flex items-center gap-3 bg-neutral-50 dark:bg-slate-700/50 rounded-lg p-3">
-            <span className="text-xl">{item.emoji}</span>
-            <div>
-              <p className="text-sm font-medium text-primary-dark dark:text-white">{item.meaning}</p>
-              <p className="text-xs text-neutral-500 dark:text-slate-400">{item.identity}</p>
+          <div key={item.emoji} className="fg-entry fg-entry--ledger">
+            <span className="fg-entry__glyph" style={{ fontSize: "1.5rem" }}>{item.emoji}</span>
+            <div className="fg-entry__main">
+              <span className="fg-entry__name">{item.meaning}</span>
+              <p className="fg-entry__text">{item.identity}</p>
             </div>
           </div>
         ))}
       </div>
-      <div className="bg-violet-50 dark:bg-violet-950/30 border-l-4 border-accent-violet rounded-r-xl p-5">
-        <h4 className="font-bold text-primary-dark dark:text-white mb-1">💡 DM Signal Guide</h4>
-        <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">A single 👀 on a story means they found it interesting. A ❤️ reaction is warmer than a Like. A 🔥 signals strong approval. A 😭 DM reaction is almost always positive — &ldquo;this content wrecked me in the best way.&rdquo;</p>
-      </div>
+      <dl className="fg-deflist mt-7 max-w-2xl">
+        <dt>Reading DM reactions</dt>
+        <dd>A single 👀 on a story means they found it interesting. A ❤️ reaction is warmer than a Like. A 🔥 signals strong approval. A 😭 reaction is almost always positive — &ldquo;this wrecked me in the best way.&rdquo;</dd>
+      </dl>
     </div>
   );
 }
-
 function TikTokTab() {
   return (
     <div>
-      <p className="text-neutral-600 dark:text-slate-300 leading-relaxed mb-6">TikTok accelerated emoji meaning evolution faster than any other platform. Several symbols carry meanings that contradict their official definitions.</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+      <p className="fg-prose max-w-2xl mb-6">TikTok accelerated emoji evolution faster than any platform. Several symbols here contradict their official definitions.</p>
+      <div className="fg-list">
         {TIKTOK_DATA.map((item) => (
-          <div key={item.emoji} className="bg-neutral-50 dark:bg-slate-700/50 rounded-xl p-4">
-            <div className="flex items-center gap-3 mb-1">
-              <span className="text-2xl">{item.emoji}</span>
-              <span className="font-medium text-sm text-primary-dark dark:text-white">{item.meaning}</span>
+          <div key={item.emoji} className="fg-entry fg-entry--ledger">
+            <span className="fg-entry__glyph">{item.emoji}</span>
+            <div className="fg-entry__main">
+              <span className="fg-entry__name normal-case" style={{ textTransform: "none", letterSpacing: 0, fontFamily: "var(--font-read)", fontSize: "0.97rem", color: "var(--ink)" }}>{item.meaning}</span>
+              <p className="fg-entry__text t-muted">{item.why}</p>
             </div>
-            <p className="text-xs text-neutral-500 dark:text-slate-400 pl-10">{item.why}</p>
           </div>
         ))}
       </div>
-      <div className="bg-violet-50 dark:bg-violet-950/30 border-l-4 border-accent-violet rounded-r-xl p-5">
-        <h4 className="font-bold text-primary-dark dark:text-white mb-1">💡 Emoji Combo Punchlines</h4>
-        <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">TikTok popularized emoji combinations as standalone punchlines. 💀🙏 = &ldquo;this killed me and I&apos;m praying for myself.&rdquo; 😭✋ = &ldquo;stop, I cannot take it.&rdquo; Two symbols forming complete emotional sentences.</p>
-      </div>
+      <dl className="fg-deflist mt-7 max-w-2xl">
+        <dt>Combo punchlines</dt>
+        <dd>TikTok turned combinations into standalone punchlines. 💀🙏 = &ldquo;this killed me and I&apos;m praying for myself.&rdquo; 😭✋ = &ldquo;stop, I cannot take it.&rdquo;</dd>
+      </dl>
     </div>
   );
 }
-
 function SnapchatTab() {
   return (
     <div>
-      <p className="text-neutral-600 dark:text-slate-300 leading-relaxed mb-6">Snapchat&apos;s emoji system works differently — most emojis are <strong className="text-primary-dark dark:text-white">assigned automatically by the algorithm</strong> based on interaction patterns, not sent by users.</p>
-      <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-6">
-        <table className="w-full text-sm">
-          <thead><tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Emoji</th>
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Snapchat Meaning</th>
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">What Triggers It</th>
-          </tr></thead>
-          <tbody>{SNAPCHAT_DATA.map((row, i) => (
-            <tr key={row.emoji} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-              <td className="px-4 py-3 text-2xl">{row.emoji}</td>
-              <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{row.meaning}</td>
-              <td className="px-4 py-3 text-neutral-500 dark:text-slate-400 text-xs">{row.trigger}</td>
-            </tr>
-          ))}</tbody>
-        </table>
-      </div>
-      <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-accent-amber rounded-r-xl p-5">
-        <h4 className="font-bold text-primary-dark dark:text-white mb-1">⚠️ Descriptive, Not Expressive</h4>
-        <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed">😬 next to a name does not mean they are grimacing at you. It indicates you both have the same #1 best friend. This entire system describes the relationship algorithmically — these are not messages anyone sent.</p>
+      <p className="fg-prose max-w-2xl mb-6">Snapchat works differently — most emojis are <strong className="t-ink">assigned automatically by the algorithm</strong> based on interaction patterns, not sent by users.</p>
+      <Table head={["Emoji", "Snapchat Meaning", "What Triggers It"]} rows={SNAPCHAT_DATA.map((r) => (
+        <tr key={r.emoji}><td className="em">{r.emoji}</td><td className="strong">{r.meaning}</td><td className="muted">{r.trigger}</td></tr>
+      ))} />
+      <div className="fg-pull fg-pull--sm mt-7">
+        <span className="fg-kicker">Important</span>
+        <p>😬 beside a name doesn&apos;t mean they&apos;re grimacing at you — it means you share a #1 best friend. The whole system describes the relationship; nobody sent it.</p>
       </div>
     </div>
   );
 }
-
 function DiscordTab() {
   return (
     <div>
-      <p className="text-neutral-600 dark:text-slate-300 leading-relaxed mb-6">Discord runs two distinct systems: standard Unicode emojis and custom server emotes uploaded by administrators.</p>
-      <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-slate-700 mb-6">
-        <table className="w-full text-sm">
-          <thead><tr className="bg-neutral-100 dark:bg-slate-700 text-left">
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Emoji</th>
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Standard Meaning</th>
-            <th className="px-4 py-3 font-bold text-primary-dark dark:text-white">Discord Reading</th>
-          </tr></thead>
-          <tbody>{DISCORD_DATA.map((row, i) => (
-            <tr key={row.emoji} className={i % 2 === 0 ? "bg-white dark:bg-slate-800" : "bg-neutral-50 dark:bg-slate-800/50"}>
-              <td className="px-4 py-3 text-2xl">{row.emoji}</td>
-              <td className="px-4 py-3 text-neutral-500 dark:text-slate-400">{row.standard}</td>
-              <td className="px-4 py-3 font-medium text-primary-dark dark:text-white">{row.discord}</td>
-            </tr>
-          ))}</tbody>
-        </table>
-      </div>
-      <div className="bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-primary rounded-r-xl p-5">
-        <h4 className="font-bold text-primary-dark dark:text-white mb-1">Emojis vs. Emotes on Discord</h4>
-        <p className="text-sm text-neutral-600 dark:text-slate-300 leading-relaxed"><strong>Emojis</strong> are standard Unicode symbols — same across all platforms. <strong>Emotes</strong> are custom images uploaded to a specific server. Discord Nitro subscribers can use animated emojis across all servers — a notable status marker in communities where this matters.</p>
-      </div>
+      <p className="fg-prose max-w-2xl mb-6">Discord runs two systems: standard Unicode emojis, and custom server emotes uploaded by administrators.</p>
+      <Table head={["Emoji", "Standard Meaning", "Discord Reading"]} rows={DISCORD_DATA.map((r) => (
+        <tr key={r.emoji}><td className="em">{r.emoji}</td><td className="muted">{r.standard}</td><td className="strong">{r.discord}</td></tr>
+      ))} />
+      <dl className="fg-deflist mt-7 max-w-2xl">
+        <dt>Emojis vs. emotes</dt>
+        <dd><strong className="t-ink">Emojis</strong> are standard Unicode — the same everywhere. <strong className="t-ink">Emotes</strong> are custom images uploaded to one server. Nitro subscribers use animated emojis across all servers — a status marker in communities that care.</dd>
+      </dl>
     </div>
   );
 }
 
 const TAB_CONTENT: Record<Tab, () => React.JSX.Element> = {
-  WhatsApp: WhatsAppTab,
-  Instagram: InstagramTab,
-  TikTok: TikTokTab,
-  Snapchat: SnapchatTab,
-  Discord: DiscordTab,
+  WhatsApp: WhatsAppTab, Instagram: InstagramTab, TikTok: TikTokTab, Snapchat: SnapchatTab, Discord: DiscordTab,
 };
 
 export default function PlatformGuides() {
   const [activeTab, setActiveTab] = useState<Tab>("WhatsApp");
   const Content = TAB_CONTENT[activeTab];
-
   return (
     <SectionShell
-      tone="tint"
-      eyebrow="Platforms"
+      n="12"
+      id="platforms"
       title="Platform-Specific Emoji Guides"
-      subtitle="Every platform has its own emoji dialect — pick a platform to see the differences"
+      dek="Every platform has its own dialect — choose one to see the differences."
     >
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-6">
-          {TABS.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                activeTab === tab
-                  ? "bg-primary text-white shadow-md"
-                  : "bg-white dark:bg-slate-700 text-neutral-600 dark:text-slate-300 border border-neutral-200 dark:border-slate-600 hover:bg-neutral-50 dark:hover:bg-slate-600"
-              }`}
-            >
-              <span>{TAB_ICONS[tab]}</span>
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-neutral-200 dark:border-slate-700">
-          <Content />
-        </div>
+      <div className="fg-tabs mb-7 overflow-x-auto scrollbar-hide">
+        {TABS.map((tab) => (
+          <button key={tab} onClick={() => setActiveTab(tab)} aria-pressed={activeTab === tab} data-active={activeTab === tab} className="fg-tab">
+            <span aria-hidden="true">{TAB_ICONS[tab]}</span>{tab}
+          </button>
+        ))}
+      </div>
+      <Content />
     </SectionShell>
   );
 }
