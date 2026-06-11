@@ -33,6 +33,7 @@ const TOOL_LINKS = [
   { icon: "📝", name: "Text to Emoji", href: "/tools/text-to-emoji" },
   { icon: "🎯", name: "Vibe Search", href: "/tools/vibe-search" },
   { icon: "💬", name: "Caption Generator", href: "/tools/caption-generator" },
+  { icon: "(•‿•)", name: "Kaomoji", href: "/tools/kaomoji" },
 ];
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {

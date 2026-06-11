@@ -30,6 +30,7 @@ const TOOL_ITEMS = [
   { icon: "🎯", name: "Vibe Search", href: "/tools/vibe-search" },
   { icon: "💬", name: "Caption Generator", href: "/tools/caption-generator" },
   { icon: "⌨️", name: "Emoji Keyboard", href: "/tools/emoji-keyboard" },
+  { icon: "(•‿•)", name: "Kaomoji", href: "/tools/kaomoji" },
   { icon: "🏷️", name: "Shortcodes", href: "/tools/emoji-shortcodes" },
   { icon: "⚔️", name: "Emoji Compare", href: "/tools/emoji-vs" },
   { icon: "🎨", name: "Emoji Combos", href: "/tools/emoji-combos" },
