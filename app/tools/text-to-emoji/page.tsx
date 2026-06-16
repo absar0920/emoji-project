@@ -1,96 +1,58 @@
-"use client";
-
-import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
-import CopyButton from "@/components/CopyButton";
-
-const STYLES = ["Balanced", "Heavy Emoji", "Minimal", "Gen-Z", "Professional"];
+import TextToEmojiTool from "@/components/text2emoji/TextToEmojiTool";
+import IntroLead from "@/components/text2emoji/IntroLead";
+import WhatIsTextToEmoji from "@/components/text2emoji/WhatIsTextToEmoji";
+import BestTools from "@/components/text2emoji/BestTools";
+import EmojiLetters from "@/components/text2emoji/EmojiLetters";
+import HowToConvert from "@/components/text2emoji/HowToConvert";
+import RemoveEmoji from "@/components/text2emoji/RemoveEmoji";
+import AddRespond from "@/components/text2emoji/AddRespond";
+import DiscordAutoConvert from "@/components/text2emoji/DiscordAutoConvert";
+import EmojiMeaning from "@/components/text2emoji/EmojiMeaning";
+import TextToSpeech from "@/components/text2emoji/TextToSpeech";
+import TextToEmojiFAQ from "@/components/text2emoji/TextToEmojiFAQ";
+import Conclusion from "@/components/text2emoji/Conclusion";
 
 export default function TextToEmojiPage() {
-  const [text, setText] = useState("");
-  const [style, setStyle] = useState("Balanced");
-  const [result, setResult] = useState<string | null>(null);
-  const [alternatives, setAlternatives] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleTranslate() {
-    if (!text.trim()) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/tools/text-to-emoji", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, style }),
-      });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      setResult(data.result);
-      setAlternatives(data.alternatives || []);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <>
       <ToolHero
         title="Text to Emoji Translator"
-        description="Transform your text into emoji-rich messages. Choose from Gen-Z, professional, and more styles."
+        description="Turn text into emoji-rich messages with AI — then the full guide to converting, emoji letters, removing emoji, and platform tricks."
         badge="AI-Powered"
       />
 
-      <div className="space-y-4 mb-9">
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value.slice(0, 500))}
-          placeholder="Type your text here…"
-          className="fg-field w-full p-4 min-h-[120px] resize-none"
-        />
-        <div className="flex items-center justify-between">
-          <span className="fg-label">{text.length}/500</span>
-        </div>
+      <TextToEmojiTool />
 
-        <div className="flex flex-wrap gap-2">
-          {STYLES.map((s) => (
-            <button key={s} onClick={() => setStyle(s)} data-active={style === s} className="fg-chip px-4 py-2">{s}</button>
-          ))}
-        </div>
+      {/* === EDITORIAL CONTENT === */}
+      <IntroLead />
+      <WhatIsTextToEmoji />
+      <BestTools />
+      <EmojiLetters />
+      <HowToConvert />
+      <RemoveEmoji />
+      <AddRespond />
+      <DiscordAutoConvert />
+      <EmojiMeaning />
+      <TextToSpeech />
+      <TextToEmojiFAQ />
+      <Conclusion />
 
-        <button onClick={handleTranslate} disabled={!text.trim() || loading} className="fg-btn w-full sm:w-auto px-8 py-3">
-          {loading ? "Translating…" : "Translate →"}
-        </button>
-      </div>
-
-      {error && <div className="fg-alert px-4 py-3 mb-6">{error}</div>}
-
-      {result && (
-        <div className="space-y-4">
-          <div className="fg-card p-6">
-            <div className="flex items-start justify-between gap-4">
-              <p className="text-lg t-ink">{result}</p>
-              <CopyButton text={result} label="Copy" tone="editorial" />
-            </div>
-          </div>
-
-          {alternatives.length > 0 && (
-            <>
-              <p className="fg-kicker mt-7 mb-1">Alternatives</p>
-              {alternatives.map((alt, i) => (
-                <div key={i} className="fg-card p-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <p className="text-sm t-body">{alt}</p>
-                    <CopyButton text={alt} label="Copy" tone="editorial" />
-                  </div>
-                </div>
-              ))}
-            </>
-          )}
-        </div>
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: "Text to Emoji: The Complete Guide to Converting, Creating & Using Emoji Text in 2026",
+            description:
+              "Convert text to emoji, generate emoji letters, remove emoji from text, and use emoji across iPhone, Android, Discord, WhatsApp, and code — with JS and Python snippets.",
+            datePublished: "2026-01-01",
+            dateModified: "2026-06-01",
+            author: { "@type": "Organization", name: "Emoji Intelligence" },
+          }),
+        }}
+      />
     </>
   );
 }
