@@ -1,91 +1,56 @@
-"use client";
-
-import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
-
-const STYLES = ["Emoji", "Cartoon", "Pixel Art", "Sticker"];
+import EmojiMakerTool from "@/components/maker/EmojiMakerTool";
+import IntroLead from "@/components/maker/IntroLead";
+import WhatIsAnEmojiMaker from "@/components/maker/WhatIsAnEmojiMaker";
+import WhyItMatters from "@/components/maker/WhyItMatters";
+import FeaturesAndExport from "@/components/maker/FeaturesAndExport";
+import MakerTypes from "@/components/maker/MakerTypes";
+import NineSteps from "@/components/maker/NineSteps";
+import DeviceGuides from "@/components/maker/DeviceGuides";
+import CommonMistakes from "@/components/maker/CommonMistakes";
+import ExpertTips from "@/components/maker/ExpertTips";
+import MakerFAQ from "@/components/maker/MakerFAQ";
+import Conclusion from "@/components/maker/Conclusion";
 
 export default function EmojiMakerPage() {
-  const [prompt, setPrompt] = useState("");
-  const [style, setStyle] = useState("Emoji");
-  const [images, setImages] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleGenerate() {
-    if (!prompt.trim()) return;
-    setLoading(true);
-    setError(null);
-    setImages([]);
-    try {
-      const res = await fetch("/api/tools/emoji-maker", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt, style }),
-      });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      setImages(data.images || []);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  function handleDownload(dataUri: string, index: number) {
-    const link = document.createElement("a");
-    link.href = dataUri;
-    link.download = `emoji-${prompt.slice(0, 20).replace(/\s+/g, "-")}-${index + 1}.png`;
-    link.click();
-  }
-
   return (
     <>
       <ToolHero
         title="Emoji Maker"
-        description="Describe any emoji and AI will generate it for you. Choose from multiple styles."
+        description="Describe any emoji and AI will generate it for you — then learn how to make, refine, and export custom emoji for Discord, Slack, and Twitch."
         badge="AI-Powered"
       />
 
-      <div className="space-y-4 mb-9">
-        <input
-          type="text"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value.slice(0, 200))}
-          placeholder="Describe your emoji… (e.g. happy cat with sunglasses)"
-          className="fg-field w-full px-4 py-3 text-base"
-        />
-        <div className="flex items-center justify-between">
-          <span className="fg-label">{prompt.length}/200</span>
-        </div>
+      <EmojiMakerTool />
 
-        <div className="flex flex-wrap gap-2">
-          {STYLES.map((s) => (
-            <button key={s} onClick={() => setStyle(s)} data-active={style === s} className="fg-chip px-4 py-2">{s}</button>
-          ))}
-        </div>
+      {/* === EDITORIAL CONTENT === */}
+      <IntroLead />
+      <WhatIsAnEmojiMaker />
+      <WhyItMatters />
+      <FeaturesAndExport />
+      <MakerTypes />
+      <NineSteps />
+      <DeviceGuides />
+      <CommonMistakes />
+      <ExpertTips />
+      <MakerFAQ />
+      <Conclusion />
 
-        <button onClick={handleGenerate} disabled={!prompt.trim() || loading} className="fg-btn w-full sm:w-auto px-8 py-3">
-          {loading ? "Generating…" : "Generate →"}
-        </button>
-      </div>
-
-      {error && <div className="fg-alert px-4 py-3 mb-6">{error}</div>}
-
-      {images.length > 0 && (
-        <div className="grid grid-cols-2 gap-4">
-          {images.map((img, i) => (
-            <div key={i} className="fg-card p-4 flex flex-col items-center gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img} alt={`Generated emoji ${i + 1}`} className="w-32 h-32 object-contain" />
-              <button onClick={() => handleDownload(img, i)} className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-4 py-1.5">
-                Download
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: "Emoji Maker: The Complete Guide to Custom Emoji Creation in 2026",
+            description:
+              "How emoji makers work, the tool types for each goal, a nine-step creation process, platform export specs for Discord, Slack, Twitch, WhatsApp, and Telegram, common mistakes, and expert tips.",
+            datePublished: "2026-01-01",
+            dateModified: "2026-06-01",
+            author: { "@type": "Organization", name: "Emoji Intelligence" },
+          }),
+        }}
+      />
     </>
   );
 }
