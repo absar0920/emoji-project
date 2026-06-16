@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { EmojiSearchItem } from "@/types/emoji";
+import { EmojiSearchItemLite } from "@/types/emoji";
 import { Skeleton } from "@/components/Skeleton";
 
 interface EmojiPickerProps {
@@ -10,14 +10,14 @@ interface EmojiPickerProps {
 }
 
 export default function EmojiPicker({ onSelect, selected }: EmojiPickerProps) {
-  const [emojis, setEmojis] = useState<EmojiSearchItem[]>([]);
+  const [emojis, setEmojis] = useState<EmojiSearchItemLite[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/search-index")
+    fetch("/api/search-index/lite")
       .then((res) => res.json())
-      .then((data: EmojiSearchItem[]) => {
+      .then((data: EmojiSearchItemLite[]) => {
         setEmojis(data);
         setLoading(false);
       })

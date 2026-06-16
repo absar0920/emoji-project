@@ -3,16 +3,16 @@
 import { useState, useEffect } from "react";
 import ToolHero from "@/components/ToolHero";
 import CopyButton from "@/components/CopyButton";
-import { EmojiSearchItem } from "@/types/emoji";
+import { EmojiSearchItemLite } from "@/types/emoji";
 
 export default function ShortcodesPage() {
-  const [emojis, setEmojis] = useState<EmojiSearchItem[]>([]);
+  const [emojis, setEmojis] = useState<EmojiSearchItemLite[]>([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("/api/search-index")
+    fetch("/api/search-index/lite")
       .then((res) => res.json())
-      .then((data: EmojiSearchItem[]) => setEmojis(data));
+      .then((data: EmojiSearchItemLite[]) => setEmojis(data));
   }, []);
 
   const filtered = search

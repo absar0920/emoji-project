@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { EmojiSearchItem } from "@/types/emoji";
+import { EmojiSearchItemLite } from "@/types/emoji";
 
 const CATEGORIES = [
   "Smileys & Emotion", "People & Body", "Animals & Nature", "Food & Drink",
@@ -9,7 +9,7 @@ const CATEGORIES = [
 ];
 
 export default function KeyboardTool() {
-  const [emojis, setEmojis] = useState<EmojiSearchItem[]>([]);
+  const [emojis, setEmojis] = useState<EmojiSearchItemLite[]>([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Smileys & Emotion");
   const [copied, setCopied] = useState<string | null>(null);
@@ -23,9 +23,9 @@ export default function KeyboardTool() {
   });
 
   useEffect(() => {
-    fetch("/api/search-index")
+    fetch("/api/search-index/lite")
       .then((res) => res.json())
-      .then((data: EmojiSearchItem[]) => setEmojis(data));
+      .then((data: EmojiSearchItemLite[]) => setEmojis(data));
   }, []);
 
   function handleCopy(character: string) {

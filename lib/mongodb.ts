@@ -1,5 +1,5 @@
 import { MongoClient, Db, Collection } from "mongodb";
-import { EmojiDocument, EmojiSearchItem, ComparisonDocument, ComboDocument } from "@/types/emoji";
+import { EmojiDocument, EmojiSearchItem, EmojiSearchItemLite, ComparisonDocument, ComboDocument } from "@/types/emoji";
 import { getCached, setCached } from "./redis";
 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -86,13 +86,41 @@ export async function getAllSlugs(): Promise<string[]> {
 }
 
 export async function getSearchIndex(): Promise<EmojiSearchItem[]> {
+  const cacheKey = "search:index:full";
+  const cached = await getCached<EmojiSearchItem[]>(cacheKey);
+  if (cached) return cached;
+
   const conn = await connectToDatabase();
   if (!conn) return [];
   const docs = await emojis(conn.db)
     .find({}, { projection: LITE_PROJECTION })
     .toArray();
 
-  return docs.map(toSearchItem);
+  const result = docs.map(toSearchItem);
+  await setCached(cacheKey, result, 3600);
+  return result;
+}
+
+/**
+ * Trimmed search index for the eager-loading tools (EmojiPicker, KeyboardTool,
+ * shortcodes). Drops semantic_tags + genz_summary (~70% of the full payload) —
+ * those are only needed by SearchModal's Fuse index, which fetches the full
+ * endpoint lazily. Cached separately from the full index.
+ */
+export async function getSearchIndexLite(): Promise<EmojiSearchItemLite[]> {
+  const cacheKey = "search:index:lite";
+  const cached = await getCached<EmojiSearchItemLite[]>(cacheKey);
+  if (cached) return cached;
+
+  const conn = await connectToDatabase();
+  if (!conn) return [];
+  const docs = await emojis(conn.db)
+    .find({}, { projection: LITE_BROWSE_PROJECTION })
+    .toArray();
+
+  const result = docs.map(toSearchItemLite);
+  await setCached(cacheKey, result, 3600);
+  return result;
 }
 
 const LITE_PROJECTION = {
@@ -106,6 +134,15 @@ const LITE_PROJECTION = {
   semantic_tags: 1,
 } as const;
 
+const LITE_BROWSE_PROJECTION = {
+  slug: 1,
+  name: 1,
+  character: 1,
+  tags: 1,
+  category: 1,
+  shortcode: 1,
+} as const;
+
 function toSearchItem(d: Partial<EmojiDocument>): EmojiSearchItem {
   return {
     slug: d.slug!,
@@ -116,6 +153,17 @@ function toSearchItem(d: Partial<EmojiDocument>): EmojiSearchItem {
     shortcode: d.shortcode!,
     genz_summary: d.genz_meaning?.interpretation?.slice(0, 80) || "",
     semantic_tags: d.semantic_tags || [],
+  };
+}
+
+function toSearchItemLite(d: Partial<EmojiDocument>): EmojiSearchItemLite {
+  return {
+    slug: d.slug!,
+    name: d.name!,
+    character: d.character!,
+    tags: d.tags || [],
+    category: d.category!,
+    shortcode: d.shortcode!,
   };
 }
 

@@ -277,6 +277,16 @@ export interface EmojiSearchItem {
   semantic_tags: string[];
 }
 
+/**
+ * Trimmed search index for the eager-loading tools (EmojiPicker, KeyboardTool,
+ * shortcodes page). Drops the two heavy fields (semantic_tags, genz_summary)
+ * that only SearchModal's Fuse index needs — ~70% of the full payload.
+ */
+export type EmojiSearchItemLite = Pick<
+  EmojiSearchItem,
+  "slug" | "name" | "character" | "tags" | "category" | "shortcode"
+>;
+
 /** Seed emoji entry — base fields only, no meaning data */
 export interface SeedEmoji {
   character: string;
