@@ -89,33 +89,68 @@ export async function getSearchIndex(): Promise<EmojiSearchItem[]> {
   const conn = await connectToDatabase();
   if (!conn) return [];
   const docs = await emojis(conn.db)
-    .find(
-      {},
-      {
-        projection: {
-          slug: 1,
-          name: 1,
-          character: 1,
-          tags: 1,
-          category: 1,
-          shortcode: 1,
-          "genz_meaning.interpretation": 1,
-          semantic_tags: 1,
-        },
-      }
-    )
+    .find({}, { projection: LITE_PROJECTION })
     .toArray();
 
-  return docs.map((d) => ({
-    slug: d.slug,
-    name: d.name,
-    character: d.character,
-    tags: d.tags,
-    category: d.category,
-    shortcode: d.shortcode,
+  return docs.map(toSearchItem);
+}
+
+const LITE_PROJECTION = {
+  slug: 1,
+  name: 1,
+  character: 1,
+  tags: 1,
+  category: 1,
+  shortcode: 1,
+  "genz_meaning.interpretation": 1,
+  semantic_tags: 1,
+} as const;
+
+function toSearchItem(d: Partial<EmojiDocument>): EmojiSearchItem {
+  return {
+    slug: d.slug!,
+    name: d.name!,
+    character: d.character!,
+    tags: d.tags || [],
+    category: d.category!,
+    shortcode: d.shortcode!,
     genz_summary: d.genz_meaning?.interpretation?.slice(0, 80) || "",
     semantic_tags: d.semantic_tags || [],
-  }));
+  };
+}
+
+/**
+ * Paginated browse index for the /search page. Filters by category (or all
+ * emojis when null), sorted by trend_score. Returns the lite search shape plus
+ * a total count for pagination. Cached per category+page.
+ */
+export async function getBrowseIndex(
+  category: string | null,
+  page: number,
+  perPage: number = 100
+): Promise<{ items: EmojiSearchItem[]; total: number }> {
+  const cacheKey = `category:index:${category ?? "all"}:${page}`;
+  const cached = await getCached<{ items: EmojiSearchItem[]; total: number }>(cacheKey);
+  if (cached) return cached;
+
+  const conn = await connectToDatabase();
+  if (!conn) return { items: [], total: 0 };
+
+  const filter = category ? { category } : {};
+  const col = emojis(conn.db);
+  const [docs, total] = await Promise.all([
+    col
+      .find(filter, { projection: LITE_PROJECTION })
+      .sort({ "virality.trend_score": -1, slug: 1 })
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .toArray(),
+    col.countDocuments(filter),
+  ]);
+
+  const result = { items: docs.map(toSearchItem), total };
+  await setCached(cacheKey, result, 3600);
+  return result;
 }
 
 export async function getRelatedEmojis(
