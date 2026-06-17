@@ -464,6 +464,15 @@ body {
 
 /* ---------- primary nav rail (Sidebar) ---------- */
 .theme-editorial.fg-rail { width: 19rem; transition: width 0.18s ease; }
+/* Icon slot: center any glyph in the fixed box. Text icons (kaomoji) render in the mono
+   face, shrunk with clamp() so the parens never overflow the 1.5rem box (collapsed or not). */
+.theme-editorial .fg-rail-icon { display: inline-flex; align-items: center; justify-content: center; line-height: 1; overflow: hidden; }
+.theme-editorial .fg-rail-icon[data-icon-kind="text"] {
+  font-family: var(--font-mono-jb), monospace;
+  font-size: clamp(0.5rem, 2.4vw, 0.62rem);
+  letter-spacing: -0.04em;
+  color: var(--ink-2);
+}
 .theme-editorial .fg-rail-summary { list-style: none; }
 .theme-editorial .fg-rail-summary::-webkit-details-marker { display: none; }
 .theme-editorial .fg-rail-group[open] > .fg-rail-summary .fg-chev { transform: rotate(180deg); }

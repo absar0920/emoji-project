@@ -49,7 +49,7 @@ function NavLink({ item, active, onClick }: { item: NavItem; active: boolean; on
       title={item.label}
       className="fg-menuitem flex items-center gap-3.5 py-2.5 px-2.5 font-read text-[1rem]"
     >
-      <span className="fg-rail-icon w-6 shrink-0 text-center text-[1.05rem]" aria-hidden="true">{item.icon}</span>
+      <span className="fg-rail-icon w-6 shrink-0 text-[1.05rem]" data-icon-kind={item.textIcon ? "text" : "emoji"} aria-hidden="true">{item.icon}</span>
       <span className="fg-rail-text min-w-0 truncate">{item.label}</span>
     </Link>
   );

@@ -5,6 +5,8 @@ export interface NavItem {
   label: string;
   href: string;
   icon: string;
+  /** Icon is a text/ASCII mark (e.g. a kaomoji), not a color emoji — rendered in the mono face. */
+  textIcon?: boolean;
 }
 
 export interface NavGroup {
@@ -25,7 +27,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { icon: "🎯", label: "Vibe Search", href: "/tools/vibe-search" },
       { icon: "💬", label: "Caption Generator", href: "/tools/caption-generator" },
       { icon: "⌨️", label: "Emoji Keyboard", href: "/tools/emoji-keyboard" },
-      { icon: "(•‿•)", label: "Kaomoji", href: "/tools/kaomoji" },
+      { icon: "(•‿•)", label: "Kaomoji", href: "/tools/kaomoji", textIcon: true },
       { icon: "🏷️", label: "Shortcodes", href: "/tools/emoji-shortcodes" },
       { icon: "⚔️", label: "Emoji Compare", href: "/tools/emoji-vs" },
       { icon: "🎨", label: "Emoji Combos", href: "/tools/emoji-combos" },
