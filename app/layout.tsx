@@ -1,35 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Libre_Bodoni, Noto_Color_Emoji, Public_Sans, Source_Serif_4 } from "next/font/google";
+import { Noto_Color_Emoji, Poppins } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono-jb",
-});
-
-// Editorial / Magazine type — Libre Bodoni display + Public Sans body (homepage theme)
-const libreBodoni = Libre_Bodoni({
+// Single site-wide typeface. Covers every role (body, headings, labels) via weights;
+// italic included for pull-quotes/standfirsts. Exposed under every legacy font variable so
+// the existing fg-* / @theme stacks all resolve to Poppins.
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-bodoni",
-});
-
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  variable: "--font-public",
-});
-
-// Field-guide reading serif (homepage body)
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
   style: ["normal", "italic"],
-  variable: "--font-source-serif",
+  display: "swap",
+  variable: "--font-poppins",
 });
 
 // Consistent color emoji across OSes — used as a *fallback* after the text faces, so Latin
@@ -57,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable} ${libreBodoni.variable} ${publicSans.variable} ${sourceSerif.variable} ${notoColorEmoji.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${notoColorEmoji.variable}`}>
       <body className="font-sans antialiased bg-[#f7f2e9] dark:bg-[#100e0c] text-neutral-700 dark:text-slate-300">
         <script
           dangerouslySetInnerHTML={{
