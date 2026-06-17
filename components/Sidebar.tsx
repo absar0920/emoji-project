@@ -47,9 +47,9 @@ function NavLink({ item, active, onClick }: { item: NavItem; active: boolean; on
       onClick={onClick}
       data-active={active}
       title={item.label}
-      className="fg-menuitem flex items-center gap-3 py-2 px-2 font-read text-[0.95rem]"
+      className="fg-menuitem flex items-center gap-3.5 py-2.5 px-2.5 font-read text-[1rem]"
     >
-      <span className="fg-rail-icon w-5 shrink-0 text-center text-[0.95rem]" aria-hidden="true">{item.icon}</span>
+      <span className="fg-rail-icon w-6 shrink-0 text-center text-[1.05rem]" aria-hidden="true">{item.icon}</span>
       <span className="fg-rail-text min-w-0 truncate">{item.label}</span>
     </Link>
   );
@@ -117,7 +117,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         onToggle={(e) => setGroupOpen(group.id, (e.currentTarget as HTMLDetailsElement).open)}
         className="fg-rail-group border-b border-[var(--line)] py-1"
       >
-        <summary className="fg-rail-summary fg-label flex items-center justify-between cursor-pointer select-none py-2 px-2 list-none">
+        <summary className="fg-rail-summary fg-label flex items-center justify-between cursor-pointer select-none py-2.5 px-2.5 list-none">
           <span>{group.label}</span>
           <Chevron className="fg-chev opacity-60" />
         </summary>

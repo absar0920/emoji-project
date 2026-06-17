@@ -463,14 +463,14 @@ body {
 .theme-editorial .fg-menuitem[data-active="true"] { color: var(--accent); }
 
 /* ---------- primary nav rail (Sidebar) ---------- */
-.theme-editorial .fg-rail { width: 15rem; transition: width 0.18s ease; }
+.theme-editorial.fg-rail { width: 19rem; transition: width 0.18s ease; }
 .theme-editorial .fg-rail-summary { list-style: none; }
 .theme-editorial .fg-rail-summary::-webkit-details-marker { display: none; }
 .theme-editorial .fg-rail-group[open] > .fg-rail-summary .fg-chev { transform: rotate(180deg); }
 .theme-editorial .fg-menuitem[data-active="true"] .fg-rail-text { font-weight: 600; }
 
 /* Collapsed: icon-only strip — narrow width, hide labels & group headers, center icons. */
-html[data-sidebar="collapsed"] .theme-editorial .fg-rail { width: 3.75rem; }
+html[data-sidebar="collapsed"] .theme-editorial.fg-rail { width: 3.75rem; }
 html[data-sidebar="collapsed"] .theme-editorial .fg-rail-text,
 html[data-sidebar="collapsed"] .theme-editorial .fg-rail-summary > span:first-child,
 html[data-sidebar="collapsed"] .theme-editorial .fg-rail-summary .fg-chev { display: none; }
