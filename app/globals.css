@@ -18,6 +18,8 @@
   --font-read: var(--font-poppins), "system-ui", "sans-serif", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
 }
 
+html { scroll-behavior: smooth; } /* in-page anchor jumps glide; disabled under reduced-motion below */
+
 body {
   font-family: var(--font-sans);
   color: #374151;
@@ -412,13 +414,19 @@ body {
   gap: 0.55rem;
   padding: 0.4rem 0;
 }
-.theme-editorial .fg-specimen__g { font-size: clamp(2.1rem, 5vw, 2.9rem); line-height: 1; }
+.theme-editorial .fg-specimen__g { font-size: clamp(2.1rem, 5vw, 2.9rem); line-height: 1; transition: transform 0.18s ease; }
 .theme-editorial .fg-specimen__c {
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.56rem;
   color: var(--ink-3);
+  transition: color 0.15s ease;
+}
+/* Restrained hover for the cover/related specimen plates — glyph lifts, caption inks to accent. */
+@media (hover: hover) {
+  .theme-editorial .fg-specimen:hover .fg-specimen__g { transform: translateY(-3px); }
+  .theme-editorial .fg-specimen:hover .fg-specimen__c { color: var(--accent); }
 }
 
 /* ---------- navbar ---------- */

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { EASE } from "@/components/MotionWrappers";
 
 interface MeaningLayer {
   key: string;
@@ -27,7 +29,13 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
       </div>
 
       {activeMeaning && (
-        <dl className="fg-deflist border-t border-[var(--line)]">
+        <motion.dl
+          key={active}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.22, ease: EASE }}
+          className="fg-deflist border-t border-[var(--line)]"
+        >
           {Object.entries(activeMeaning.content).map(([key, value]) => {
             if (typeof value === "boolean") {
               return (
@@ -52,7 +60,7 @@ export default function MeaningTabs({ meanings }: MeaningTabsProps) {
               </div>
             );
           })}
-        </dl>
+        </motion.dl>
       )}
     </div>
   );

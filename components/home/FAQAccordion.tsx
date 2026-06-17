@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatedSection } from "@/components/MotionWrappers";
+import { AnimatePresence, motion } from "framer-motion";
+import { AnimatedSection, EASE } from "@/components/MotionWrappers";
 import SectionShell from "./SectionShell";
 
 const FAQS = [
@@ -63,7 +64,19 @@ export default function FAQAccordion() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                {open && <p className="t-body leading-relaxed pb-4 max-w-2xl sm:pl-[2.6rem]">{faq.a}</p>}
+                <AnimatePresence initial={false}>
+                  {open && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: EASE }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <p className="t-body leading-relaxed pb-4 max-w-2xl sm:pl-[2.6rem]">{faq.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </AnimatedSection>
           );
