@@ -10,10 +10,10 @@
   --color-accent-red: #DC2626;
   --color-accent-amber: #D97706;
   --color-accent-violet: #7C3AED;
-  --font-sans: var(--font-public), "Inter", "system-ui", "sans-serif";
-  --font-mono: var(--font-mono-jb), "JetBrains Mono", "monospace";
-  --font-serif: var(--font-bodoni), "Georgia", "serif";
-  --font-read: var(--font-source-serif), "Georgia", "serif";
+  --font-sans: var(--font-public), "Inter", "system-ui", "sans-serif", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
+  --font-mono: var(--font-mono-jb), "JetBrains Mono", "monospace", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
+  --font-serif: var(--font-bodoni), "Georgia", "serif", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
+  --font-read: var(--font-source-serif), "Georgia", "serif", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
 }
 
 body {

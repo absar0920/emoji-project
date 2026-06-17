@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Libre_Bodoni, Public_Sans, Source_Serif_4 } from "next/font/google";
+import { Inter, JetBrains_Mono, Libre_Bodoni, Noto_Color_Emoji, Public_Sans, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 
@@ -32,6 +32,16 @@ const sourceSerif = Source_Serif_4({
   variable: "--font-source-serif",
 });
 
+// Consistent color emoji across OSes — used as a *fallback* after the text faces, so Latin
+// text keeps rendering in the editorial fonts and only emoji codepoints fall through to Noto.
+// Fixes "tofu" boxes for newer emoji on devices with an outdated system emoji font.
+const notoColorEmoji = Noto_Color_Emoji({
+  weight: "400",
+  subsets: ["emoji"],
+  display: "swap",
+  variable: "--font-emoji",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Emoji Intelligence — Every Emoji. Every Meaning.",
@@ -47,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable} ${libreBodoni.variable} ${publicSans.variable} ${sourceSerif.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable} ${libreBodoni.variable} ${publicSans.variable} ${sourceSerif.variable} ${notoColorEmoji.variable}`}>
       <body className="font-sans antialiased bg-[#f7f2e9] dark:bg-[#100e0c] text-neutral-700 dark:text-slate-300">
         <script
           dangerouslySetInnerHTML={{
