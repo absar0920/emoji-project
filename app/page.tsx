@@ -121,9 +121,8 @@ export default function HomePage() {
             </div>
           </section>
 
-          {/* ───────────── Contents + chapters ───────────── */}
+          {/* ───────────── Chapters + on-this-page rail ───────────── */}
           <div className="flex gap-10 lg:gap-16">
-            <HomeSidebar />
             <div className="min-w-0 flex-1">
               <WhatAreEmojiMeanings />
               <QuickReferenceTable />
@@ -150,6 +149,7 @@ export default function HomePage() {
               <FAQAccordion />
               <BottomLine />
             </div>
+            <HomeSidebar />
           </div>
         </div>
 

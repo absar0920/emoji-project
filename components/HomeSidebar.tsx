@@ -30,7 +30,7 @@ export const CHAPTERS = [
 
 export default function HomeSidebar() {
   return (
-    <aside className="hidden lg:block w-52 shrink-0">
+    <aside className="hidden xl:block w-52 shrink-0">
       <nav className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto scrollbar-hide">
         <p className="fg-label pb-2 mb-1 border-b-2 border-[var(--rule)]">Contents</p>
         <ol>
