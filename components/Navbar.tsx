@@ -32,18 +32,24 @@ export default function Navbar({ onSearchClick, onMenuClick }: NavbarProps) {
               </Link>
             </div>
 
-            {/* Right: search + theme */}
-            <div className="flex items-center gap-2">
+            {/* Center: large search bar (desktop) — styled like an input, opens the search modal */}
+            <div className="hidden sm:flex flex-1 justify-center px-4">
+              <button
+                onClick={onSearchClick}
+                aria-label="Search emojis"
+                className="group w-full max-w-md flex items-center gap-3 h-10 px-4 border border-[var(--line)] hover:border-[var(--accent)] transition-colors text-left cursor-pointer"
+              >
+                <svg className="w-4 h-4 shrink-0 text-[var(--ink-3)] group-hover:text-[var(--accent)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span className="flex-1 min-w-0 truncate text-[var(--ink-3)] text-sm">Search emojis&hellip;</span>
+                <kbd className="mono text-[0.66rem] text-[var(--ink-3)] tracking-widest shrink-0">⌘K</kbd>
+              </button>
+            </div>
+
+            {/* Right: theme + mobile search icon */}
+            <div className="flex items-center gap-2 shrink-0">
               <ThemeToggle />
-              <div className="hidden sm:block">
-                <button onClick={onSearchClick} className="fg-navlink h-9 px-3 border border-[var(--line)] hover:border-[var(--accent)] transition-colors">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                  <span>Search</span>
-                  <span className="opacity-50 ml-1" aria-hidden="true">⌘K</span>
-                </button>
-              </div>
               <div className="sm:hidden">
                 <button onClick={onSearchClick} className="fg-iconbtn w-9 h-9" aria-label="Search">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

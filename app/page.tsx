@@ -75,18 +75,6 @@ export default function HomePage() {
               </p>
             </FadeIn>
 
-            {/* Specimen plate */}
-            <FadeIn>
-              <div className="mt-10 border-y border-[var(--line)] py-5 flex gap-7 sm:gap-10 overflow-x-auto scrollbar-hide -mx-5 px-5 sm:mx-0 sm:px-0">
-                {SPECIMENS.map((s) => (
-                  <figure key={s.label} className="fg-specimen shrink-0">
-                    <span className="fg-specimen__g">{s.emoji}</span>
-                    <figcaption className="fg-specimen__c">{s.label}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </FadeIn>
-
             {/* Search + stat ledger */}
             <FadeIn>
               <div className="mt-10 max-w-2xl">
@@ -99,6 +87,18 @@ export default function HomePage() {
                 <span aria-hidden="true" className="opacity-50">/</span>
                 <span>31 cultures</span>
               </p>
+            </FadeIn>
+
+            {/* Specimen plate */}
+            <FadeIn>
+              <div className="mt-10 border-y border-[var(--line)] py-5 flex gap-7 sm:gap-10 overflow-x-auto scrollbar-hide -mx-5 px-5 sm:mx-0 sm:px-0">
+                {SPECIMENS.map((s) => (
+                  <figure key={s.label} className="fg-specimen shrink-0">
+                    <span className="fg-specimen__g">{s.emoji}</span>
+                    <figcaption className="fg-specimen__c">{s.label}</figcaption>
+                  </figure>
+                ))}
+              </div>
             </FadeIn>
           </header>
 
