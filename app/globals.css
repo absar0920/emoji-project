@@ -608,6 +608,36 @@ html[data-sidebar="collapsed"] .theme-editorial .fg-rail-items { display: block 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ---------- short-viewport hero compression ----------
+   On short LANDSCAPE viewports (laptops, Chromebooks, landscape tablets) the
+   masthead → heading → lead → search → stats column eats the whole fold, pushing
+   the cover specimen plate (🥺 🫠 💀 …) out of view on fresh load. These two
+   height-scoped tiers tighten the hero so the plate lands above the fold.
+   Keyed on viewport HEIGHT (CSS px, post-chrome) — tall windows are untouched.
+   Selectors are scoped to `.theme-editorial header` so they out-specify the
+   Tailwind utilities (including `sm:` variants) without !important. */
+
+/* Tier A — mild trim (most laptops / 768px-class screens) */
+@media (max-height: 850px) {
+  .theme-editorial header { padding-top: 1rem; }
+  .theme-editorial header .fg-runhead { margin-bottom: 1.5rem; }
+  .theme-editorial header h1 { font-size: 3.25rem; }
+  .theme-editorial header .mt-7  { margin-top: 1rem; }
+  .theme-editorial header .mt-10 { margin-top: 1.25rem; }
+  .theme-editorial header .mt-5  { margin-top: 0.75rem; }
+}
+
+/* Tier B — aggressive (genuinely short windows, ~600px and below) */
+@media (max-height: 650px) {
+  .theme-editorial header { padding-top: 0.75rem; }
+  .theme-editorial header .fg-runhead { margin-bottom: 1rem; }
+  .theme-editorial header h1 { font-size: 2.4rem; }
+  .theme-editorial header .mt-7  { margin-top: 0.75rem; }
+  .theme-editorial header .mt-10 { margin-top: 0.85rem; }
+  .theme-editorial header .mt-5  { margin-top: 0.6rem; }
+  .theme-editorial header .py-5  { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
