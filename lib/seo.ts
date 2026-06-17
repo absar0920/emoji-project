@@ -1,7 +1,7 @@
 import { EmojiDocument, ComparisonDocument, ComboDocument, PLATFORM_LABELS, PlatformKey, CULTURE_INFO, CultureRegion } from "@/types/emoji";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://emojintel.com";
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Emoji Intelligence";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Emoji Meaning";
 
 export function generateEmojiMeta(emoji: EmojiDocument) {
   const year = new Date().getFullYear();

@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!category) return { title: "Category Not Found" };
   return {
     title: `${category.name} — Blog`,
-    description: category.description || `Browse ${category.name} articles on Emoji Intelligence.`,
+    description: category.description || `Browse ${category.name} articles on Emoji Meaning.`,
   };
 }
 

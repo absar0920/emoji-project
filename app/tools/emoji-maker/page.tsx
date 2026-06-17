@@ -47,7 +47,7 @@ export default function EmojiMakerPage() {
               "How emoji makers work, the tool types for each goal, a nine-step creation process, platform export specs for Discord, Slack, Twitch, WhatsApp, and Telegram, common mistakes, and expert tips.",
             datePublished: "2026-01-01",
             dateModified: "2026-06-01",
-            author: { "@type": "Organization", name: "Emoji Intelligence" },
+            author: { "@type": "Organization", name: "Emoji Meaning" },
           }),
         }}
       />

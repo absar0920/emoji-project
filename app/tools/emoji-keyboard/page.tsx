@@ -55,7 +55,7 @@ export default function EmojiKeyboardPage() {
               "How to open and use the built-in emoji keyboard on Windows, Mac, iPhone, Android, and Chromebook, plus Slack, Teams, Outlook, Gmail, and Google Docs.",
             datePublished: "2026-01-01",
             dateModified: "2026-06-01",
-            author: { "@type": "Organization", name: "Emoji Intelligence" },
+            author: { "@type": "Organization", name: "Emoji Meaning" },
           }),
         }}
       />

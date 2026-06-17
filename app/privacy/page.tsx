@@ -4,8 +4,8 @@ import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Emoji Intelligence",
-  description: "Privacy policy for Emoji Intelligence.",
+  title: "Privacy Policy — Emoji Meaning",
+  description: "Privacy policy for Emoji Meaning.",
 };
 
 export default function PrivacyPage() {
@@ -29,10 +29,10 @@ export default function PrivacyPage() {
 
           <div className="fg-article">
             <h2>What We Collect</h2>
-            <p>Emoji Intelligence does not require user accounts or login. We do not collect personal information such as names, email addresses, or phone numbers.</p>
+            <p>Emoji Meaning does not require user accounts or login. We do not collect personal information such as names, email addresses, or phone numbers.</p>
 
             <h2>Cookies &amp; Local Storage</h2>
-            <p>We use browser localStorage to store your recent emoji selections for convenience. No tracking cookies are set by Emoji Intelligence directly.</p>
+            <p>We use browser localStorage to store your recent emoji selections for convenience. No tracking cookies are set by Emoji Meaning directly.</p>
 
             <h2>Third-Party Services</h2>
             <p>We use the following third-party services:</p>

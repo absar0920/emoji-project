@@ -63,7 +63,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     dateModified: post.modified,
     author: { "@type": "Person", name: post.author },
     ...(post.featuredImage ? { image: post.featuredImage } : {}),
-    publisher: { "@type": "Organization", name: process.env.NEXT_PUBLIC_SITE_NAME || "Emoji Intelligence" },
+    publisher: { "@type": "Organization", name: process.env.NEXT_PUBLIC_SITE_NAME || "Emoji Meaning" },
   };
 
   const breadcrumbSchema = {

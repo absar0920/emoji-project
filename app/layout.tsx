@@ -26,8 +26,8 @@ const notoColorEmoji = Noto_Color_Emoji({
 
 export const metadata: Metadata = {
   title: {
-    default: "Emoji Intelligence — Every Emoji. Every Meaning.",
-    template: "%s | Emoji Intelligence",
+    default: "Emoji Meaning — Every Emoji, Decoded.",
+    template: "%s | Emoji Meaning",
   },
   description:
     "Discover what every emoji really means. Gen-Z slang, TikTok meanings, cultural intelligence, and platform-specific usage for 1000+ emojis.",

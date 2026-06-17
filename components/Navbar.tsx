@@ -27,8 +27,8 @@ export default function Navbar({ onSearchClick, onMenuClick }: NavbarProps) {
                 </button>
               </div>
               <Link href="/" className="flex items-baseline gap-2 shrink-0 fg-link">
-                <span className="text-lg" aria-hidden="true">🧠</span>
-                <span className="font-display t-ink text-xl leading-none">Emoji Intelligence</span>
+                <span className="text-lg" aria-hidden="true">📖</span>
+                <span className="font-display t-ink text-xl leading-none">Emoji Meaning</span>
               </Link>
             </div>
 

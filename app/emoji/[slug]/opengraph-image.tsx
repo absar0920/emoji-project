@@ -29,7 +29,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         <div style={{ fontSize: 180, lineHeight: 1 }}>{character}</div>
         <div style={{ fontSize: 48, fontWeight: 800, marginTop: 20, textAlign: "center" }}>{name} Emoji</div>
         <div style={{ fontSize: 24, opacity: 0.8, marginTop: 12, maxWidth: 800, textAlign: "center" }}>{description.slice(0, 100)}</div>
-        <div style={{ fontSize: 18, opacity: 0.6, marginTop: 24, display: "flex", alignItems: "center", gap: 8 }}>🧠 Emoji Intelligence</div>
+        <div style={{ fontSize: 18, opacity: 0.6, marginTop: 24, display: "flex", alignItems: "center", gap: 8 }}>📖 Emoji Meaning</div>
       </div>
     ),
     { ...size }

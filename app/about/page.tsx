@@ -4,8 +4,8 @@ import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "About — Emoji Intelligence",
-  description: "Emoji Intelligence is the world's most comprehensive emoji meaning platform. 3,700+ emojis, 15 platforms, 31 cultures.",
+  title: "About — Emoji Meaning",
+  description: "Emoji Meaning is the world's most comprehensive emoji meaning platform. 3,700+ emojis, 15 platforms, 31 cultures.",
 };
 
 export default function AboutPage() {
@@ -24,11 +24,11 @@ export default function AboutPage() {
 
           <div className="border-b-2 border-[var(--rule)] pb-7 mb-9">
             <p className="fg-kicker mb-4">Colophon</p>
-            <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2.6rem] sm:text-[3.6rem]">About Emoji Intelligence</h1>
+            <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2.6rem] sm:text-[3.6rem]">About Emoji Meaning</h1>
           </div>
 
           <div className="fg-article">
-            <p className="fg-lead">Emoji Intelligence is the world&apos;s most comprehensive emoji-meaning field guide. We go beyond simple definitions to provide multi-layer semantic analysis of every emoji across cultures, platforms, and generations.</p>
+            <p className="fg-lead">Emoji Meaning is the world&apos;s most comprehensive emoji-meaning field guide. We go beyond simple definitions to provide multi-layer semantic analysis of every emoji across cultures, platforms, and generations.</p>
 
             <h2>What We Cover</h2>
             <ul>

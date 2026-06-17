@@ -57,8 +57,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10">
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <div className="flex items-baseline gap-2 mb-3">
-              <span className="text-lg" aria-hidden="true">🧠</span>
-              <span className="font-display t-ink text-xl">Emoji Intelligence</span>
+              <span className="text-lg" aria-hidden="true">📖</span>
+              <span className="font-display t-ink text-xl">Emoji Meaning</span>
             </div>
             <p className="t-muted text-sm leading-relaxed max-w-xs">
               A complete field guide to what every emoji really means — Gen-Z slang, platform context, and cultural intelligence.
@@ -71,7 +71,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-[var(--line)] mt-12 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 fg-label">
-          <span>© {new Date().getFullYear()} Emoji Intelligence</span>
+          <span>© {new Date().getFullYear()} Emoji Meaning</span>
           <span>Emoji Meanings — A Field Guide · Nº 2026</span>
         </div>
       </div>

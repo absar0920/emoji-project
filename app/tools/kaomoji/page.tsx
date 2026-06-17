@@ -43,7 +43,7 @@ export default function KaomojiPage() {
               "Definition, 100+ copy-paste examples by category, the full history, how to type kaomoji on iPhone, Windows, Mac, and Android, and how to build your own.",
             datePublished: "2026-01-01",
             dateModified: "2026-06-01",
-            author: { "@type": "Organization", name: "Emoji Intelligence" },
+            author: { "@type": "Organization", name: "Emoji Meaning" },
           }),
         }}
       />

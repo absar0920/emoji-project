@@ -50,7 +50,7 @@ export default function EmojiKitchenPage() {
             description: "The definitive guide to Emoji Kitchen — how to combine emojis, best combos, supported apps, hidden features, and troubleshooting.",
             datePublished: "2026-01-01",
             dateModified: "2026-06-01",
-            author: { "@type": "Organization", name: "Emoji Intelligence" },
+            author: { "@type": "Organization", name: "Emoji Meaning" },
           }),
         }}
       />

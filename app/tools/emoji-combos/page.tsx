@@ -64,7 +64,7 @@ export default async function EmojiCombosPage() {
               "200+ copy-paste emoji combos across cute, funny, aesthetic, platform, and seasonal categories, plus how to build your own, combos with meaning, and Emoji Kitchen.",
             datePublished: "2026-01-01",
             dateModified: "2026-06-01",
-            author: { "@type": "Organization", name: "Emoji Intelligence" },
+            author: { "@type": "Organization", name: "Emoji Meaning" },
           }),
         }}
       />

@@ -49,7 +49,7 @@ export default function TextToEmojiPage() {
               "Convert text to emoji, generate emoji letters, remove emoji from text, and use emoji across iPhone, Android, Discord, WhatsApp, and code — with JS and Python snippets.",
             datePublished: "2026-01-01",
             dateModified: "2026-06-01",
-            author: { "@type": "Organization", name: "Emoji Intelligence" },
+            author: { "@type": "Organization", name: "Emoji Meaning" },
           }),
         }}
       />
