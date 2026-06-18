@@ -473,8 +473,14 @@ body {
   letter-spacing: -0.04em;
   color: var(--ink-2);
 }
-.theme-editorial .fg-rail-summary { list-style: none; }
+.theme-editorial .fg-rail-summary {
+  list-style: none;
+  color: var(--ink-2);
+  font-weight: 600;
+  transition: background 0.12s ease, color 0.12s ease;
+}
 .theme-editorial .fg-rail-summary::-webkit-details-marker { display: none; }
+.theme-editorial .fg-rail-summary:hover { background: var(--paper-2); color: var(--accent); }
 .theme-editorial .fg-rail-group[open] > .fg-rail-summary .fg-chev { transform: rotate(180deg); }
 .theme-editorial .fg-menuitem[data-active="true"] .fg-rail-text { font-weight: 600; }
 
