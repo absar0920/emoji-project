@@ -28,9 +28,7 @@ export default function Navbar({ onSearchClick, onMenuClick }: NavbarProps) {
                 </button>
               </div>
               <Link href="/" className="flex items-center gap-2.5 shrink-0 fg-link">
-                <span className="inline-flex items-center justify-center w-8 h-8 rounded-[3px] border-[1.5px] border-[var(--rule)] bg-white overflow-hidden" aria-hidden="true">
-                  <Image src="/logo.png" alt="" width={32} height={32} priority className="w-full h-full object-contain" />
-                </span>
+                <Image src="/logo.png" alt="" width={32} height={32} priority className="w-8 h-8 object-contain" />
                 <span className="font-display t-ink text-xl leading-none">Emoji Meaning</span>
               </Link>
             </div>

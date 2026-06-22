@@ -25,20 +25,7 @@ export default async function Image() {
           color: "#1a1714",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            width: 200,
-            height: 200,
-            alignItems: "center",
-            justifyContent: "center",
-            background: "white",
-            borderRadius: 16,
-            border: "3px solid #1a1714",
-          }}
-        >
-          <img src={logoSrc} width={176} height={176} alt="" />
-        </div>
+        <img src={logoSrc} width={220} height={220} alt="" />
         <div style={{ fontSize: 64, fontWeight: 800, marginTop: 36 }}>Emoji Meaning</div>
         <div style={{ fontSize: 28, opacity: 0.7, marginTop: 12 }}>
           Every Emoji, Decoded.

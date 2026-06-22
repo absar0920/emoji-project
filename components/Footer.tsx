@@ -58,9 +58,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10">
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-3">
-              <span className="inline-flex items-center justify-center w-8 h-8 rounded-[3px] border-[1.5px] border-[var(--rule)] bg-white overflow-hidden" aria-hidden="true">
-                <Image src="/logo.png" alt="" width={32} height={32} className="w-full h-full object-contain" />
-              </span>
+              <Image src="/logo.png" alt="" width={32} height={32} className="w-8 h-8 object-contain" />
               <span className="font-display t-ink text-xl">Emoji Meaning</span>
             </div>
             <p className="t-muted text-sm leading-relaxed max-w-xs">
