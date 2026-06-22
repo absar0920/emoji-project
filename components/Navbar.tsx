@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
@@ -26,8 +27,10 @@ export default function Navbar({ onSearchClick, onMenuClick }: NavbarProps) {
                   </svg>
                 </button>
               </div>
-              <Link href="/" className="flex items-baseline gap-2 shrink-0 fg-link">
-                <span className="text-lg" aria-hidden="true">📖</span>
+              <Link href="/" className="flex items-center gap-2.5 shrink-0 fg-link">
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-[3px] border-[1.5px] border-[var(--rule)] bg-white overflow-hidden" aria-hidden="true">
+                  <Image src="/logo.png" alt="" width={32} height={32} priority className="w-full h-full object-contain" />
+                </span>
                 <span className="font-display t-ink text-xl leading-none">Emoji Meaning</span>
               </Link>
             </div>
