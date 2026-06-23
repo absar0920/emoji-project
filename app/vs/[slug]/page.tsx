@@ -1,6 +1,7 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Metadata } from "next";
-import { getComparisonBySlug, getRelatedComparisons } from "@/lib/mongodb";
+import { getRelatedComparisons } from "@/lib/mongodb";
+import { resolveComparison } from "@/lib/comparison";
 import { generateComparisonMeta, generateComparisonFAQ } from "@/lib/seo";
 import ComparisonRow from "@/components/ComparisonRow";
 import ClientShell from "@/components/ClientShell";
@@ -16,10 +17,20 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const comparison = await getComparisonBySlug(slug);
-  if (!comparison) return { title: "Comparison Not Found" };
-  const meta = generateComparisonMeta(comparison);
-  return { title: meta.title, description: meta.description, alternates: { canonical: meta.canonical } };
+  const res = await resolveComparison(slug);
+  if (res.kind === "notfound") return { title: "Comparison Not Found" };
+  // Page-level permanentRedirect handles the actual hop; metadata is discarded.
+  if (res.kind === "redirect") return {};
+  const meta = generateComparisonMeta(res.comparison);
+  const base: Metadata = {
+    title: meta.title,
+    description: meta.description,
+    alternates: { canonical: meta.canonical },
+  };
+  // Composed long-tail pages resolve so nobody hits a 404, but stay out of the
+  // index to avoid thin/duplicate-content penalties. Curated pages are indexable.
+  if (res.kind === "composed") base.robots = { index: false, follow: true };
+  return base;
 }
 
 function Chapter({ label, meta, title, children }: { label: string; meta?: string; title: string; children: React.ReactNode }) {
@@ -39,9 +50,14 @@ function Chapter({ label, meta, title, children }: { label: string; meta?: strin
 
 export default async function ComparisonPage({ params }: PageProps) {
   const { slug } = await params;
-  const comparison = await getComparisonBySlug(slug);
-  if (!comparison) notFound();
+  const res = await resolveComparison(slug);
+  if (res.kind === "notfound") notFound();
+  if (res.kind === "redirect") permanentRedirect(`/vs/${res.to}`);
+  const comparison = res.comparison;
 
+  // Related = curated comparisons sharing either emoji (all indexable pages, so
+  // a noindex composed page funnels link equity into them). The masthead always
+  // links both constituent /emoji/[slug] pages as guaranteed-present exits.
   const related = await getRelatedComparisons(comparison.emoji1_slug, 5);
   const faqSchema = generateComparisonFAQ(comparison);
 
@@ -86,12 +102,14 @@ export default async function ComparisonPage({ params }: PageProps) {
             </div>
           </FadeIn>
 
-          <AnimatedSection>
-            <div className="fg-pull mt-10">
-              <span className="fg-kicker">Winner · {comparison.winner}</span>
-              <p>{comparison.winner_reason}</p>
-            </div>
-          </AnimatedSection>
+          {comparison.winner && (
+            <AnimatedSection>
+              <div className="fg-pull mt-10">
+                <span className="fg-kicker">Winner · {comparison.winner}</span>
+                <p>{comparison.winner_reason}</p>
+              </div>
+            </AnimatedSection>
+          )}
 
           <Chapter label="Differences" title="Key differences">
             <div className="grid grid-cols-[1fr_auto_1fr] gap-4 pb-2 border-b-2 border-[var(--rule)] mb-2">

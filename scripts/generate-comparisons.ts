@@ -102,6 +102,7 @@ async function main() {
           winner_reason: String(result.winner_reason),
           when_to_use: String(result.when_to_use),
           created_at: new Date(),
+          source: "curated",
         };
 
         await comparisonsCol.updateOne(

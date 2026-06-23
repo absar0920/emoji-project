@@ -319,6 +319,8 @@ export interface ComparisonDocument {
   winner_reason: string;
   when_to_use: string;
   created_at: Date;
+  /** Provenance: LLM-generated ("curated") vs derived at request time ("composed"). Undefined on legacy docs == curated. */
+  source?: "curated" | "composed";
 }
 
 export interface ComboDocument {

@@ -34,8 +34,10 @@ export default function EmojiVsPage() {
       .catch(() => {});
   }, []);
 
+  const sameEmoji = !!emoji1 && !!emoji2 && emoji1.slug === emoji2.slug;
+
   function handleCompare() {
-    if (!emoji1 || !emoji2) return;
+    if (!emoji1 || !emoji2 || sameEmoji) return;
     const sorted = [emoji1.slug, emoji2.slug].sort();
     router.push(`/vs/${sorted[0]}-vs-${sorted[1]}`);
   }
@@ -59,9 +61,10 @@ export default function EmojiVsPage() {
       </div>
 
       <div className="text-center mb-12">
-        <button onClick={handleCompare} disabled={!emoji1 || !emoji2} className="fg-btn px-8 py-3">
+        <button onClick={handleCompare} disabled={!emoji1 || !emoji2 || sameEmoji} className="fg-btn px-8 py-3">
           Compare now →
         </button>
+        {sameEmoji && <p className="t-muted text-sm mt-3">Pick two different emojis to compare.</p>}
       </div>
 
       {popular.length > 0 && (
