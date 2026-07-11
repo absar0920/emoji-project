@@ -12,7 +12,8 @@ import EmojiKitchen from "@/components/combos/EmojiKitchen";
 import CombosFAQ from "@/components/combos/CombosFAQ";
 import Conclusion from "@/components/combos/Conclusion";
 
-export const dynamic = "force-dynamic";
+// Weekly ISR — cached after first render instead of running on every request.
+export const revalidate = 604800;
 
 export default async function EmojiCombosPage() {
   const combos = await getPopularCombos(30);

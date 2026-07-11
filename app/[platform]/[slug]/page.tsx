@@ -10,7 +10,12 @@ import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
 import { FadeIn, AnimatedSection } from "@/components/MotionWrappers";
 
-export const dynamic = "force-dynamic";
+// Weekly ISR: each URL renders on first request, then serves from cache for 7 days.
+// Empty generateStaticParams => nothing prerendered at build (keeps build under Vercel's limit).
+export const revalidate = 604800;
+export async function generateStaticParams() {
+  return [];
+}
 
 interface PageProps {
   params: Promise<{ platform: string; slug: string }>;

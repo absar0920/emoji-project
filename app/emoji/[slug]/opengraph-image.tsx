@@ -7,6 +7,13 @@ export const alt = "Emoji meaning";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// Weekly ISR: generate each OG image once on first crawl, then serve from cache.
+// Empty generateStaticParams => none rendered at build (keeps build fast).
+export const revalidate = 604800;
+export async function generateStaticParams() {
+  return [];
+}
+
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const emoji = await getEmojiBySlug(slug);

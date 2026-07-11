@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   description: "See which emojis are trending on TikTok, Instagram, and across all platforms. Updated daily with trend scores.",
 };
 
-export const dynamic = "force-dynamic";
+// Weekly ISR — cached after first render instead of running on every request.
+// Shorten this (e.g. 3600) if you want the trending list to refresh more often.
+export const revalidate = 604800;
 
 interface TrendingEmoji {
   slug: string;
