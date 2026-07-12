@@ -29,7 +29,7 @@
  *
  *   The brief calls for proving an unauthenticated call to the savePost
  *   write path is rejected. savePost/deletePost/setPostStatus
- *   (app/admin/actions.ts) are React Server Actions, which are awkward to
+ *   (app/admin/posts/actions.ts) are React Server Actions, which are awkward to
  *   invoke directly over raw HTTP with a stable wire contract (see the check
  *   3 note below on the login action for why). Rather than reverse-engineer
  *   that protocol a second time, note that every one of those actions is
@@ -290,7 +290,7 @@ async function checkDataLayer() {
 // it shows up in captured run output as evidence the gap was considered.
 
 function printSavePostCoverageNote() {
-  console.log("\nNote: savePost/deletePost/setPostStatus (app/admin/actions.ts) write-path auth");
+  console.log("\nNote: savePost/deletePost/setPostStatus (app/admin/posts/actions.ts) write-path auth");
   console.log("  is enforced by the SAME assertAdmin()/isAdmin() gate that check 2 (POST");
   console.log("  /api/admin/upload) verifies rejects unauthenticated requests with 401.");
   console.log("  Covered by check 2 — not a separate runtime probe (Server Actions have no");

@@ -44,3 +44,27 @@ export async function setCached<T>(key: string, value: T, ttlSeconds: number): P
     // Cache write failure is non-fatal
   }
 }
+
+export async function delCached(key: string): Promise<void> {
+  const r = getRedis();
+  if (!r) return;
+  try {
+    await r.del(key);
+  } catch {
+    // Cache delete failure is non-fatal
+  }
+}
+
+// Used for the blog list-page cache-generation counter: incrementing this on
+// every write instantly invalidates all `blog:list:*` pages (they key on the
+// current generation) without needing to enumerate every category/page/
+// perPage combination that could be cached.
+export async function incrCached(key: string): Promise<number | null> {
+  const r = getRedis();
+  if (!r) return null;
+  try {
+    return await r.incr(key);
+  } catch {
+    return null;
+  }
+}

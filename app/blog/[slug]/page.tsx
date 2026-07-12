@@ -52,7 +52,7 @@ async function resolvePost(slug: string): Promise<BlogPost | null> {
 // through to the normal published-only resolution below, same as if they'd
 // never passed it.
 async function enablePreviewIfRequested(slug: string, preview?: string): Promise<void> {
-  if (!preview) return;
+  if (preview !== "1") return;
   if (!(await isAdmin())) return;
   (await draftMode()).enable();
   redirect(`/blog/${slug}`);
@@ -61,7 +61,7 @@ async function enablePreviewIfRequested(slug: string, preview?: string): Promise
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const { preview } = await searchParams;
-  if (preview) return { title: "Preview" };
+  if (preview === "1" && (await isAdmin())) return { title: "Preview" };
   const post = await resolvePost(slug);
   if (!post) return { title: "Post Not Found" };
 

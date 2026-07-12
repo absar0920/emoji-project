@@ -2,7 +2,7 @@
 import "server-only";
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "./mongodb";
-import { getCached, setCached } from "./redis";
+import { getCached, setCached, delCached, incrCached } from "./redis";
 import { jsonToSanitizedHtml, estimateReadingTime } from "./blog-html";
 import { slugify, ensureUniqueSlug } from "./slug";
 import type {
@@ -10,6 +10,21 @@ import type {
 } from "@/types/blog";
 
 const COLLECTION = "blog_posts";
+
+// The sitemap chunk id (see generateSitemaps() in app/sitemap.ts) that serves
+// blog post URLs at /sitemap/<id>.xml. Shared here so app/sitemap.ts and the
+// admin revalidation actions can't drift apart.
+export const BLOG_SITEMAP_ID = 18;
+
+// Bumped on every write that can change public list-page output (new post,
+// status change, slug/category change, delete). getPublishedPosts() folds
+// the current value into its cache key, so a bump makes every previously
+// cached `blog:list:*` page unreachable instantly — no need to enumerate
+// every category/page/perPage combination to delete individually.
+const LIST_GEN_KEY = "blog:list:gen";
+async function bumpBlogListGeneration(): Promise<void> {
+  await incrCached(LIST_GEN_KEY);
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function toPost(d: any): BlogPost {
@@ -45,7 +60,8 @@ const LIST_PROJECTION = {
 export async function getPublishedPosts(
   page = 1, perPage = 12, categorySlug?: string
 ): Promise<{ posts: BlogListItem[]; totalPages: number }> {
-  const cacheKey = `blog:list:${categorySlug ?? "all"}:${page}:${perPage}`;
+  const gen = (await getCached<number>(LIST_GEN_KEY)) ?? 0;
+  const cacheKey = `blog:list:${categorySlug ?? "all"}:${page}:${perPage}:${gen}`;
   const cached = await getCached<{ posts: BlogListItem[]; totalPages: number }>(cacheKey);
   if (cached) return cached;
 
@@ -165,6 +181,7 @@ export async function createPost(input: BlogPostInput): Promise<{ id: string; sl
     published_at: input.status === "published" ? now : null,
   };
   const res = await conn.db.collection(COLLECTION).insertOne(doc);
+  await bumpBlogListGeneration();
   return { id: String(res.insertedId), slug };
 }
 
@@ -188,6 +205,11 @@ export async function updatePost(id: string, input: BlogPostInput): Promise<{ sl
       published_at: becomingPublished ? now : existing.published_at ?? null,
     },
   });
+  // Bust the read cache for both the old and (if changed) new slug so the
+  // canonical URL never keeps serving a stale doc after a save.
+  await delCached(`blog:post:${existing.slug}`);
+  if (slug !== existing.slug) await delCached(`blog:post:${slug}`);
+  await bumpBlogListGeneration();
   return { slug };
 }
 
@@ -205,6 +227,10 @@ export async function setStatus(id: string, status: BlogStatus): Promise<{ slug:
       published_at: status === "published" && !existing.published_at ? now : existing.published_at ?? null,
     },
   });
+  // Bust the read cache so an unpublish (or re-publish) is reflected on the
+  // next public read instead of serving the pre-change status for up to 5min.
+  await delCached(`blog:post:${existing.slug}`);
+  await bumpBlogListGeneration();
   return { slug: existing.slug };
 }
 
@@ -212,5 +238,9 @@ export async function deletePost(id: string): Promise<void> {
   if (!ObjectId.isValid(id)) return;
   const conn = await connectToDatabase();
   if (!conn) return;
-  await conn.db.collection(COLLECTION).deleteOne({ _id: new ObjectId(id) });
+  const _id = new ObjectId(id);
+  const existing = await conn.db.collection(COLLECTION).findOne({ _id }, { projection: { slug: 1 } });
+  await conn.db.collection(COLLECTION).deleteOne({ _id });
+  if (existing) await delCached(`blog:post:${existing.slug}`);
+  await bumpBlogListGeneration();
 }

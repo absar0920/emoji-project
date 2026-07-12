@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllSlugs, getAllComparisonSlugs, getAllComboSlugs } from "@/lib/mongodb";
-import { getAllPublishedSlugs } from "@/lib/blog";
+import { getAllPublishedSlugs, BLOG_SITEMAP_ID } from "@/lib/blog";
 import { PLATFORM_KEYS } from "@/types/emoji";
 import { CULTURE_REGIONS } from "@/types/emoji";
 
@@ -12,8 +12,10 @@ export async function generateSitemaps() {
   // Chunks 1-15: one per platform
   // Chunk 16: comparisons
   // Chunk 17: base emoji pages
+  // Chunk BLOG_SITEMAP_ID (18): blog posts — must stay last/highest so it
+  // remains the id app/admin/posts/actions.ts revalidates on every write.
   const ids = [];
-  for (let i = 0; i <= 18; i++) {
+  for (let i = 0; i <= BLOG_SITEMAP_ID; i++) {
     ids.push({ id: i });
   }
   return ids;
@@ -78,7 +80,7 @@ export default async function sitemap(props: { id: Promise<string> }): Promise<M
     }));
   }
 
-  if (id === 18) {
+  if (id === BLOG_SITEMAP_ID) {
     // Blog post pages
     const postSlugs = await getAllPublishedSlugs();
     return postSlugs.map((slug) => ({

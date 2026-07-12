@@ -3,17 +3,22 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/dal";
-import { createPost, updatePost, deletePost as del, setStatus, getPostById } from "@/lib/blog";
+import { createPost, updatePost, deletePost as del, setStatus, getPostById, BLOG_SITEMAP_ID } from "@/lib/blog";
 import type { BlogPostInput, BlogStatus } from "@/types/blog";
 
 async function assertAdmin() {
   if (!(await isAdmin())) throw new Error("Unauthorized");
 }
+// `/sitemap.xml` (next.config.ts rewrite -> app/api/sitemap-index/route.ts)
+// is a fixed-count index of chunk URLs, not post data — it doesn't need
+// revalidating. The actual blog-post URLs live in the sitemap chunk at
+// /sitemap/<BLOG_SITEMAP_ID>.xml (generateSitemaps() in app/sitemap.ts),
+// which is what must be kept fresh on every write.
 function revalidateBlog(slug: string, categories: { slug: string }[] = []) {
   revalidatePath("/blog");
   revalidatePath(`/blog/${slug}`);
   for (const c of categories) revalidatePath(`/blog/category/${c.slug}`);
-  revalidatePath("/sitemap.xml");
+  revalidatePath(`/sitemap/${BLOG_SITEMAP_ID}.xml`);
 }
 
 export async function savePost(input: BlogPostInput & { id?: string }): Promise<{ id: string; slug: string }> {
@@ -48,7 +53,7 @@ export async function deletePost(id: string): Promise<void> {
   if (post) revalidateBlog(post.slug, post.categories);
   else {
     revalidatePath("/blog");
-    revalidatePath("/sitemap.xml");
+    revalidatePath(`/sitemap/${BLOG_SITEMAP_ID}.xml`);
   }
   redirect("/admin");
 }
