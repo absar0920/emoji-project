@@ -85,36 +85,45 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
     if (patch.status !== undefined) setStatus(patch.status);
   }
 
+  // Status is sourced from state (the single source of truth for the post's
+  // publish state), never from a parameter — this is what makes the sidebar
+  // Status dropdown actually take effect.
   const buildInput = useCallback(
-    (explicitStatus: BlogStatus): BlogPostInput & { id?: string } => ({
+    (): BlogPostInput & { id?: string } => ({
       ...(id ? { id } : {}),
       title,
       slug: slug || slugify(title || "post"),
       excerpt,
       content_json: editor?.getJSON() ?? (initial?.content_json ?? {}),
-      status: explicitStatus,
+      status,
       featured_image: featuredImage,
       featured_image_alt: featuredImageAlt,
       categories,
       seo_title: seoTitle,
       seo_description: seoDescription,
     }),
-    [id, title, slug, excerpt, featuredImage, featuredImageAlt, categories, seoTitle, seoDescription, editor, initial]
+    [id, title, slug, excerpt, status, featuredImage, featuredImageAlt, categories, seoTitle, seoDescription, editor, initial]
   );
 
+  // statusOverride lets the explicit "Save draft"/"Publish" buttons force a
+  // specific status for THIS save even though the setStatus() call they also
+  // make hasn't been committed to state yet (setState is async). Autosave
+  // calls this with no override, so it always saves whatever status is
+  // currently in state — it must never force "draft" and silently unpublish.
   const runSave = useCallback(
-    async (explicitStatus: BlogStatus) => {
+    async (statusOverride?: BlogStatus) => {
       if (savingRef.current) return;
       savingRef.current = true;
       setSaving(true);
       setSaveError(null);
       try {
-        const input = buildInput(explicitStatus);
+        const input = buildInput();
+        if (statusOverride) input.status = statusOverride;
         const result = await savePost(input);
         setId(result.id);
         setSlug(result.slug);
         slugTouchedRef.current = true;
-        setStatus(explicitStatus);
+        setStatus(input.status);
         setSavedAt(new Date());
       } catch (err) {
         setSaveError(err instanceof Error ? err.message : "Save failed");
@@ -128,11 +137,12 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
 
   // Autosave: only once the post already has an id (i.e. a manual save has
   // happened) and there's a title to save. Never autosaves a brand-new,
-  // untitled post.
+  // untitled post. Preserves whatever status is currently set (published
+  // stays published, draft stays draft) — it must never hard-code "draft".
   useEffect(() => {
     if (!editor || !id || !title.trim()) return;
     const timer = setTimeout(() => {
-      void runSave("draft");
+      void runSave();
     }, AUTOSAVE_DELAY_MS);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -142,6 +152,7 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
     title,
     slug,
     excerpt,
+    status,
     seoTitle,
     seoDescription,
     categories,
@@ -161,7 +172,10 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={() => void runSave("draft")}
+              onClick={() => {
+                setStatus("draft");
+                void runSave("draft");
+              }}
               disabled={saving || !title.trim()}
               className="fg-btn fg-btn-ghost px-5 py-2.5"
             >
@@ -169,7 +183,10 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
             </button>
             <button
               type="button"
-              onClick={() => void runSave("published")}
+              onClick={() => {
+                setStatus("published");
+                void runSave("published");
+              }}
               disabled={saving || !title.trim()}
               className="fg-btn px-5 py-2.5"
             >
