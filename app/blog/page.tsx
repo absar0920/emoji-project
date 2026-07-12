@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { getPosts, getCategories } from "@/lib/wordpress";
+import { getPublishedPosts, getCategoryCounts } from "@/lib/blog";
 import BlogCard from "@/components/BlogCard";
 import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
@@ -21,8 +21,8 @@ export default async function BlogPage({ searchParams }: PageProps) {
   const page = Math.max(1, Number(pageParam) || 1);
 
   const [{ posts, totalPages }, categories] = await Promise.all([
-    getPosts(page, 12),
-    getCategories(),
+    getPublishedPosts(page, 12),
+    getCategoryCounts(),
   ]);
 
   return (
@@ -51,7 +51,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
             <div className="flex flex-wrap gap-x-6 gap-y-2.5 py-5 border-b border-[var(--line)] mb-9">
               <Link href="/blog" className="fg-navlink" data-active style={{ color: "var(--accent)", borderBottom: "2px solid var(--accent)", paddingBottom: "2px" }}>All</Link>
               {categories.map((cat) => (
-                <Link key={cat.id} href={`/blog/category/${cat.slug}`} className="fg-navlink">{cat.name}</Link>
+                <Link key={cat.slug} href={`/blog/category/${cat.slug}`} className="fg-navlink">{cat.name}</Link>
               ))}
             </div>
           )}

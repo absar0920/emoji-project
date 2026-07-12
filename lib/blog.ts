@@ -77,6 +77,15 @@ export async function getPublishedPostBySlug(slug: string): Promise<BlogPost | n
   return post;
 }
 
+// Uncached lookup by slug regardless of status — used only for admin-gated
+// draft/unpublished previews. Callers MUST check `isAdmin()` before calling.
+export async function getPostBySlugForPreview(slug: string): Promise<BlogPost | null> {
+  const conn = await connectToDatabase();
+  if (!conn) return null;
+  const d = await conn.db.collection(COLLECTION).findOne({ slug });
+  return d ? toPost(d) : null;
+}
+
 export async function getCategoryCounts(): Promise<BlogCategoryCount[]> {
   const conn = await connectToDatabase();
   if (!conn) return [];

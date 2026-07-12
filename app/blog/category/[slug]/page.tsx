@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getPosts, getCategoryBySlug, getCategories } from "@/lib/wordpress";
+import { getPublishedPosts, getCategoryCounts } from "@/lib/blog";
 import BlogCard from "@/components/BlogCard";
 import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
@@ -15,11 +15,12 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const category = await getCategoryBySlug(slug);
+  const allCategories = await getCategoryCounts();
+  const category = allCategories.find((c) => c.slug === slug);
   if (!category) return { title: "Category Not Found" };
   return {
     title: `${category.name} — Blog`,
-    description: category.description || `Browse ${category.name} articles on Emoji Meaning.`,
+    description: `Browse ${category.name} articles on Emoji Meaning.`,
   };
 }
 
@@ -28,13 +29,11 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
   const { page: pageParam } = await searchParams;
   const page = Math.max(1, Number(pageParam) || 1);
 
-  const [category, allCategories] = await Promise.all([
-    getCategoryBySlug(slug),
-    getCategories(),
-  ]);
+  const allCategories = await getCategoryCounts();
+  const category = allCategories.find((c) => c.slug === slug);
   if (!category) notFound();
 
-  const { posts, totalPages } = await getPosts(page, 12, category.id);
+  const { posts, totalPages } = await getPublishedPosts(page, 12, slug);
 
   return (
     <ClientShell>
@@ -56,7 +55,6 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
           <div className="border-b-2 border-[var(--rule)] pb-7">
             <p className="fg-kicker mb-4">Category</p>
             <h1 className="font-display t-ink leading-[1.0] tracking-[-0.015em] text-[2.6rem] sm:text-[3.6rem]">{category.name}</h1>
-            {category.description && <p className="t-muted font-read mt-4 max-w-2xl">{category.description}</p>}
           </div>
 
           {/* Category filing row */}
@@ -66,7 +64,7 @@ export default async function BlogCategoryPage({ params, searchParams }: PagePro
               const active = cat.slug === slug;
               return (
                 <Link
-                  key={cat.id}
+                  key={cat.slug}
                   href={`/blog/category/${cat.slug}`}
                   className="fg-navlink"
                   data-active={active}
