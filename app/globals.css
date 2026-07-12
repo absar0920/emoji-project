@@ -533,11 +533,155 @@ html[data-sidebar="collapsed"] .theme-editorial .fg-rail-items { display: block 
   border-left: 2px solid var(--accent); padding-left: 1.2rem; margin: 1.6rem 0;
   font-style: italic; color: var(--ink); font-family: var(--font-serif); font-size: 1.22rem; line-height: 1.4;
 }
-.theme-editorial .fg-article img { border: 1px solid var(--line); max-width: 100%; height: auto; }
+.theme-editorial .fg-article img { display: block; border: 1px solid var(--line); max-width: 100%; height: auto; }
 .theme-editorial .fg-article hr { border: 0; border-top: 1px solid var(--line); margin: 2.2rem 0; }
 .theme-editorial .fg-article code { font-family: var(--font-mono); font-size: 0.85em; background: var(--paper-2); padding: 0.1em 0.35em; border: 1px solid var(--line); }
-.theme-editorial .fg-article pre { background: var(--paper-2); border: 1px solid var(--line); padding: 1rem; overflow-x: auto; }
-.theme-editorial .fg-article pre code { background: none; border: 0; padding: 0; }
+.theme-editorial .fg-article pre {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  line-height: 1.65;
+  tab-size: 2;
+}
+.theme-editorial .fg-article pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+/* ---------- syntax theme for lowlight/highlight.js tokens (editor + any
+   future highlighted output) — mapped onto the field-guide palette so code
+   reads as part of the same system in both light and dark. ---------- */
+.theme-editorial .fg-article .hljs-comment,
+.theme-editorial .fg-article .hljs-quote { color: var(--ink-3); font-style: italic; }
+.theme-editorial .fg-article .hljs-keyword,
+.theme-editorial .fg-article .hljs-selector-tag,
+.theme-editorial .fg-article .hljs-subst { color: var(--accent); font-weight: 600; }
+.theme-editorial .fg-article .hljs-number,
+.theme-editorial .fg-article .hljs-literal,
+.theme-editorial .fg-article .hljs-variable,
+.theme-editorial .fg-article .hljs-template-variable,
+.theme-editorial .fg-article .hljs-attr { color: var(--warn); }
+.theme-editorial .fg-article .hljs-string,
+.theme-editorial .fg-article .hljs-doctag,
+.theme-editorial .fg-article .hljs-addition { color: var(--good); }
+.theme-editorial .fg-article .hljs-title,
+.theme-editorial .fg-article .hljs-section,
+.theme-editorial .fg-article .hljs-selector-id,
+.theme-editorial .fg-article .hljs-type,
+.theme-editorial .fg-article .hljs-class .hljs-title { color: var(--ink); font-weight: 700; }
+.theme-editorial .fg-article .hljs-attribute,
+.theme-editorial .fg-article .hljs-name,
+.theme-editorial .fg-article .hljs-regexp,
+.theme-editorial .fg-article .hljs-link,
+.theme-editorial .fg-article .hljs-symbol,
+.theme-editorial .fg-article .hljs-bullet,
+.theme-editorial .fg-article .hljs-built_in,
+.theme-editorial .fg-article .hljs-builtin-name { color: var(--accent-2); }
+.theme-editorial .fg-article .hljs-meta { color: var(--ink-3); font-size: 0.92em; }
+.theme-editorial .fg-article .hljs-deletion { color: var(--bad); }
+.theme-editorial .fg-article .hljs-emphasis { font-style: italic; }
+.theme-editorial .fg-article .hljs-strong { font-weight: 700; }
+
+/* ---------- tables (ledger rule, matches .fg-table) ---------- */
+.theme-editorial .fg-article table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-top: 2px solid var(--rule);
+  border-bottom: 2px solid var(--rule);
+}
+.theme-editorial .fg-article th {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-align: left;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.theme-editorial .fg-article td {
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  vertical-align: top;
+}
+.theme-editorial .fg-article tr:last-child td { border-bottom: 0; }
+
+/* ---------- figures / captions ---------- */
+.theme-editorial .fg-article figure { margin: 0; }
+.theme-editorial .fg-article figure .fg-article__img { margin-bottom: 0; }
+.theme-editorial .fg-article figcaption {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.64rem;
+  color: var(--ink-3);
+  margin-top: 0.6rem;
+}
+
+/* ---------- task lists (checkbox: square, no rounded corners) ---------- */
+.theme-editorial .fg-article ul[data-type="taskList"] { list-style: none; padding-left: 0; }
+.theme-editorial .fg-article ul[data-type="taskList"] > li { display: flex; align-items: flex-start; gap: 0.65rem; }
+.theme-editorial .fg-article ul[data-type="taskList"] > li::before { content: none; }
+.theme-editorial .fg-article ul[data-type="taskList"] > li > label {
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: 1.6em;
+  cursor: pointer;
+  user-select: none;
+}
+.theme-editorial .fg-article ul[data-type="taskList"] > li > label > input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+.theme-editorial .fg-article ul[data-type="taskList"] > li > label > input[type="checkbox"]::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--accent);
+  transform: scale(0);
+  transition: transform 0.1s ease;
+}
+.theme-editorial .fg-article ul[data-type="taskList"] > li > label > input[type="checkbox"]:checked::before { transform: scale(1); }
+.theme-editorial .fg-article ul[data-type="taskList"] > li > label > span { display: none; }
+.theme-editorial .fg-article ul[data-type="taskList"] > li > div { flex: 1 1 auto; min-width: 0; }
+.theme-editorial .fg-article ul[data-type="taskList"] > li[data-checked="true"] > div {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: var(--line);
+}
+
+/* ---------- admin editor surface (ProseMirror WYSIWYG) ----------
+   .fg-article is applied directly to the ProseMirror root, so published
+   posts and the editing surface share every rule above. This section only
+   adds editor-only chrome: focus ring, empty-state placeholder, and the
+   toolbar buttons in EditorToolbar.tsx. ---------- */
+.theme-editorial .fg-field:focus-within { border-color: var(--accent); }
+.theme-editorial .fg-article.ProseMirror { outline: none; }
+.theme-editorial .fg-article.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: var(--ink-3);
+  font-style: italic;
+  pointer-events: none;
+}
 
 /* ---------- specimen grid (search index) ---------- */
 .theme-editorial .fg-specimen-grid {
@@ -593,6 +737,8 @@ html[data-sidebar="collapsed"] .theme-editorial .fg-rail-items { display: block 
 }
 .theme-editorial .fg-chip:hover { border-color: var(--accent); color: var(--accent); }
 .theme-editorial .fg-chip[data-active="true"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.theme-editorial .fg-chip:disabled { opacity: 0.4; cursor: not-allowed; }
+.theme-editorial .fg-chip:disabled:hover { border-color: var(--line); color: var(--ink-2); }
 
 .theme-editorial .fg-card { border: 1px solid var(--line); background: transparent; transition: border-color 0.15s ease; }
 .theme-editorial a.fg-card:hover, .theme-editorial button.fg-card:hover { border-color: var(--accent); }
