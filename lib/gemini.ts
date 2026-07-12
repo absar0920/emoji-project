@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getCached, setCached } from "./redis";
+import { reserveGlobalBudget, GlobalBudgetError } from "./ratelimit";
 import crypto from "crypto";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
@@ -16,6 +17,12 @@ export async function callGemini(
   if (cacheKey) {
     const cached = await getCached<Record<string, unknown>>(cacheKey);
     if (cached) return cached;
+  }
+
+  // Cache miss => this is a real, billable Gemini call. Reserve one unit of the
+  // global daily text budget before spending. Cache hits above never reach here.
+  if (!(await reserveGlobalBudget("text"))) {
+    throw new GlobalBudgetError("text");
   }
 
   for (let attempt = 0; attempt <= retries; attempt++) {

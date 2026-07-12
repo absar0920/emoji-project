@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { callGemini, hashKey } from "@/lib/gemini";
+import { enforceRateLimit, capacityResponse, GlobalBudgetError } from "@/lib/ratelimit";
 
 const VALID_STYLES = ["Balanced", "Heavy Emoji", "Minimal", "Gen-Z", "Professional"];
 
 export async function POST(req: NextRequest) {
+  const blocked = await enforceRateLimit(req, "text");
+  if (blocked) return blocked;
+
   try {
     const body = await req.json();
     const { text, style } = body as { text?: string; style?: string };
@@ -27,6 +31,7 @@ Return a JSON object with:
 
     return NextResponse.json(result);
   } catch (err) {
+    if (err instanceof GlobalBudgetError) return capacityResponse();
     console.error("Text-to-emoji error:", err);
     return NextResponse.json({ error: "Failed to translate text" }, { status: 500 });
   }

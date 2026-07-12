@@ -2,12 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getCached, setCached } from "@/lib/redis";
 import { hashKey } from "@/lib/gemini";
+import { enforceRateLimit, reserveGlobalBudget, capacityResponse } from "@/lib/ratelimit";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 const VALID_STYLES = ["Emoji", "Cartoon", "Pixel Art", "Sticker"];
 
 export async function POST(req: NextRequest) {
+  const blocked = await enforceRateLimit(req, "image");
+  if (blocked) return blocked;
+
   try {
     const body = await req.json();
     const { prompt, style } = body as { prompt?: string; style?: string };
@@ -28,6 +32,12 @@ export async function POST(req: NextRequest) {
     const cacheKey = `maker:${style}:${hashKey(prompt)}`;
     const cached = await getCached<{ images: string[] }>(cacheKey);
     if (cached) return NextResponse.json(cached);
+
+    // Cache miss => a real, expensive image generation. Reserve global image
+    // budget before spending; this is the primary bill-control ceiling.
+    if (!(await reserveGlobalBudget("image"))) {
+      return capacityResponse();
+    }
 
     const model = genAI.getGenerativeModel({
       model: "gemini-2.0-flash-exp",

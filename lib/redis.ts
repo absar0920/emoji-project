@@ -15,6 +15,15 @@ function getRedis(): Redis | null {
   return redis;
 }
 
+/**
+ * Shared Upstash client for callers that need raw Redis ops (rate limiter,
+ * global-budget counters) rather than the cache helpers. Returns null when
+ * Redis is not configured — callers decide fail-open vs fail-closed.
+ */
+export function getRedisClient(): Redis | null {
+  return getRedis();
+}
+
 export async function getCached<T>(key: string): Promise<T | null> {
   const r = getRedis();
   if (!r) return null;

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
 import CopyAllButton from "@/components/CopyAllButton";
+import { readToolJson } from "@/lib/toolError";
 
 const MOODS = ["sad", "love", "toxic", "funny", "aesthetic", "angry", "hype", "chill", "romantic", "dark"];
 
@@ -30,8 +31,7 @@ export default function VibeSearchPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: q }),
       });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      const data = await readToolJson<{ results?: VibeResult[] }>(res);
       setResults(data.results || []);
     } catch (err) {
       setError((err as Error).message);

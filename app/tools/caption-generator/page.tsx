@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ToolHero from "@/components/ToolHero";
 import CopyButton from "@/components/CopyButton";
+import { readToolJson } from "@/lib/toolError";
 
 const MOODS = ["Happy", "Sad", "Hype", "Aesthetic", "Funny", "Romantic", "Motivational", "Chill"];
 const PLATFORMS = ["Instagram", "TikTok", "WhatsApp", "Twitter", "LinkedIn"];
@@ -31,8 +32,7 @@ export default function CaptionGeneratorPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topic, mood, platform }),
       });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      const data = await readToolJson<{ captions?: Caption[] }>(res);
       setCaptions(data.captions || []);
     } catch (err) {
       setError((err as Error).message);

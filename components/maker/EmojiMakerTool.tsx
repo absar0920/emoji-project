@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { readToolJson } from "@/lib/toolError";
 
 const STYLES = ["Emoji", "Cartoon", "Pixel Art", "Sticker"];
 
@@ -22,8 +23,7 @@ export default function EmojiMakerTool() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, style }),
       });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      const data = await readToolJson<{ images?: string[] }>(res);
       setImages(data.images || []);
     } catch (err) {
       setError((err as Error).message);

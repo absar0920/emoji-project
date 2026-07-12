@@ -95,13 +95,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         body: JSON.stringify({ query }),
         signal: controller.signal,
       })
-        .then((res) => res.json())
+        .then((res) => {
+          // 429 (rate limited) / 503 (at capacity) → fall back to fuzzy search,
+          // same as a network error, instead of showing an empty AI panel.
+          if (!res.ok) throw new Error("smart-search unavailable");
+          return res.json();
+        })
         .then((data) => {
           setSmartResults(data.results || []);
           setSmartLoading(false);
         })
         .catch(() => {
-          // Fallback to fuzzy search on error/timeout
+          // Fallback to fuzzy search on error/timeout/rate-limit
           if (fuse) setResults(searchEmojis(fuse, query));
           setSmartResults([]);
           setSmartLoading(false);

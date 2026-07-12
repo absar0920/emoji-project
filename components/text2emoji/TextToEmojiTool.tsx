@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import CopyButton from "@/components/CopyButton";
+import { readToolJson } from "@/lib/toolError";
 
 const STYLES = ["Balanced", "Heavy Emoji", "Minimal", "Gen-Z", "Professional"];
 
@@ -23,9 +24,8 @@ export default function TextToEmojiTool() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text, style }),
       });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      setResult(data.result);
+      const data = await readToolJson<{ result?: string; alternatives?: string[] }>(res);
+      setResult(data.result ?? null);
       setAlternatives(data.alternatives || []);
     } catch (err) {
       setError((err as Error).message);

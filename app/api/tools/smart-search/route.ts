@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { callGemini, hashKey } from "@/lib/gemini";
 import { connectToDatabase, emojis } from "@/lib/mongodb";
+import { enforceRateLimit, capacityResponse, GlobalBudgetError } from "@/lib/ratelimit";
 
 export async function POST(req: NextRequest) {
+  const blocked = await enforceRateLimit(req, "text");
+  if (blocked) return blocked;
+
   try {
     const body = await req.json();
     const { query } = body as { query?: string };
@@ -92,6 +96,8 @@ Return a JSON object with these fields.`,
 
     return NextResponse.json({ results });
   } catch (err) {
+    // Budget exhausted => signal capacity so the client falls back to Fuse.
+    if (err instanceof GlobalBudgetError) return capacityResponse();
     console.error("Smart search error:", err);
     return NextResponse.json({ results: [] });
   }

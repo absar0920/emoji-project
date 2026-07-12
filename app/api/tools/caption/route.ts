@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { callGemini, hashKey } from "@/lib/gemini";
+import { enforceRateLimit, capacityResponse, GlobalBudgetError } from "@/lib/ratelimit";
 
 const VALID_MOODS = ["Happy", "Sad", "Hype", "Aesthetic", "Funny", "Romantic", "Motivational", "Chill"];
 const VALID_PLATFORMS = ["Instagram", "TikTok", "WhatsApp", "Twitter", "LinkedIn"];
 
 export async function POST(req: NextRequest) {
+  const blocked = await enforceRateLimit(req, "text");
+  if (blocked) return blocked;
+
   try {
     const body = await req.json();
     const { topic, mood, platform } = body as { topic?: string; mood?: string; platform?: string };
@@ -33,6 +37,7 @@ Return a JSON object with:
 
     return NextResponse.json(result);
   } catch (err) {
+    if (err instanceof GlobalBudgetError) return capacityResponse();
     console.error("Caption generator error:", err);
     return NextResponse.json({ error: "Failed to generate captions" }, { status: 500 });
   }
