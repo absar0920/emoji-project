@@ -17,7 +17,9 @@
     "download-kitchen": "env-cmd -f .env.local npx tsx scripts/download-kitchen-data.ts",
     "generate-variations": "env-cmd -f .env.local npx tsx scripts/generate-design-variations.ts",
     "generate-semantic-tags": "env-cmd -f .env.local npx tsx scripts/generate-semantic-tags.ts",
-    "smoke:blog-admin": "NODE_OPTIONS=--conditions=react-server env-cmd -f .env.local npx tsx scripts/smoke-blog-admin.ts"
+    "smoke:blog-admin": "NODE_OPTIONS=--conditions=react-server env-cmd -f .env.local npx tsx scripts/smoke-blog-admin.ts",
+    "smoke:sanitize": "NODE_OPTIONS=--conditions=react-server npx tsx scripts/smoke-sanitize.ts",
+    "seed:blogs": "NODE_OPTIONS=--conditions=react-server env-cmd -f .env.local npx tsx scripts/seed-blogs.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
@@ -40,7 +42,6 @@
     "env-cmd": "^11.0.0",
     "framer-motion": "^12.40.0",
     "fuse.js": "^7.3.0",
-    "isomorphic-dompurify": "^3.18.0",
     "jose": "^6.2.3",
     "lowlight": "^3.3.0",
     "mongodb": "^7.2.0",
@@ -49,6 +50,7 @@
     "p-limit": "^7.3.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "sanitize-html": "^2.17.6",
     "uuid": "^14.0.0"
   },
   "devDependencies": {
@@ -56,6 +58,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/sanitize-html": "^2.16.1",
     "@types/uuid": "^11.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
