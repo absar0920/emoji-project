@@ -2,7 +2,7 @@
 import "server-only";
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "./mongodb";
-import { getCached, setCached, delCached, incrCached } from "./redis";
+import { getCached, setCached, incrCached } from "./redis";
 import { jsonToSanitizedHtml, estimateReadingTime } from "./blog-html";
 import { slugify, ensureUniqueSlug } from "./slug";
 import type {
@@ -80,17 +80,18 @@ export async function getPublishedPosts(
   return result;
 }
 
+// No Redis cache here (unlike getPublishedPosts). This powers the
+// /blog/[slug] page, which is weekly on-demand ISR (revalidate=604800) and is
+// invalidated on write via revalidatePath (see app/admin/posts/actions.ts).
+// A Redis read here would be a `no-store` fetch (the Upstash REST client),
+// which forces the ISR render dynamic — Next then aborts it as "static to
+// dynamic at runtime" and 500s the route. Mongo reads use the native driver
+// (TCP, not fetch), so they are prerender-safe.
 export async function getPublishedPostBySlug(slug: string): Promise<BlogPost | null> {
-  const cacheKey = `blog:post:${slug}`;
-  const cached = await getCached<BlogPost>(cacheKey);
-  if (cached) return cached;
   const conn = await connectToDatabase();
   if (!conn) return null;
   const d = await conn.db.collection(COLLECTION).findOne({ slug, status: "published" });
-  if (!d) return null;
-  const post = toPost(d);
-  await setCached(cacheKey, post, 300);
-  return post;
+  return d ? toPost(d) : null;
 }
 
 // Uncached lookup by slug regardless of status — used only for admin-gated
@@ -205,10 +206,8 @@ export async function updatePost(id: string, input: BlogPostInput): Promise<{ sl
       published_at: becomingPublished ? now : existing.published_at ?? null,
     },
   });
-  // Bust the read cache for both the old and (if changed) new slug so the
-  // canonical URL never keeps serving a stale doc after a save.
-  await delCached(`blog:post:${existing.slug}`);
-  if (slug !== existing.slug) await delCached(`blog:post:${slug}`);
+  // The /blog/<slug> ISR page is busted by revalidatePath in the save action;
+  // the list-page cache (Redis) is invalidated by bumping the generation key.
   await bumpBlogListGeneration();
   return { slug };
 }
@@ -227,9 +226,8 @@ export async function setStatus(id: string, status: BlogStatus): Promise<{ slug:
       published_at: status === "published" && !existing.published_at ? now : existing.published_at ?? null,
     },
   });
-  // Bust the read cache so an unpublish (or re-publish) is reflected on the
-  // next public read instead of serving the pre-change status for up to 5min.
-  await delCached(`blog:post:${existing.slug}`);
+  // Unpublish/re-publish is reflected on the /blog/<slug> page via
+  // revalidatePath in the action; the list cache via the generation bump.
   await bumpBlogListGeneration();
   return { slug: existing.slug };
 }
@@ -239,8 +237,8 @@ export async function deletePost(id: string): Promise<void> {
   const conn = await connectToDatabase();
   if (!conn) return;
   const _id = new ObjectId(id);
-  const existing = await conn.db.collection(COLLECTION).findOne({ _id }, { projection: { slug: 1 } });
   await conn.db.collection(COLLECTION).deleteOne({ _id });
-  if (existing) await delCached(`blog:post:${existing.slug}`);
+  // The caller (deletePost action) revalidatePath's /blog/<slug>; the list
+  // cache is invalidated by the generation bump below.
   await bumpBlogListGeneration();
 }

@@ -177,7 +177,7 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
 
   const characterCount = editor?.storage.characterCount;
 
-  const previewHref = id && slug ? `/blog/${slug}?preview=1` : null;
+  const previewHref = id && slug ? `/blog/${slug}/preview` : null;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">

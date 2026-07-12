@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,18 +23,21 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://emojintel.com";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ preview?: string }>;
 }
 
-// Preview is admin-gated and routed through Next's Draft Mode rather than a
-// raw searchParams branch: `revalidate = 604800` puts this route on weekly
-// on-demand ISR, and ISR's cache is keyed by pathname only (it doesn't vary
-// on the query string). Branching the *content* directly on `?preview=1`
-// would risk an admin's draft render getting cached at the bare `/blog/slug`
-// path and served to the next anonymous visitor — a real content leak. Draft
-// Mode's `__prerender_bypass` cookie is specifically designed so
-// cookie-bearing requests always render fresh and are never written to that
-// shared cache, so we use it as the actual gate for draft content.
+// This route is weekly on-demand ISR (`revalidate = 604800`). It must NOT read
+// any request-time API (searchParams/cookies/headers) at the top level: doing
+// so during the static-generation pass throws DYNAMIC_SERVER_USAGE and 500s the
+// route. Draft-Mode preview is therefore driven entirely by the
+// `__prerender_bypass` cookie (set by the /blog/<slug>/preview route handler),
+// never by a query param.
+//
+// Reading `draftMode()` here is safe: when the bypass cookie is absent it
+// returns `{ isEnabled: false }` during static generation without opting the
+// route into dynamic rendering, so anonymous visitors get the cached published
+// render. When the cookie IS present the request renders dynamically/fresh and
+// is never written to the shared ISR cache, so draft content can't leak to the
+// next anonymous visitor.
 async function resolvePost(slug: string): Promise<BlogPost | null> {
   const { isEnabled } = await draftMode();
   if (isEnabled && (await isAdmin())) {
@@ -43,25 +46,8 @@ async function resolvePost(slug: string): Promise<BlogPost | null> {
   return getPublishedPostBySlug(slug);
 }
 
-// `?preview=1` is the entry point admins use, but it only ever triggers a
-// redirect (never renders content itself): it verifies admin, flips on Draft
-// Mode, then redirects to the clean canonical URL where `resolvePost` above
-// takes over. This keeps the canonical URL's ISR cache safe (see above) while
-// still satisfying a plain `?preview=1` link. Non-admins passing `?preview=1`
-// are not blocked outright — the flag is simply ignored and they fall
-// through to the normal published-only resolution below, same as if they'd
-// never passed it.
-async function enablePreviewIfRequested(slug: string, preview?: string): Promise<void> {
-  if (preview !== "1") return;
-  if (!(await isAdmin())) return;
-  (await draftMode()).enable();
-  redirect(`/blog/${slug}`);
-}
-
-export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const { preview } = await searchParams;
-  if (preview === "1" && (await isAdmin())) return { title: "Preview" };
   const post = await resolvePost(slug);
   if (!post) return { title: "Post Not Found" };
 
@@ -84,10 +70,8 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   };
 }
 
-export default async function BlogPostPage({ params, searchParams }: PageProps) {
+export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const { preview } = await searchParams;
-  await enablePreviewIfRequested(slug, preview);
 
   const post = await resolvePost(slug);
   if (!post) notFound();
