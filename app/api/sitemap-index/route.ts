@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://emojintel.com";
-const SITEMAP_COUNT = 18; // IDs 0-17
+const SITEMAP_COUNT = 19; // IDs 0-18
 
 export async function GET() {
   const entries = Array.from({ length: SITEMAP_COUNT }, (_, i) =>

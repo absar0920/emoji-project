@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllSlugs, getAllComparisonSlugs, getAllComboSlugs } from "@/lib/mongodb";
-import { getAllPostSlugs } from "@/lib/wordpress";
+import { getAllPublishedSlugs } from "@/lib/blog";
 import { PLATFORM_KEYS } from "@/types/emoji";
 import { CULTURE_REGIONS } from "@/types/emoji";
 
@@ -79,7 +79,8 @@ export default async function sitemap(props: { id: Promise<string> }): Promise<M
   }
 
   if (id === 18) {
-    const postSlugs = await getAllPostSlugs();
+    // Blog post pages
+    const postSlugs = await getAllPublishedSlugs();
     return postSlugs.map((slug) => ({
       url: `${SITE_URL}/blog/${slug}`,
       lastModified: new Date(),

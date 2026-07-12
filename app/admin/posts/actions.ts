@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/dal";
-import { createPost, updatePost, deletePost as del, setStatus } from "@/lib/blog";
+import { createPost, updatePost, deletePost as del, setStatus, getPostById } from "@/lib/blog";
 import type { BlogPostInput, BlogStatus } from "@/types/blog";
 
 async function assertAdmin() {
@@ -19,8 +19,19 @@ function revalidateBlog(slug: string, categories: { slug: string }[] = []) {
 export async function savePost(input: BlogPostInput & { id?: string }): Promise<{ id: string; slug: string }> {
   await assertAdmin();
   const { id, ...data } = input;
+  const prior = id ? await getPostById(id) : null;
   const res = id ? { id, ...(await updatePost(id, data)) } : await createPost(data);
   revalidateBlog(res.slug, data.categories);
+  if (prior && prior.slug !== res.slug) {
+    // Slug changed: the old URL must stop serving the (now stale/removed) post.
+    revalidatePath(`/blog/${prior.slug}`);
+  }
+  if (prior) {
+    const newCategorySlugs = new Set(data.categories.map((c) => c.slug));
+    for (const c of prior.categories) {
+      if (!newCategorySlugs.has(c.slug)) revalidatePath(`/blog/category/${c.slug}`);
+    }
+  }
   return res;
 }
 
@@ -32,8 +43,12 @@ export async function setPostStatus(id: string, status: BlogStatus): Promise<voi
 
 export async function deletePost(id: string): Promise<void> {
   await assertAdmin();
+  const post = await getPostById(id);
   await del(id);
-  revalidatePath("/blog");
-  revalidatePath("/sitemap.xml");
+  if (post) revalidateBlog(post.slug, post.categories);
+  else {
+    revalidatePath("/blog");
+    revalidatePath("/sitemap.xml");
+  }
   redirect("/admin");
 }
