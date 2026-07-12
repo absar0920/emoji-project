@@ -1,12 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { useEditor, EditorContent, type Content } from "@tiptap/react";
 import Placeholder from "@tiptap/extension-placeholder";
 import CharacterCount from "@tiptap/extension-character-count";
 import { editorExtensions } from "@/lib/editor-extensions";
 import { slugify } from "@/lib/slug";
-import { savePost } from "@/app/admin/posts/actions";
+import { savePost, deletePost } from "@/app/admin/posts/actions";
 import PostMetaFields from "@/components/admin/PostMetaFields";
 import CategoryInput from "@/components/admin/CategoryInput";
 import FeaturedImageInput from "@/components/admin/FeaturedImageInput";
@@ -50,6 +50,8 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
   const [savedAt, setSavedAt] = useState<Date | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const savingRef = useRef(false);
+
+  const [deleting, startDeleteTransition] = useTransition();
 
   const editor = useEditor({
     extensions: [
@@ -161,6 +163,18 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
     contentTick,
   ]);
 
+  // Confirmation happens before the transition starts — deletePost() performs
+  // a server-side redirect() on success, which surfaces as a NEXT_REDIRECT
+  // control-flow signal, not a real error, so it must be allowed to propagate
+  // (no try/catch here).
+  function handleDelete() {
+    if (!id) return;
+    if (!window.confirm("Delete this post? This cannot be undone.")) return;
+    startDeleteTransition(async () => {
+      await deletePost(id);
+    });
+  }
+
   const characterCount = editor?.storage.characterCount;
 
   const previewHref = id && slug ? `/blog/${slug}?preview=1` : null;
@@ -209,6 +223,17 @@ export default function BlogEditor({ initial, suggestions }: { initial?: BlogPos
                 Preview →
               </span>
             )}
+            {id ? (
+              <button
+                type="button"
+                onClick={handleDelete}
+                disabled={deleting}
+                className="fg-btn fg-btn-ghost px-5 py-2.5"
+                style={{ color: "var(--bad)", borderColor: "var(--bad)" }}
+              >
+                {deleting ? "Deleting…" : "Delete"}
+              </button>
+            ) : null}
           </div>
           <p className="mono text-[0.72rem] uppercase tracking-[0.14em] t-muted">
             {saveError ? <span className="t-accent">{saveError}</span> : savedAt ? formatSavedAt(savedAt) : "Not saved yet"}
