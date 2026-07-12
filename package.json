@@ -16,7 +16,8 @@
     "generate:combos": "env-cmd -f .env.local npx tsx scripts/generate-combos.ts",
     "download-kitchen": "env-cmd -f .env.local npx tsx scripts/download-kitchen-data.ts",
     "generate-variations": "env-cmd -f .env.local npx tsx scripts/generate-design-variations.ts",
-    "generate-semantic-tags": "env-cmd -f .env.local npx tsx scripts/generate-semantic-tags.ts"
+    "generate-semantic-tags": "env-cmd -f .env.local npx tsx scripts/generate-semantic-tags.ts",
+    "smoke:blog-admin": "NODE_OPTIONS=--conditions=react-server env-cmd -f .env.local npx tsx scripts/smoke-blog-admin.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
