@@ -12,9 +12,12 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
   images: {
-    remotePatterns: wpUrl
-      ? [{ protocol: wpUrl.protocol.replace(":", "") as "http" | "https", hostname: wpUrl.hostname }]
-      : [],
+    remotePatterns: [
+      { protocol: "https", hostname: "res.cloudinary.com" },
+      ...(wpUrl
+        ? [{ protocol: wpUrl.protocol.replace(":", "") as "http" | "https", hostname: wpUrl.hostname }]
+        : []),
+    ],
   },
   async rewrites() {
     return [
