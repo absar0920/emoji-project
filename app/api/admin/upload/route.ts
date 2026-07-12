@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   if (file.size > MAX_BYTES) return NextResponse.json({ error: "File too large (max 8MB)" }, { status: 400 });
   try {
     const bytes = Buffer.from(await file.arrayBuffer());
-    const { url } = await uploadImage(bytes);
+    const { url } = await uploadImage(bytes, file.type);
     return NextResponse.json({ url });
   } catch (err) {
     console.error("Upload failed:", err);

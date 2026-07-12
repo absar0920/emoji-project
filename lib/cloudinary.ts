@@ -8,9 +8,12 @@ cloudinary.config({
   secure: true,
 });
 
-export async function uploadImage(bytes: Buffer): Promise<{ url: string }> {
+export async function uploadImage(bytes: Buffer, mimeType: string): Promise<{ url: string }> {
   const folder = process.env.CLOUDINARY_UPLOAD_FOLDER || "blog";
-  const dataUri = `data:image/*;base64,${bytes.toString("base64")}`;
+  // Must be a CONCRETE mime (e.g. image/png) — a wildcard like image/* makes
+  // Cloudinary fail to parse the data URI and fall back to treating the whole
+  // base64 string as a file path (ENAMETOOLONG). The caller validates mimeType.
+  const dataUri = `data:${mimeType};base64,${bytes.toString("base64")}`;
   const res = await cloudinary.uploader.upload(dataUri, { folder, resource_type: "image" });
   return { url: res.secure_url };
 }
