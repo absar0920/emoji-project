@@ -20,7 +20,7 @@ import { getRedisClient } from "./redis";
  * Vercel dashboard without a code change or redeploy.
  */
 
-export type Tier = "text" | "image" | "public";
+export type Tier = "text" | "image" | "public" | "login";
 export type BudgetKind = "text" | "image";
 
 function envInt(name: string, fallback: number): number {
@@ -48,6 +48,8 @@ function windowsFor(tier: Tier): Window[] {
       ];
     case "public":
       return [{ limit: envInt("RL_PUBLIC_PER_MIN", 30), window: "60 s", suffix: "min" }];
+    case "login":
+      return [{ limit: envInt("RL_LOGIN_PER_MIN", 5), window: "60 s", suffix: "min" }];
   }
 }
 
