@@ -1,0 +1,32 @@
+# Reinstalled/regenerated in the build — never ship the host copies.
+node_modules
+.next
+.git
+.github
+
+# Secrets & local env — must never enter the build context or image.
+.env
+.env.*
+!.env.local.example
+
+# Offline data + one-off assets the app build doesn't need.
+dump
+memory
+docs
+data
+*.tsbuildinfo
+Emojis Meaning Logo.png
+
+# Deploy/infra files (built and shipped separately, not into the image).
+Dockerfile
+.dockerignore
+compose.yml
+docker-compose.yml
+Caddyfile
+
+# Editor / OS noise
+.DS_Store
+*.log
+.vscode
+.idea
+.superpowers

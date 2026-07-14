@@ -8,9 +8,10 @@ export const metadata: Metadata = {
   description: "See which emojis are trending on TikTok, Instagram, and WhatsApp. Updated daily with trend scores.",
 };
 
-// Weekly ISR — cached after first render instead of running on every request.
-// Shorten this (e.g. 3600) if you want trends to refresh more often.
-export const revalidate = 604800;
+// Rendered on-demand at request time so it reads the DB from the *server's*
+// runtime env (the CI build has no database). getTrendingEmojis is itself
+// Redis-cached (5-min TTL), so this is not an uncached hit per request.
+export const dynamic = "force-dynamic";
 
 export default async function EmojiTrendsPage() {
   const trending = await getTrendingEmojis(20);

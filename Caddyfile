@@ -1,0 +1,14 @@
+# Automatic HTTPS via Let's Encrypt. Caddy issues + renews certs for both
+# names on first boot (ports 80/443 must be reachable from the internet and DNS
+# must point here — both already confirmed).
+
+# Canonical host: proxy to the app container over the internal network.
+www.emojismeaning.com {
+	encode zstd gzip
+	reverse_proxy emoji-app:3000
+}
+
+# Apex → www 301 so SEO/cookies don't split across two hosts.
+emojismeaning.com {
+	redir https://www.emojismeaning.com{uri} permanent
+}
