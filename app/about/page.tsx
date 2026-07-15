@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
+import SocialLinks from "@/components/SocialLinks";
 
 export const metadata: Metadata = {
   title: "About — Emoji Meaning",
@@ -50,6 +51,11 @@ export default function AboutPage() {
               <Link href="/tools/emoji-kitchen" className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-5 py-2.5">Emoji Kitchen</Link>
               <Link href="/trending" className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-5 py-2.5">Trending</Link>
             </div>
+          </div>
+
+          <div className="mt-10 pt-7 border-t border-[var(--line)]">
+            <p className="fg-kicker mb-4">Connect</p>
+            <SocialLinks />
           </div>
         </div>
       </main>

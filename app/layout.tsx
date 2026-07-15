@@ -3,6 +3,21 @@ import { Noto_Color_Emoji, Poppins } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
+import { SOCIAL_LINKS } from "@/lib/social";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.emojismeaning.com";
+
+// Site-wide Organization entity. `sameAs` asserts our official social profiles
+// to search engines (entity/knowledge-graph signal); sourced from the same
+// SOCIAL_LINKS list the visible footer/about icons use, so they can't drift.
+const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Emoji Meaning",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
+  sameAs: SOCIAL_LINKS.map((s) => s.url),
+};
 
 // GA4 property. Non-secret (ships to every browser). Loaded only in production
 // so local `npm run dev` traffic never counts. SPA route-change pageviews are
@@ -39,6 +54,10 @@ export const metadata: Metadata = {
   },
   description:
     "Discover what every emoji really means. Gen-Z slang, TikTok meanings, cultural intelligence, and platform-specific usage for 1000+ emojis.",
+  // Google Search Console ownership. Renders <meta name="google-site-verification" ...>.
+  verification: {
+    google: "WVp49MCpFgdgpon-MSeHZ4jFT_c6cx1hCAzS250QTVM",
+  },
 };
 
 export default function RootLayout({
@@ -57,6 +76,10 @@ export default function RootLayout({
         <ThemeProvider>
           {children}
         </ThemeProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}
+        />
         {process.env.NODE_ENV === "production" && (
           <>
             <Script

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import SocialLinks from "@/components/SocialLinks";
 
 const footerLinks = {
   popular: [
@@ -64,6 +65,8 @@ export default function Footer() {
             <p className="t-muted text-sm leading-relaxed max-w-xs">
               A complete field guide to what every emoji really means — Gen-Z slang, platform context, and cultural intelligence.
             </p>
+            <p className="fg-label mt-6 mb-3">Follow</p>
+            <SocialLinks />
           </div>
           <Column title="Popular Emojis" links={footerLinks.popular} />
           <Column title="Tools" links={footerLinks.tools} />
