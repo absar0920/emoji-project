@@ -12,10 +12,10 @@
   --color-accent-violet: #7C3AED;
   /* Whole site uses one typeface (Poppins). Every role token resolves to it so existing
      fg-* / font-* classes need no edits; emoji still fall through to Noto. */
-  --font-sans: var(--font-poppins), "system-ui", "sans-serif", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
-  --font-mono: var(--font-poppins), "system-ui", "sans-serif", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
-  --font-serif: var(--font-poppins), "system-ui", "sans-serif", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
-  --font-read: var(--font-poppins), "system-ui", "sans-serif", var(--font-emoji), "Apple Color Emoji", "Segoe UI Emoji", emoji;
+  --font-sans: var(--font-poppins), "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", var(--font-emoji), emoji;
+  --font-mono: var(--font-poppins), "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", var(--font-emoji), emoji;
+  --font-serif: var(--font-poppins), "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", var(--font-emoji), emoji;
+  --font-read: var(--font-poppins), "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", var(--font-emoji), emoji;
 }
 
 html { scroll-behavior: smooth; } /* in-page anchor jumps glide; disabled under reduced-motion below */

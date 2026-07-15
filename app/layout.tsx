@@ -44,6 +44,11 @@ const notoColorEmoji = Noto_Color_Emoji({
   weight: "400",
   subsets: ["emoji"],
   display: "swap",
+  // Do NOT preload: this ~1MB color-emoji font is a LAST-RESORT fallback only.
+  // It sits after the system emoji fonts in the --font-* stacks (globals.css),
+  // so modern devices render emoji from their built-in font and never fetch it;
+  // preloading it would drag it back onto the critical path (killed FCP/LCP).
+  preload: false,
   variable: "--font-emoji",
 });
 
