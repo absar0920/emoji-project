@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import { Noto_Color_Emoji, Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
+
+// GA4 property. Non-secret (ships to every browser). Loaded only in production
+// so local `npm run dev` traffic never counts. SPA route-change pageviews are
+// handled by GA4 Enhanced Measurement (History-event tracking, on by default).
+// No consent gating today — if EU-consent compliance is needed later, add
+// Google Consent Mode v2 (gtag('consent','default',{...}) before the config).
+const GA_ID = "G-BKG5X1CEN3";
 
 // Single site-wide typeface. Covers every role (body, headings, labels) via weights;
 // italic included for pull-quotes/standfirsts. Exposed under every legacy font variable so
@@ -49,6 +57,20 @@ export default function RootLayout({
         <ThemeProvider>
           {children}
         </ThemeProvider>
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
