@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { MongoClient, Db, Collection } from "mongodb";
 import { EmojiDocument, EmojiSearchItem, EmojiSearchItemLite, ComparisonDocument, ComboDocument } from "@/types/emoji";
 import { getCached, setCached } from "./redis";
@@ -40,22 +41,22 @@ export function emojis(db: Db): Collection<EmojiDocument> {
   return db.collection<EmojiDocument>("emojis");
 }
 
-export async function getEmojiBySlug(
+// Mongo-only, and wrapped in React cache() so the two reads of the same slug
+// within one render (generateMetadata + the page body) share a single round-
+// trip. Deliberately NO Redis: this runs inside the ISR render of
+// /emoji/[slug], /[platform]/[slug] and (via lib/comparison) /vs/[slug]. A
+// Redis read is an Upstash REST `no-store` fetch, which forces the static
+// render dynamic and 500s the route ("static to dynamic at runtime"). The
+// Mongo driver is native TCP and prerender-safe. Same rule as lib/blog.ts;
+// every caller of this fn is an ISR render, so the old Redis layer was dead
+// weight here anyway.
+export const getEmojiBySlug = cache(async (
   slug: string
-): Promise<EmojiDocument | null> {
-  const cacheKey = `emoji:${slug}`;
-  const cached = await getCached<EmojiDocument>(cacheKey);
-  if (cached) return cached;
-
+): Promise<EmojiDocument | null> => {
   const conn = await connectToDatabase();
   if (!conn) return null;
-  const result = await emojis(conn.db).findOne({ slug });
-
-  if (result) {
-    await setCached(cacheKey, result, 3600);
-  }
-  return result;
-}
+  return emojis(conn.db).findOne({ slug });
+});
 
 export async function getTrendingEmojis(
   limit: number = 10
@@ -249,38 +250,28 @@ export async function getEmojiPlatformData(
   return result;
 }
 
+// Mongo-only (prerender-safe): runs inside the /vs/[slug] ISR render via
+// lib/comparison.ts. See getEmojiBySlug for why Redis is avoided here.
 export async function getComparisonBySlug(
   slug: string
 ): Promise<ComparisonDocument | null> {
-  const cacheKey = `comparison:${slug}`;
-  const cached = await getCached<ComparisonDocument>(cacheKey);
-  if (cached) return cached;
-
   const conn = await connectToDatabase();
   if (!conn) return null;
-  const result = await conn.db
+  return conn.db
     .collection<ComparisonDocument>("comparisons")
     .findOne({ slug });
-
-  if (result) await setCached(cacheKey, result, 3600);
-  return result;
 }
 
+// Mongo-only (prerender-safe): runs inside the /combo/[type] ISR render.
+// See getEmojiBySlug for why Redis is avoided here.
 export async function getComboBySlug(
   slug: string
 ): Promise<ComboDocument | null> {
-  const cacheKey = `combo:${slug}`;
-  const cached = await getCached<ComboDocument>(cacheKey);
-  if (cached) return cached;
-
   const conn = await connectToDatabase();
   if (!conn) return null;
-  const result = await conn.db
+  return conn.db
     .collection<ComboDocument>("combos")
     .findOne({ slug });
-
-  if (result) await setCached(cacheKey, result, 3600);
-  return result;
 }
 
 export async function getAllComparisonSlugs(): Promise<string[]> {
@@ -303,17 +294,15 @@ export async function getAllComboSlugs(): Promise<string[]> {
   return docs.map((d) => d.slug);
 }
 
+// Mongo-only (prerender-safe): runs inside the /culture/[region] ISR render.
+// See getEmojiBySlug for why Redis is avoided here.
 export async function getEmojisByCulture(
   region: string,
   limit: number = 30
 ): Promise<EmojiDocument[]> {
-  const cacheKey = `culture:${region}`;
-  const cached = await getCached<EmojiDocument[]>(cacheKey);
-  if (cached) return cached;
-
   const conn = await connectToDatabase();
   if (!conn) return [];
-  const results = await emojis(conn.db)
+  return emojis(conn.db)
     .find(
       { [`cultures.${region}`]: { $exists: true, $ne: "" } },
       { projection: { slug: 1, name: 1, character: 1, [`cultures.${region}`]: 1, virality: 1 } }
@@ -321,9 +310,6 @@ export async function getEmojisByCulture(
     .sort({ "virality.trend_score": -1 })
     .limit(limit)
     .toArray();
-
-  await setCached(cacheKey, results, 3600);
-  return results;
 }
 
 export async function getRelatedComparisons(

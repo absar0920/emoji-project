@@ -39,8 +39,11 @@ export async function POST(req: NextRequest) {
       return capacityResponse();
     }
 
+    // gemini-2.0-flash-exp was retired by Google (404). gemini-2.5-flash-image
+    // is the GA drop-in with the same generateContent + responseModalities
+    // contract and ~$0.039/image — the cost the RL_IMAGE_* budget is tuned to.
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash-exp",
+      model: "gemini-2.5-flash-image",
       generationConfig: {
         responseModalities: ["image", "text"],
       } as any,
