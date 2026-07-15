@@ -5,10 +5,15 @@ import { readToolJson } from "@/lib/toolError";
 
 const STYLES = ["Emoji", "Cartoon", "Pixel Art", "Sticker"];
 
+interface EmojiImage {
+  url: string;
+  download: string;
+}
+
 export default function EmojiMakerTool() {
   const [prompt, setPrompt] = useState("");
   const [style, setStyle] = useState("Emoji");
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<EmojiImage[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,20 +28,13 @@ export default function EmojiMakerTool() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, style }),
       });
-      const data = await readToolJson<{ images?: string[] }>(res);
+      const data = await readToolJson<{ images?: EmojiImage[] }>(res);
       setImages(data.images || []);
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setLoading(false);
     }
-  }
-
-  function handleDownload(dataUri: string, index: number) {
-    const link = document.createElement("a");
-    link.href = dataUri;
-    link.download = `emoji-${prompt.slice(0, 20).replace(/\s+/g, "-")}-${index + 1}.png`;
-    link.click();
   }
 
   return (
@@ -71,10 +69,10 @@ export default function EmojiMakerTool() {
           {images.map((img, i) => (
             <div key={i} className="fg-card p-4 flex flex-col items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img} alt={`Generated emoji ${i + 1}`} className="w-32 h-32 object-contain" />
-              <button onClick={() => handleDownload(img, i)} className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-4 py-1.5">
+              <img src={img.url} alt={`Generated emoji ${i + 1}`} className="w-32 h-32 object-contain" />
+              <a href={img.download} className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-4 py-1.5">
                 Download
-              </button>
+              </a>
             </div>
           ))}
         </div>
