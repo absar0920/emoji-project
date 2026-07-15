@@ -12,24 +12,53 @@ interface SidebarProps {
 }
 
 /* Match the current route against a nav item. Pathname-only on the server (SSR-safe);
-   category links (/search?category=…) additionally match the query on the client. */
-function useIsActive() {
+   category links (/search?category=…) additionally match the ?category query on the client.
+
+   The active category is read reactively from THREE signals, because App-Router client nav
+   between two /search?category=… URLs changes only the query, not the pathname — so a
+   usePathname-only effect never re-fires and the highlight sticks on the first-viewed
+   category (the reported bug):
+     • mount / pathname change → effect re-reads the URL
+     • back / forward          → popstate re-reads the URL
+     • clicking a category link → onNavigate sets it optimistically (pathname doesn't change,
+                                  and Sidebar doesn't subscribe to the query, so it would
+                                  otherwise not re-render at all)
+   Deliberately NOT useSearchParams(): Sidebar renders on static pages via ClientShell, and an
+   unsuspended useSearchParams() there de-opts every static route to CSR at build time. */
+function useActive() {
   const pathname = usePathname();
-  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<string | null>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: read browser-only search params after hydration
-    setSearch(window.location.search);
+    const sync = () => {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: read browser-only URL after hydration / on popstate
+      setCategory(
+        window.location.pathname === "/search"
+          ? new URLSearchParams(window.location.search).get("category")
+          : null
+      );
+    };
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
   }, [pathname]);
 
-  return (href: string) => {
+  const isActive = (href: string) => {
     const [path, query] = href.split("?");
     if (path !== pathname) return false;
     if (!query) return true;
     const want = new URLSearchParams(query).get("category");
     if (!want) return true;
-    return new URLSearchParams(search).get("category") === want;
+    return category === want;
   };
+
+  const onNavigate = (href: string) => {
+    if (!href.startsWith("/search")) return;
+    const query = href.split("?")[1];
+    setCategory(query ? new URLSearchParams(query).get("category") : null);
+  };
+
+  return { isActive, onNavigate };
 }
 
 function Chevron({ className = "" }: { className?: string }) {
@@ -56,7 +85,7 @@ function NavLink({ item, active, onClick }: { item: NavItem; active: boolean; on
 }
 
 export default function Sidebar({ open, onClose }: SidebarProps) {
-  const isActive = useIsActive();
+  const { isActive, onNavigate } = useActive();
   const pathname = usePathname();
 
   // Whole-rail collapse (desktop). Visual width + label hiding is driven by CSS on
@@ -124,7 +153,14 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         <ul className="fg-rail-items pb-1">
           {group.items.map((item) => (
             <li key={item.href}>
-              <NavLink item={item} active={isActive(item.href)} onClick={onItemClick} />
+              <NavLink
+                item={item}
+                active={isActive(item.href)}
+                onClick={() => {
+                  onNavigate(item.href);
+                  onItemClick?.();
+                }}
+              />
             </li>
           ))}
         </ul>
