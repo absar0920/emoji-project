@@ -790,6 +790,15 @@ html[data-sidebar="collapsed"] .theme-editorial .fg-rail-items { display: block 
   .theme-editorial header .py-5  { padding-top: 0.75rem; padding-bottom: 0.75rem; }
 }
 
+/* CSS-driven entrance for <FadeIn> — runs at first paint, so above-the-fold
+   content (the hero LCP) is visible without waiting for framer-motion to
+   download + hydrate. The prefers-reduced-motion block below neutralizes it. */
+@keyframes fg-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+.fg-fade-in { animation: fg-fade-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

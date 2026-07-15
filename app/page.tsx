@@ -62,7 +62,7 @@ export default function HomePage() {
               <span>Nº 2026</span>
             </div>
 
-            <FadeIn>
+            <FadeIn immediate>
               <p className="fg-kicker mb-5">The Complete Guide</p>
               <h1 className="font-display t-ink tracking-[-0.02em] leading-[0.95] text-[2.9rem] sm:text-[4.75rem] lg:text-[6.25rem]">
                 Every emoji.

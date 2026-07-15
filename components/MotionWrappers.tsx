@@ -12,23 +12,26 @@ export const EASE = [0.22, 1, 0.36, 1] as const; // easeOut, no overshoot
 export const DURATION = 0.3;
 export const DURATION_FAST = 0.18;
 
+/**
+ * On-load entrance — now CSS-driven (see .fg-fade-in in globals.css), NOT framer.
+ * framer rendered this at opacity:0 in the SSR HTML and only revealed it after
+ * the framer bundle downloaded + hydrated, which held the above-the-fold hero
+ * invisible for ~3s and destroyed mobile LCP. CSS runs at first paint instead.
+ *
+ * `immediate` skips even the CSS fade (paints at full opacity on the first
+ * frame) — use it on the LCP element so LCP ≈ first paint.
+ */
 export function FadeIn({
   children,
   className = "",
+  immediate = false,
 }: {
   children: ReactNode;
   className?: string;
+  immediate?: boolean;
 }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: DURATION, ease: EASE }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  const cls = immediate ? className : `fg-fade-in ${className}`.trim();
+  return <div className={cls}>{children}</div>;
 }
 
 export function StaggerContainer({

@@ -50,7 +50,7 @@ export default async function ComboPage({ params }: PageProps) {
           </div>
 
           {/* Masthead */}
-          <FadeIn>
+          <FadeIn immediate>
             <div className="border-b-2 border-[var(--rule)] pb-7">
               <p className="fg-kicker mb-4">Emoji Combos</p>
               <h1 className="font-display t-ink leading-[1.02] tracking-[-0.015em] text-[2.4rem] sm:text-[3.4rem]">{combo.theme}</h1>

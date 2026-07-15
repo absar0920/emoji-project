@@ -51,7 +51,7 @@ export default async function CulturePage({ params }: PageProps) {
           </div>
 
           {/* Masthead */}
-          <FadeIn>
+          <FadeIn immediate>
             <div className="flex items-end gap-5 sm:gap-7 border-b-2 border-[var(--rule)] pb-8">
               <span className="text-[4.5rem] sm:text-[6rem] leading-[0.8] shrink-0">{info.flag}</span>
               <div className="pb-1">

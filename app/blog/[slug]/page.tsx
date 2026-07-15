@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <span className="hidden sm:inline shrink-0">Field Guide</span>
           </div>
 
-          <FadeIn>
+          <FadeIn immediate>
             {/* Categories */}
             {post.categories.length > 0 && (
               <div className="flex flex-wrap gap-x-3 gap-y-1 mb-5">

@@ -87,7 +87,7 @@ export default async function ComparisonPage({ params }: PageProps) {
           </div>
 
           {/* Masthead */}
-          <FadeIn>
+          <FadeIn immediate>
             <div className="border-b-2 border-[var(--rule)] pb-9">
               <p className="fg-kicker mb-5">The Comparison</p>
               <div className="flex items-center justify-center gap-6 sm:gap-12 mb-6">

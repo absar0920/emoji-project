@@ -78,7 +78,7 @@ export default async function PlatformPage({ params }: PageProps) {
           </div>
 
           {/* Masthead */}
-          <FadeIn>
+          <FadeIn immediate>
             <div className="flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-8 border-b-2 border-[var(--rule)] pb-9">
               <span className="text-[6.5rem] sm:text-[8.5rem] leading-[0.8] shrink-0">{emoji.character}</span>
               <div className="flex-1 min-w-0 pb-1">
