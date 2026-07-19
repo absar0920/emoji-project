@@ -110,7 +110,10 @@ export default function HomePage() {
             </div>
             <div className="mt-6 fg-list">
               {TOOLS.map((tool, i) => (
-                <Link key={tool.href} href={tool.href} className="fg-link group flex items-baseline gap-3 sm:gap-4 border-b border-[var(--line)] py-3.5">
+                // prefetch={false}: these sit just under the hero, so Next would
+                // prefetch all 6 RSC payloads on load and starve the critical path
+                // on slow mobile connections. Nav is fast enough without pre-warming.
+                <Link key={tool.href} href={tool.href} prefetch={false} className="fg-link group flex items-baseline gap-3 sm:gap-4 border-b border-[var(--line)] py-3.5">
                   <span className="mono text-[0.62rem] t-muted w-5 shrink-0 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                   <span className="text-lg shrink-0 w-6 text-center">{tool.icon}</span>
                   <span className="font-read font-medium t-ink">{tool.name}</span>

@@ -74,6 +74,7 @@ function NavLink({ item, active, onClick }: { item: NavItem; active: boolean; on
     <Link
       href={item.href}
       onClick={onClick}
+      prefetch={false}
       data-active={active}
       title={item.label}
       className="fg-menuitem flex items-center gap-3.5 py-2.5 px-2.5 font-read text-[1rem]"
