@@ -67,7 +67,18 @@ export default function KitchenTool() {
           </div>
           <div className="flex gap-3 justify-center mt-5">
             <CopyButton text={resultUrl} label="Copy URL" tone="editorial" />
-            <a href={resultUrl} download className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-4 py-2">Download</a>
+            {/* Route through the same-origin proxy so the attachment header
+                actually triggers a download (the cross-origin `download` attr
+                on a gstatic URL is ignored and just opens the image). */}
+            <a
+              href={`/api/tools/kitchen/download?url=${encodeURIComponent(resultUrl)}${
+                emoji1 && emoji2 ? `&name=${emoji1.slug}-${emoji2.slug}` : ""
+              }`}
+              download
+              className="fg-btn-ghost mono text-[0.66rem] uppercase tracking-[0.14em] px-4 py-2"
+            >
+              Download
+            </a>
           </div>
         </FadeIn>
       )}
