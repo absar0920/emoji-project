@@ -7,6 +7,14 @@ import { CULTURE_REGIONS } from "@/types/emoji";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://emojintel.com";
 const MAX_PER_SITEMAP = 45000;
 
+// Render every shard at request time, NOT at build. The CI/Docker build has no
+// MONGODB_URI (the .env is placed on the server at runtime), so building these
+// statically freezes every DB-backed shard (platforms, comparisons, emoji, blog)
+// as empty XML — which is exactly what Search Console was rejecting. As a
+// request-time route handler this queries Mongo on the running server, where the
+// DB is reachable, and emits the full URL set.
+export const dynamic = "force-dynamic";
+
 export async function generateSitemaps() {
   // Chunk 0: static pages + combos + cultures
   // Chunks 1-15: one per platform
