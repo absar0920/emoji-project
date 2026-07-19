@@ -799,6 +799,43 @@ html[data-sidebar="collapsed"] .theme-editorial .fg-rail-items { display: block 
 }
 .fg-fade-in { animation: fg-fade-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
+/* Scroll-reveal (<AnimatedSection>) — an IntersectionObserver flips data-reveal
+   from "out" to "in" the first time the element nears the viewport. Replaces
+   framer whileInView; content is always in the DOM, only opacity/transform move.
+   Under reduced-motion the component sets "in" immediately (and the block below
+   makes the transition instant), so content can never get stuck hidden. */
+[data-reveal="out"] { opacity: 0; transform: translateY(16px); }
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Staggered list entrance (<StaggerContainer>/<StaggerItem>) — CSS nth-child
+   delays cascade the fade across direct children; replaces framer staggerChildren. */
+.fg-stagger > * { animation: fg-fade-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.fg-stagger > *:nth-child(1) { animation-delay: 0s; }
+.fg-stagger > *:nth-child(2) { animation-delay: 0.04s; }
+.fg-stagger > *:nth-child(3) { animation-delay: 0.08s; }
+.fg-stagger > *:nth-child(4) { animation-delay: 0.12s; }
+.fg-stagger > *:nth-child(5) { animation-delay: 0.16s; }
+.fg-stagger > *:nth-child(6) { animation-delay: 0.2s; }
+.fg-stagger > *:nth-child(7) { animation-delay: 0.24s; }
+.fg-stagger > *:nth-child(8) { animation-delay: 0.28s; }
+.fg-stagger > *:nth-child(n + 9) { animation-delay: 0.32s; }
+
+/* Hover-lift (<AnimatedCard>) — replaces framer whileHover/whileTap. */
+.fg-card-lift { transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1); }
+.fg-card-lift:hover { transform: translateY(-2px); }
+.fg-card-lift:active { transform: scale(0.99); }
+
+/* Collapsible answer (<FAQAccordion>) — grid-rows 0fr↔1fr animates height while
+   the content stays in the DOM. Replaces framer AnimatePresence height:auto. */
+.fg-collapse { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
+.fg-collapse[data-open="true"] { grid-template-rows: 1fr; }
+.fg-collapse > div { overflow: hidden; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { MotionConfig } from "framer-motion";
 
 type Theme = "light" | "dark";
 
@@ -42,9 +41,8 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {/* reducedMotion="user" makes every framer animation honor prefers-reduced-motion. */}
-      <MotionConfig reducedMotion="user">{children}</MotionConfig>
-    </ThemeContext.Provider>
+    // prefers-reduced-motion is honored globally by the universal @media block
+    // in globals.css, so there's no framer MotionConfig to wrap children in.
+    <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 interface CopyButtonProps {
   text: string;
@@ -22,26 +21,24 @@ export default function CopyButton({ text, label, className = "", tone = "defaul
 
   if (tone === "editorial") {
     return (
-      <motion.button
+      <button
         onClick={handleCopy}
-        whileTap={{ scale: 0.96 }}
-        className={`mono inline-flex items-center gap-1.5 px-4 py-2 text-[0.66rem] uppercase tracking-[0.14em] transition-colors ${className}`}
+        className={`mono inline-flex items-center gap-1.5 px-4 py-2 text-[0.66rem] uppercase tracking-[0.14em] transition-[transform,color] active:scale-[0.96] ${className}`}
         style={{ background: copied ? "var(--good)" : "var(--accent)", color: "var(--paper)" }}
       >
         {copied ? "Copied ✓" : label || `Copy ${text}`}
-      </motion.button>
+      </button>
     );
   }
 
   return (
-    <motion.button
+    <button
       onClick={handleCopy}
-      whileTap={{ scale: 0.9 }}
-      className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+      className={`px-3 py-1.5 rounded-full text-sm font-medium transition-[transform,color] active:scale-90 ${
         copied ? "bg-accent-emerald text-white" : "bg-primary text-white hover:bg-primary-dark"
       } ${className}`}
     >
       {copied ? "Copied!" : label || `Copy ${text}`}
-    </motion.button>
+    </button>
   );
 }

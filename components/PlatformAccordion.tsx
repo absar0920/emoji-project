@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { EASE } from "@/components/MotionWrappers";
 
 const PLATFORM_ICONS: Record<string, string> = {
   tiktok: "🎵", whatsapp: "💬", instagram: "📸", x: "𝕏", facebook: "👤",
@@ -31,13 +29,7 @@ export default function PlatformAccordion({ platforms }: PlatformAccordionProps)
       </div>
 
       {current && (
-        <motion.dl
-          key={open}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.22, ease: EASE }}
-          className="fg-deflist border-t border-[var(--line)]"
-        >
+        <dl key={open} className="fg-fade-in fg-deflist border-t border-[var(--line)]">
           {Object.entries(current.data).map(([key, value]) => {
             if (Array.isArray(value)) {
               return (
@@ -66,7 +58,7 @@ export default function PlatformAccordion({ platforms }: PlatformAccordionProps)
               </div>
             );
           })}
-        </motion.dl>
+        </dl>
       )}
     </div>
   );

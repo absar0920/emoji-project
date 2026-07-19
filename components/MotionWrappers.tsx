@@ -1,23 +1,22 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 /**
  * Shared motion vocabulary — restrained editorial.
- * Gentle ease-out, short durations, no spring/bounce. Keep all framer transitions
- * referencing these so the whole site moves with one consistent feel.
+ * All entrance/hover motion is now CSS-driven (see globals.css): gentle ease-out,
+ * short durations, no spring/bounce. framer-motion was removed because it shipped
+ * ~50KB of JS onto every page's critical bundle to express fades a keyframe does
+ * for free — which wrecked mobile FCP/LCP under slow networks.
+ *
+ * These constants are kept so any future JS-driven motion stays on the same curve.
  */
 export const EASE = [0.22, 1, 0.36, 1] as const; // easeOut, no overshoot
 export const DURATION = 0.3;
 export const DURATION_FAST = 0.18;
 
 /**
- * On-load entrance — now CSS-driven (see .fg-fade-in in globals.css), NOT framer.
- * framer rendered this at opacity:0 in the SSR HTML and only revealed it after
- * the framer bundle downloaded + hydrated, which held the above-the-fold hero
- * invisible for ~3s and destroyed mobile LCP. CSS runs at first paint instead.
- *
+ * On-load entrance — CSS-driven (see .fg-fade-in in globals.css).
  * `immediate` skips even the CSS fade (paints at full opacity on the first
  * frame) — use it on the LCP element so LCP ≈ first paint.
  */
@@ -34,6 +33,58 @@ export function FadeIn({
   return <div className={cls}>{children}</div>;
 }
 
+/**
+ * Scroll-reveal — fades/slides content in the first time it enters the viewport.
+ * Was framer `whileInView`; now a ~1KB IntersectionObserver toggling a data
+ * attribute that CSS transitions (see [data-reveal] in globals.css). Reveals
+ * once, slightly early (-50px), and shows immediately under reduced-motion or
+ * when IntersectionObserver is unavailable so content can never get stuck hidden.
+ */
+export function AnimatedSection({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    if (
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ||
+      !("IntersectionObserver" in window)
+    ) {
+      setShown(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: "-50px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} data-reveal={shown ? "in" : "out"} className={className}>
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Staggered list entrance — was framer staggerChildren; now the container marks
+ * itself `.fg-stagger` and CSS nth-child delays cascade the fade over its direct
+ * children (see globals.css). StaggerItem is just the child wrapper.
+ */
 export function StaggerContainer({
   children,
   className = "",
@@ -41,19 +92,7 @@ export function StaggerContainer({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={{
-        hidden: {},
-        visible: { transition: { staggerChildren: 0.06 } },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={`fg-stagger ${className}`.trim()}>{children}</div>;
 }
 
 export function StaggerItem({
@@ -63,43 +102,12 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 12 },
-        visible: { opacity: 1, y: 0 },
-      }}
-      transition={{ duration: DURATION, ease: EASE }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-export function AnimatedSection({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: DURATION, ease: EASE }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 /**
  * Editorial hover wrapper — a hairline/translate lift, NO shadow (the Field Guide
- * has no shadows). Use on interactive surfaces that aren't already fg-* hover-styled.
+ * has no shadows). Was framer whileHover/whileTap; now a CSS class (see globals.css).
  */
 export function AnimatedCard({
   children,
@@ -108,14 +116,5 @@ export function AnimatedCard({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.99 }}
-      transition={{ duration: DURATION_FAST, ease: EASE }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={`fg-card-lift ${className}`.trim()}>{children}</div>;
 }
