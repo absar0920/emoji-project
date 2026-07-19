@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Color_Emoji, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -37,21 +37,6 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-// Consistent color emoji across OSes — used as a *fallback* after the text faces, so Latin
-// text keeps rendering in the editorial fonts and only emoji codepoints fall through to Noto.
-// Fixes "tofu" boxes for newer emoji on devices with an outdated system emoji font.
-const notoColorEmoji = Noto_Color_Emoji({
-  weight: "400",
-  subsets: ["emoji"],
-  display: "swap",
-  // Do NOT preload: this ~1MB color-emoji font is a LAST-RESORT fallback only.
-  // It sits after the system emoji fonts in the --font-* stacks (globals.css),
-  // so modern devices render emoji from their built-in font and never fetch it;
-  // preloading it would drag it back onto the critical path (killed FCP/LCP).
-  preload: false,
-  variable: "--font-emoji",
-});
-
 export const metadata: Metadata = {
   title: {
     default: "Emoji Meaning — Every Emoji, Decoded.",
@@ -71,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${notoColorEmoji.variable}`}>
+    <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <body className="font-sans antialiased bg-[#f7f2e9] dark:bg-[#100e0c] text-neutral-700 dark:text-slate-300">
         <script
           dangerouslySetInnerHTML={{
