@@ -56,15 +56,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Ship the infra files that live on the server (never the .env).
+      # The reverse proxy is no longer part of this project: Caddy runs as its
+      # own Compose project at /opt/caddy and its Caddyfile is managed on the
+      # host, because it now serves more than one site.
       - uses: actions/checkout@v4
 
-      - name: Copy compose.yml + Caddyfile to the server
+      - name: Copy compose.yml to the server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "compose.yml,Caddyfile"
+          source: "compose.yml"
           target: /opt/emoji
           overwrite: true
 
